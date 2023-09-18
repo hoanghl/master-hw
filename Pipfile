@@ -8,6 +8,8 @@ ipykernel = "*"
 ipywidgets = "*"
 pyspark = "*"
 pandas = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 
