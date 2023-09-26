@@ -10,6 +10,7 @@ pyspark = "*"
 pandas = "*"
 matplotlib = "*"
 seaborn = "*"
+tqdm = "*"
 
 [dev-packages]
 
