@@ -1,0 +1,4180 @@
+Entity,Year,Investment(USDmn)
+Afghanistan,2000,0.02
+Afghanistan,2001,0.13
+Afghanistan,2002,3.95
+Afghanistan,2003,25.97
+Afghanistan,2004,0
+Afghanistan,2005,9.83
+Afghanistan,2006,10.61
+Afghanistan,2007,15.75
+Afghanistan,2008,16.17
+Afghanistan,2009,9.96
+Afghanistan,2010,36.5
+Afghanistan,2011,28.69
+Afghanistan,2012,62.62
+Afghanistan,2013,268.46
+Afghanistan,2014,6.94
+Afghanistan,2015,4.89
+Afghanistan,2016,0.86
+Afghanistan,2017,50.33
+Afghanistan,2018,70.1
+Afghanistan,2019,4.62
+Afghanistan,2020,0
+Albania,2000,0.15
+Albania,2001,335.7
+Albania,2002,3.6
+Albania,2003,0.18
+Albania,2004,0
+Albania,2005,19.82
+Albania,2006,0
+Albania,2007,1.51
+Albania,2008,0
+Albania,2009,0.15
+Albania,2010,6.62
+Albania,2011,0.3
+Albania,2012,23.65
+Albania,2013,67.69
+Albania,2014,0.01
+Albania,2015,23.89
+Albania,2016,0
+Albania,2017,0.12
+Albania,2018,0
+Albania,2019,3.65
+Albania,2020,0
+Algeria,2000,0
+Algeria,2001,0.81
+Algeria,2002,0.31
+Algeria,2003,0.09
+Algeria,2004,0.14
+Algeria,2005,0.16
+Algeria,2006,0
+Algeria,2007,0
+Algeria,2008,0
+Algeria,2009,2.19
+Algeria,2010,0.4
+Algeria,2011,0
+Algeria,2012,0.94
+Algeria,2013,0.94
+Algeria,2014,0.93
+Algeria,2015,0.89
+Algeria,2016,0.16
+Algeria,2017,0.01
+Algeria,2018,0.05
+Algeria,2019,0.06
+Algeria,2020,0
+Angola,2000,0
+Angola,2001,0
+Angola,2002,0
+Angola,2003,0.05
+Angola,2004,0.04
+Angola,2005,0
+Angola,2006,0
+Angola,2007,0.76
+Angola,2008,0
+Angola,2009,0
+Angola,2010,0.02
+Angola,2011,0.22
+Angola,2012,0.01
+Angola,2013,0
+Angola,2014,0
+Angola,2015,0.01
+Angola,2016,93.96
+Angola,2017,0
+Angola,2018,0.12
+Angola,2019,0.06
+Angola,2020,0
+Anguilla,2000,0
+Anguilla,2001,0
+Anguilla,2002,0
+Anguilla,2003,0
+Anguilla,2004,0
+Anguilla,2005,0
+Anguilla,2006,0
+Anguilla,2007,0
+Anguilla,2008,0
+Anguilla,2009,0
+Anguilla,2010,0.05
+Anguilla,2011,0
+Anguilla,2012,0
+Anguilla,2013,0
+Anguilla,2014,0
+Anguilla,2015,0
+Anguilla,2016,0
+Anguilla,2017,0
+Anguilla,2018,0
+Anguilla,2019,0
+Anguilla,2020,0
+Antigua and Barbuda,2000,0
+Antigua and Barbuda,2001,0
+Antigua and Barbuda,2002,0
+Antigua and Barbuda,2003,0
+Antigua and Barbuda,2004,0
+Antigua and Barbuda,2005,0
+Antigua and Barbuda,2006,0
+Antigua and Barbuda,2007,0
+Antigua and Barbuda,2008,0
+Antigua and Barbuda,2009,0
+Antigua and Barbuda,2010,0
+Antigua and Barbuda,2011,0
+Antigua and Barbuda,2012,0
+Antigua and Barbuda,2013,2.58
+Antigua and Barbuda,2014,0
+Antigua and Barbuda,2015,6.97
+Antigua and Barbuda,2016,0
+Antigua and Barbuda,2017,19.55
+Antigua and Barbuda,2018,0
+Antigua and Barbuda,2019,0
+Antigua and Barbuda,2020,0
+Argentina,2000,0
+Argentina,2001,3.89
+Argentina,2002,0
+Argentina,2003,0.05
+Argentina,2004,40.96
+Argentina,2005,0.27
+Argentina,2006,0.44
+Argentina,2007,0.37
+Argentina,2008,22.95
+Argentina,2009,39.08
+Argentina,2010,1.04
+Argentina,2011,69.26
+Argentina,2012,256.24
+Argentina,2013,47.82
+Argentina,2014,2466.14
+Argentina,2015,109.83
+Argentina,2016,250.16
+Argentina,2017,503.89
+Argentina,2018,487.91
+Argentina,2019,418.84
+Argentina,2020,82.07
+Armenia,2000,0
+Armenia,2001,7.67
+Armenia,2002,0.05
+Armenia,2003,2.78
+Armenia,2004,10.32
+Armenia,2005,3.06
+Armenia,2006,13.47
+Armenia,2007,1.53
+Armenia,2008,0.1
+Armenia,2009,0.45
+Armenia,2010,92.45
+Armenia,2011,0.97
+Armenia,2012,74.17
+Armenia,2013,25.91
+Armenia,2014,9.34
+Armenia,2015,23.25
+Armenia,2016,120.44
+Armenia,2017,1.56
+Armenia,2018,27.69
+Armenia,2019,42.59
+Armenia,2020,0
+Austria,2000,0
+Austria,2001,0
+Austria,2002,0
+Austria,2003,0
+Austria,2004,0
+Austria,2005,0
+Austria,2006,0
+Austria,2007,0
+Austria,2008,0
+Austria,2009,70.99
+Austria,2010,0
+Austria,2011,434.3
+Austria,2012,85.07
+Austria,2013,284.43
+Austria,2014,405.47
+Austria,2015,295.08
+Austria,2016,68.14
+Austria,2017,202.4
+Austria,2018,36.79
+Austria,2019,0
+Austria,2020,188.13
+Azerbaijan,2000,4.88
+Azerbaijan,2001,0
+Azerbaijan,2002,0
+Azerbaijan,2003,0
+Azerbaijan,2004,0
+Azerbaijan,2005,2.23
+Azerbaijan,2006,0.48
+Azerbaijan,2007,0
+Azerbaijan,2008,0
+Azerbaijan,2009,0.17
+Azerbaijan,2010,187.39
+Azerbaijan,2011,0.02
+Azerbaijan,2012,0
+Azerbaijan,2013,0
+Azerbaijan,2014,0.02
+Azerbaijan,2015,77.64
+Azerbaijan,2016,0.01
+Azerbaijan,2017,0.02
+Azerbaijan,2018,0
+Azerbaijan,2019,0.01
+Azerbaijan,2020,0
+Bahamas,2000,0
+Bahamas,2001,0
+Bahamas,2002,0
+Bahamas,2003,0
+Bahamas,2004,0
+Bahamas,2005,0
+Bahamas,2006,0
+Bahamas,2007,0
+Bahamas,2008,0
+Bahamas,2009,0
+Bahamas,2010,0
+Bahamas,2011,0
+Bahamas,2012,0
+Bahamas,2013,0
+Bahamas,2014,0
+Bahamas,2015,0
+Bahamas,2016,0
+Bahamas,2017,0.02
+Bahamas,2018,0.11
+Bahamas,2019,0.56
+Bahamas,2020,185.05
+Bangladesh,2000,3.02
+Bangladesh,2001,0
+Bangladesh,2002,32.19
+Bangladesh,2003,46.69
+Bangladesh,2004,17.17
+Bangladesh,2005,39.38
+Bangladesh,2006,0.02
+Bangladesh,2007,50.5
+Bangladesh,2008,0.01
+Bangladesh,2009,26.96
+Bangladesh,2010,0.18
+Bangladesh,2011,236.75
+Bangladesh,2012,149.13
+Bangladesh,2013,112.94
+Bangladesh,2014,90.49
+Bangladesh,2015,7.7
+Bangladesh,2016,418.43
+Bangladesh,2017,246.62
+Bangladesh,2018,235.49
+Bangladesh,2019,137.39
+Bangladesh,2020,0.04
+Barbados,2000,0
+Barbados,2001,0
+Barbados,2002,0
+Barbados,2003,0
+Barbados,2004,0
+Barbados,2005,0
+Barbados,2006,0
+Barbados,2007,0
+Barbados,2008,0
+Barbados,2009,0
+Barbados,2010,0
+Barbados,2011,0
+Barbados,2012,0
+Barbados,2013,0
+Barbados,2014,0
+Barbados,2015,0.08
+Barbados,2016,8.86
+Barbados,2017,0
+Barbados,2018,0.05
+Barbados,2019,34.1
+Barbados,2020,0
+Belarus,2000,0
+Belarus,2001,0
+Belarus,2002,0
+Belarus,2003,0
+Belarus,2004,0
+Belarus,2005,0
+Belarus,2006,0
+Belarus,2007,0.26
+Belarus,2008,0.06
+Belarus,2009,0.17
+Belarus,2010,0.13
+Belarus,2011,206.91
+Belarus,2012,2.95
+Belarus,2013,0.26
+Belarus,2014,61.33
+Belarus,2015,0.02
+Belarus,2016,0.13
+Belarus,2017,0.12
+Belarus,2018,15.6
+Belarus,2019,155.65
+Belarus,2020,0
+Belgium,2000,0
+Belgium,2001,0
+Belgium,2002,0
+Belgium,2003,0
+Belgium,2004,0
+Belgium,2005,0
+Belgium,2006,0
+Belgium,2007,0
+Belgium,2008,0
+Belgium,2009,377.48
+Belgium,2010,564.97
+Belgium,2011,0
+Belgium,2012,405.93
+Belgium,2013,0
+Belgium,2014,0
+Belgium,2015,294.36
+Belgium,2016,1378.73
+Belgium,2017,0
+Belgium,2018,344.49
+Belgium,2019,0
+Belgium,2020,0
+Belize,2000,0
+Belize,2001,0
+Belize,2002,0
+Belize,2003,0
+Belize,2004,0
+Belize,2005,0
+Belize,2006,0
+Belize,2007,0
+Belize,2008,0
+Belize,2009,4.66
+Belize,2010,0
+Belize,2011,0
+Belize,2012,0
+Belize,2013,0
+Belize,2014,0
+Belize,2015,0.02
+Belize,2016,1.69
+Belize,2017,0.01
+Belize,2018,15.95
+Belize,2019,0.26
+Belize,2020,0
+Benin,2000,0
+Benin,2001,0
+Benin,2002,0.09
+Benin,2003,0
+Benin,2004,0
+Benin,2005,0
+Benin,2006,8.54
+Benin,2007,0
+Benin,2008,0.56
+Benin,2009,8.85
+Benin,2010,0.17
+Benin,2011,0.37
+Benin,2012,0.08
+Benin,2013,0
+Benin,2014,12.89
+Benin,2015,566.9
+Benin,2016,1.28
+Benin,2017,268.46
+Benin,2018,1.94
+Benin,2019,0.03
+Benin,2020,0
+Bhutan,2000,4.89
+Bhutan,2001,2.49
+Bhutan,2002,25.88
+Bhutan,2003,0
+Bhutan,2004,0
+Bhutan,2005,1.32
+Bhutan,2006,0.12
+Bhutan,2007,0.83
+Bhutan,2008,4.25
+Bhutan,2009,82.98
+Bhutan,2010,22.89
+Bhutan,2011,0.08
+Bhutan,2012,3.51
+Bhutan,2013,36.93
+Bhutan,2014,2
+Bhutan,2015,126.11
+Bhutan,2016,0.05
+Bhutan,2017,0.02
+Bhutan,2018,0.11
+Bhutan,2019,0.7
+Bhutan,2020,0
+Bolivia (Plurinational State of),2000,0.09
+Bolivia (Plurinational State of),2001,0.77
+Bolivia (Plurinational State of),2002,0.07
+Bolivia (Plurinational State of),2003,16.19
+Bolivia (Plurinational State of),2004,0.04
+Bolivia (Plurinational State of),2005,0.15
+Bolivia (Plurinational State of),2006,0.43
+Bolivia (Plurinational State of),2007,0.41
+Bolivia (Plurinational State of),2008,0.84
+Bolivia (Plurinational State of),2009,100.48
+Bolivia (Plurinational State of),2010,5.29
+Bolivia (Plurinational State of),2011,1.33
+Bolivia (Plurinational State of),2012,4.89
+Bolivia (Plurinational State of),2013,74.85
+Bolivia (Plurinational State of),2014,38.29
+Bolivia (Plurinational State of),2015,2.46
+Bolivia (Plurinational State of),2016,1125.08
+Bolivia (Plurinational State of),2017,642.8
+Bolivia (Plurinational State of),2018,139.27
+Bolivia (Plurinational State of),2019,0.9
+Bolivia (Plurinational State of),2020,0.18
+Bosnia and Herzegovina,2000,0
+Bosnia and Herzegovina,2001,6.52
+Bosnia and Herzegovina,2002,0.3
+Bosnia and Herzegovina,2003,0
+Bosnia and Herzegovina,2004,7.03
+Bosnia and Herzegovina,2005,0
+Bosnia and Herzegovina,2006,12.15
+Bosnia and Herzegovina,2007,0.27
+Bosnia and Herzegovina,2008,22.59
+Bosnia and Herzegovina,2009,0.11
+Bosnia and Herzegovina,2010,93.35
+Bosnia and Herzegovina,2011,64.99
+Bosnia and Herzegovina,2012,0.92
+Bosnia and Herzegovina,2013,93.87
+Bosnia and Herzegovina,2014,158.64
+Bosnia and Herzegovina,2015,6.29
+Bosnia and Herzegovina,2016,3.62
+Bosnia and Herzegovina,2017,80.41
+Bosnia and Herzegovina,2018,1.3
+Bosnia and Herzegovina,2019,20.09
+Bosnia and Herzegovina,2020,0
+Botswana,2000,0.03
+Botswana,2001,0
+Botswana,2002,0
+Botswana,2003,0
+Botswana,2004,0.04
+Botswana,2005,0.02
+Botswana,2006,0.06
+Botswana,2007,0.01
+Botswana,2008,0
+Botswana,2009,6.74
+Botswana,2010,10.26
+Botswana,2011,0.08
+Botswana,2012,0.46
+Botswana,2013,0
+Botswana,2014,2.55
+Botswana,2015,0
+Botswana,2016,0.01
+Botswana,2017,0.02
+Botswana,2018,0.01
+Botswana,2019,0
+Botswana,2020,0
+Brazil,2000,126.49
+Brazil,2001,5.29
+Brazil,2002,45.3
+Brazil,2003,7.53
+Brazil,2004,1.14
+Brazil,2005,11.72
+Brazil,2006,1.22
+Brazil,2007,0.91
+Brazil,2008,37.79
+Brazil,2009,9737.17
+Brazil,2010,2331.67
+Brazil,2011,4589.3
+Brazil,2012,11601.62
+Brazil,2013,2767.62
+Brazil,2014,2546.5
+Brazil,2015,2825.75
+Brazil,2016,1863.32
+Brazil,2017,3232.58
+Brazil,2018,1523.48
+Brazil,2019,1864.91
+Brazil,2020,0.1
+Bulgaria,2000,0
+Bulgaria,2001,0
+Bulgaria,2002,0
+Bulgaria,2003,0
+Bulgaria,2004,0
+Bulgaria,2005,0
+Bulgaria,2006,0
+Bulgaria,2007,102.86
+Bulgaria,2008,0
+Bulgaria,2009,0
+Bulgaria,2010,16.37
+Bulgaria,2011,271.58
+Bulgaria,2012,56.13
+Bulgaria,2013,0
+Bulgaria,2014,0
+Bulgaria,2015,0
+Bulgaria,2016,0
+Bulgaria,2017,0
+Bulgaria,2018,76.31
+Bulgaria,2019,0
+Bulgaria,2020,0.99
+Burkina Faso,2000,0.12
+Burkina Faso,2001,15.36
+Burkina Faso,2002,0.02
+Burkina Faso,2003,0
+Burkina Faso,2004,5.26
+Burkina Faso,2005,15.86
+Burkina Faso,2006,0
+Burkina Faso,2007,3.55
+Burkina Faso,2008,8
+Burkina Faso,2009,0.7
+Burkina Faso,2010,1.35
+Burkina Faso,2011,0.03
+Burkina Faso,2012,1.48
+Burkina Faso,2013,32.45
+Burkina Faso,2014,38.41
+Burkina Faso,2015,0.18
+Burkina Faso,2016,29.28
+Burkina Faso,2017,20.81
+Burkina Faso,2018,35.13
+Burkina Faso,2019,45.33
+Burkina Faso,2020,100.25
+Burundi,2000,0
+Burundi,2001,0
+Burundi,2002,0
+Burundi,2003,0
+Burundi,2004,0
+Burundi,2005,0
+Burundi,2006,0
+Burundi,2007,0
+Burundi,2008,0.01
+Burundi,2009,0.09
+Burundi,2010,13.35
+Burundi,2011,0.01
+Burundi,2012,6.19
+Burundi,2013,96.64
+Burundi,2014,140.9
+Burundi,2015,2.49
+Burundi,2016,0.05
+Burundi,2017,16.93
+Burundi,2018,10.18
+Burundi,2019,89.84
+Burundi,2020,11.18
+Cabo Verde,2000,0
+Cabo Verde,2001,2.66
+Cabo Verde,2002,0
+Cabo Verde,2003,0
+Cabo Verde,2004,0
+Cabo Verde,2005,0.02
+Cabo Verde,2006,0
+Cabo Verde,2007,0
+Cabo Verde,2008,0.43
+Cabo Verde,2009,0.18
+Cabo Verde,2010,69.19
+Cabo Verde,2011,14.29
+Cabo Verde,2012,16.57
+Cabo Verde,2013,15.79
+Cabo Verde,2014,7.21
+Cabo Verde,2015,3.17
+Cabo Verde,2016,7.94
+Cabo Verde,2017,0.11
+Cabo Verde,2018,0
+Cabo Verde,2019,1.18
+Cabo Verde,2020,0
+Cambodia,2000,0
+Cambodia,2001,0
+Cambodia,2002,0
+Cambodia,2003,4.63
+Cambodia,2004,409.24
+Cambodia,2005,1.25
+Cambodia,2006,10.3
+Cambodia,2007,0
+Cambodia,2008,65.89
+Cambodia,2009,3.84
+Cambodia,2010,680.71
+Cambodia,2011,1.11
+Cambodia,2012,0.72
+Cambodia,2013,428.34
+Cambodia,2014,0.42
+Cambodia,2015,8.15
+Cambodia,2016,156.64
+Cambodia,2017,3.75
+Cambodia,2018,15.75
+Cambodia,2019,0.36
+Cambodia,2020,7.96
+Cameroon,2000,0
+Cameroon,2001,0
+Cameroon,2002,0.01
+Cameroon,2003,0.01
+Cameroon,2004,0.02
+Cameroon,2005,0
+Cameroon,2006,11.09
+Cameroon,2007,0
+Cameroon,2008,0.49
+Cameroon,2009,0.15
+Cameroon,2010,53.98
+Cameroon,2011,0.04
+Cameroon,2012,724.93
+Cameroon,2013,0.02
+Cameroon,2014,11.24
+Cameroon,2015,2.05
+Cameroon,2016,77.89
+Cameroon,2017,171.18
+Cameroon,2018,912.08
+Cameroon,2019,1.75
+Cameroon,2020,0
+Canada,2000,0
+Canada,2001,0
+Canada,2002,0
+Canada,2003,0
+Canada,2004,0
+Canada,2005,0
+Canada,2006,0
+Canada,2007,0
+Canada,2008,0
+Canada,2009,0
+Canada,2010,0
+Canada,2011,0
+Canada,2012,426.28
+Canada,2013,0
+Canada,2014,0
+Canada,2015,0
+Canada,2016,0
+Canada,2017,0
+Canada,2018,0
+Canada,2019,0
+Canada,2020,0
+Central African Republic,2000,0
+Central African Republic,2001,0
+Central African Republic,2002,0
+Central African Republic,2003,0
+Central African Republic,2004,0
+Central African Republic,2005,0
+Central African Republic,2006,0
+Central African Republic,2007,0
+Central African Republic,2008,0
+Central African Republic,2009,4.19
+Central African Republic,2010,0
+Central African Republic,2011,32.84
+Central African Republic,2012,0
+Central African Republic,2013,0
+Central African Republic,2014,0
+Central African Republic,2015,9.25
+Central African Republic,2016,0
+Central African Republic,2017,0.03
+Central African Republic,2018,3.73
+Central African Republic,2019,50.05
+Central African Republic,2020,5.93
+Chad,2000,0
+Chad,2001,5.88
+Chad,2002,0
+Chad,2003,0
+Chad,2004,0
+Chad,2005,0
+Chad,2006,0
+Chad,2007,25.86
+Chad,2008,0
+Chad,2009,0
+Chad,2010,0
+Chad,2011,0
+Chad,2012,0
+Chad,2013,0.03
+Chad,2014,0.02
+Chad,2015,0.02
+Chad,2016,41.33
+Chad,2017,0
+Chad,2018,0
+Chad,2019,10
+Chad,2020,0.41
+Chile,2000,0.45
+Chile,2001,0.15
+Chile,2002,0.03
+Chile,2003,0.07
+Chile,2004,2.79
+Chile,2005,50.46
+Chile,2006,0.11
+Chile,2007,93.22
+Chile,2008,65.32
+Chile,2009,56.21
+Chile,2010,3.21
+Chile,2011,68.53
+Chile,2012,1004.29
+Chile,2013,1352.65
+Chile,2014,1263.79
+Chile,2015,113.31
+Chile,2016,300.13
+Chile,2017,209.26
+Chile,2018,0
+Chile,2019,0
+Chile,2020,0.94
+China,2000,243.61
+China,2001,325.04
+China,2002,218.28
+China,2003,22.51
+China,2004,32.68
+China,2005,155.06
+China,2006,127.73
+China,2007,24.78
+China,2008,142.77
+China,2009,58.54
+China,2010,131.23
+China,2011,43.04
+China,2012,100.64
+China,2013,301.71
+China,2014,229.42
+China,2015,92
+China,2016,1271.88
+China,2017,372.49
+China,2018,318.26
+China,2019,201.54
+China,2020,13.64
+Colombia,2000,0
+Colombia,2001,0
+Colombia,2002,0.09
+Colombia,2003,0.01
+Colombia,2004,0
+Colombia,2005,223.46
+Colombia,2006,1.94
+Colombia,2007,0.79
+Colombia,2008,15.93
+Colombia,2009,0.01
+Colombia,2010,3.47
+Colombia,2011,0.78
+Colombia,2012,1.84
+Colombia,2013,0.32
+Colombia,2014,55.29
+Colombia,2015,23.22
+Colombia,2016,1454.76
+Colombia,2017,184.77
+Colombia,2018,144.25
+Colombia,2019,152.5
+Colombia,2020,0
+Comoros,2000,0
+Comoros,2001,0
+Comoros,2002,0
+Comoros,2003,0
+Comoros,2004,0
+Comoros,2005,0
+Comoros,2006,0
+Comoros,2007,0
+Comoros,2008,0
+Comoros,2009,0
+Comoros,2010,0
+Comoros,2011,0
+Comoros,2012,0.3
+Comoros,2013,0.02
+Comoros,2014,0.12
+Comoros,2015,0.97
+Comoros,2016,0.01
+Comoros,2017,11.18
+Comoros,2018,0
+Comoros,2019,15.99
+Comoros,2020,0
+Congo,2000,0.15
+Congo,2001,0
+Congo,2002,0
+Congo,2003,516.03
+Congo,2004,0
+Congo,2005,0
+Congo,2006,0
+Congo,2007,0
+Congo,2008,0
+Congo,2009,0
+Congo,2010,0
+Congo,2011,0
+Congo,2012,114.95
+Congo,2013,1.88
+Congo,2014,0
+Congo,2015,0
+Congo,2016,0.09
+Congo,2017,0
+Congo,2018,20.63
+Congo,2019,0.09
+Congo,2020,0
+Cook Islands,2000,0
+Cook Islands,2001,0
+Cook Islands,2002,0
+Cook Islands,2003,0
+Cook Islands,2004,0
+Cook Islands,2005,0
+Cook Islands,2006,0
+Cook Islands,2007,0
+Cook Islands,2008,0
+Cook Islands,2009,0
+Cook Islands,2010,0
+Cook Islands,2011,3.41
+Cook Islands,2012,4.93
+Cook Islands,2013,7.34
+Cook Islands,2014,14.72
+Cook Islands,2015,18.1
+Cook Islands,2016,4.44
+Cook Islands,2017,0
+Cook Islands,2018,0
+Cook Islands,2019,0
+Cook Islands,2020,0
+Costa Rica,2000,0.1
+Costa Rica,2001,140.12
+Costa Rica,2002,0
+Costa Rica,2003,16.2
+Costa Rica,2004,0.09
+Costa Rica,2005,0.11
+Costa Rica,2006,0.08
+Costa Rica,2007,0.71
+Costa Rica,2008,0.09
+Costa Rica,2009,0.01
+Costa Rica,2010,7.65
+Costa Rica,2011,130.92
+Costa Rica,2012,546.47
+Costa Rica,2013,122.77
+Costa Rica,2014,161.78
+Costa Rica,2015,596.37
+Costa Rica,2016,173.04
+Costa Rica,2017,251.88
+Costa Rica,2018,27.8
+Costa Rica,2019,0.68
+Costa Rica,2020,0
+Côte d'Ivoire,2000,13.65
+Côte d'Ivoire,2001,0
+Côte d'Ivoire,2002,0
+Côte d'Ivoire,2003,0
+Côte d'Ivoire,2004,0
+Côte d'Ivoire,2005,0
+Côte d'Ivoire,2006,0
+Côte d'Ivoire,2007,0
+Côte d'Ivoire,2008,0
+Côte d'Ivoire,2009,0
+Côte d'Ivoire,2010,0.9
+Côte d'Ivoire,2011,15.24
+Côte d'Ivoire,2012,0.26
+Côte d'Ivoire,2013,488.12
+Côte d'Ivoire,2014,0
+Côte d'Ivoire,2015,0.82
+Côte d'Ivoire,2016,34.91
+Côte d'Ivoire,2017,27.63
+Côte d'Ivoire,2018,31
+Côte d'Ivoire,2019,191.6
+Côte d'Ivoire,2020,8.97
+Croatia,2000,0
+Croatia,2001,0
+Croatia,2002,0
+Croatia,2003,6.21
+Croatia,2004,0
+Croatia,2005,0.01
+Croatia,2006,32.28
+Croatia,2007,0
+Croatia,2008,66.44
+Croatia,2009,0.89
+Croatia,2010,0
+Croatia,2011,0
+Croatia,2012,24.98
+Croatia,2013,23.29
+Croatia,2014,25.41
+Croatia,2015,0
+Croatia,2016,0
+Croatia,2017,0
+Croatia,2018,0
+Croatia,2019,0
+Croatia,2020,0
+Cuba,2000,0.8
+Cuba,2001,4.59
+Cuba,2002,1.72
+Cuba,2003,0.35
+Cuba,2004,0.91
+Cuba,2005,0.41
+Cuba,2006,0.38
+Cuba,2007,0.01
+Cuba,2008,0.05
+Cuba,2009,0.91
+Cuba,2010,4.16
+Cuba,2011,1.31
+Cuba,2012,0.41
+Cuba,2013,3.1
+Cuba,2014,0.04
+Cuba,2015,76.78
+Cuba,2016,31.02
+Cuba,2017,110.99
+Cuba,2018,7.21
+Cuba,2019,5.67
+Cuba,2020,0
+Cyprus,2000,0
+Cyprus,2001,0
+Cyprus,2002,0
+Cyprus,2003,0
+Cyprus,2004,0
+Cyprus,2005,0
+Cyprus,2006,0
+Cyprus,2007,0
+Cyprus,2008,0
+Cyprus,2009,81.8
+Cyprus,2010,0
+Cyprus,2011,0
+Cyprus,2012,0
+Cyprus,2013,0
+Cyprus,2014,0
+Cyprus,2015,0
+Cyprus,2016,0
+Cyprus,2017,0
+Cyprus,2018,0
+Cyprus,2019,11.19
+Cyprus,2020,0
+Czechia,2000,0
+Czechia,2001,0
+Czechia,2002,0
+Czechia,2003,0
+Czechia,2004,0
+Czechia,2005,0
+Czechia,2006,0
+Czechia,2007,0
+Czechia,2008,0
+Czechia,2009,0
+Czechia,2010,128.62
+Czechia,2011,97.47
+Czechia,2012,0
+Czechia,2013,0
+Czechia,2014,0
+Czechia,2015,0
+Czechia,2016,0
+Czechia,2017,0
+Czechia,2018,14.24
+Czechia,2019,0
+Czechia,2020,0
+Democratic People's Republic of Korea,2000,0
+Democratic People's Republic of Korea,2001,0
+Democratic People's Republic of Korea,2002,0.04
+Democratic People's Republic of Korea,2003,0
+Democratic People's Republic of Korea,2004,0.37
+Democratic People's Republic of Korea,2005,0.14
+Democratic People's Republic of Korea,2006,0.08
+Democratic People's Republic of Korea,2007,0
+Democratic People's Republic of Korea,2008,0
+Democratic People's Republic of Korea,2009,0
+Democratic People's Republic of Korea,2010,0
+Democratic People's Republic of Korea,2011,0
+Democratic People's Republic of Korea,2012,0.02
+Democratic People's Republic of Korea,2013,0.03
+Democratic People's Republic of Korea,2014,0
+Democratic People's Republic of Korea,2015,0
+Democratic People's Republic of Korea,2016,0.34
+Democratic People's Republic of Korea,2017,2.41
+Democratic People's Republic of Korea,2018,0.65
+Democratic People's Republic of Korea,2019,1.02
+Democratic People's Republic of Korea,2020,0
+Democratic Republic of the Congo,2000,0
+Democratic Republic of the Congo,2001,0.04
+Democratic Republic of the Congo,2002,0.06
+Democratic Republic of the Congo,2003,0
+Democratic Republic of the Congo,2004,0
+Democratic Republic of the Congo,2005,1.28
+Democratic Republic of the Congo,2006,0
+Democratic Republic of the Congo,2007,210.97
+Democratic Republic of the Congo,2008,54.44
+Democratic Republic of the Congo,2009,0.06
+Democratic Republic of the Congo,2010,0.41
+Democratic Republic of the Congo,2011,1291.67
+Democratic Republic of the Congo,2012,0.07
+Democratic Republic of the Congo,2013,25.63
+Democratic Republic of the Congo,2014,72.26
+Democratic Republic of the Congo,2015,0.61
+Democratic Republic of the Congo,2016,23.74
+Democratic Republic of the Congo,2017,43.73
+Democratic Republic of the Congo,2018,0.08
+Democratic Republic of the Congo,2019,0.35
+Democratic Republic of the Congo,2020,0
+Denmark,2000,0
+Denmark,2001,0
+Denmark,2002,0
+Denmark,2003,0
+Denmark,2004,0
+Denmark,2005,0
+Denmark,2006,0
+Denmark,2007,0
+Denmark,2008,0
+Denmark,2009,50.56
+Denmark,2010,86.01
+Denmark,2011,238.96
+Denmark,2012,65.13
+Denmark,2013,28.2
+Denmark,2014,5.05
+Denmark,2015,66.23
+Denmark,2016,0
+Denmark,2017,0
+Denmark,2018,0
+Denmark,2019,0
+Denmark,2020,22.84
+Djibouti,2000,0
+Djibouti,2001,0
+Djibouti,2002,0
+Djibouti,2003,0
+Djibouti,2004,0
+Djibouti,2005,5.94
+Djibouti,2006,0
+Djibouti,2007,0
+Djibouti,2008,0
+Djibouti,2009,5.58
+Djibouti,2010,12.44
+Djibouti,2011,0.01
+Djibouti,2012,9.48
+Djibouti,2013,8.23
+Djibouti,2014,3.14
+Djibouti,2015,0.94
+Djibouti,2016,1.29
+Djibouti,2017,1.73
+Djibouti,2018,30.47
+Djibouti,2019,25.19
+Djibouti,2020,0
+Dominica,2000,0
+Dominica,2001,0
+Dominica,2002,0
+Dominica,2003,0
+Dominica,2004,0
+Dominica,2005,0
+Dominica,2006,0
+Dominica,2007,0
+Dominica,2008,0
+Dominica,2009,0
+Dominica,2010,0
+Dominica,2011,0
+Dominica,2012,0
+Dominica,2013,7.64
+Dominica,2014,1.7
+Dominica,2015,0
+Dominica,2016,0
+Dominica,2017,13.26
+Dominica,2018,1.64
+Dominica,2019,8.94
+Dominica,2020,0
+Dominican Republic,2000,11.1
+Dominican Republic,2001,4.17
+Dominican Republic,2002,0.66
+Dominican Republic,2003,0
+Dominican Republic,2004,0.46
+Dominican Republic,2005,6.25
+Dominican Republic,2006,0.52
+Dominican Republic,2007,0.37
+Dominican Republic,2008,0.15
+Dominican Republic,2009,0.31
+Dominican Republic,2010,78.54
+Dominican Republic,2011,0.24
+Dominican Republic,2012,1.39
+Dominican Republic,2013,0.01
+Dominican Republic,2014,0.45
+Dominican Republic,2015,0.07
+Dominican Republic,2016,81.91
+Dominican Republic,2017,82.19
+Dominican Republic,2018,0.38
+Dominican Republic,2019,39.25
+Dominican Republic,2020,0
+Ecuador,2000,2.22
+Ecuador,2001,2.14
+Ecuador,2002,0.83
+Ecuador,2003,0.36
+Ecuador,2004,0.31
+Ecuador,2005,8.4
+Ecuador,2006,0.01
+Ecuador,2007,0
+Ecuador,2008,2.78
+Ecuador,2009,1.27
+Ecuador,2010,2812.78
+Ecuador,2011,394.8
+Ecuador,2012,26.48
+Ecuador,2013,333.46
+Ecuador,2014,507.66
+Ecuador,2015,31.74
+Ecuador,2016,134.67
+Ecuador,2017,36.81
+Ecuador,2018,0.89
+Ecuador,2019,60.12
+Ecuador,2020,68.18
+Egypt,2000,10.78
+Egypt,2001,31.59
+Egypt,2002,0.53
+Egypt,2003,209.66
+Egypt,2004,47.56
+Egypt,2005,102.77
+Egypt,2006,0.5
+Egypt,2007,97.27
+Egypt,2008,85.76
+Egypt,2009,257.89
+Egypt,2010,1025.13
+Egypt,2011,118.94
+Egypt,2012,14.92
+Egypt,2013,159.85
+Egypt,2014,0.08
+Egypt,2015,239.15
+Egypt,2016,312.35
+Egypt,2017,2095.34
+Egypt,2018,105.81
+Egypt,2019,340.39
+Egypt,2020,48.28
+El Salvador,2000,0
+El Salvador,2001,0
+El Salvador,2002,0
+El Salvador,2003,0
+El Salvador,2004,1.3
+El Salvador,2005,0
+El Salvador,2006,0
+El Salvador,2007,0.25
+El Salvador,2008,0.02
+El Salvador,2009,0.1
+El Salvador,2010,56.41
+El Salvador,2011,0.97
+El Salvador,2012,1.44
+El Salvador,2013,68.24
+El Salvador,2014,280.97
+El Salvador,2015,167.58
+El Salvador,2016,205.94
+El Salvador,2017,517.32
+El Salvador,2018,58.08
+El Salvador,2019,1.19
+El Salvador,2020,0
+Equatorial Guinea,2000,0
+Equatorial Guinea,2001,0.18
+Equatorial Guinea,2002,0.17
+Equatorial Guinea,2003,0.04
+Equatorial Guinea,2004,0
+Equatorial Guinea,2005,0
+Equatorial Guinea,2006,464.78
+Equatorial Guinea,2007,0
+Equatorial Guinea,2008,0
+Equatorial Guinea,2009,0
+Equatorial Guinea,2010,0
+Equatorial Guinea,2011,0
+Equatorial Guinea,2012,0
+Equatorial Guinea,2013,3.42
+Equatorial Guinea,2014,0
+Equatorial Guinea,2015,0.02
+Equatorial Guinea,2016,0
+Equatorial Guinea,2017,0
+Equatorial Guinea,2018,0
+Equatorial Guinea,2019,0
+Equatorial Guinea,2020,0
+Eritrea,2000,0
+Eritrea,2001,0
+Eritrea,2002,0
+Eritrea,2003,0
+Eritrea,2004,0
+Eritrea,2005,0
+Eritrea,2006,0
+Eritrea,2007,0.51
+Eritrea,2008,0.07
+Eritrea,2009,0.03
+Eritrea,2010,0.05
+Eritrea,2011,0.25
+Eritrea,2012,0
+Eritrea,2013,0
+Eritrea,2014,0
+Eritrea,2015,112.31
+Eritrea,2016,0
+Eritrea,2017,85.29
+Eritrea,2018,0.03
+Eritrea,2019,0
+Eritrea,2020,0
+Estonia,2000,0
+Estonia,2001,0
+Estonia,2002,0
+Estonia,2003,0
+Estonia,2004,0
+Estonia,2005,0
+Estonia,2006,0
+Estonia,2007,0
+Estonia,2008,1265.04
+Estonia,2009,28.88
+Estonia,2010,0
+Estonia,2011,83.38
+Estonia,2012,0
+Estonia,2013,0
+Estonia,2014,0
+Estonia,2015,48.24
+Estonia,2016,0
+Estonia,2017,0
+Estonia,2018,0
+Estonia,2019,10.42
+Estonia,2020,0
+Eswatini,2000,0
+Eswatini,2001,0
+Eswatini,2002,0
+Eswatini,2003,9.82
+Eswatini,2004,0
+Eswatini,2005,0
+Eswatini,2006,0
+Eswatini,2007,0
+Eswatini,2008,0
+Eswatini,2009,0
+Eswatini,2010,0
+Eswatini,2011,0
+Eswatini,2012,0
+Eswatini,2013,0
+Eswatini,2014,0
+Eswatini,2015,1.04
+Eswatini,2016,0
+Eswatini,2017,0
+Eswatini,2018,0
+Eswatini,2019,12.79
+Eswatini,2020,0
+Ethiopia,2000,1.5
+Ethiopia,2001,0.79
+Ethiopia,2002,205.48
+Ethiopia,2003,7.79
+Ethiopia,2004,0.65
+Ethiopia,2005,364.87
+Ethiopia,2006,0.42
+Ethiopia,2007,204.22
+Ethiopia,2008,0.32
+Ethiopia,2009,4285.25
+Ethiopia,2010,92.37
+Ethiopia,2011,109.55
+Ethiopia,2012,53.99
+Ethiopia,2013,295.14
+Ethiopia,2014,654.09
+Ethiopia,2015,315.03
+Ethiopia,2016,54.1
+Ethiopia,2017,361.35
+Ethiopia,2018,33.8
+Ethiopia,2019,55.11
+Ethiopia,2020,0
+EU (28),2000,0
+EU (28),2001,0
+EU (28),2002,0
+EU (28),2003,0
+EU (28),2004,0
+EU (28),2005,0
+EU (28),2006,0
+EU (28),2007,0
+EU (28),2008,0
+EU (28),2009,0
+EU (28),2010,0
+EU (28),2011,0
+EU (28),2012,0
+EU (28),2013,0
+EU (28),2014,0
+EU (28),2015,0
+EU (28),2016,0
+EU (28),2017,0
+EU (28),2018,0
+EU (28),2019,67.17
+EU (28),2020,125.31
+Fiji,2000,0
+Fiji,2001,0
+Fiji,2002,0
+Fiji,2003,0
+Fiji,2004,0.31
+Fiji,2005,0.26
+Fiji,2006,0
+Fiji,2007,0.05
+Fiji,2008,0
+Fiji,2009,96.09
+Fiji,2010,0
+Fiji,2011,0.01
+Fiji,2012,0.11
+Fiji,2013,4.71
+Fiji,2014,6.67
+Fiji,2015,1.7
+Fiji,2016,0.19
+Fiji,2017,0.05
+Fiji,2018,5.61
+Fiji,2019,0.12
+Fiji,2020,0
+Finland,2000,0
+Finland,2001,0
+Finland,2002,0
+Finland,2003,0
+Finland,2004,0
+Finland,2005,0
+Finland,2006,0
+Finland,2007,0
+Finland,2008,45.93
+Finland,2009,162.89
+Finland,2010,100.01
+Finland,2011,143.26
+Finland,2012,16.61
+Finland,2013,69.34
+Finland,2014,20.11
+Finland,2015,148.77
+Finland,2016,212.37
+Finland,2017,0
+Finland,2018,286.12
+Finland,2019,18.19
+Finland,2020,129.03
+France,2000,0
+France,2001,0
+France,2002,0
+France,2003,0
+France,2004,0
+France,2005,0
+France,2006,0
+France,2007,0
+France,2008,0
+France,2009,226.52
+France,2010,147.45
+France,2011,262.49
+France,2012,0
+France,2013,714.61
+France,2014,286.78
+France,2015,558.91
+France,2016,504.79
+France,2017,1387.85
+France,2018,844.39
+France,2019,817.22
+France,2020,699.69
+French Polynesia,2000,0
+French Polynesia,2001,0
+French Polynesia,2002,0
+French Polynesia,2003,0
+French Polynesia,2004,0
+French Polynesia,2005,0
+French Polynesia,2006,0
+French Polynesia,2007,0
+French Polynesia,2008,0
+French Polynesia,2009,0
+French Polynesia,2010,0
+French Polynesia,2011,0
+French Polynesia,2012,0.24
+French Polynesia,2013,0
+French Polynesia,2014,0
+French Polynesia,2015,0
+French Polynesia,2016,0
+French Polynesia,2017,0
+French Polynesia,2018,0
+French Polynesia,2019,0
+French Polynesia,2020,0
+Gabon,2000,0
+Gabon,2001,0
+Gabon,2002,0
+Gabon,2003,0
+Gabon,2004,0
+Gabon,2005,0
+Gabon,2006,0
+Gabon,2007,0
+Gabon,2008,407.08
+Gabon,2009,0
+Gabon,2010,6.24
+Gabon,2011,0
+Gabon,2012,0
+Gabon,2013,0.02
+Gabon,2014,0.01
+Gabon,2015,13.09
+Gabon,2016,40.71
+Gabon,2017,0.12
+Gabon,2018,0.02
+Gabon,2019,0
+Gabon,2020,0
+Gambia,2000,0
+Gambia,2001,0
+Gambia,2002,0.01
+Gambia,2003,0
+Gambia,2004,0
+Gambia,2005,0
+Gambia,2006,0
+Gambia,2007,0
+Gambia,2008,0
+Gambia,2009,0
+Gambia,2010,0
+Gambia,2011,0.01
+Gambia,2012,0
+Gambia,2013,0
+Gambia,2014,0
+Gambia,2015,0
+Gambia,2016,0
+Gambia,2017,25.39
+Gambia,2018,124.97
+Gambia,2019,25.19
+Gambia,2020,8.83
+Georgia,2000,0
+Georgia,2001,18.26
+Georgia,2002,0
+Georgia,2003,1.86
+Georgia,2004,3.44
+Georgia,2005,9.57
+Georgia,2006,2.57
+Georgia,2007,0
+Georgia,2008,0
+Georgia,2009,1.02
+Georgia,2010,8.38
+Georgia,2011,139.21
+Georgia,2012,37.14
+Georgia,2013,9.82
+Georgia,2014,196
+Georgia,2015,6.76
+Georgia,2016,90.51
+Georgia,2017,30
+Georgia,2018,46.33
+Georgia,2019,12.68
+Georgia,2020,0
+Germany,2000,0
+Germany,2001,0
+Germany,2002,0
+Germany,2003,0
+Germany,2004,0
+Germany,2005,0
+Germany,2006,0
+Germany,2007,0
+Germany,2008,0
+Germany,2009,146.59
+Germany,2010,378.65
+Germany,2011,732.46
+Germany,2012,620.38
+Germany,2013,559.58
+Germany,2014,687.07
+Germany,2015,294.07
+Germany,2016,0
+Germany,2017,0
+Germany,2018,205.01
+Germany,2019,83.96
+Germany,2020,0
+Ghana,2000,4.16
+Ghana,2001,1.02
+Ghana,2002,0.02
+Ghana,2003,0.34
+Ghana,2004,0.25
+Ghana,2005,0.35
+Ghana,2006,27.04
+Ghana,2007,922.57
+Ghana,2008,7.78
+Ghana,2009,0.62
+Ghana,2010,24.73
+Ghana,2011,1.37
+Ghana,2012,0.79
+Ghana,2013,2.38
+Ghana,2014,7.2
+Ghana,2015,60.26
+Ghana,2016,505.23
+Ghana,2017,7.91
+Ghana,2018,27.61
+Ghana,2019,15.81
+Ghana,2020,0
+Greece,2000,0
+Greece,2001,0
+Greece,2002,0
+Greece,2003,0
+Greece,2004,0
+Greece,2005,0
+Greece,2006,0
+Greece,2007,0
+Greece,2008,0
+Greece,2009,0
+Greece,2010,0
+Greece,2011,0
+Greece,2012,0
+Greece,2013,0
+Greece,2014,0
+Greece,2015,14.72
+Greece,2016,52.11
+Greece,2017,472.75
+Greece,2018,72.44
+Greece,2019,0
+Greece,2020,155.04
+Grenada,2000,0
+Grenada,2001,0
+Grenada,2002,0
+Grenada,2003,0.46
+Grenada,2004,0
+Grenada,2005,0
+Grenada,2006,0
+Grenada,2007,0
+Grenada,2008,0
+Grenada,2009,0
+Grenada,2010,0
+Grenada,2011,3.09
+Grenada,2012,0
+Grenada,2013,0
+Grenada,2014,0.11
+Grenada,2015,1.74
+Grenada,2016,0
+Grenada,2017,0.73
+Grenada,2018,0
+Grenada,2019,0.2
+Grenada,2020,0
+Guatemala,2000,0
+Guatemala,2001,0
+Guatemala,2002,21.06
+Guatemala,2003,0
+Guatemala,2004,0
+Guatemala,2005,0.04
+Guatemala,2006,0
+Guatemala,2007,0
+Guatemala,2008,0.06
+Guatemala,2009,0.02
+Guatemala,2010,9.61
+Guatemala,2011,4.33
+Guatemala,2012,56.41
+Guatemala,2013,17.64
+Guatemala,2014,23.97
+Guatemala,2015,0.02
+Guatemala,2016,14.42
+Guatemala,2017,0.86
+Guatemala,2018,11.45
+Guatemala,2019,37.6
+Guatemala,2020,0
+Guinea,2000,0.22
+Guinea,2001,0.56
+Guinea,2002,4.91
+Guinea,2003,0
+Guinea,2004,0
+Guinea,2005,0
+Guinea,2006,2.49
+Guinea,2007,0.5
+Guinea,2008,0.01
+Guinea,2009,0
+Guinea,2010,0
+Guinea,2011,366.7
+Guinea,2012,6
+Guinea,2013,0
+Guinea,2014,0.06
+Guinea,2015,1.2
+Guinea,2016,140.76
+Guinea,2017,0.12
+Guinea,2018,1140.22
+Guinea,2019,832.77
+Guinea,2020,0
+Guinea-Bissau,2000,0
+Guinea-Bissau,2001,3.34
+Guinea-Bissau,2002,4.56
+Guinea-Bissau,2003,0
+Guinea-Bissau,2004,0.16
+Guinea-Bissau,2005,0
+Guinea-Bissau,2006,0
+Guinea-Bissau,2007,0
+Guinea-Bissau,2008,0
+Guinea-Bissau,2009,0.03
+Guinea-Bissau,2010,0.02
+Guinea-Bissau,2011,0.22
+Guinea-Bissau,2012,0.1
+Guinea-Bissau,2013,0.19
+Guinea-Bissau,2014,0.2
+Guinea-Bissau,2015,0
+Guinea-Bissau,2016,0.41
+Guinea-Bissau,2017,3.37
+Guinea-Bissau,2018,4.51
+Guinea-Bissau,2019,0.23
+Guinea-Bissau,2020,0
+Guyana,2000,0
+Guyana,2001,5.03
+Guyana,2002,0
+Guyana,2003,0
+Guyana,2004,0
+Guyana,2005,0.03
+Guyana,2006,0
+Guyana,2007,0
+Guyana,2008,0
+Guyana,2009,0
+Guyana,2010,1.19
+Guyana,2011,0
+Guyana,2012,0.09
+Guyana,2013,0.02
+Guyana,2014,0.02
+Guyana,2015,2.85
+Guyana,2016,0
+Guyana,2017,0
+Guyana,2018,30.81
+Guyana,2019,14.63
+Guyana,2020,1.46
+Haiti,2000,0.84
+Haiti,2001,0
+Haiti,2002,0
+Haiti,2003,0
+Haiti,2004,0
+Haiti,2005,0.32
+Haiti,2006,0
+Haiti,2007,0
+Haiti,2008,0
+Haiti,2009,14.87
+Haiti,2010,2.33
+Haiti,2011,31.32
+Haiti,2012,12.11
+Haiti,2013,13.92
+Haiti,2014,0.81
+Haiti,2015,49.59
+Haiti,2016,8.67
+Haiti,2017,26.18
+Haiti,2018,0.74
+Haiti,2019,39.51
+Haiti,2020,0.33
+Honduras,2000,32.74
+Honduras,2001,0
+Honduras,2002,0
+Honduras,2003,0.21
+Honduras,2004,0
+Honduras,2005,5.86
+Honduras,2006,0
+Honduras,2007,0.02
+Honduras,2008,0.02
+Honduras,2009,0.13
+Honduras,2010,129.54
+Honduras,2011,13.08
+Honduras,2012,23.32
+Honduras,2013,353.09
+Honduras,2014,176.6
+Honduras,2015,432.51
+Honduras,2016,217.68
+Honduras,2017,109.46
+Honduras,2018,83.89
+Honduras,2019,0.96
+Honduras,2020,78.51
+Hungary,2000,0
+Hungary,2001,0
+Hungary,2002,0
+Hungary,2003,0
+Hungary,2004,0
+Hungary,2005,0
+Hungary,2006,0
+Hungary,2007,0
+Hungary,2008,0
+Hungary,2009,0
+Hungary,2010,141.03
+Hungary,2011,0
+Hungary,2012,0
+Hungary,2013,0
+Hungary,2014,0
+Hungary,2015,23.69
+Hungary,2016,0
+Hungary,2017,0
+Hungary,2018,10.25
+Hungary,2019,0
+Hungary,2020,0
+Iceland,2000,0
+Iceland,2001,0
+Iceland,2002,0
+Iceland,2003,0
+Iceland,2004,0
+Iceland,2005,0
+Iceland,2006,0
+Iceland,2007,0
+Iceland,2008,0
+Iceland,2009,227.2
+Iceland,2010,0
+Iceland,2011,137.97
+Iceland,2012,0
+Iceland,2013,0
+Iceland,2014,0
+Iceland,2015,37.93
+Iceland,2016,259.9
+Iceland,2017,0
+Iceland,2018,0
+Iceland,2019,0
+Iceland,2020,85.61
+India,2000,485.73
+India,2001,193.14
+India,2002,17.16
+India,2003,10.7
+India,2004,399.44
+India,2005,175.34
+India,2006,160.99
+India,2007,465.63
+India,2008,369.36
+India,2009,210.65
+India,2010,372.82
+India,2011,1950.93
+India,2012,1119.11
+India,2013,586.41
+India,2014,699.8
+India,2015,898.76
+India,2016,2198.17
+India,2017,861.45
+India,2018,1947.29
+India,2019,865.64
+India,2020,431.45
+Indonesia,2000,2.31
+Indonesia,2001,5.09
+Indonesia,2002,0.12
+Indonesia,2003,201.31
+Indonesia,2004,51.67
+Indonesia,2005,188.35
+Indonesia,2006,255.84
+Indonesia,2007,602.25
+Indonesia,2008,19.45
+Indonesia,2009,29.22
+Indonesia,2010,46.3
+Indonesia,2011,947.34
+Indonesia,2012,16.11
+Indonesia,2013,245.06
+Indonesia,2014,881.34
+Indonesia,2015,378.14
+Indonesia,2016,342.33
+Indonesia,2017,300.88
+Indonesia,2018,1056.14
+Indonesia,2019,216.2
+Indonesia,2020,0
+Iran (Islamic Republic of),2000,62.25
+Iran (Islamic Republic of),2001,291.05
+Iran (Islamic Republic of),2002,0
+Iran (Islamic Republic of),2003,0
+Iran (Islamic Republic of),2004,0
+Iran (Islamic Republic of),2005,0
+Iran (Islamic Republic of),2006,0
+Iran (Islamic Republic of),2007,0
+Iran (Islamic Republic of),2008,0
+Iran (Islamic Republic of),2009,0.02
+Iran (Islamic Republic of),2010,0
+Iran (Islamic Republic of),2011,0
+Iran (Islamic Republic of),2012,0
+Iran (Islamic Republic of),2013,0
+Iran (Islamic Republic of),2014,0.09
+Iran (Islamic Republic of),2015,0.2
+Iran (Islamic Republic of),2016,0.08
+Iran (Islamic Republic of),2017,0.28
+Iran (Islamic Republic of),2018,0.07
+Iran (Islamic Republic of),2019,0
+Iran (Islamic Republic of),2020,0
+Iraq,2000,0
+Iraq,2001,0
+Iraq,2002,0
+Iraq,2003,23.85
+Iraq,2004,0
+Iraq,2005,0
+Iraq,2006,43.26
+Iraq,2007,35.23
+Iraq,2008,0.08
+Iraq,2009,0.15
+Iraq,2010,158.47
+Iraq,2011,0
+Iraq,2012,2.25
+Iraq,2013,0
+Iraq,2014,0.02
+Iraq,2015,0
+Iraq,2016,260.57
+Iraq,2017,112.96
+Iraq,2018,0
+Iraq,2019,0
+Iraq,2020,0
+Ireland,2000,0
+Ireland,2001,0
+Ireland,2002,0
+Ireland,2003,0
+Ireland,2004,0
+Ireland,2005,0
+Ireland,2006,0
+Ireland,2007,0
+Ireland,2008,0
+Ireland,2009,264.32
+Ireland,2010,0
+Ireland,2011,0
+Ireland,2012,189.58
+Ireland,2013,106.08
+Ireland,2014,0
+Ireland,2015,0
+Ireland,2016,0
+Ireland,2017,0
+Ireland,2018,84.85
+Ireland,2019,0
+Ireland,2020,0
+Israel,2000,0
+Israel,2001,0
+Israel,2002,0
+Israel,2003,0
+Israel,2004,0
+Israel,2005,0
+Israel,2006,0
+Israel,2007,0
+Israel,2008,0
+Israel,2009,0
+Israel,2010,0
+Israel,2011,0
+Israel,2012,0
+Israel,2013,0
+Israel,2014,721
+Israel,2015,166.02
+Israel,2016,0
+Israel,2017,0
+Israel,2018,0
+Israel,2019,0
+Israel,2020,0
+Italy,2000,0
+Italy,2001,0
+Italy,2002,0
+Italy,2003,0
+Italy,2004,0
+Italy,2005,0
+Italy,2006,0
+Italy,2007,0
+Italy,2008,0
+Italy,2009,0
+Italy,2010,1275.69
+Italy,2011,184.36
+Italy,2012,0
+Italy,2013,0
+Italy,2014,340.54
+Italy,2015,44.15
+Italy,2016,196.19
+Italy,2017,555.14
+Italy,2018,392.71
+Italy,2019,307.86
+Italy,2020,100.19
+Jamaica,2000,5.18
+Jamaica,2001,9.07
+Jamaica,2002,0
+Jamaica,2003,0
+Jamaica,2004,0
+Jamaica,2005,0
+Jamaica,2006,0
+Jamaica,2007,0
+Jamaica,2008,0.41
+Jamaica,2009,0.11
+Jamaica,2010,0.17
+Jamaica,2011,8.86
+Jamaica,2012,0.12
+Jamaica,2013,0
+Jamaica,2014,57.8
+Jamaica,2015,87.99
+Jamaica,2016,17.58
+Jamaica,2017,0.9
+Jamaica,2018,70.52
+Jamaica,2019,0.17
+Jamaica,2020,0
+Jordan,2000,0
+Jordan,2001,0
+Jordan,2002,0.03
+Jordan,2003,0.25
+Jordan,2004,0
+Jordan,2005,0.02
+Jordan,2006,0
+Jordan,2007,0.2
+Jordan,2008,0.08
+Jordan,2009,14.16
+Jordan,2010,6.88
+Jordan,2011,46.93
+Jordan,2012,0.01
+Jordan,2013,212.09
+Jordan,2014,156.21
+Jordan,2015,252.19
+Jordan,2016,548.69
+Jordan,2017,436.08
+Jordan,2018,89
+Jordan,2019,43.35
+Jordan,2020,14.61
+Kazakhstan,2000,0
+Kazakhstan,2001,0
+Kazakhstan,2002,0
+Kazakhstan,2003,0
+Kazakhstan,2004,0
+Kazakhstan,2005,0
+Kazakhstan,2006,361.7
+Kazakhstan,2007,57.66
+Kazakhstan,2008,2.67
+Kazakhstan,2009,0
+Kazakhstan,2010,1.36
+Kazakhstan,2011,1.71
+Kazakhstan,2012,27.49
+Kazakhstan,2013,0.02
+Kazakhstan,2014,37.39
+Kazakhstan,2015,48.47
+Kazakhstan,2016,45.87
+Kazakhstan,2017,150.15
+Kazakhstan,2018,250.38
+Kazakhstan,2019,591.11
+Kazakhstan,2020,46.17
+Kenya,2000,0.09
+Kenya,2001,0
+Kenya,2002,0
+Kenya,2003,0.33
+Kenya,2004,135.54
+Kenya,2005,44.01
+Kenya,2006,0.01
+Kenya,2007,59.03
+Kenya,2008,29.99
+Kenya,2009,35.47
+Kenya,2010,729.4
+Kenya,2011,511.18
+Kenya,2012,144
+Kenya,2013,16.26
+Kenya,2014,818.04
+Kenya,2015,542.53
+Kenya,2016,701.14
+Kenya,2017,301.26
+Kenya,2018,256.69
+Kenya,2019,84.49
+Kenya,2020,19.88
+Kiribati,2000,0
+Kiribati,2001,0
+Kiribati,2002,0
+Kiribati,2003,0
+Kiribati,2004,0
+Kiribati,2005,0
+Kiribati,2006,0
+Kiribati,2007,0
+Kiribati,2008,0
+Kiribati,2009,5.15
+Kiribati,2010,0.98
+Kiribati,2011,0
+Kiribati,2012,0
+Kiribati,2013,4.7
+Kiribati,2014,4.34
+Kiribati,2015,0
+Kiribati,2016,0
+Kiribati,2017,0
+Kiribati,2018,0.86
+Kiribati,2019,0
+Kiribati,2020,0
+Kosovo*,2000,0
+Kosovo*,2001,0
+Kosovo*,2002,0
+Kosovo*,2003,0
+Kosovo*,2004,0
+Kosovo*,2005,0
+Kosovo*,2006,0
+Kosovo*,2007,0
+Kosovo*,2008,0
+Kosovo*,2009,0
+Kosovo*,2010,0
+Kosovo*,2011,0
+Kosovo*,2012,0
+Kosovo*,2013,0.28
+Kosovo*,2014,26.63
+Kosovo*,2015,24.75
+Kosovo*,2016,0
+Kosovo*,2017,0.7
+Kosovo*,2018,0.58
+Kosovo*,2019,85.56
+Kosovo*,2020,0
+Kyrgyzstan,2000,8.46
+Kyrgyzstan,2001,0
+Kyrgyzstan,2002,0
+Kyrgyzstan,2003,0
+Kyrgyzstan,2004,0.04
+Kyrgyzstan,2005,0
+Kyrgyzstan,2006,0
+Kyrgyzstan,2007,0
+Kyrgyzstan,2008,0.4
+Kyrgyzstan,2009,0.17
+Kyrgyzstan,2010,1.55
+Kyrgyzstan,2011,24.38
+Kyrgyzstan,2012,0.61
+Kyrgyzstan,2013,13.51
+Kyrgyzstan,2014,0
+Kyrgyzstan,2015,0.02
+Kyrgyzstan,2016,38.23
+Kyrgyzstan,2017,1.25
+Kyrgyzstan,2018,0.07
+Kyrgyzstan,2019,86.21
+Kyrgyzstan,2020,0
+Lao People's Democratic Republic,2000,0
+Lao People's Democratic Republic,2001,0
+Lao People's Democratic Republic,2002,10.26
+Lao People's Democratic Republic,2003,0.17
+Lao People's Democratic Republic,2004,366.22
+Lao People's Democratic Republic,2005,53.66
+Lao People's Democratic Republic,2006,218.77
+Lao People's Democratic Republic,2007,2.13
+Lao People's Democratic Republic,2008,1.59
+Lao People's Democratic Republic,2009,412.65
+Lao People's Democratic Republic,2010,10.64
+Lao People's Democratic Republic,2011,1228.36
+Lao People's Democratic Republic,2012,134.96
+Lao People's Democratic Republic,2013,733.55
+Lao People's Democratic Republic,2014,430.08
+Lao People's Democratic Republic,2015,81.79
+Lao People's Democratic Republic,2016,753.69
+Lao People's Democratic Republic,2017,2392.4
+Lao People's Democratic Republic,2018,389.73
+Lao People's Democratic Republic,2019,2.29
+Lao People's Democratic Republic,2020,0
+Latvia,2000,0
+Latvia,2001,0
+Latvia,2002,0
+Latvia,2003,0
+Latvia,2004,0
+Latvia,2005,0
+Latvia,2006,0
+Latvia,2007,0
+Latvia,2008,57.42
+Latvia,2009,0
+Latvia,2010,0
+Latvia,2011,0
+Latvia,2012,0
+Latvia,2013,0
+Latvia,2014,0
+Latvia,2015,0
+Latvia,2016,0
+Latvia,2017,0
+Latvia,2018,0
+Latvia,2019,0
+Latvia,2020,0
+Lebanon,2000,0
+Lebanon,2001,0
+Lebanon,2002,0
+Lebanon,2003,0
+Lebanon,2004,0.08
+Lebanon,2005,0
+Lebanon,2006,0
+Lebanon,2007,0.81
+Lebanon,2008,0
+Lebanon,2009,0.39
+Lebanon,2010,1.67
+Lebanon,2011,0
+Lebanon,2012,1.42
+Lebanon,2013,0.02
+Lebanon,2014,2.33
+Lebanon,2015,36.59
+Lebanon,2016,23.65
+Lebanon,2017,0.03
+Lebanon,2018,6.2
+Lebanon,2019,0.32
+Lebanon,2020,0
+Lesotho,2000,0
+Lesotho,2001,0
+Lesotho,2002,0
+Lesotho,2003,0
+Lesotho,2004,0.05
+Lesotho,2005,0.09
+Lesotho,2006,0.06
+Lesotho,2007,0.01
+Lesotho,2008,0
+Lesotho,2009,0.79
+Lesotho,2010,0.04
+Lesotho,2011,2.82
+Lesotho,2012,0.2
+Lesotho,2013,0.1
+Lesotho,2014,9.27
+Lesotho,2015,0.04
+Lesotho,2016,0
+Lesotho,2017,0
+Lesotho,2018,0
+Lesotho,2019,13.52
+Lesotho,2020,0
+Liberia,2000,0
+Liberia,2001,0
+Liberia,2002,0
+Liberia,2003,0
+Liberia,2004,0
+Liberia,2005,0
+Liberia,2006,0
+Liberia,2007,0.66
+Liberia,2008,0.16
+Liberia,2009,0
+Liberia,2010,0
+Liberia,2011,103.07
+Liberia,2012,0.02
+Liberia,2013,85.18
+Liberia,2014,0.19
+Liberia,2015,252.91
+Liberia,2016,10.24
+Liberia,2017,46.27
+Liberia,2018,6.58
+Liberia,2019,37.56
+Liberia,2020,0
+Libya,2000,0
+Libya,2001,0
+Libya,2002,0
+Libya,2003,0
+Libya,2004,0
+Libya,2005,0
+Libya,2006,0
+Libya,2007,0
+Libya,2008,0
+Libya,2009,0
+Libya,2010,0
+Libya,2011,0
+Libya,2012,0
+Libya,2013,0
+Libya,2014,0
+Libya,2015,0
+Libya,2016,0
+Libya,2017,0
+Libya,2018,0
+Libya,2019,0
+Libya,2020,0
+Lithuania,2000,0
+Lithuania,2001,0
+Lithuania,2002,0
+Lithuania,2003,0
+Lithuania,2004,0
+Lithuania,2005,0
+Lithuania,2006,0
+Lithuania,2007,0
+Lithuania,2008,0
+Lithuania,2009,0
+Lithuania,2010,0
+Lithuania,2011,0
+Lithuania,2012,0
+Lithuania,2013,0
+Lithuania,2014,0
+Lithuania,2015,0
+Lithuania,2016,0
+Lithuania,2017,26.03
+Lithuania,2018,8.69
+Lithuania,2019,0
+Lithuania,2020,0
+Madagascar,2000,0
+Madagascar,2001,0
+Madagascar,2002,0.01
+Madagascar,2003,0
+Madagascar,2004,8.34
+Madagascar,2005,3.22
+Madagascar,2006,7.15
+Madagascar,2007,8.56
+Madagascar,2008,2.72
+Madagascar,2009,0
+Madagascar,2010,0
+Madagascar,2011,7.38
+Madagascar,2012,0.05
+Madagascar,2013,2.77
+Madagascar,2014,14.12
+Madagascar,2015,4.74
+Madagascar,2016,22.53
+Madagascar,2017,27.11
+Madagascar,2018,5.25
+Madagascar,2019,43.74
+Madagascar,2020,0
+Malawi,2000,6.84
+Malawi,2001,0
+Malawi,2002,0
+Malawi,2003,0.51
+Malawi,2004,0.06
+Malawi,2005,0.06
+Malawi,2006,0.05
+Malawi,2007,0.06
+Malawi,2008,0
+Malawi,2009,0.07
+Malawi,2010,15.19
+Malawi,2011,2.41
+Malawi,2012,1.69
+Malawi,2013,36.02
+Malawi,2014,1.93
+Malawi,2015,63.52
+Malawi,2016,0.35
+Malawi,2017,3.86
+Malawi,2018,17.15
+Malawi,2019,105.14
+Malawi,2020,1.58
+Malaysia,2000,141.19
+Malaysia,2001,0
+Malaysia,2002,0.02
+Malaysia,2003,0
+Malaysia,2004,0.27
+Malaysia,2005,0
+Malaysia,2006,0.02
+Malaysia,2007,0.01
+Malaysia,2008,0
+Malaysia,2009,0.03
+Malaysia,2010,0.14
+Malaysia,2011,0.06
+Malaysia,2012,4
+Malaysia,2013,0.07
+Malaysia,2014,0.16
+Malaysia,2015,0.18
+Malaysia,2016,1.3
+Malaysia,2017,0.05
+Malaysia,2018,0.06
+Malaysia,2019,0.02
+Malaysia,2020,0
+Maldives,2000,4.77
+Maldives,2001,0
+Maldives,2002,0
+Maldives,2003,0
+Maldives,2004,0
+Maldives,2005,0
+Maldives,2006,0
+Maldives,2007,0
+Maldives,2008,0.11
+Maldives,2009,0.45
+Maldives,2010,9.72
+Maldives,2011,0.01
+Maldives,2012,0.03
+Maldives,2013,0
+Maldives,2014,42.59
+Maldives,2015,6.21
+Maldives,2016,0.01
+Maldives,2017,0.02
+Maldives,2018,5.69
+Maldives,2019,4.02
+Maldives,2020,0
+Mali,2000,3.57
+Mali,2001,10.19
+Mali,2002,0.01
+Mali,2003,0.02
+Mali,2004,0.06
+Mali,2005,5.95
+Mali,2006,31.38
+Mali,2007,0.1
+Mali,2008,0.05
+Mali,2009,38.44
+Mali,2010,0.02
+Mali,2011,0.23
+Mali,2012,0.18
+Mali,2013,448.53
+Mali,2014,99.64
+Mali,2015,9.44
+Mali,2016,61.26
+Mali,2017,26.38
+Mali,2018,20.86
+Mali,2019,44.95
+Mali,2020,0
+Malta,2000,0
+Malta,2001,0
+Malta,2002,0
+Malta,2003,0
+Malta,2004,0
+Malta,2005,0
+Malta,2006,0
+Malta,2007,0
+Malta,2008,0
+Malta,2009,0
+Malta,2010,0
+Malta,2011,0
+Malta,2012,0
+Malta,2013,0
+Malta,2014,0
+Malta,2015,0
+Malta,2016,4.41
+Malta,2017,0
+Malta,2018,0
+Malta,2019,0
+Malta,2020,0
+Marshall Islands,2000,0
+Marshall Islands,2001,0
+Marshall Islands,2002,0
+Marshall Islands,2003,0
+Marshall Islands,2004,0
+Marshall Islands,2005,3.11
+Marshall Islands,2006,0
+Marshall Islands,2007,0.91
+Marshall Islands,2008,0
+Marshall Islands,2009,10.5
+Marshall Islands,2010,0
+Marshall Islands,2011,0.16
+Marshall Islands,2012,0.02
+Marshall Islands,2013,1.27
+Marshall Islands,2014,0.01
+Marshall Islands,2015,4.14
+Marshall Islands,2016,0.26
+Marshall Islands,2017,41.65
+Marshall Islands,2018,0
+Marshall Islands,2019,0
+Marshall Islands,2020,0
+Mauritania,2000,0
+Mauritania,2001,0.2
+Mauritania,2002,0
+Mauritania,2003,0
+Mauritania,2004,0
+Mauritania,2005,0
+Mauritania,2006,24.33
+Mauritania,2007,0.07
+Mauritania,2008,0
+Mauritania,2009,0
+Mauritania,2010,0
+Mauritania,2011,0.01
+Mauritania,2012,67.62
+Mauritania,2013,68.68
+Mauritania,2014,6.04
+Mauritania,2015,0.12
+Mauritania,2016,178.25
+Mauritania,2017,18.44
+Mauritania,2018,0.01
+Mauritania,2019,12.32
+Mauritania,2020,0
+Mauritius,2000,0
+Mauritius,2001,0
+Mauritius,2002,0
+Mauritius,2003,0
+Mauritius,2004,0
+Mauritius,2005,0
+Mauritius,2006,0
+Mauritius,2007,0
+Mauritius,2008,0
+Mauritius,2009,0
+Mauritius,2010,2.04
+Mauritius,2011,0
+Mauritius,2012,0
+Mauritius,2013,58.79
+Mauritius,2014,52.61
+Mauritius,2015,9.44
+Mauritius,2016,29.4
+Mauritius,2017,0.34
+Mauritius,2018,0
+Mauritius,2019,29.84
+Mauritius,2020,0
+Mexico,2000,2.46
+Mexico,2001,3.43
+Mexico,2002,14.19
+Mexico,2003,0.26
+Mexico,2004,0.53
+Mexico,2005,33.67
+Mexico,2006,32.77
+Mexico,2007,0.16
+Mexico,2008,6.68
+Mexico,2009,4.42
+Mexico,2010,82.31
+Mexico,2011,1.02
+Mexico,2012,366.04
+Mexico,2013,70.97
+Mexico,2014,387.45
+Mexico,2015,226.35
+Mexico,2016,455.35
+Mexico,2017,502.06
+Mexico,2018,377.95
+Mexico,2019,197.42
+Mexico,2020,376.63
+Micronesia (Federated States of),2000,0
+Micronesia (Federated States of),2001,0
+Micronesia (Federated States of),2002,0
+Micronesia (Federated States of),2003,0
+Micronesia (Federated States of),2004,0
+Micronesia (Federated States of),2005,5.51
+Micronesia (Federated States of),2006,0
+Micronesia (Federated States of),2007,0
+Micronesia (Federated States of),2008,0
+Micronesia (Federated States of),2009,14.23
+Micronesia (Federated States of),2010,0
+Micronesia (Federated States of),2011,0
+Micronesia (Federated States of),2012,0.02
+Micronesia (Federated States of),2013,5.74
+Micronesia (Federated States of),2014,0.81
+Micronesia (Federated States of),2015,4.07
+Micronesia (Federated States of),2016,0.01
+Micronesia (Federated States of),2017,1.18
+Micronesia (Federated States of),2018,10
+Micronesia (Federated States of),2019,27.27
+Micronesia (Federated States of),2020,0
+Mongolia,2000,5.18
+Mongolia,2001,1.65
+Mongolia,2002,1.41
+Mongolia,2003,5.69
+Mongolia,2004,0
+Mongolia,2005,2.8
+Mongolia,2006,6.12
+Mongolia,2007,12.73
+Mongolia,2008,4.4
+Mongolia,2009,11.98
+Mongolia,2010,12.17
+Mongolia,2011,0
+Mongolia,2012,29.08
+Mongolia,2013,0.15
+Mongolia,2014,0.01
+Mongolia,2015,0.89
+Mongolia,2016,198.81
+Mongolia,2017,84.18
+Mongolia,2018,99.32
+Mongolia,2019,10.6
+Mongolia,2020,0
+Montenegro,2000,0
+Montenegro,2001,0
+Montenegro,2002,0
+Montenegro,2003,0
+Montenegro,2004,0
+Montenegro,2005,0
+Montenegro,2006,0
+Montenegro,2007,1.62
+Montenegro,2008,0.15
+Montenegro,2009,0.15
+Montenegro,2010,0.2
+Montenegro,2011,6.32
+Montenegro,2012,0
+Montenegro,2013,0
+Montenegro,2014,27.16
+Montenegro,2015,83.69
+Montenegro,2016,4.7
+Montenegro,2017,0.01
+Montenegro,2018,0
+Montenegro,2019,87.32
+Montenegro,2020,0
+Montserrat,2000,0
+Montserrat,2001,0
+Montserrat,2002,0
+Montserrat,2003,0
+Montserrat,2004,0
+Montserrat,2005,0
+Montserrat,2006,0
+Montserrat,2007,0
+Montserrat,2008,1.29
+Montserrat,2009,0
+Montserrat,2010,0
+Montserrat,2011,0.09
+Montserrat,2012,6.73
+Montserrat,2013,0.57
+Montserrat,2014,0.96
+Montserrat,2015,2.01
+Montserrat,2016,7.98
+Montserrat,2017,0.14
+Montserrat,2018,0
+Montserrat,2019,0
+Montserrat,2020,0
+Morocco,2000,0.26
+Morocco,2001,1.47
+Morocco,2002,13.45
+Morocco,2003,0.55
+Morocco,2004,153.48
+Morocco,2005,186.11
+Morocco,2006,70.28
+Morocco,2007,180.55
+Morocco,2008,226.26
+Morocco,2009,121.03
+Morocco,2010,8.46
+Morocco,2011,218.32
+Morocco,2012,914.03
+Morocco,2013,5.9
+Morocco,2014,1433.58
+Morocco,2015,234.28
+Morocco,2016,468.74
+Morocco,2017,119.26
+Morocco,2018,811.63
+Morocco,2019,639.78
+Morocco,2020,0
+Mozambique,2000,0.04
+Mozambique,2001,0.42
+Mozambique,2002,13.11
+Mozambique,2003,4.02
+Mozambique,2004,1.35
+Mozambique,2005,0.9
+Mozambique,2006,0.05
+Mozambique,2007,4.81
+Mozambique,2008,6.43
+Mozambique,2009,1.96
+Mozambique,2010,90.9
+Mozambique,2011,16.2
+Mozambique,2012,74.19
+Mozambique,2013,38.45
+Mozambique,2014,9.31
+Mozambique,2015,63.11
+Mozambique,2016,55.93
+Mozambique,2017,56.74
+Mozambique,2018,1.93
+Mozambique,2019,194.07
+Mozambique,2020,0
+Multilateral,2000,19.68
+Multilateral,2001,17.38
+Multilateral,2002,6.76
+Multilateral,2003,1.43
+Multilateral,2004,11.01
+Multilateral,2005,4.6
+Multilateral,2006,3.13
+Multilateral,2007,2.38
+Multilateral,2008,81.15
+Multilateral,2009,216.84
+Multilateral,2010,831.92
+Multilateral,2011,339.34
+Multilateral,2012,168.79
+Multilateral,2013,197.68
+Multilateral,2014,121.74
+Multilateral,2015,295.36
+Multilateral,2016,1016.55
+Multilateral,2017,662.31
+Multilateral,2018,625.69
+Multilateral,2019,763
+Multilateral,2020,10.05
+Myanmar,2000,0
+Myanmar,2001,0
+Myanmar,2002,5.35
+Myanmar,2003,434.32
+Myanmar,2004,0.07
+Myanmar,2005,0
+Myanmar,2006,0
+Myanmar,2007,0
+Myanmar,2008,0
+Myanmar,2009,0
+Myanmar,2010,0.09
+Myanmar,2011,0
+Myanmar,2012,0.01
+Myanmar,2013,64.08
+Myanmar,2014,10.63
+Myanmar,2015,57.8
+Myanmar,2016,3.88
+Myanmar,2017,129.65
+Myanmar,2018,19.45
+Myanmar,2019,40.86
+Myanmar,2020,0
+Namibia,2000,0.11
+Namibia,2001,0.22
+Namibia,2002,0.03
+Namibia,2003,0.03
+Namibia,2004,0.1
+Namibia,2005,0.4
+Namibia,2006,0.22
+Namibia,2007,0.01
+Namibia,2008,46.6
+Namibia,2009,0
+Namibia,2010,47.2
+Namibia,2011,0.05
+Namibia,2012,0.53
+Namibia,2013,0
+Namibia,2014,0.07
+Namibia,2015,0
+Namibia,2016,11.63
+Namibia,2017,37.15
+Namibia,2018,41.96
+Namibia,2019,0.02
+Namibia,2020,0
+Nauru,2000,0
+Nauru,2001,0
+Nauru,2002,0
+Nauru,2003,0
+Nauru,2004,0
+Nauru,2005,2.07
+Nauru,2006,0
+Nauru,2007,0.35
+Nauru,2008,0
+Nauru,2009,0
+Nauru,2010,0
+Nauru,2011,0
+Nauru,2012,0
+Nauru,2013,0
+Nauru,2014,0.01
+Nauru,2015,8.64
+Nauru,2016,2.95
+Nauru,2017,2.65
+Nauru,2018,0
+Nauru,2019,22
+Nauru,2020,0
+Nepal,2000,11.78
+Nepal,2001,5.14
+Nepal,2002,41.82
+Nepal,2003,62.49
+Nepal,2004,5.26
+Nepal,2005,39.84
+Nepal,2006,18.59
+Nepal,2007,61.79
+Nepal,2008,53.06
+Nepal,2009,51.23
+Nepal,2010,23.29
+Nepal,2011,130.76
+Nepal,2012,29.37
+Nepal,2013,320.07
+Nepal,2014,386.22
+Nepal,2015,18.44
+Nepal,2016,29.04
+Nepal,2017,10.64
+Nepal,2018,14.92
+Nepal,2019,326.95
+Nepal,2020,0.04
+Netherlands,2000,0
+Netherlands,2001,0
+Netherlands,2002,0
+Netherlands,2003,0
+Netherlands,2004,0
+Netherlands,2005,0
+Netherlands,2006,0
+Netherlands,2007,0
+Netherlands,2008,0
+Netherlands,2009,0
+Netherlands,2010,0
+Netherlands,2011,0
+Netherlands,2012,0
+Netherlands,2013,0
+Netherlands,2014,880.64
+Netherlands,2015,0
+Netherlands,2016,270.17
+Netherlands,2017,0
+Netherlands,2018,0
+Netherlands,2019,0
+Netherlands,2020,41.4
+New Caledonia,2000,0
+New Caledonia,2001,0
+New Caledonia,2002,0
+New Caledonia,2003,0
+New Caledonia,2004,0
+New Caledonia,2005,0
+New Caledonia,2006,0
+New Caledonia,2007,0
+New Caledonia,2008,0
+New Caledonia,2009,0
+New Caledonia,2010,0
+New Caledonia,2011,0
+New Caledonia,2012,0
+New Caledonia,2013,0
+New Caledonia,2014,0
+New Caledonia,2015,0
+New Caledonia,2016,0
+New Caledonia,2017,58.91
+New Caledonia,2018,0
+New Caledonia,2019,0
+New Caledonia,2020,0
+Nicaragua,2000,0.03
+Nicaragua,2001,0.02
+Nicaragua,2002,0.68
+Nicaragua,2003,15.28
+Nicaragua,2004,0.19
+Nicaragua,2005,0.05
+Nicaragua,2006,0.05
+Nicaragua,2007,0.1
+Nicaragua,2008,1.93
+Nicaragua,2009,34.08
+Nicaragua,2010,132.22
+Nicaragua,2011,40.51
+Nicaragua,2012,72.2
+Nicaragua,2013,127.68
+Nicaragua,2014,146.61
+Nicaragua,2015,67.43
+Nicaragua,2016,178.27
+Nicaragua,2017,154.46
+Nicaragua,2018,19.74
+Nicaragua,2019,0.91
+Nicaragua,2020,0.3
+Niger,2000,0.19
+Niger,2001,3.5
+Niger,2002,1.41
+Niger,2003,0
+Niger,2004,0
+Niger,2005,0.04
+Niger,2006,0.1
+Niger,2007,0
+Niger,2008,0.01
+Niger,2009,0
+Niger,2010,0
+Niger,2011,0
+Niger,2012,132.26
+Niger,2013,0
+Niger,2014,40.99
+Niger,2015,0
+Niger,2016,1.17
+Niger,2017,82.98
+Niger,2018,46.2
+Niger,2019,114.09
+Niger,2020,0
+Nigeria,2000,0
+Nigeria,2001,0
+Nigeria,2002,0
+Nigeria,2003,0
+Nigeria,2004,0.18
+Nigeria,2005,18.5
+Nigeria,2006,1.23
+Nigeria,2007,0.55
+Nigeria,2008,0
+Nigeria,2009,0
+Nigeria,2010,0.59
+Nigeria,2011,18.97
+Nigeria,2012,20.95
+Nigeria,2013,981.7
+Nigeria,2014,24.78
+Nigeria,2015,46.5
+Nigeria,2016,61.81
+Nigeria,2017,5204.42
+Nigeria,2018,94.77
+Nigeria,2019,1151.97
+Nigeria,2020,251.31
+Niue,2000,0
+Niue,2001,0
+Niue,2002,0
+Niue,2003,0
+Niue,2004,0
+Niue,2005,2.43
+Niue,2006,0
+Niue,2007,0
+Niue,2008,0
+Niue,2009,3.2
+Niue,2010,0
+Niue,2011,0
+Niue,2012,0
+Niue,2013,0.36
+Niue,2014,0
+Niue,2015,0.01
+Niue,2016,0.25
+Niue,2017,3.51
+Niue,2018,0
+Niue,2019,0.1
+Niue,2020,0
+Norway,2000,0
+Norway,2001,0
+Norway,2002,0
+Norway,2003,0
+Norway,2004,0
+Norway,2005,0
+Norway,2006,0
+Norway,2007,0
+Norway,2008,0
+Norway,2009,0
+Norway,2010,0
+Norway,2011,150.58
+Norway,2012,206.66
+Norway,2013,55.12
+Norway,2014,240.25
+Norway,2015,117.79
+Norway,2016,75.27
+Norway,2017,41.16
+Norway,2018,213.64
+Norway,2019,79.08
+Norway,2020,146.43
+Oman,2000,0
+Oman,2001,0
+Oman,2002,0
+Oman,2003,0
+Oman,2004,0
+Oman,2005,0
+Oman,2006,0
+Oman,2007,0
+Oman,2008,0
+Oman,2009,0
+Oman,2010,0
+Oman,2011,0
+Oman,2012,0
+Oman,2013,0
+Oman,2014,0
+Oman,2015,0
+Oman,2016,0
+Oman,2017,0
+Oman,2018,0
+Oman,2019,0
+Oman,2020,0
+Other Africa,2000,10.33
+Other Africa,2001,42.24
+Other Africa,2002,0.4
+Other Africa,2003,0.13
+Other Africa,2004,3.03
+Other Africa,2005,1.91
+Other Africa,2006,48.62
+Other Africa,2007,10.71
+Other Africa,2008,57.77
+Other Africa,2009,90.68
+Other Africa,2010,30.36
+Other Africa,2011,97.07
+Other Africa,2012,16.42
+Other Africa,2013,65.45
+Other Africa,2014,199.96
+Other Africa,2015,152.68
+Other Africa,2016,826.7
+Other Africa,2017,353.81
+Other Africa,2018,184.36
+Other Africa,2019,727.85
+Other Africa,2020,40.67
+Other Asia,2000,3.49
+Other Asia,2001,0
+Other Asia,2002,3.24
+Other Asia,2003,0.6
+Other Asia,2004,1.47
+Other Asia,2005,3.59
+Other Asia,2006,23.56
+Other Asia,2007,11.1
+Other Asia,2008,7.21
+Other Asia,2009,16.05
+Other Asia,2010,23.41
+Other Asia,2011,51.19
+Other Asia,2012,37.98
+Other Asia,2013,178.29
+Other Asia,2014,17.53
+Other Asia,2015,53.09
+Other Asia,2016,80.64
+Other Asia,2017,127.43
+Other Asia,2018,26.21
+Other Asia,2019,61.66
+Other Asia,2020,0
+Other Cent Am Carib,2000,0.53
+Other Cent Am Carib,2001,0.21
+Other Cent Am Carib,2002,0
+Other Cent Am Carib,2003,4.35
+Other Cent Am Carib,2004,0
+Other Cent Am Carib,2005,0
+Other Cent Am Carib,2006,1.13
+Other Cent Am Carib,2007,59.46
+Other Cent Am Carib,2008,0.98
+Other Cent Am Carib,2009,0.53
+Other Cent Am Carib,2010,2.54
+Other Cent Am Carib,2011,68.58
+Other Cent Am Carib,2012,156.75
+Other Cent Am Carib,2013,52.17
+Other Cent Am Carib,2014,10.95
+Other Cent Am Carib,2015,90.39
+Other Cent Am Carib,2016,52.52
+Other Cent Am Carib,2017,40.68
+Other Cent Am Carib,2018,171.25
+Other Cent Am Carib,2019,34.22
+Other Cent Am Carib,2020,5.94
+Other Europe,2000,0
+Other Europe,2001,0
+Other Europe,2002,0
+Other Europe,2003,0
+Other Europe,2004,0.08
+Other Europe,2005,0
+Other Europe,2006,0
+Other Europe,2007,0.3
+Other Europe,2008,0
+Other Europe,2009,3.8
+Other Europe,2010,8.35
+Other Europe,2011,0.47
+Other Europe,2012,0
+Other Europe,2013,0.18
+Other Europe,2014,0.67
+Other Europe,2015,0
+Other Europe,2016,170.11
+Other Europe,2017,431.13
+Other Europe,2018,119.65
+Other Europe,2019,276.3
+Other Europe,2020,0
+Other Mid East,2000,0
+Other Mid East,2001,0
+Other Mid East,2002,0
+Other Mid East,2003,0
+Other Mid East,2004,0
+Other Mid East,2005,0
+Other Mid East,2006,0
+Other Mid East,2007,5.34
+Other Mid East,2008,0.78
+Other Mid East,2009,0.07
+Other Mid East,2010,0.92
+Other Mid East,2011,0
+Other Mid East,2012,0
+Other Mid East,2013,0
+Other Mid East,2014,231.04
+Other Mid East,2015,34.33
+Other Mid East,2016,10.63
+Other Mid East,2017,18.86
+Other Mid East,2018,4.27
+Other Mid East,2019,3.93
+Other Mid East,2020,0
+Other Oceania,2000,0
+Other Oceania,2001,0
+Other Oceania,2002,0.05
+Other Oceania,2003,0.05
+Other Oceania,2004,0.03
+Other Oceania,2005,0
+Other Oceania,2006,0
+Other Oceania,2007,0
+Other Oceania,2008,0.03
+Other Oceania,2009,0.45
+Other Oceania,2010,0.84
+Other Oceania,2011,0
+Other Oceania,2012,1.33
+Other Oceania,2013,1.54
+Other Oceania,2014,0
+Other Oceania,2015,2
+Other Oceania,2016,0.21
+Other Oceania,2017,8.08
+Other Oceania,2018,0.35
+Other Oceania,2019,21.89
+Other Oceania,2020,0
+Other South Am,2000,1.78
+Other South Am,2001,1.46
+Other South Am,2002,0
+Other South Am,2003,0
+Other South Am,2004,3.58
+Other South Am,2005,0
+Other South Am,2006,128.47
+Other South Am,2007,7.05
+Other South Am,2008,16.18
+Other South Am,2009,3.81
+Other South Am,2010,7.54
+Other South Am,2011,8.97
+Other South Am,2012,53.86
+Other South Am,2013,13.52
+Other South Am,2014,12.79
+Other South Am,2015,25.81
+Other South Am,2016,107.49
+Other South Am,2017,21.19
+Other South Am,2018,67.48
+Other South Am,2019,31.62
+Other South Am,2020,0.35
+Pakistan,2000,0.04
+Pakistan,2001,360.29
+Pakistan,2002,0.18
+Pakistan,2003,2.78
+Pakistan,2004,0.04
+Pakistan,2005,4.07
+Pakistan,2006,6.82
+Pakistan,2007,122.69
+Pakistan,2008,138.06
+Pakistan,2009,118.64
+Pakistan,2010,264.76
+Pakistan,2011,329.48
+Pakistan,2012,1387.09
+Pakistan,2013,244.72
+Pakistan,2014,552.09
+Pakistan,2015,1225.17
+Pakistan,2016,903.84
+Pakistan,2017,3388.07
+Pakistan,2018,99.11
+Pakistan,2019,297.84
+Pakistan,2020,0.31
+Palau,2000,0
+Palau,2001,0
+Palau,2002,0
+Palau,2003,0
+Palau,2004,0
+Palau,2005,2.3
+Palau,2006,0
+Palau,2007,0.39
+Palau,2008,0
+Palau,2009,7.49
+Palau,2010,0
+Palau,2011,0
+Palau,2012,0
+Palau,2013,0.01
+Palau,2014,0
+Palau,2015,5.19
+Palau,2016,0.01
+Palau,2017,0
+Palau,2018,0
+Palau,2019,1.15
+Palau,2020,0
+Panama,2000,0
+Panama,2001,0.23
+Panama,2002,0
+Panama,2003,0
+Panama,2004,0
+Panama,2005,0
+Panama,2006,0
+Panama,2007,0
+Panama,2008,0.01
+Panama,2009,0.01
+Panama,2010,9.11
+Panama,2011,66.11
+Panama,2012,0
+Panama,2013,1.81
+Panama,2014,184.49
+Panama,2015,65.06
+Panama,2016,366.66
+Panama,2017,101.57
+Panama,2018,0.35
+Panama,2019,90.01
+Panama,2020,0
+Papua New Guinea,2000,0
+Papua New Guinea,2001,0
+Papua New Guinea,2002,0
+Papua New Guinea,2003,0
+Papua New Guinea,2004,0.01
+Papua New Guinea,2005,0
+Papua New Guinea,2006,0
+Papua New Guinea,2007,0.03
+Papua New Guinea,2008,0.03
+Papua New Guinea,2009,0
+Papua New Guinea,2010,0
+Papua New Guinea,2011,37.76
+Papua New Guinea,2012,0
+Papua New Guinea,2013,6.41
+Papua New Guinea,2014,0
+Papua New Guinea,2015,8.42
+Papua New Guinea,2016,32.34
+Papua New Guinea,2017,0.84
+Papua New Guinea,2018,0.13
+Papua New Guinea,2019,0.12
+Papua New Guinea,2020,0
+Paraguay,2000,0
+Paraguay,2001,0.01
+Paraguay,2002,0
+Paraguay,2003,0
+Paraguay,2004,0
+Paraguay,2005,0
+Paraguay,2006,191.13
+Paraguay,2007,0
+Paraguay,2008,0
+Paraguay,2009,0.08
+Paraguay,2010,0.1
+Paraguay,2011,0.03
+Paraguay,2012,0
+Paraguay,2013,0.08
+Paraguay,2014,0
+Paraguay,2015,0
+Paraguay,2016,0.46
+Paraguay,2017,0
+Paraguay,2018,130.47
+Paraguay,2019,1.16
+Paraguay,2020,390.4
+Peru,2000,1.07
+Peru,2001,0.19
+Peru,2002,88.2
+Peru,2003,0.28
+Peru,2004,0.11
+Peru,2005,0.29
+Peru,2006,7.55
+Peru,2007,0.74
+Peru,2008,0.96
+Peru,2009,1.52
+Peru,2010,91.14
+Peru,2011,223.97
+Peru,2012,238.87
+Peru,2013,292.66
+Peru,2014,279.43
+Peru,2015,84.64
+Peru,2016,102.31
+Peru,2017,548.98
+Peru,2018,68.75
+Peru,2019,1.08
+Peru,2020,22.52
+Philippines,2000,12.14
+Philippines,2001,0.03
+Philippines,2002,50.39
+Philippines,2003,29.15
+Philippines,2004,5.83
+Philippines,2005,11.81
+Philippines,2006,27.52
+Philippines,2007,204.84
+Philippines,2008,140.13
+Philippines,2009,3.86
+Philippines,2010,80.87
+Philippines,2011,0.81
+Philippines,2012,1.3
+Philippines,2013,53.28
+Philippines,2014,9.28
+Philippines,2015,22.76
+Philippines,2016,98.89
+Philippines,2017,1.51
+Philippines,2018,177.92
+Philippines,2019,2
+Philippines,2020,0.14
+Poland,2000,0
+Poland,2001,0
+Poland,2002,0
+Poland,2003,0
+Poland,2004,0
+Poland,2005,0
+Poland,2006,0
+Poland,2007,0
+Poland,2008,0
+Poland,2009,115.09
+Poland,2010,136.02
+Poland,2011,332.41
+Poland,2012,78.91
+Poland,2013,113.86
+Poland,2014,113.76
+Poland,2015,117.05
+Poland,2016,0
+Poland,2017,48.34
+Poland,2018,24.77
+Poland,2019,138.2
+Poland,2020,352.84
+Portugal,2000,0
+Portugal,2001,0
+Portugal,2002,0
+Portugal,2003,0
+Portugal,2004,0
+Portugal,2005,0
+Portugal,2006,0
+Portugal,2007,0
+Portugal,2008,0
+Portugal,2009,167.67
+Portugal,2010,655.77
+Portugal,2011,647
+Portugal,2012,0
+Portugal,2013,59.49
+Portugal,2014,0
+Portugal,2015,0
+Portugal,2016,3.65
+Portugal,2017,0
+Portugal,2018,641.21
+Portugal,2019,220.54
+Portugal,2020,125.58
+Qatar,2000,0
+Qatar,2001,0
+Qatar,2002,0
+Qatar,2003,0
+Qatar,2004,0
+Qatar,2005,0
+Qatar,2006,0
+Qatar,2007,0
+Qatar,2008,0
+Qatar,2009,0
+Qatar,2010,0
+Qatar,2011,0
+Qatar,2012,0
+Qatar,2013,0
+Qatar,2014,0
+Qatar,2015,0
+Qatar,2016,0
+Qatar,2017,0
+Qatar,2018,0
+Qatar,2019,0
+Qatar,2020,160.04
+Republic of Moldova,2000,0
+Republic of Moldova,2001,0
+Republic of Moldova,2002,0
+Republic of Moldova,2003,0
+Republic of Moldova,2004,0
+Republic of Moldova,2005,0
+Republic of Moldova,2006,0
+Republic of Moldova,2007,0
+Republic of Moldova,2008,0
+Republic of Moldova,2009,0.11
+Republic of Moldova,2010,18.44
+Republic of Moldova,2011,3.97
+Republic of Moldova,2012,3.31
+Republic of Moldova,2013,24.02
+Republic of Moldova,2014,0.28
+Republic of Moldova,2015,0.5
+Republic of Moldova,2016,0.22
+Republic of Moldova,2017,0.22
+Republic of Moldova,2018,0.09
+Republic of Moldova,2019,0.24
+Republic of Moldova,2020,0
+Republic of North Macedonia,2000,0.36
+Republic of North Macedonia,2001,0
+Republic of North Macedonia,2002,0.04
+Republic of North Macedonia,2003,0
+Republic of North Macedonia,2004,0.27
+Republic of North Macedonia,2005,0.43
+Republic of North Macedonia,2006,2.33
+Republic of North Macedonia,2007,0.09
+Republic of North Macedonia,2008,0
+Republic of North Macedonia,2009,0.41
+Republic of North Macedonia,2010,35.48
+Republic of North Macedonia,2011,42.2
+Republic of North Macedonia,2012,0
+Republic of North Macedonia,2013,18.59
+Republic of North Macedonia,2014,0
+Republic of North Macedonia,2015,0
+Republic of North Macedonia,2016,0.01
+Republic of North Macedonia,2017,4.74
+Republic of North Macedonia,2018,8.11
+Republic of North Macedonia,2019,0
+Republic of North Macedonia,2020,0
+Réunion,2000,0
+Réunion,2001,0
+Réunion,2002,0
+Réunion,2003,0
+Réunion,2004,0
+Réunion,2005,0
+Réunion,2006,0
+Réunion,2007,0
+Réunion,2008,0
+Réunion,2009,0
+Réunion,2010,0
+Réunion,2011,8.4
+Réunion,2012,15.4
+Réunion,2013,10.59
+Réunion,2014,10.97
+Réunion,2015,1.62
+Réunion,2016,0
+Réunion,2017,0
+Réunion,2018,0
+Réunion,2019,0
+Réunion,2020,0
+Romania,2000,0
+Romania,2001,0
+Romania,2002,0
+Romania,2003,0
+Romania,2004,0
+Romania,2005,0
+Romania,2006,0
+Romania,2007,0
+Romania,2008,0
+Romania,2009,0
+Romania,2010,354.56
+Romania,2011,198.27
+Romania,2012,188.48
+Romania,2013,491.81
+Romania,2014,119.79
+Romania,2015,0
+Romania,2016,0
+Romania,2017,0
+Romania,2018,15.34
+Romania,2019,0
+Romania,2020,0
+Russian Federation,2000,0
+Russian Federation,2001,0
+Russian Federation,2002,0
+Russian Federation,2003,0
+Russian Federation,2004,0
+Russian Federation,2005,0
+Russian Federation,2006,0
+Russian Federation,2007,0
+Russian Federation,2008,0
+Russian Federation,2009,0
+Russian Federation,2010,0
+Russian Federation,2011,0
+Russian Federation,2012,27.68
+Russian Federation,2013,0
+Russian Federation,2014,0
+Russian Federation,2015,0
+Russian Federation,2016,0
+Russian Federation,2017,0
+Russian Federation,2018,0
+Russian Federation,2019,0
+Russian Federation,2020,0
+Rwanda,2000,0.15
+Rwanda,2001,0
+Rwanda,2002,0
+Rwanda,2003,0
+Rwanda,2004,0
+Rwanda,2005,8.14
+Rwanda,2006,0.55
+Rwanda,2007,20.65
+Rwanda,2008,26.6
+Rwanda,2009,23.36
+Rwanda,2010,2.11
+Rwanda,2011,6.47
+Rwanda,2012,0.72
+Rwanda,2013,96.71
+Rwanda,2014,48.48
+Rwanda,2015,0
+Rwanda,2016,41.63
+Rwanda,2017,81.05
+Rwanda,2018,15.82
+Rwanda,2019,1.56
+Rwanda,2020,14.4
+Saint Helena,2000,0
+Saint Helena,2001,0
+Saint Helena,2002,0
+Saint Helena,2003,0.17
+Saint Helena,2004,0
+Saint Helena,2005,0
+Saint Helena,2006,0
+Saint Helena,2007,0
+Saint Helena,2008,0.12
+Saint Helena,2009,0
+Saint Helena,2010,0
+Saint Helena,2011,0
+Saint Helena,2012,0
+Saint Helena,2013,0
+Saint Helena,2014,0
+Saint Helena,2015,1.42
+Saint Helena,2016,0
+Saint Helena,2017,0
+Saint Helena,2018,0
+Saint Helena,2019,0
+Saint Helena,2020,0
+Saint Kitts and Nevis,2000,0
+Saint Kitts and Nevis,2001,0
+Saint Kitts and Nevis,2002,0
+Saint Kitts and Nevis,2003,0
+Saint Kitts and Nevis,2004,0
+Saint Kitts and Nevis,2005,0
+Saint Kitts and Nevis,2006,0
+Saint Kitts and Nevis,2007,0
+Saint Kitts and Nevis,2008,0.36
+Saint Kitts and Nevis,2009,0
+Saint Kitts and Nevis,2010,0
+Saint Kitts and Nevis,2011,18.41
+Saint Kitts and Nevis,2012,0
+Saint Kitts and Nevis,2013,0
+Saint Kitts and Nevis,2014,0
+Saint Kitts and Nevis,2015,0
+Saint Kitts and Nevis,2016,0
+Saint Kitts and Nevis,2017,0
+Saint Kitts and Nevis,2018,0
+Saint Kitts and Nevis,2019,0
+Saint Kitts and Nevis,2020,0
+Saint Lucia,2000,0
+Saint Lucia,2001,0
+Saint Lucia,2002,0
+Saint Lucia,2003,0
+Saint Lucia,2004,0
+Saint Lucia,2005,0
+Saint Lucia,2006,0
+Saint Lucia,2007,0
+Saint Lucia,2008,0
+Saint Lucia,2009,0
+Saint Lucia,2010,0
+Saint Lucia,2011,0
+Saint Lucia,2012,0
+Saint Lucia,2013,0
+Saint Lucia,2014,0.93
+Saint Lucia,2015,0.01
+Saint Lucia,2016,0
+Saint Lucia,2017,9.77
+Saint Lucia,2018,0
+Saint Lucia,2019,0
+Saint Lucia,2020,0
+Saint Vincent and the Grenadines,2000,0
+Saint Vincent and the Grenadines,2001,0
+Saint Vincent and the Grenadines,2002,0
+Saint Vincent and the Grenadines,2003,0
+Saint Vincent and the Grenadines,2004,0
+Saint Vincent and the Grenadines,2005,0
+Saint Vincent and the Grenadines,2006,0
+Saint Vincent and the Grenadines,2007,0
+Saint Vincent and the Grenadines,2008,0.36
+Saint Vincent and the Grenadines,2009,0
+Saint Vincent and the Grenadines,2010,0
+Saint Vincent and the Grenadines,2011,0
+Saint Vincent and the Grenadines,2012,0
+Saint Vincent and the Grenadines,2013,0.01
+Saint Vincent and the Grenadines,2014,0.02
+Saint Vincent and the Grenadines,2015,0
+Saint Vincent and the Grenadines,2016,31.69
+Saint Vincent and the Grenadines,2017,3.1
+Saint Vincent and the Grenadines,2018,0
+Saint Vincent and the Grenadines,2019,0
+Saint Vincent and the Grenadines,2020,0
+Samoa,2000,0
+Samoa,2001,0
+Samoa,2002,0
+Samoa,2003,0
+Samoa,2004,0
+Samoa,2005,0
+Samoa,2006,0
+Samoa,2007,0
+Samoa,2008,0
+Samoa,2009,0
+Samoa,2010,0.2
+Samoa,2011,0
+Samoa,2012,0
+Samoa,2013,4.71
+Samoa,2014,32.47
+Samoa,2015,0.01
+Samoa,2016,0
+Samoa,2017,2.05
+Samoa,2018,0
+Samoa,2019,0
+Samoa,2020,0
+Sao Tome and Principe,2000,0
+Sao Tome and Principe,2001,1.09
+Sao Tome and Principe,2002,1.22
+Sao Tome and Principe,2003,0
+Sao Tome and Principe,2004,0.07
+Sao Tome and Principe,2005,0.19
+Sao Tome and Principe,2006,0
+Sao Tome and Principe,2007,0
+Sao Tome and Principe,2008,0
+Sao Tome and Principe,2009,0
+Sao Tome and Principe,2010,0.12
+Sao Tome and Principe,2011,0.26
+Sao Tome and Principe,2012,0.02
+Sao Tome and Principe,2013,5.06
+Sao Tome and Principe,2014,0.12
+Sao Tome and Principe,2015,0.35
+Sao Tome and Principe,2016,0.31
+Sao Tome and Principe,2017,0.01
+Sao Tome and Principe,2018,0
+Sao Tome and Principe,2019,0
+Sao Tome and Principe,2020,0
+Saudi Arabia,2000,0
+Saudi Arabia,2001,0
+Saudi Arabia,2002,0
+Saudi Arabia,2003,0
+Saudi Arabia,2004,0
+Saudi Arabia,2005,0
+Saudi Arabia,2006,0
+Saudi Arabia,2007,0
+Saudi Arabia,2008,0
+Saudi Arabia,2009,0
+Saudi Arabia,2010,0
+Saudi Arabia,2011,0
+Saudi Arabia,2012,0
+Saudi Arabia,2013,0
+Saudi Arabia,2014,0
+Saudi Arabia,2015,0
+Saudi Arabia,2016,0
+Saudi Arabia,2017,0
+Saudi Arabia,2018,0
+Saudi Arabia,2019,0
+Saudi Arabia,2020,0
+Senegal,2000,0.16
+Senegal,2001,11.5
+Senegal,2002,2.03
+Senegal,2003,33.84
+Senegal,2004,13.42
+Senegal,2005,6.65
+Senegal,2006,33.41
+Senegal,2007,0.71
+Senegal,2008,0
+Senegal,2009,38.09
+Senegal,2010,1.09
+Senegal,2011,1.44
+Senegal,2012,8.59
+Senegal,2013,18.4
+Senegal,2014,0.13
+Senegal,2015,32.32
+Senegal,2016,339.55
+Senegal,2017,43.52
+Senegal,2018,52.04
+Senegal,2019,49.89
+Senegal,2020,0.97
+Serbia,2000,0
+Serbia,2001,0
+Serbia,2002,15.78
+Serbia,2003,7.52
+Serbia,2004,7.09
+Serbia,2005,41.1
+Serbia,2006,20.15
+Serbia,2007,41.27
+Serbia,2008,16.5
+Serbia,2009,0.16
+Serbia,2010,90.85
+Serbia,2011,114.68
+Serbia,2012,2.94
+Serbia,2013,37.13
+Serbia,2014,3.4
+Serbia,2015,4.45
+Serbia,2016,17.97
+Serbia,2017,424.8
+Serbia,2018,70.53
+Serbia,2019,13.11
+Serbia,2020,0
+Seychelles,2000,0
+Seychelles,2001,0
+Seychelles,2002,0
+Seychelles,2003,0
+Seychelles,2004,0
+Seychelles,2005,0
+Seychelles,2006,0
+Seychelles,2007,0
+Seychelles,2008,0
+Seychelles,2009,0
+Seychelles,2010,0
+Seychelles,2011,0.01
+Seychelles,2012,0
+Seychelles,2013,0
+Seychelles,2014,0.08
+Seychelles,2015,0.04
+Seychelles,2016,0.67
+Seychelles,2017,0.95
+Seychelles,2018,0
+Seychelles,2019,0
+Seychelles,2020,0
+Sierra Leone,2000,0
+Sierra Leone,2001,0
+Sierra Leone,2002,0
+Sierra Leone,2003,0
+Sierra Leone,2004,24.79
+Sierra Leone,2005,56.41
+Sierra Leone,2006,0.01
+Sierra Leone,2007,15.53
+Sierra Leone,2008,15.6
+Sierra Leone,2009,0.05
+Sierra Leone,2010,9.31
+Sierra Leone,2011,0
+Sierra Leone,2012,0
+Sierra Leone,2013,0
+Sierra Leone,2014,8.4
+Sierra Leone,2015,0
+Sierra Leone,2016,29.28
+Sierra Leone,2017,0.38
+Sierra Leone,2018,0.24
+Sierra Leone,2019,0.17
+Sierra Leone,2020,1.43
+Slovakia,2000,0
+Slovakia,2001,0
+Slovakia,2002,0
+Slovakia,2003,0
+Slovakia,2004,0
+Slovakia,2005,0
+Slovakia,2006,0
+Slovakia,2007,0
+Slovakia,2008,0
+Slovakia,2009,0
+Slovakia,2010,0
+Slovakia,2011,0
+Slovakia,2012,0
+Slovakia,2013,71.9
+Slovakia,2014,0
+Slovakia,2015,0
+Slovakia,2016,0
+Slovakia,2017,0
+Slovakia,2018,0
+Slovakia,2019,0
+Slovakia,2020,0
+Slovenia,2000,0
+Slovenia,2001,0
+Slovenia,2002,0
+Slovenia,2003,0
+Slovenia,2004,0
+Slovenia,2005,0
+Slovenia,2006,0
+Slovenia,2007,0
+Slovenia,2008,0
+Slovenia,2009,0
+Slovenia,2010,0
+Slovenia,2011,0
+Slovenia,2012,0
+Slovenia,2013,0
+Slovenia,2014,0
+Slovenia,2015,0
+Slovenia,2016,0
+Slovenia,2017,0
+Slovenia,2018,0
+Slovenia,2019,0
+Slovenia,2020,0
+Solomon Islands,2000,0
+Solomon Islands,2001,0
+Solomon Islands,2002,0
+Solomon Islands,2003,0
+Solomon Islands,2004,0
+Solomon Islands,2005,0
+Solomon Islands,2006,0
+Solomon Islands,2007,0
+Solomon Islands,2008,0.09
+Solomon Islands,2009,0.08
+Solomon Islands,2010,0
+Solomon Islands,2011,0.01
+Solomon Islands,2012,1.09
+Solomon Islands,2013,0.01
+Solomon Islands,2014,13.07
+Solomon Islands,2015,6.83
+Solomon Islands,2016,7.1
+Solomon Islands,2017,163.01
+Solomon Islands,2018,20.56
+Solomon Islands,2019,46.4
+Solomon Islands,2020,0
+Somalia,2000,0
+Somalia,2001,0
+Somalia,2002,0
+Somalia,2003,0
+Somalia,2004,0
+Somalia,2005,0
+Somalia,2006,0
+Somalia,2007,0
+Somalia,2008,0
+Somalia,2009,0
+Somalia,2010,0
+Somalia,2011,0
+Somalia,2012,0
+Somalia,2013,3.35
+Somalia,2014,0
+Somalia,2015,0.31
+Somalia,2016,0.81
+Somalia,2017,0.02
+Somalia,2018,3.2
+Somalia,2019,19.7
+Somalia,2020,0
+South Africa,2000,7.02
+South Africa,2001,1.24
+South Africa,2002,25.55
+South Africa,2003,0
+South Africa,2004,0.04
+South Africa,2005,13.11
+South Africa,2006,7.77
+South Africa,2007,1.15
+South Africa,2008,1.17
+South Africa,2009,0.09
+South Africa,2010,261.16
+South Africa,2011,265.14
+South Africa,2012,484.73
+South Africa,2013,409.2
+South Africa,2014,202.28
+South Africa,2015,725.58
+South Africa,2016,201.74
+South Africa,2017,26.33
+South Africa,2018,350.83
+South Africa,2019,163.69
+South Africa,2020,91.03
+South Sudan,2000,0
+South Sudan,2001,0
+South Sudan,2002,0
+South Sudan,2003,0
+South Sudan,2004,0
+South Sudan,2005,0
+South Sudan,2006,0
+South Sudan,2007,0
+South Sudan,2008,0
+South Sudan,2009,0
+South Sudan,2010,0
+South Sudan,2011,0.99
+South Sudan,2012,1.67
+South Sudan,2013,28.58
+South Sudan,2014,0
+South Sudan,2015,0.07
+South Sudan,2016,0.03
+South Sudan,2017,0.29
+South Sudan,2018,0.28
+South Sudan,2019,0.1
+South Sudan,2020,0
+Spain,2000,0
+Spain,2001,0
+Spain,2002,0
+Spain,2003,0
+Spain,2004,0
+Spain,2005,0
+Spain,2006,0
+Spain,2007,0
+Spain,2008,0
+Spain,2009,692.89
+Spain,2010,46.86
+Spain,2011,293.59
+Spain,2012,340.5
+Spain,2013,322.86
+Spain,2014,0
+Spain,2015,125.99
+Spain,2016,58.54
+Spain,2017,552.23
+Spain,2018,752.24
+Spain,2019,1070.22
+Spain,2020,983.13
+Sri Lanka,2000,1.47
+Sri Lanka,2001,3.81
+Sri Lanka,2002,388.25
+Sri Lanka,2003,0.04
+Sri Lanka,2004,0.13
+Sri Lanka,2005,24.75
+Sri Lanka,2006,0.09
+Sri Lanka,2007,38.22
+Sri Lanka,2008,0.12
+Sri Lanka,2009,11.75
+Sri Lanka,2010,44.56
+Sri Lanka,2011,7.08
+Sri Lanka,2012,225.76
+Sri Lanka,2013,2.33
+Sri Lanka,2014,119.75
+Sri Lanka,2015,0.45
+Sri Lanka,2016,61.26
+Sri Lanka,2017,211.63
+Sri Lanka,2018,200.52
+Sri Lanka,2019,0.17
+Sri Lanka,2020,0
+State of Palestine,2000,0.03
+State of Palestine,2001,0.03
+State of Palestine,2002,0
+State of Palestine,2003,0
+State of Palestine,2004,0
+State of Palestine,2005,0.03
+State of Palestine,2006,0
+State of Palestine,2007,0.4
+State of Palestine,2008,0.09
+State of Palestine,2009,5.48
+State of Palestine,2010,1.39
+State of Palestine,2011,0.81
+State of Palestine,2012,1.34
+State of Palestine,2013,0.96
+State of Palestine,2014,1.97
+State of Palestine,2015,22.94
+State of Palestine,2016,2.9
+State of Palestine,2017,10.72
+State of Palestine,2018,36.3
+State of Palestine,2019,42.24
+State of Palestine,2020,0
+Sudan,2000,0
+Sudan,2001,0
+Sudan,2002,0
+Sudan,2003,1318.25
+Sudan,2004,0
+Sudan,2005,0
+Sudan,2006,0
+Sudan,2007,0
+Sudan,2008,0
+Sudan,2009,0
+Sudan,2010,85.5
+Sudan,2011,27.7
+Sudan,2012,0.12
+Sudan,2013,3.34
+Sudan,2014,0.4
+Sudan,2015,0.03
+Sudan,2016,0.04
+Sudan,2017,0.01
+Sudan,2018,2.47
+Sudan,2019,205.73
+Sudan,2020,0
+Suriname,2000,0
+Suriname,2001,0
+Suriname,2002,0
+Suriname,2003,0
+Suriname,2004,0
+Suriname,2005,0
+Suriname,2006,0
+Suriname,2007,0
+Suriname,2008,0
+Suriname,2009,0.4
+Suriname,2010,0
+Suriname,2011,4.06
+Suriname,2012,0
+Suriname,2013,0.02
+Suriname,2014,0
+Suriname,2015,0
+Suriname,2016,0
+Suriname,2017,0.01
+Suriname,2018,0.29
+Suriname,2019,22.5
+Suriname,2020,0
+Sweden,2000,0
+Sweden,2001,0
+Sweden,2002,0
+Sweden,2003,0
+Sweden,2004,0
+Sweden,2005,0
+Sweden,2006,0
+Sweden,2007,0
+Sweden,2008,114.83
+Sweden,2009,0
+Sweden,2010,57.28
+Sweden,2011,184.01
+Sweden,2012,82.23
+Sweden,2013,75.94
+Sweden,2014,241.27
+Sweden,2015,11.83
+Sweden,2016,133.66
+Sweden,2017,562.45
+Sweden,2018,0
+Sweden,2019,105.16
+Sweden,2020,0
+Syrian Arab Republic,2000,0
+Syrian Arab Republic,2001,0
+Syrian Arab Republic,2002,0
+Syrian Arab Republic,2003,0
+Syrian Arab Republic,2004,0
+Syrian Arab Republic,2005,0
+Syrian Arab Republic,2006,0
+Syrian Arab Republic,2007,0
+Syrian Arab Republic,2008,0
+Syrian Arab Republic,2009,0
+Syrian Arab Republic,2010,5.23
+Syrian Arab Republic,2011,0
+Syrian Arab Republic,2012,0
+Syrian Arab Republic,2013,0
+Syrian Arab Republic,2014,0
+Syrian Arab Republic,2015,0
+Syrian Arab Republic,2016,0
+Syrian Arab Republic,2017,0
+Syrian Arab Republic,2018,0.06
+Syrian Arab Republic,2019,0
+Syrian Arab Republic,2020,0
+Tajikistan,2000,0
+Tajikistan,2001,0
+Tajikistan,2002,20.92
+Tajikistan,2003,20.78
+Tajikistan,2004,0
+Tajikistan,2005,0.58
+Tajikistan,2006,0.54
+Tajikistan,2007,22.87
+Tajikistan,2008,34.87
+Tajikistan,2009,0.14
+Tajikistan,2010,6.53
+Tajikistan,2011,0.89
+Tajikistan,2012,3.7
+Tajikistan,2013,134.39
+Tajikistan,2014,0.43
+Tajikistan,2015,0.18
+Tajikistan,2016,0.09
+Tajikistan,2017,334.53
+Tajikistan,2018,0
+Tajikistan,2019,106.16
+Tajikistan,2020,0
+Thailand,2000,0.15
+Thailand,2001,6.5
+Thailand,2002,10.66
+Thailand,2003,3.65
+Thailand,2004,1.52
+Thailand,2005,0
+Thailand,2006,0.09
+Thailand,2007,0.44
+Thailand,2008,4.66
+Thailand,2009,1.72
+Thailand,2010,4.13
+Thailand,2011,288.27
+Thailand,2012,119.37
+Thailand,2013,54.65
+Thailand,2014,4.37
+Thailand,2015,55.52
+Thailand,2016,0.43
+Thailand,2017,1.99
+Thailand,2018,296.13
+Thailand,2019,99.16
+Thailand,2020,0
+Timor-Leste,2000,0
+Timor-Leste,2001,0
+Timor-Leste,2002,0
+Timor-Leste,2003,4.09
+Timor-Leste,2004,0
+Timor-Leste,2005,1.35
+Timor-Leste,2006,1.45
+Timor-Leste,2007,1.18
+Timor-Leste,2008,0.07
+Timor-Leste,2009,0.15
+Timor-Leste,2010,5.06
+Timor-Leste,2011,0.23
+Timor-Leste,2012,1.98
+Timor-Leste,2013,0.47
+Timor-Leste,2014,0.01
+Timor-Leste,2015,0
+Timor-Leste,2016,1.05
+Timor-Leste,2017,0
+Timor-Leste,2018,0
+Timor-Leste,2019,0.02
+Timor-Leste,2020,0
+Togo,2000,0
+Togo,2001,0
+Togo,2002,0
+Togo,2003,0
+Togo,2004,0
+Togo,2005,0
+Togo,2006,0.02
+Togo,2007,0
+Togo,2008,0
+Togo,2009,0
+Togo,2010,0
+Togo,2011,0
+Togo,2012,0.02
+Togo,2013,0.16
+Togo,2014,9.16
+Togo,2015,4.78
+Togo,2016,0.05
+Togo,2017,0
+Togo,2018,17.71
+Togo,2019,1.14
+Togo,2020,0
+Tokelau,2000,0
+Tokelau,2001,0
+Tokelau,2002,0
+Tokelau,2003,0
+Tokelau,2004,0
+Tokelau,2005,0
+Tokelau,2006,0
+Tokelau,2007,0
+Tokelau,2008,0
+Tokelau,2009,0
+Tokelau,2010,0
+Tokelau,2011,5.29
+Tokelau,2012,0
+Tokelau,2013,0
+Tokelau,2014,0
+Tokelau,2015,0
+Tokelau,2016,0
+Tokelau,2017,0
+Tokelau,2018,0
+Tokelau,2019,3.95
+Tokelau,2020,0
+Tonga,2000,0
+Tonga,2001,0
+Tonga,2002,0
+Tonga,2003,0
+Tonga,2004,0.02
+Tonga,2005,0.76
+Tonga,2006,0.44
+Tonga,2007,0
+Tonga,2008,0
+Tonga,2009,0
+Tonga,2010,5.66
+Tonga,2011,12.1
+Tonga,2012,7.94
+Tonga,2013,17.55
+Tonga,2014,2.51
+Tonga,2015,14.14
+Tonga,2016,2.92
+Tonga,2017,20.47
+Tonga,2018,37
+Tonga,2019,2.45
+Tonga,2020,0
+Trinidad and Tobago,2000,0
+Trinidad and Tobago,2001,0
+Trinidad and Tobago,2002,0
+Trinidad and Tobago,2003,0
+Trinidad and Tobago,2004,0
+Trinidad and Tobago,2005,0
+Trinidad and Tobago,2006,0
+Trinidad and Tobago,2007,0
+Trinidad and Tobago,2008,0
+Trinidad and Tobago,2009,0
+Trinidad and Tobago,2010,0
+Trinidad and Tobago,2011,0
+Trinidad and Tobago,2012,0
+Trinidad and Tobago,2013,0
+Trinidad and Tobago,2014,0
+Trinidad and Tobago,2015,0
+Trinidad and Tobago,2016,0
+Trinidad and Tobago,2017,0
+Trinidad and Tobago,2018,0
+Trinidad and Tobago,2019,0
+Trinidad and Tobago,2020,0.24
+Tunisia,2000,4.4
+Tunisia,2001,4.41
+Tunisia,2002,5.28
+Tunisia,2003,0.42
+Tunisia,2004,0.28
+Tunisia,2005,17.63
+Tunisia,2006,24.44
+Tunisia,2007,1.64
+Tunisia,2008,235.95
+Tunisia,2009,123.5
+Tunisia,2010,130.73
+Tunisia,2011,0.82
+Tunisia,2012,180.15
+Tunisia,2013,9.35
+Tunisia,2014,0
+Tunisia,2015,8.88
+Tunisia,2016,45.64
+Tunisia,2017,4.87
+Tunisia,2018,18.6
+Tunisia,2019,111.47
+Tunisia,2020,0
+Turkey,2000,130.88
+Turkey,2001,0.01
+Turkey,2002,0
+Turkey,2003,0
+Turkey,2004,128.92
+Turkey,2005,0.35
+Turkey,2006,0.24
+Turkey,2007,1.64
+Turkey,2008,66.71
+Turkey,2009,494.55
+Turkey,2010,283.45
+Turkey,2011,801.71
+Turkey,2012,280.19
+Turkey,2013,595.99
+Turkey,2014,533.85
+Turkey,2015,430.44
+Turkey,2016,1460.23
+Turkey,2017,403.61
+Turkey,2018,1098.01
+Turkey,2019,360.12
+Turkey,2020,0
+Turkmenistan,2000,0
+Turkmenistan,2001,0
+Turkmenistan,2002,0
+Turkmenistan,2003,0
+Turkmenistan,2004,0
+Turkmenistan,2005,0
+Turkmenistan,2006,0
+Turkmenistan,2007,0
+Turkmenistan,2008,0
+Turkmenistan,2009,0.03
+Turkmenistan,2010,0
+Turkmenistan,2011,0
+Turkmenistan,2012,0
+Turkmenistan,2013,5.94
+Turkmenistan,2014,0.05
+Turkmenistan,2015,0.13
+Turkmenistan,2016,0.08
+Turkmenistan,2017,0.06
+Turkmenistan,2018,0
+Turkmenistan,2019,0.04
+Turkmenistan,2020,0
+Tuvalu,2000,0
+Tuvalu,2001,0
+Tuvalu,2002,0
+Tuvalu,2003,0
+Tuvalu,2004,0
+Tuvalu,2005,0
+Tuvalu,2006,0
+Tuvalu,2007,0
+Tuvalu,2008,0.03
+Tuvalu,2009,0.01
+Tuvalu,2010,0.53
+Tuvalu,2011,0.01
+Tuvalu,2012,2.32
+Tuvalu,2013,4.76
+Tuvalu,2014,20.31
+Tuvalu,2015,8.56
+Tuvalu,2016,0
+Tuvalu,2017,0
+Tuvalu,2018,0.39
+Tuvalu,2019,6.16
+Tuvalu,2020,0
+Uganda,2000,26.56
+Uganda,2001,6.62
+Uganda,2002,3.7
+Uganda,2003,0.64
+Uganda,2004,0.03
+Uganda,2005,0.07
+Uganda,2006,0.06
+Uganda,2007,571.17
+Uganda,2008,19.61
+Uganda,2009,74.23
+Uganda,2010,29.34
+Uganda,2011,27.09
+Uganda,2012,23.25
+Uganda,2013,1481.26
+Uganda,2014,32.25
+Uganda,2015,517
+Uganda,2016,187.71
+Uganda,2017,93.3
+Uganda,2018,230.12
+Uganda,2019,64.12
+Uganda,2020,11.74
+Ukraine,2000,0
+Ukraine,2001,0
+Ukraine,2002,0
+Ukraine,2003,0
+Ukraine,2004,0
+Ukraine,2005,128.67
+Ukraine,2006,0
+Ukraine,2007,0
+Ukraine,2008,0.24
+Ukraine,2009,63.53
+Ukraine,2010,1.2
+Ukraine,2011,29.6
+Ukraine,2012,19.64
+Ukraine,2013,47.14
+Ukraine,2014,81.75
+Ukraine,2015,11.38
+Ukraine,2016,244.13
+Ukraine,2017,75.07
+Ukraine,2018,658.21
+Ukraine,2019,366.28
+Ukraine,2020,0
+United Arab Emirates,2000,0
+United Arab Emirates,2001,0
+United Arab Emirates,2002,0
+United Arab Emirates,2003,0
+United Arab Emirates,2004,0
+United Arab Emirates,2005,0
+United Arab Emirates,2006,0
+United Arab Emirates,2007,0
+United Arab Emirates,2008,0
+United Arab Emirates,2009,0
+United Arab Emirates,2010,0
+United Arab Emirates,2011,0
+United Arab Emirates,2012,0
+United Arab Emirates,2013,0
+United Arab Emirates,2014,0
+United Arab Emirates,2015,0
+United Arab Emirates,2016,0
+United Arab Emirates,2017,0
+United Arab Emirates,2018,0
+United Arab Emirates,2019,0
+United Arab Emirates,2020,0
+United Kingdom of Great Britain and Northern Ireland,2000,0
+United Kingdom of Great Britain and Northern Ireland,2001,0
+United Kingdom of Great Britain and Northern Ireland,2002,0
+United Kingdom of Great Britain and Northern Ireland,2003,0
+United Kingdom of Great Britain and Northern Ireland,2004,0
+United Kingdom of Great Britain and Northern Ireland,2005,0
+United Kingdom of Great Britain and Northern Ireland,2006,0
+United Kingdom of Great Britain and Northern Ireland,2007,0
+United Kingdom of Great Britain and Northern Ireland,2008,0
+United Kingdom of Great Britain and Northern Ireland,2009,0
+United Kingdom of Great Britain and Northern Ireland,2010,1546.39
+United Kingdom of Great Britain and Northern Ireland,2011,316.53
+United Kingdom of Great Britain and Northern Ireland,2012,151.56
+United Kingdom of Great Britain and Northern Ireland,2013,834.25
+United Kingdom of Great Britain and Northern Ireland,2014,2109.86
+United Kingdom of Great Britain and Northern Ireland,2015,1690.18
+United Kingdom of Great Britain and Northern Ireland,2016,1364
+United Kingdom of Great Britain and Northern Ireland,2017,1116.54
+United Kingdom of Great Britain and Northern Ireland,2018,1150.1
+United Kingdom of Great Britain and Northern Ireland,2019,0
+United Kingdom of Great Britain and Northern Ireland,2020,0
+United Republic of Tanzania,2000,0.2
+United Republic of Tanzania,2001,2.41
+United Republic of Tanzania,2002,1.59
+United Republic of Tanzania,2003,3.77
+United Republic of Tanzania,2004,0.08
+United Republic of Tanzania,2005,0.04
+United Republic of Tanzania,2006,0.12
+United Republic of Tanzania,2007,20.07
+United Republic of Tanzania,2008,62.56
+United Republic of Tanzania,2009,0.55
+United Republic of Tanzania,2010,8.85
+United Republic of Tanzania,2011,8.38
+United Republic of Tanzania,2012,3.42
+United Republic of Tanzania,2013,168.95
+United Republic of Tanzania,2014,45.42
+United Republic of Tanzania,2015,37.24
+United Republic of Tanzania,2016,152.21
+United Republic of Tanzania,2017,26.25
+United Republic of Tanzania,2018,13.23
+United Republic of Tanzania,2019,5.67
+United Republic of Tanzania,2020,82.07
+United States of America,2000,0
+United States of America,2001,0
+United States of America,2002,0
+United States of America,2003,0
+United States of America,2004,0
+United States of America,2005,0
+United States of America,2006,0
+United States of America,2007,0
+United States of America,2008,0
+United States of America,2009,0
+United States of America,2010,55.5
+United States of America,2011,117.63
+United States of America,2012,22.01
+United States of America,2013,35.06
+United States of America,2014,0
+United States of America,2015,0
+United States of America,2016,0
+United States of America,2017,0
+United States of America,2018,0
+United States of America,2019,0
+United States of America,2020,0
+Uruguay,2000,0
+Uruguay,2001,1.31
+Uruguay,2002,0
+Uruguay,2003,23.52
+Uruguay,2004,0
+Uruguay,2005,0
+Uruguay,2006,0
+Uruguay,2007,0.88
+Uruguay,2008,0
+Uruguay,2009,6.77
+Uruguay,2010,1.12
+Uruguay,2011,7.77
+Uruguay,2012,290.7
+Uruguay,2013,211.67
+Uruguay,2014,275.61
+Uruguay,2015,518.27
+Uruguay,2016,69.86
+Uruguay,2017,18.29
+Uruguay,2018,0
+Uruguay,2019,0.2
+Uruguay,2020,0
+Uzbekistan,2000,0
+Uzbekistan,2001,0
+Uzbekistan,2002,0
+Uzbekistan,2003,0
+Uzbekistan,2004,0.22
+Uzbekistan,2005,0
+Uzbekistan,2006,0
+Uzbekistan,2007,25.51
+Uzbekistan,2008,0
+Uzbekistan,2009,0
+Uzbekistan,2010,0
+Uzbekistan,2011,0
+Uzbekistan,2012,94.47
+Uzbekistan,2013,196.81
+Uzbekistan,2014,0
+Uzbekistan,2015,0.27
+Uzbekistan,2016,0.69
+Uzbekistan,2017,60.16
+Uzbekistan,2018,84.18
+Uzbekistan,2019,65.94
+Uzbekistan,2020,119.5
+Vanuatu,2000,0
+Vanuatu,2001,0
+Vanuatu,2002,0
+Vanuatu,2003,0
+Vanuatu,2004,0
+Vanuatu,2005,0
+Vanuatu,2006,0
+Vanuatu,2007,12.72
+Vanuatu,2008,0.03
+Vanuatu,2009,0
+Vanuatu,2010,0.89
+Vanuatu,2011,0
+Vanuatu,2012,3.05
+Vanuatu,2013,4.76
+Vanuatu,2014,8.54
+Vanuatu,2015,7.27
+Vanuatu,2016,0
+Vanuatu,2017,17.77
+Vanuatu,2018,1.79
+Vanuatu,2019,0.15
+Vanuatu,2020,0.77
+Venezuela (Bolivarian Republic of),2000,0.85
+Venezuela (Bolivarian Republic of),2001,0
+Venezuela (Bolivarian Republic of),2002,0
+Venezuela (Bolivarian Republic of),2003,0
+Venezuela (Bolivarian Republic of),2004,0.02
+Venezuela (Bolivarian Republic of),2005,0
+Venezuela (Bolivarian Republic of),2006,811.18
+Venezuela (Bolivarian Republic of),2007,0
+Venezuela (Bolivarian Republic of),2008,0
+Venezuela (Bolivarian Republic of),2009,0.19
+Venezuela (Bolivarian Republic of),2010,1273.45
+Venezuela (Bolivarian Republic of),2011,351.04
+Venezuela (Bolivarian Republic of),2012,0.01
+Venezuela (Bolivarian Republic of),2013,0.01
+Venezuela (Bolivarian Republic of),2014,4.35
+Venezuela (Bolivarian Republic of),2015,0.35
+Venezuela (Bolivarian Republic of),2016,0
+Venezuela (Bolivarian Republic of),2017,0
+Venezuela (Bolivarian Republic of),2018,0.39
+Venezuela (Bolivarian Republic of),2019,0
+Venezuela (Bolivarian Republic of),2020,0
+Viet Nam,2000,0
+Viet Nam,2001,100.67
+Viet Nam,2002,39.89
+Viet Nam,2003,0.17
+Viet Nam,2004,221.04
+Viet Nam,2005,5.13
+Viet Nam,2006,1.44
+Viet Nam,2007,0.05
+Viet Nam,2008,192.46
+Viet Nam,2009,443.53
+Viet Nam,2010,102.18
+Viet Nam,2011,271.13
+Viet Nam,2012,1.39
+Viet Nam,2013,91
+Viet Nam,2014,244.08
+Viet Nam,2015,6.35
+Viet Nam,2016,301.77
+Viet Nam,2017,24.53
+Viet Nam,2018,105.77
+Viet Nam,2019,250.8
+Viet Nam,2020,30.08
+Yemen,2000,1.48
+Yemen,2001,0.03
+Yemen,2002,0
+Yemen,2003,0
+Yemen,2004,0.11
+Yemen,2005,0.14
+Yemen,2006,0.13
+Yemen,2007,0.11
+Yemen,2008,0.15
+Yemen,2009,11.18
+Yemen,2010,0.32
+Yemen,2011,0
+Yemen,2012,79.63
+Yemen,2013,0.66
+Yemen,2014,18.67
+Yemen,2015,0
+Yemen,2016,0
+Yemen,2017,0.01
+Yemen,2018,55.73
+Yemen,2019,1.2
+Yemen,2020,0
+Zambia,2000,0.01
+Zambia,2001,0
+Zambia,2002,0
+Zambia,2003,0
+Zambia,2004,2.55
+Zambia,2005,10.3
+Zambia,2006,0.1
+Zambia,2007,0.02
+Zambia,2008,19.44
+Zambia,2009,254.01
+Zambia,2010,397.55
+Zambia,2011,75.36
+Zambia,2012,0.01
+Zambia,2013,1.97
+Zambia,2014,233.9
+Zambia,2015,1775.78
+Zambia,2016,109.51
+Zambia,2017,170.34
+Zambia,2018,64.83
+Zambia,2019,67.21
+Zambia,2020,0
+Zimbabwe,2000,0.04
+Zimbabwe,2001,0.28
+Zimbabwe,2002,0
+Zimbabwe,2003,0.01
+Zimbabwe,2004,0
+Zimbabwe,2005,0.5
+Zimbabwe,2006,0
+Zimbabwe,2007,0
+Zimbabwe,2008,0
+Zimbabwe,2009,0.02
+Zimbabwe,2010,0
+Zimbabwe,2011,1.08
+Zimbabwe,2012,0
+Zimbabwe,2013,321.51
+Zimbabwe,2014,17.83
+Zimbabwe,2015,0
+Zimbabwe,2016,0.03
+Zimbabwe,2017,5.58
+Zimbabwe,2018,0.01
+Zimbabwe,2019,0.25
+Zimbabwe,2020,0

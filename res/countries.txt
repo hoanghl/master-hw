@@ -1,3 +1,4 @@
+Country,Continent
 Algeria
 Botswana
 Chad
@@ -13,7 +14,7 @@ India
 Japan
 Qatar
 China
-singapor
+Singapore
 Thailand
 Nepal
 Maldives
