@@ -22,8 +22,13 @@ plotly = "~=5.15.0"
 joblib = "~=1.2.0"
 kserve = "==0.10.1"
 kfp = "==1.8.22"
+ipython = "*"
+ipywidgets = "*"
+ipykernel = "*"
+ansible = "*"
 
 [dev-packages]
+python-openstackclient = "*"
 
 [requires]
 python_version = "3.9"
