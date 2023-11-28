@@ -1,0 +1,25 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "redwine1"
+  namespace: kserve-inference
+spec:
+  predictor:
+    serviceAccountName: kserve-sa 
+    model:
+      modelFormat: 
+        name: sklearn
+      storageUri: s3://mlflow/12/9d75a172ed7543cd9619cb6ab5589258/artifacts/model # change to the S3 URI of your model artifact
+---
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "redwine2"
+  namespace: kserve-inference
+spec:
+  predictor:
+    serviceAccountName: kserve-sa 
+    model:
+      modelFormat: 
+        name: sklearn
+      storageUri: s3://mlflow/12/e0fe87484cde48f5a51e5615c91d734c/artifacts/model # change to the S3 URI of your model artifact

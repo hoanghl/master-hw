@@ -1,0 +1,26 @@
+apiVersion: "serving.kserve.io/v1alpha1"
+kind: InferenceGraph
+metadata:
+  name: my-graph2
+  namespace: kserve-inference
+spec:
+  nodes:
+    ### START CONF HERE
+    root:
+      routerType: Switch
+      steps:
+        - serviceName: bike-lgbm-3
+          condition: '[@this].#(userType=="advanced")'
+        # This routing node forwards requests to the second routing node named "ensembleNode"
+        - nodeName: ensembleNode
+          condition: '[@this].#(userType=="basic")'
+
+    # The second routing node
+    ensembleNode:
+      routerType: Ensemble
+      steps:
+        - serviceName: bike-lgbm-1
+          name: bike-lgbm-1
+        - serviceName: bike-lgbm-2
+          name: bike-lgbm-2
+    ### END CONF HERE

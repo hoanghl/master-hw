@@ -1,0 +1,13 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "redwine-week4"
+  namespace: kserve-inference
+spec:
+  predictor:
+    minReplicas: 3
+    serviceAccountName: kserve-sa 
+    model:
+      modelFormat: 
+        name: sklearn
+      storageUri: s3://mlflow/12/e0fe87484cde48f5a51e5615c91d734c/artifacts/model # change to the S3 URI of your model artifact

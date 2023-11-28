@@ -1,0 +1,13 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "redwine-week4"
+  namespace: kserve-inference
+spec:
+  predictor:
+    canaryTrafficPercent: 10
+    serviceAccountName: kserve-sa # created when deploying the MLOps platform, associating with the secret that contains the username and password of the MLflow's MinIO server
+    model:
+      modelFormat: 
+        name: sklearn
+      storageUri: s3://mlflow/12/e0fe87484cde48f5a51e5615c91d734c/artifacts/model # change to the S3 URI of your model artifact
