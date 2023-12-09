@@ -1,0 +1,49 @@
+{
+  "id": "690b3431-3f86-4d6f-8dd8-62589c396dc6",
+  "name": "house-price-model-monitoring",
+  "description": null,
+  "dashboard": {
+    "name": "house-price-model-monitoring",
+    "panels": [
+      {
+        "type": "evidently.ui.dashboards.DashboardPanelTestSuiteCounter",
+        "id": "4bd60b75-3512-4880-b5fd-0f77dfa33026",
+        "title": "MAE",
+        "filter": {
+          "metadata_values": {},
+          "tag_values": [],
+          "include_test_suites": true
+        },
+        "size": 2,
+        "agg": "last",
+        "test_filters": [],
+        "statuses": [
+          "SUCCESS"
+        ]
+      },
+      {
+        "type": "evidently.ui.dashboards.DashboardPanelPlot",
+        "id": "4bd60b75-3512-4880-b5fd-0f77dfa33026",
+        "title": "MAE",
+        "filter": {
+          "metadata_values": {},
+          "tag_values": [],
+          "include_test_suites": false
+        },
+        "size": 2,
+        "values": [
+          {
+            "field_path": "current.mean_abs_error",
+            "metric_id": "RegressionQualityMetric",
+            "metric_hash": null,
+            "metric_args": {},
+            "legend": "MAE"
+          }
+        ],
+        "plot_type": "line"
+      }
+    ]
+  },
+  "date_from": null,
+  "date_to": null
+}

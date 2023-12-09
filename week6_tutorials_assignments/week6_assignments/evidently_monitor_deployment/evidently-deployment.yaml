@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evidently-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evidently-monitor
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: evidently-monitor
+    spec:
+      volumes:
+      - name: evidently-workspace-pvc
+        persistentVolumeClaim:
+          claimName: evidently-workspace-pvc
+      containers:
+      - name: evidently-monitor
+        image: yumol/evidently-monitor:v1
+        volumeMounts:
+        - name: evidently-workspace-pvc
+          mountPath: /app/evidently_workspace
+        ports:
+        - containerPort: 8000
