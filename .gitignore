@@ -218,3 +218,6 @@ Temporary Items
 *.exe
 *.out
 *.app
+
+tests/
+*.dSYM
