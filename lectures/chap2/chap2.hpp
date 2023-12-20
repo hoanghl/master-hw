@@ -3,6 +3,9 @@
 
 using namespace std;
 
+#ifndef CHAP2_HPP
+#define CHAP2_HPP
+
 const string STD_FILENAME = "test1.txt";
 
 struct chap2_result
@@ -14,3 +17,5 @@ struct chap2_result
 #pragma once
 void writeFile(string fileName, uint n);
 chap2_result *readFile(string fileName);
+
+#endif

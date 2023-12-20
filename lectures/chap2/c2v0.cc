@@ -1,6 +1,7 @@
-#include "chap2.hpp"
 #include <iostream>
 #include <chrono>
+
+#include "chap2.hpp"
 
 using namespace std;
 using namespace std::chrono;
