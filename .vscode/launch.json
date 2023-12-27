@@ -5,17 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(lldb) Launch",
+      "name": "debug: test1",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/c2v0",
+      "program": "${workspaceFolder}/homework/cp1/test1",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/homework/cp1",
       "environment": [],
       "externalConsole": false,
-      "MIMode": "lldb",
-      "preLaunchTask": "make file"
+      "MIMode": "lldb"
+      // "preLaunchTask": "make file"
     }
   ]
 }
