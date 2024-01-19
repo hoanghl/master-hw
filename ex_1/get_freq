@@ -1,0 +1,16 @@
+#! /bin/bash
+
+
+if [ $# -ne 1 ]; then
+    echo "usage: $0 nsamples"
+    exit 1
+fi
+
+nsamples=$1
+
+for (( i=1; i<=$nsamples; i++ )); do
+    f=$(grep MHz /proc/cpuinfo | gawk '{print $NF}')
+    echo $f
+    sleep 1
+done
+
