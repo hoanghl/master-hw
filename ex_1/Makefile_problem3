@@ -5,6 +5,6 @@ dep_a2: dep_a1
 dep_b2: dep_b1
 	cp dep_b1 dep_b2
 dep_a1:
-	touch dep_a1
+	
 dep_b1:
-	touch dep_b1
+	
