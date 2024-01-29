@@ -5,12 +5,13 @@
 # Last Updated: January 15, 2024
 ################################################################################
 
+from itertools import combinations
 
 import networkx as nx
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-def get_strong_weak_links(G,threshold):
+def get_strong_weak_links(G, threshold):
     """
     A function that returns the list of weak and strong links in the graph based on the threshold of edge weight
     
@@ -19,15 +20,24 @@ def get_strong_weak_links(G,threshold):
         threshold (float) : weight threshold for strong ties
     """
     ###############################################################################
-    # TODO: your code here 
+    # TODO: your code here
+    # FIXME: HoangLe [Jan-24]: Done
     ###############################################################################
     
     # Hint: get weights using nx.get_edge_attributes 
+    strong_links = []
+    weak_links = []
+
+    for edge, w in nx.get_edge_attributes(G, 'weight').items():
+        if w >= threshold:
+            strong_links.append(edge)
+        else:
+            weak_links.append(edge)
     return weak_links, strong_links
 
 
 
-def draw_network_with_tie_strength(G,weak_links,strong_links):
+def draw_network_with_tie_strength(G, weak_links, strong_links):
     """
     Plots the network and links as described in exercise handout
     Args:
@@ -38,16 +48,25 @@ def draw_network_with_tie_strength(G,weak_links,strong_links):
     """
     ############################################################################
     # TODO: Your code here!
+    # FIXME: HoangLe [Jan-24]: Done
     ############################################################################
-    # get layout 
+    # get layout
+    layout = nx.circular_layout(G)
+
+    fig = plt.figure(figsize=(10, 10))
+    ax = fig.add_subplot(111)
 
     # draw nodes
+    nx.draw_networkx_nodes(G, pos=layout, node_size=2000, node_color='#d78cf5', ax=ax)
 
     # draw node labels 
+    nx.draw_networkx_labels(G, pos=layout, font_size=14, ax=ax)
 
     # draw strong links
+    nx.draw_networkx_edges(G, pos=layout, edgelist=strong_links, width=2, style='solid', edge_color='red')
 
     # draw weak links 
+    nx.draw_networkx_edges(G, pos=layout, edgelist=weak_links, width=2, style='dashed', edge_color='blue')
 
     plt.title("Barn Swallow Contact Network")
     plt.show()
@@ -73,11 +92,29 @@ def check_stcp(G,weak_links,strong_links):
     # Note: G is undirected, so edge (u,v) is same as (v,u).
     # Hint: use itertools.combinations to get all pairs of two edges of nodes 
 
+    def are_nodes_connected(g: nx.Graph, u, v):
+        return v in g.neighbors(u)
+
+    for node in G.nodes:
+        neighbors_strong = [
+            u for u in G.neighbors(node)
+            if ((node, u) in strong_links) or ((u, node) in strong_links)
+        ]
+
+        is_violated = True
+        for (u, v) in combinations(neighbors_strong, 2):
+            if are_nodes_connected(G, u, v):
+                is_violated = False
+
+                break
+
+        stcp_validity[node] = not is_violated
+
     return stcp_validity 
 
 
 if __name__ == '__main__':
-    network_file = Path(__file__).parent / "data" / "aves-barn-swallow-contact-network.edges"
+    network_file = Path(__file__).parent / "aves-barn-swallow-contact-network.edges"
     # keep the network file in a subfolder called data
     if not network_file.exists():
         raise FileNotFoundError(f"Cannot find network file at {network_file.resolve()}. Please check path.")
@@ -85,7 +122,7 @@ if __name__ == '__main__':
     aves = nx.read_weighted_edgelist(network_file,nodetype=int)
 
     # Choose threshold from exercise 
-    weak_links, strong_links = get_strong_weak_links(aves,threshold=)
+    weak_links, strong_links = get_strong_weak_links(aves,threshold=3)
 
     draw_network_with_tie_strength(aves,weak_links,strong_links)
 
