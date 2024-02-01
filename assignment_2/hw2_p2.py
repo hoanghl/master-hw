@@ -4,14 +4,13 @@
 # Boilerplate code for Exercise 2
 # Last Updated: January 15, 2024
 ################################################################################
-from collections import defaultdict, deque
+from collections import defaultdict, deque, Counter
 from itertools import combinations
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
-
 
 def load_signed_network(path):
     """Reads from file at path and return graph
@@ -25,6 +24,7 @@ def load_signed_network(path):
     ############################################################################
     # TODO: Your code here!
     # NOTE: Graph is directed and stored in edgelist format.
+    # FIXME: HoangLe [Jan-29]: Done
     # Each line of the file has 4 numbers. For example
     # Source Target Rating Time
     # 1 2 4      1289241911.72836
@@ -36,7 +36,7 @@ def load_signed_network(path):
     # use edge_attr to choose columns for edge weights
     df = pd.read_csv(path)
 
-    G = nx.from_pandas_edgelist(df, source='Source', target='Target', edge_attr='Rating')
+    G = nx.from_pandas_edgelist(df, source='Source', target='Target', edge_attr='Rating', create_using=nx.DiGraph)
     assert nx.is_directed(G)
     return G
 
@@ -55,12 +55,27 @@ def get_asymm_edges_diffs(G):
     """
     ############################################################################
     # TODO: Your code here!
+    # FIXME: HoangLe [Jan-29]: Partially done
     ############################################################################
     assert nx.is_directed(G)
     asymmetric_edges = []
     # Note: process an asymmetric edge (u,v) ONLY ONCE and store one entry
     # Note: both (u,v) and (v,u) need to be present in graph to qualify as asymmetric
     # Hint: keep absolute differences in a list and then use `collections.Counter` to get dict of counts
+    weight_attr = 'Rating'
+
+    edges_asym = set()
+    list_abs_diff = []
+    for (u, v) in G.edges:
+        if (v, u) in G.edges and \
+            G.edges[(u, v)][weight_attr] != G.edges[(v, u)][weight_attr] and \
+            (v, u) not in edges_asym:
+            edges_asym.add((u, v))
+            diff = abs(G.edges[(u, v)][weight_attr] - G.edges[(v, u)][weight_attr])
+            list_abs_diff.append(diff)
+
+    asymmetric_edges = list(edges_asym)
+    absolute_diffs = dict(Counter(list_abs_diff))
 
     return asymmetric_edges, absolute_diffs
 
@@ -107,10 +122,17 @@ def convert_undirected(G, asymmetric_edges):
     assert nx.is_directed(G)
     #######################################################
     # TODO: Your code here!
+    # FIXME: HoangLe [Jan-29]: Done
     #######################################################
     # Note: remove both (u,v) and (v,u) edges from G
     # Then convert to undirected graph
-    G_und = G.to
+    asymmetric_edges = set(asymmetric_edges)
+
+    G_und = nx.Graph()
+    for edge in G.edges:
+        if edge in asymmetric_edges or (edge[1], edge[0]) in asymmetric_edges:
+            continue
+        G_und.add_edge(*edge)
     assert not nx.is_directed(G_und)
     return G_und
 
@@ -242,6 +264,7 @@ def bfs_check(G: nx.Graph, src):
         # 2. Check every pairs of nodes within the queue whether there is an edge between a pair
         for u, v in combinations(q, 2):
             if (u, v) in G.edges:
+                # logger.info(f"Found Odd Length Cycle at: {(u, v)}")
                 # Found Odd Length Cycle at edge (u, v)
                 return None
 
@@ -324,23 +347,21 @@ if __name__ == "__main__":
         print("Group Y: ", bipartite_mapping["Y"])
         print()
 
-    # bitcoin_file = Path(__file__).parent / "data" / "soc-sign-bitcoinotc.csv"
-    # if not bitcoin_file.exists():
-    #     raise FileNotFoundError(
-    #         f"Cannot find network file at {bitcoin_file.resolve()}. Please check path"
-    #     )
-    # bitcoin_directed = load_signed_network(bitcoin_file)
-    # asymmetric_edges, absolute_diffs = get_asymm_edges_diffs(bitcoin_directed)
+    bitcoin_file = Path(__file__).parent / "soc-sign-bitcoinotc.csv"
+    if not bitcoin_file.exists():
+        raise FileNotFoundError(
+            f"Cannot find network file at {bitcoin_file.resolve()}. Please check path"
+        )
+    bitcoin_directed = load_signed_network(bitcoin_file)
+    asymmetric_edges, absolute_diffs = get_asymm_edges_diffs(bitcoin_directed)
 
-    # print(
-    #     f"There are {len(asymmetric_edges)} pairs of nodes that have asymmetric edges"
-    # )
-    # plot_absolute_diffs(absolute_diffs)
+    print(f"There are {len(asymmetric_edges)} pairs of nodes that have asymmetric edges")
+    plot_absolute_diffs(absolute_diffs)
 
-    # # convert directed network to undirected
-    # bitcoin_undirected = convert_undirected(bitcoin_directed, asymmetric_edges)
+    # convert directed network to undirected
+    bitcoin_undirected = convert_undirected(bitcoin_directed, asymmetric_edges)
 
-    # if check_balance(bitcoin_undirected):
-    #     print("Bitcoin Network is balanced")
-    # else:
-    #     print("Bitcoin Network is not balanced")
+    if check_balance(bitcoin_undirected):
+        print("Bitcoin Network is balanced")
+    else:
+        print("Bitcoin Network is not balanced")

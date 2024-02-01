@@ -101,12 +101,15 @@ def check_stcp(G,weak_links,strong_links):
             if ((node, u) in strong_links) or ((u, node) in strong_links)
         ]
 
-        is_violated = True
-        for (u, v) in combinations(neighbors_strong, 2):
-            if are_nodes_connected(G, u, v):
-                is_violated = False
+        if len(neighbors_strong) < 2:
+            is_violated = False
+        else:
+            is_violated = False
+            for (u, v) in combinations(neighbors_strong, 2):
+                if not are_nodes_connected(G, u, v):
+                    is_violated = True
 
-                break
+                    break
 
         stcp_validity[node] = not is_violated
 
