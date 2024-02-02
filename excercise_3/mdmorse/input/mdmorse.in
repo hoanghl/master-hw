@@ -1,0 +1,41 @@
+ 
+ Sample input file for mdmorse md program
+ File format: $identifier, then value. Rest is arbitrary comments
+ Lines which do not begin with "$" are all ignored
+
+Identifier     | Value
+
+$initialT   0.0            Initial temperature
+
+$desiredT		0.0            Variables for temperature control
+$btctau			400.0           If btctau=0 no effect
+
+$bpctau			300.0          Variables for pressure control
+$bpcbeta		7.0e-4         If bpctau=0 no effect
+$desiredP		0.00
+
+$mass           63.546         	For Cu
+
+$xsize          18.126900793    Box size in each dimension
+$ysize          18.126900793
+$zsize          18.126900793
+
+$periodicx      1		Boundary conditions
+$periodicy      1               1=periodic
+$periodicz      0               0=free
+
+$morseD         0.3429		Morse potential parameters for Cu
+$morsealpha     1.3588      
+$morser0        2.8660
+
+$rpotcut        5.0 		Potential cutoff 
+$rskincut       6.0		Neighbour list cutoff, must be > rpotc9t
+
+$nupdate        5               Number of steps between neighbour list updates
+
+$nmovieoutput   1000             Interval between atom movie output
+
+$deltat         2.0		Time step in simulation in fs
+$tmax           60000.0		Total simulation time
+
+$seed           8734395         Random number generator seed

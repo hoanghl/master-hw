@@ -1,0 +1,1030 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+  7.27      0.91     0.91                             GetForces (forces.c:107 @ 2c04)
+  6.79      1.76     0.85                             GetForces (forces.c:75 @ 2aac)
+  6.71      2.60     0.84                             GetForces (forces.c:44 @ 29f0)
+  5.11      3.24     0.64                             UpdateNeighbourlist (neighbourlist.c:52 @ 2458)
+  4.63      3.82     0.58                             GetForces (forces.c:79 @ 2af4)
+  4.55      4.39     0.57                             UpdateNeighbourlist (neighbourlist.c:61 @ 2494)
+  3.67      4.85     0.46                             GetForces (forces.c:50 @ 2a00)
+  3.19      5.25     0.40                             GetForces (forces.c:59 @ 2a38)
+  3.19      5.65     0.40                             UpdateNeighbourlist (neighbourlist.c:58 @ 23fc)
+  2.88      6.01     0.36                             UpdateNeighbourlist (neighbourlist.c:48 @ 2524)
+  2.72      6.35     0.34                             GetForces (forces.c:53 @ 2a84)
+  2.72      6.69     0.34                             UpdateNeighbourlist (neighbourlist.c:43 @ 2410)
+  2.64      7.02     0.33                             UpdateNeighbourlist (neighbourlist.c:47 @ 251c)
+  2.56      7.34     0.32                             UpdateNeighbourlist (neighbourlist.c:50 @ 243c)
+  2.24      7.62     0.28                             GetForces (forces.c:68 @ 29dc)
+  1.76      7.84     0.22                             GetForces (forces.c:105 @ 2bec)
+  1.76      8.06     0.22                             UpdateNeighbourlist (neighbourlist.c:44 @ 2420)
+  1.76      8.28     0.22                             UpdateNeighbourlist (neighbourlist.c:46 @ 2428)
+  1.68      8.49     0.21                             GetForces (forces.c:62 @ 2a44)
+  1.68      8.70     0.21                             GetForces (forces.c:93 @ 2ba4)
+  1.68      8.91     0.21                             UpdateNeighbourlist (neighbourlist.c:54 @ 2460)
+  1.60      9.11     0.20                             GetForces (forces.c:56 @ 2a1c)
+  1.60      9.31     0.20                             GetForces (forces.c:102 @ 2bcc)
+  1.52      9.50     0.19                             GetForces (forces.c:51 @ 2a7c)
+  1.44      9.68     0.18                             GetForces (forces.c:96 @ 2b8c)
+  1.36      9.85     0.17                             _init
+  1.28     10.01     0.16                             GetForces (forces.c:57 @ 2a28)
+  1.28     10.17     0.16                             GetForces (forces.c:44 @ 2c10)
+  1.04     10.30     0.13                             GetForces (forces.c:93 @ 2b54)
+  0.96     10.42     0.12                             GetForces (forces.c:104 @ 2be0)
+  0.88     10.53     0.11                             GetForces (forces.c:60 @ 2a70)
+  0.88     10.64     0.11                             GetForces (forces.c:84 @ 2b70)
+  0.88     10.75     0.11                             UpdateNeighbourlist (neighbourlist.c:51 @ 2548)
+  0.80     10.85     0.10                             GetForces (forces.c:96 @ 2b78)
+  0.80     10.95     0.10                             GetForces (forces.c:102 @ 2bc0)
+  0.80     11.05     0.10                             GetForces (forces.c:58 @ 2c84)
+  0.80     11.15     0.10                             UpdateNeighbourlist (neighbourlist.c:52 @ 248c)
+  0.72     11.24     0.09                             GetForces (forces.c:93 @ 2b64)
+  0.72     11.33     0.09                             UpdateNeighbourlist (neighbourlist.c:51 @ 2448)
+  0.64     11.41     0.08                             GetForces (forces.c:113 @ 2c18)
+  0.64     11.49     0.08                             UpdateNeighbourlist (neighbourlist.c:54 @ 23e8)
+  0.56     11.56     0.07                             GetForces (forces.c:106 @ 2bf8)
+  0.48     11.62     0.06                             GetForces (forces.c:107 @ 2b5c)
+  0.48     11.68     0.06                             GetForces (forces.c:85 @ 2b80)
+  0.48     11.74     0.06                             GetTemperature (physical.c:78 @ 20b8)
+  0.40     11.79     0.05                             GetForces (forces.c:93 @ 2b74)
+  0.40     11.84     0.05                             GetForces (forces.c:98 @ 2b9c)
+  0.40     11.89     0.05                             GetForces (forces.c:103 @ 2bd4)
+  0.40     11.94     0.05                             UpdateNeighbourlist (neighbourlist.c:47 @ 2538)
+  0.32     11.98     0.04                             GetForces (forces.c:33 @ 2958)
+  0.32     12.02     0.04                             GetForces (forces.c:84 @ 2b40)
+  0.32     12.06     0.04                             UpdateNeighbourlist (neighbourlist.c:67 @ 24a8)
+  0.24     12.09     0.03                             GetEnergies (physical.c:106 @ 220c)
+  0.24     12.12     0.03                             GetForces (forces.c:54 @ 2a94)
+  0.24     12.15     0.03                             GetForces (forces.c:98 @ 2b30)
+  0.24     12.18     0.03                             GetForces (forces.c:52 @ 2c78)
+  0.24     12.21     0.03                             UpdateNeighbourlist (neighbourlist.c:47 @ 2434)
+  0.16     12.23     0.02                             GetForces (forces.c:62 @ 29c8)
+  0.16     12.25     0.02                             GetForces (forces.c:47 @ 29fc)
+  0.16     12.27     0.02                             GetForces (forces.c:103 @ 2b58)
+  0.16     12.29     0.02                             GetForces (forces.c:98 @ 2b94)
+  0.16     12.31     0.02                             GetForces (forces.c:85 @ 2ba0)
+  0.16     12.33     0.02                             GetForces (forces.c:98 @ 2bb4)
+  0.16     12.35     0.02                             GetForces (forces.c:93 @ 2bb8)
+  0.08     12.36     0.01                             GetForces (forces.c:28 @ 295c)
+  0.08     12.37     0.01                             GetForces (forces.c:63 @ 2a50)
+  0.08     12.38     0.01                             GetForces (forces.c:84 @ 2b14)
+  0.08     12.39     0.01                             GetForces (forces.c:98 @ 2b4c)
+  0.08     12.40     0.01                             GetForces (forces.c:98 @ 2b60)
+  0.08     12.41     0.01                             GetForces (forces.c:90 @ 2b68)
+  0.08     12.42     0.01                             GetForces (forces.c:93 @ 2b84)
+  0.08     12.43     0.01                             GetForces (forces.c:85 @ 2b88)
+  0.08     12.44     0.01                             GetForces (forces.c:38 @ 2c34)
+  0.08     12.45     0.01                             Solve1 (solve.c:30 @ 2650)
+  0.08     12.46     0.01                             Solve1 (solve.c:31 @ 2664)
+  0.08     12.47     0.01                             Solve1 (solve.c:34 @ 268c)
+  0.08     12.48     0.01                             Solve1 (solve.c:39 @ 26a4)
+  0.08     12.49     0.01                             Solve1 (solve.c:42 @ 26c0)
+  0.08     12.50     0.01                             Solve2 (solve.c:85 @ 2814)
+  0.08     12.51     0.01                             UpdateNeighbourlist (neighbourlist.c:60 @ 2408)
+  0.08     12.52     0.01                             main (main.c:163 @ 105c)
+  0.00     12.52     0.00    30001     0.00     0.00  GetTemperature (physical.c:64 @ 2060)
+  0.00     12.52     0.00    30000     0.00     0.00  GetEnergies (physical.c:97 @ 2140)
+  0.00     12.52     0.00    30000     0.00     0.00  GetForces (forces.c:18 @ 2890)
+  0.00     12.52     0.00    30000     0.00     0.00  Solve1 (solve.c:13 @ 2570)
+  0.00     12.52     0.00    30000     0.00     0.00  Solve2 (solve.c:61 @ 2770)
+  0.00     12.52     0.00     6000     0.00     0.00  UpdateNeighbourlist (neighbourlist.c:27 @ 2340)
+  0.00     12.52     0.00      781     0.00     0.00  WriteAtoms (inout.c:197 @ 1c10)
+  0.00     12.52     0.00        1     0.00     0.00  ReadAtoms (inout.c:152 @ 1a14)
+  0.00     12.52     0.00        1     0.00     0.00  ReadParams (inout.c:30 @ 1340)
+  0.00     12.52     0.00        1     0.00     0.00  SetTemperature (physical.c:12 @ 1ea4)
+  0.00     12.52     0.00                             GetEnergies (physical.c:101 @ 2188)
+  0.00     12.52     0.00                             GetEnergies (physical.c:102 @ 218c)
+  0.00     12.52     0.00                             GetEnergies (physical.c:101 @ 2194)
+  0.00     12.52     0.00                             GetEnergies (physical.c:102 @ 2198)
+  0.00     12.52     0.00                             GetEnergies (physical.c:103 @ 21c4)
+  0.00     12.52     0.00                             GetEnergies (physical.c:104 @ 21d8)
+  0.00     12.52     0.00                             GetEnergies (physical.c:103 @ 21dc)
+  0.00     12.52     0.00                             GetEnergies (physical.c:104 @ 21e0)
+  0.00     12.52     0.00                             GetEnergies (physical.c:105 @ 21f8)
+  0.00     12.52     0.00                             GetEnergies (physical.c:106 @ 2204)
+  0.00     12.52     0.00                             GetEnergies (physical.c:103 @ 2208)
+  0.00     12.52     0.00                             GetEnergies (physical.c:103 @ 2218)
+  0.00     12.52     0.00                             GetEnergies (physical.c:108 @ 2220)
+  0.00     12.52     0.00                             GetEnergies (physical.c:110 @ 2224)
+  0.00     12.52     0.00                             GetEnergies (physical.c:108 @ 2228)
+  0.00     12.52     0.00                             GetEnergies (physical.c:110 @ 222c)
+  0.00     12.52     0.00                             GetEnergies (physical.c:108 @ 2238)
+  0.00     12.52     0.00                             GetEnergies (physical.c:110 @ 223c)
+  0.00     12.52     0.00                             GetEnergies (physical.c:103 @ 2248)
+  0.00     12.52     0.00                             GetForces (forces.c:23 @ 28f0)
+  0.00     12.52     0.00                             GetForces (forces.c:26 @ 28f8)
+  0.00     12.52     0.00                             GetForces (forces.c:23 @ 2904)
+  0.00     12.52     0.00                             GetForces (forces.c:24 @ 2910)
+  0.00     12.52     0.00                             GetForces (forces.c:25 @ 2918)
+  0.00     12.52     0.00                             GetForces (forces.c:28 @ 291c)
+  0.00     12.52     0.00                             GetForces (forces.c:30 @ 2948)
+  0.00     12.52     0.00                             GetForces (forces.c:28 @ 294c)
+  0.00     12.52     0.00                             GetForces (forces.c:32 @ 2950)
+  0.00     12.52     0.00                             GetForces (forces.c:28 @ 2954)
+  0.00     12.52     0.00                             GetForces (forces.c:36 @ 2964)
+  0.00     12.52     0.00                             GetForces (forces.c:38 @ 297c)
+  0.00     12.52     0.00                             GetForces (forces.c:36 @ 2980)
+  0.00     12.52     0.00                             GetForces (forces.c:40 @ 2988)
+  0.00     12.52     0.00                             GetForces (forces.c:44 @ 29a0)
+  0.00     12.52     0.00                             GetForces (forces.c:50 @ 29bc)
+  0.00     12.52     0.00                             GetForces (forces.c:63 @ 29d4)
+  0.00     12.52     0.00                             GetForces (forces.c:70 @ 29e8)
+  0.00     12.52     0.00                             GetForces (forces.c:51 @ 2a14)
+  0.00     12.52     0.00                             GetForces (forces.c:65 @ 2a60)
+  0.00     12.52     0.00                             GetForces (forces.c:66 @ 2aa0)
+  0.00     12.52     0.00                             GetForces (forces.c:79 @ 2ae4)
+  0.00     12.52     0.00                             GetForces (forces.c:85 @ 2ae8)
+  0.00     12.52     0.00                             GetForces (forces.c:44 @ 2af0)
+  0.00     12.52     0.00                             GetForces (forces.c:83 @ 2b08)
+  0.00     12.52     0.00                             GetForces (forces.c:80 @ 2b0c)
+  0.00     12.52     0.00                             GetForces (forces.c:90 @ 2b10)
+  0.00     12.52     0.00                             GetForces (forces.c:83 @ 2b18)
+  0.00     12.52     0.00                             GetForces (forces.c:90 @ 2b1c)
+  0.00     12.52     0.00                             GetForces (forces.c:83 @ 2b24)
+  0.00     12.52     0.00                             GetForces (forces.c:90 @ 2b2c)
+  0.00     12.52     0.00                             GetForces (forces.c:107 @ 2b38)
+  0.00     12.52     0.00                             GetForces (forces.c:90 @ 2b3c)
+  0.00     12.52     0.00                             GetForces (forces.c:90 @ 2b48)
+  0.00     12.52     0.00                             GetForces (forces.c:96 @ 2b50)
+  0.00     12.52     0.00                             GetForces (forces.c:93 @ 2b6c)
+  0.00     12.52     0.00                             GetForces (forces.c:96 @ 2b98)
+  0.00     12.52     0.00                             GetForces (forces.c:98 @ 2bc4)
+  0.00     12.52     0.00                             GetForces (forces.c:38 @ 2c1c)
+  0.00     12.52     0.00                             GetForces (forces.c:113 @ 2c28)
+  0.00     12.52     0.00                             GetForces (forces.c:116 @ 2c48)
+  0.00     12.52     0.00                             GetForces (forces.c:64 @ 2c6c)
+  0.00     12.52     0.00                             GetForces (forces.c:36 @ 2c90)
+  0.00     12.52     0.00                             GetForces (forces.c:116 @ 2c94)
+  0.00     12.52     0.00                             GetTemperature (physical.c:76 @ 2090)
+  0.00     12.52     0.00                             GetTemperature (physical.c:75 @ 20a4)
+  0.00     12.52     0.00                             GetTemperature (physical.c:78 @ 20b0)
+  0.00     12.52     0.00                             GetTemperature (physical.c:76 @ 20b4)
+  0.00     12.52     0.00                             GetTemperature (physical.c:76 @ 20c8)
+  0.00     12.52     0.00                             GetTemperature (physical.c:82 @ 20d0)
+  0.00     12.52     0.00                             GetTemperature (physical.c:84 @ 20d8)
+  0.00     12.52     0.00                             GetTemperature (physical.c:82 @ 20e0)
+  0.00     12.52     0.00                             GetTemperature (physical.c:86 @ 20ec)
+  0.00     12.52     0.00                             GetTemperature (physical.c:82 @ 20f0)
+  0.00     12.52     0.00                             GetTemperature (physical.c:84 @ 20f8)
+  0.00     12.52     0.00                             GetTemperature (physical.c:82 @ 2100)
+  0.00     12.52     0.00                             GetTemperature (physical.c:84 @ 2104)
+  0.00     12.52     0.00                             GetTemperature (physical.c:86 @ 2108)
+  0.00     12.52     0.00                             GetTemperature (physical.c:82 @ 210c)
+  0.00     12.52     0.00                             GetTemperature (physical.c:84 @ 2110)
+  0.00     12.52     0.00                             GetTemperature (physical.c:82 @ 2114)
+  0.00     12.52     0.00                             GetTemperature (physical.c:84 @ 211c)
+  0.00     12.52     0.00                             GetTemperature (physical.c:86 @ 2124)
+  0.00     12.52     0.00                             GetTemperature (physical.c:75 @ 2130)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:157 @ 1a44)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:152 @ 1a50)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:157 @ 1a54)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:152 @ 1a58)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:157 @ 1a64)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:159 @ 1a6c)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:161 @ 1a84)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:163 @ 1a98)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:168 @ 1ae4)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:171 @ 1b04)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:168 @ 1b0c)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:171 @ 1b34)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:174 @ 1b50)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:177 @ 1b8c)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:178 @ 1b98)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:163 @ 1ba0)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:184 @ 1bbc)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:159 @ 1bec)
+  0.00     12.52     0.00                             ReadAtoms (inout.c:184 @ 1c08)
+  0.00     12.52     0.00                             ReadParams (inout.c:36 @ 13dc)
+  0.00     12.52     0.00                             ReadParams (inout.c:30 @ 13e8)
+  0.00     12.52     0.00                             ReadParams (inout.c:36 @ 13ec)
+  0.00     12.52     0.00                             ReadParams (inout.c:30 @ 13f0)
+  0.00     12.52     0.00                             ReadParams (inout.c:36 @ 13fc)
+  0.00     12.52     0.00                             ReadParams (inout.c:38 @ 1404)
+  0.00     12.52     0.00                             ReadParams (inout.c:41 @ 1408)
+  0.00     12.52     0.00                             ReadParams (inout.c:44 @ 1414)
+  0.00     12.52     0.00                             ReadParams (inout.c:41 @ 1418)
+  0.00     12.52     0.00                             ReadParams (inout.c:45 @ 141c)
+  0.00     12.52     0.00                             ReadParams (inout.c:46 @ 1420)
+  0.00     12.52     0.00                             ReadParams (inout.c:65 @ 1424)
+  0.00     12.52     0.00                             ReadParams (inout.c:41 @ 1430)
+  0.00     12.52     0.00                             ReadParams (inout.c:46 @ 1434)
+  0.00     12.52     0.00                             ReadParams (inout.c:42 @ 1438)
+  0.00     12.52     0.00                             ReadParams (inout.c:64 @ 143c)
+  0.00     12.52     0.00                             ReadParams (inout.c:46 @ 1440)
+  0.00     12.52     0.00                             ReadParams (inout.c:49 @ 1444)
+  0.00     12.52     0.00                             ReadParams (inout.c:42 @ 1448)
+  0.00     12.52     0.00                             ReadParams (inout.c:49 @ 144c)
+  0.00     12.52     0.00                             ReadParams (inout.c:51 @ 1460)
+  0.00     12.52     0.00                             ReadParams (inout.c:44 @ 1468)
+  0.00     12.52     0.00                             ReadParams (inout.c:45 @ 1470)
+  0.00     12.52     0.00                             ReadParams (inout.c:53 @ 1478)
+  0.00     12.52     0.00                             ReadParams (inout.c:46 @ 147c)
+  0.00     12.52     0.00                             ReadParams (inout.c:53 @ 1480)
+  0.00     12.52     0.00                             ReadParams (inout.c:46 @ 1484)
+  0.00     12.52     0.00                             ReadParams (inout.c:49 @ 1490)
+  0.00     12.52     0.00                             ReadParams (inout.c:51 @ 14a8)
+  0.00     12.52     0.00                             ReadParams (inout.c:50 @ 14ac)
+  0.00     12.52     0.00                             ReadParams (inout.c:51 @ 14b4)
+  0.00     12.52     0.00                             ReadParams (inout.c:53 @ 14c8)
+  0.00     12.52     0.00                             ReadParams (inout.c:65 @ 14d0)
+  0.00     12.52     0.00                             ReadParams (inout.c:62 @ 14e4)
+  0.00     12.52     0.00                             ReadParams (inout.c:65 @ 14e8)
+  0.00     12.52     0.00                             ReadParams (inout.c:64 @ 14fc)
+  0.00     12.52     0.00                             ReadParams (inout.c:65 @ 1500)
+  0.00     12.52     0.00                             ReadParams (inout.c:68 @ 1504)
+  0.00     12.52     0.00                             ReadParams (inout.c:70 @ 1510)
+  0.00     12.52     0.00                             ReadParams (inout.c:77 @ 1518)
+  0.00     12.52     0.00                             ReadParams (inout.c:78 @ 154c)
+  0.00     12.52     0.00                             ReadParams (inout.c:79 @ 156c)
+  0.00     12.52     0.00                             ReadParams (inout.c:81 @ 158c)
+  0.00     12.52     0.00                             ReadParams (inout.c:120 @ 15b0)
+  0.00     12.52     0.00                             ReadParams (inout.c:132 @ 1634)
+  0.00     12.52     0.00                             ReadParams (inout.c:137 @ 1640)
+  0.00     12.52     0.00                             ReadParams (inout.c:144 @ 1650)
+  0.00     12.52     0.00                             ReadParams (inout.c:83 @ 168c)
+  0.00     12.52     0.00                             ReadParams (inout.c:142 @ 16c8)
+  0.00     12.52     0.00                             ReadParams (inout.c:137 @ 16e0)
+  0.00     12.52     0.00                             ReadParams (inout.c:84 @ 16f4)
+  0.00     12.52     0.00                             ReadParams (inout.c:85 @ 1708)
+  0.00     12.52     0.00                             ReadParams (inout.c:73 @ 174c)
+  0.00     12.52     0.00                             ReadParams (inout.c:84 @ 1754)
+  0.00     12.52     0.00                             ReadParams (inout.c:87 @ 1764)
+  0.00     12.52     0.00                             ReadParams (inout.c:88 @ 1778)
+  0.00     12.52     0.00                             ReadParams (inout.c:87 @ 1798)
+  0.00     12.52     0.00                             ReadParams (inout.c:89 @ 17a4)
+  0.00     12.52     0.00                             ReadParams (inout.c:91 @ 17c4)
+  0.00     12.52     0.00                             ReadParams (inout.c:92 @ 17f4)
+  0.00     12.52     0.00                             ReadParams (inout.c:93 @ 1824)
+  0.00     12.52     0.00                             ReadParams (inout.c:95 @ 1854)
+  0.00     12.52     0.00                             ReadParams (inout.c:144 @ 1884)
+  0.00     12.52     0.00                             ReadParams (inout.c:38 @ 1888)
+  0.00     12.52     0.00                             ReadParams (inout.c:97 @ 189c)
+  0.00     12.52     0.00                             ReadParams (inout.c:98 @ 18c0)
+  0.00     12.52     0.00                             ReadParams (inout.c:100 @ 18e4)
+  0.00     12.52     0.00                             ReadParams (inout.c:102 @ 1914)
+  0.00     12.52     0.00                             ReadParams (inout.c:103 @ 1938)
+  0.00     12.52     0.00                             ReadParams (inout.c:105 @ 195c)
+  0.00     12.52     0.00                             ReadParams (inout.c:106 @ 1980)
+  0.00     12.52     0.00                             ReadParams (inout.c:107 @ 19a4)
+  0.00     12.52     0.00                             ReadParams (inout.c:109 @ 19c8)
+  0.00     12.52     0.00                             ReadParams (inout.c:113 @ 1a0c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:29 @ 1ed8)
+  0.00     12.52     0.00                             SetTemperature (physical.c:32 @ 1f20)
+  0.00     12.52     0.00                             SetTemperature (physical.c:31 @ 1f28)
+  0.00     12.52     0.00                             SetTemperature (physical.c:32 @ 1f34)
+  0.00     12.52     0.00                             SetTemperature (physical.c:31 @ 1f4c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:34 @ 1f5c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:34 @ 1f64)
+  0.00     12.52     0.00                             SetTemperature (physical.c:35 @ 1f6c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:35 @ 1f74)
+  0.00     12.52     0.00                             SetTemperature (physical.c:39 @ 1f84)
+  0.00     12.52     0.00                             SetTemperature (physical.c:36 @ 1f88)
+  0.00     12.52     0.00                             SetTemperature (physical.c:32 @ 1f8c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:39 @ 1f90)
+  0.00     12.52     0.00                             SetTemperature (physical.c:40 @ 1f94)
+  0.00     12.52     0.00                             SetTemperature (physical.c:36 @ 1f98)
+  0.00     12.52     0.00                             SetTemperature (physical.c:38 @ 1f9c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:32 @ 1fa4)
+  0.00     12.52     0.00                             SetTemperature (physical.c:34 @ 1fb8)
+  0.00     12.52     0.00                             SetTemperature (physical.c:34 @ 1fc0)
+  0.00     12.52     0.00                             SetTemperature (physical.c:35 @ 1fd0)
+  0.00     12.52     0.00                             SetTemperature (physical.c:35 @ 1fd8)
+  0.00     12.52     0.00                             SetTemperature (physical.c:44 @ 1fec)
+  0.00     12.52     0.00                             SetTemperature (physical.c:45 @ 2000)
+  0.00     12.52     0.00                             SetTemperature (physical.c:46 @ 2008)
+  0.00     12.52     0.00                             SetTemperature (physical.c:49 @ 200c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:51 @ 2010)
+  0.00     12.52     0.00                             SetTemperature (physical.c:52 @ 2014)
+  0.00     12.52     0.00                             SetTemperature (physical.c:50 @ 2018)
+  0.00     12.52     0.00                             SetTemperature (physical.c:51 @ 201c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:52 @ 2020)
+  0.00     12.52     0.00                             SetTemperature (physical.c:51 @ 2024)
+  0.00     12.52     0.00                             SetTemperature (physical.c:49 @ 2028)
+  0.00     12.52     0.00                             SetTemperature (physical.c:52 @ 202c)
+  0.00     12.52     0.00                             SetTemperature (physical.c:49 @ 2030)
+  0.00     12.52     0.00                             SetTemperature (physical.c:55 @ 2044)
+  0.00     12.52     0.00                             Solve1 (solve.c:19 @ 25b4)
+  0.00     12.52     0.00                             Solve1 (solve.c:21 @ 25c8)
+  0.00     12.52     0.00                             Solve1 (solve.c:22 @ 25cc)
+  0.00     12.52     0.00                             Solve1 (solve.c:19 @ 25d0)
+  0.00     12.52     0.00                             Solve1 (solve.c:23 @ 25d8)
+  0.00     12.52     0.00                             Solve1 (solve.c:25 @ 25dc)
+  0.00     12.52     0.00                             Solve1 (solve.c:39 @ 25f0)
+  0.00     12.52     0.00                             Solve1 (solve.c:42 @ 25f4)
+  0.00     12.52     0.00                             Solve1 (solve.c:45 @ 25f8)
+  0.00     12.52     0.00                             Solve1 (solve.c:42 @ 2610)
+  0.00     12.52     0.00                             Solve1 (solve.c:45 @ 2618)
+  0.00     12.52     0.00                             Solve1 (solve.c:25 @ 2620)
+  0.00     12.52     0.00                             Solve1 (solve.c:30 @ 2634)
+  0.00     12.52     0.00                             Solve1 (solve.c:29 @ 2638)
+  0.00     12.52     0.00                             Solve1 (solve.c:31 @ 2644)
+  0.00     12.52     0.00                             Solve1 (solve.c:29 @ 2648)
+  0.00     12.52     0.00                             Solve1 (solve.c:34 @ 2678)
+  0.00     12.52     0.00                             Solve1 (solve.c:33 @ 267c)
+  0.00     12.52     0.00                             Solve1 (solve.c:35 @ 2684)
+  0.00     12.52     0.00                             Solve1 (solve.c:33 @ 2688)
+  0.00     12.52     0.00                             Solve1 (solve.c:35 @ 2698)
+  0.00     12.52     0.00                             Solve1 (solve.c:40 @ 26b8)
+  0.00     12.52     0.00                             Solve1 (solve.c:43 @ 26d4)
+  0.00     12.52     0.00                             Solve1 (solve.c:45 @ 26dc)
+  0.00     12.52     0.00                             Solve1 (solve.c:46 @ 26f4)
+  0.00     12.52     0.00                             Solve1 (solve.c:25 @ 26fc)
+  0.00     12.52     0.00                             Solve1 (solve.c:50 @ 2710)
+  0.00     12.52     0.00                             Solve1 (solve.c:40 @ 2724)
+  0.00     12.52     0.00                             Solve1 (solve.c:46 @ 2730)
+  0.00     12.52     0.00                             Solve1 (solve.c:43 @ 273c)
+  0.00     12.52     0.00                             Solve1 (solve.c:42 @ 2748)
+  0.00     12.52     0.00                             Solve1 (solve.c:45 @ 2754)
+  0.00     12.52     0.00                             Solve1 (solve.c:39 @ 2760)
+  0.00     12.52     0.00                             Solve2 (solve.c:70 @ 27b0)
+  0.00     12.52     0.00                             Solve2 (solve.c:73 @ 27b8)
+  0.00     12.52     0.00                             Solve2 (solve.c:76 @ 27bc)
+  0.00     12.52     0.00                             Solve2 (solve.c:80 @ 27d0)
+  0.00     12.52     0.00                             Solve2 (solve.c:81 @ 27e8)
+  0.00     12.52     0.00                             Solve2 (solve.c:76 @ 27ec)
+  0.00     12.52     0.00                             Solve2 (solve.c:81 @ 27f0)
+  0.00     12.52     0.00                             Solve2 (solve.c:82 @ 27f4)
+  0.00     12.52     0.00                             Solve2 (solve.c:80 @ 27f8)
+  0.00     12.52     0.00                             Solve2 (solve.c:82 @ 27fc)
+  0.00     12.52     0.00                             Solve2 (solve.c:81 @ 2800)
+  0.00     12.52     0.00                             Solve2 (solve.c:82 @ 2804)
+  0.00     12.52     0.00                             Solve2 (solve.c:84 @ 2808)
+  0.00     12.52     0.00                             Solve2 (solve.c:85 @ 280c)
+  0.00     12.52     0.00                             Solve2 (solve.c:86 @ 2810)
+  0.00     12.52     0.00                             Solve2 (solve.c:76 @ 2818)
+  0.00     12.52     0.00                             Solve2 (solve.c:86 @ 281c)
+  0.00     12.52     0.00                             Solve2 (solve.c:76 @ 2820)
+  0.00     12.52     0.00                             Solve2 (solve.c:90 @ 2828)
+  0.00     12.52     0.00                             Solve2 (solve.c:70 @ 2840)
+  0.00     12.52     0.00                             Solve2 (solve.c:71 @ 284c)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:36 @ 2384)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:33 @ 238c)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:34 @ 2398)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:35 @ 23a0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:40 @ 23a4)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:56 @ 23b4)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:52 @ 23b8)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:48 @ 23bc)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:39 @ 23c0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:63 @ 23c4)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:40 @ 23c8)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:38 @ 23d0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:63 @ 23d4)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:27 @ 23d8)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:41 @ 23dc)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:43 @ 23e0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:55 @ 23f4)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:55 @ 246c)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:56 @ 2480)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:62 @ 2498)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:63 @ 249c)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:43 @ 24ac)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:75 @ 24bc)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:40 @ 24c0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:73 @ 24c4)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:40 @ 24c8)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:75 @ 24cc)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:40 @ 24d0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:80 @ 24d8)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:79 @ 24dc)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:82 @ 24e0)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:82 @ 24ec)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:82 @ 24fc)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:56 @ 2514)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:55 @ 2540)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:64 @ 2550)
+  0.00     12.52     0.00                             UpdateNeighbourlist (neighbourlist.c:65 @ 255c)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:205 @ 1c34)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:197 @ 1c38)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:206 @ 1c54)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:197 @ 1c58)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:205 @ 1c60)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:211 @ 1c68)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:220 @ 1ca4)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:220 @ 1cbc)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:220 @ 1cd4)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:220 @ 1cdc)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:220 @ 1ce8)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:225 @ 1cf0)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:227 @ 1cf4)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:225 @ 1d0c)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:206 @ 1d10)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:207 @ 1d28)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:208 @ 1d2c)
+  0.00     12.52     0.00                             WriteAtoms (inout.c:207 @ 1d34)
+  0.00     12.52     0.00                             __do_global_dtors_aux
+  0.00     12.52     0.00                             __gmon_start__
+  0.00     12.52     0.00                             __stack_chk_fail_local
+  0.00     12.52     0.00                             _dl_relocate_static_pie
+  0.00     12.52     0.00                             _fini
+  0.00     12.52     0.00                             _start
+  0.00     12.52     0.00                             atexit
+  0.00     12.52     0.00                             call_weak_fn
+  0.00     12.52     0.00                             deregister_tm_clones
+  0.00     12.52     0.00                             etext
+  0.00     12.52     0.00                             fgets (stdio2.h:266 @ 14d4)
+  0.00     12.52     0.00                             fgets (stdio2.h:266 @ 1a70)
+  0.00     12.52     0.00                             fgets (stdio2.h:266 @ 1aa8)
+  0.00     12.52     0.00                             fgets (stdio2.h:266 @ 1b24)
+  0.00     12.52     0.00                             fprintf (stdio2.h:105 @ 1c6c)
+  0.00     12.52     0.00                             fprintf (stdio2.h:105 @ 1cb8)
+  0.00     12.52     0.00                             fprintf (stdio2.h:105 @ 1cc0)
+  0.00     12.52     0.00                             fprintf (stdio2.h:105 @ 1cd8)
+  0.00     12.52     0.00                             fprintf (stdio2.h:105 @ 1ce0)
+  0.00     12.52     0.00                             frame_dummy
+  0.00     12.52     0.00                             gaussianrand (physical.c:145 @ 1d50)
+  0.00     12.52     0.00                             gaussianrand (physical.c:163 @ 1da8)
+  0.00     12.52     0.00                             gaussianrand (physical.c:166 @ 1db0)
+  0.00     12.52     0.00                             gaussianrand (physical.c:163 @ 1e04)
+  0.00     12.52     0.00                             gaussianrand (physical.c:164 @ 1e2c)
+  0.00     12.52     0.00                             gaussianrand (physical.c:165 @ 1e30)
+  0.00     12.52     0.00                             gaussianrand (physical.c:166 @ 1e38)
+  0.00     12.52     0.00                             gaussianrand (physical.c:167 @ 1e48)
+  0.00     12.52     0.00                             gaussianrand (physical.c:168 @ 1e74)
+  0.00     12.52     0.00                             gaussianrand (physical.c:177 @ 1e80)
+  0.00     12.52     0.00                             gaussianrand (physical.c:169 @ 1e84)
+  0.00     12.52     0.00                             gaussianrand (physical.c:177 @ 1e88)
+  0.00     12.52     0.00                             gaussianrand (physical.c:168 @ 1e90)
+  0.00     12.52     0.00                             gaussianrand (physical.c:177 @ 1e94)
+  0.00     12.52     0.00                             gaussianrand (physical.c:169 @ 1e98)
+  0.00     12.52     0.00                             gaussianrand (physical.c:177 @ 1e9c)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 1f44)
+  0.00     12.52     0.00                             gaussianrand (physical.c:31 @ 1f58)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 1f60)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 1f68)
+  0.00     12.52     0.00                             gaussianrand (physical.c:173 @ 1f70)
+  0.00     12.52     0.00                             gaussianrand (physical.c:35 @ 1f7c)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 1fac)
+  0.00     12.52     0.00                             gaussianrand (physical.c:173 @ 1fbc)
+  0.00     12.52     0.00                             gaussianrand (physical.c:34 @ 1fc8)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 1fd4)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 1fdc)
+  0.00     12.52     0.00                             gaussianrand (physical.c:173 @ 1fe0)
+  0.00     12.52     0.00                             gaussianrand (physical.c:174 @ 1fe4)
+  0.00     12.52     0.00                             gaussianrand (physical.c:155 @ 22f0)
+  0.00     12.52     0.00                             gaussianrand (physical.c:161 @ 230c)
+  0.00     12.52     0.00                             gaussianrand (physical.c:177 @ 2320)
+  0.00     12.52     0.00                             gaussianrand (physical.c:173 @ 2330)
+  0.00     12.52     0.00                             gaussianrand (physical.c:177 @ 2334)
+  0.00     12.52     0.00                             main (main.c:22 @ c40)
+  0.00     12.52     0.00                             main (main.c:103 @ c94)
+  0.00     12.52     0.00                             main (main.c:22 @ c98)
+  0.00     12.52     0.00                             main (main.c:103 @ ca0)
+  0.00     12.52     0.00                             main (main.c:22 @ ca4)
+  0.00     12.52     0.00                             main (main.c:98 @ cb4)
+  0.00     12.52     0.00                             main (main.c:22 @ cb8)
+  0.00     12.52     0.00                             main (main.c:103 @ cc4)
+  0.00     12.52     0.00                             main (main.c:106 @ ccc)
+  0.00     12.52     0.00                             main (main.c:109 @ cd4)
+  0.00     12.52     0.00                             main (main.c:98 @ cdc)
+  0.00     12.52     0.00                             main (main.c:103 @ d40)
+  0.00     12.52     0.00                             main (main.c:106 @ d50)
+  0.00     12.52     0.00                             main (main.c:109 @ d74)
+  0.00     12.52     0.00                             main (main.c:113 @ d9c)
+  0.00     12.52     0.00                             main (main.c:114 @ dc0)
+  0.00     12.52     0.00                             main (main.c:113 @ dc4)
+  0.00     12.52     0.00                             main (main.c:114 @ dc8)
+  0.00     12.52     0.00                             main (main.c:113 @ dcc)
+  0.00     12.52     0.00                             main (main.c:142 @ dd4)
+  0.00     12.52     0.00                             main (main.c:118 @ e08)
+  0.00     12.52     0.00                             main (main.c:142 @ e0c)
+  0.00     12.52     0.00                             main (main.c:119 @ e38)
+  0.00     12.52     0.00                             main (main.c:125 @ e40)
+  0.00     12.52     0.00                             main (main.c:127 @ e68)
+  0.00     12.52     0.00                             main (main.c:130 @ ea0)
+  0.00     12.52     0.00                             main (main.c:132 @ eb4)
+  0.00     12.52     0.00                             main (main.c:135 @ ed0)
+  0.00     12.52     0.00                             main (main.c:139 @ ed4)
+  0.00     12.52     0.00                             main (main.c:135 @ ee0)
+  0.00     12.52     0.00                             main (main.c:139 @ ee4)
+  0.00     12.52     0.00                             main (main.c:142 @ efc)
+  0.00     12.52     0.00                             main (main.c:142 @ f04)
+  0.00     12.52     0.00                             main (main.c:142 @ f0c)
+  0.00     12.52     0.00                             main (main.c:142 @ f24)
+  0.00     12.52     0.00                             main (main.c:144 @ f28)
+  0.00     12.52     0.00                             main (main.c:142 @ f2c)
+  0.00     12.52     0.00                             main (main.c:142 @ f34)
+  0.00     12.52     0.00                             main (main.c:144 @ f3c)
+  0.00     12.52     0.00                             main (main.c:142 @ f40)
+  0.00     12.52     0.00                             main (main.c:142 @ f48)
+  0.00     12.52     0.00                             main (main.c:142 @ f54)
+  0.00     12.52     0.00                             main (main.c:147 @ f68)
+  0.00     12.52     0.00                             main (main.c:148 @ f74)
+  0.00     12.52     0.00                             main (main.c:154 @ f80)
+  0.00     12.52     0.00                             main (main.c:160 @ f84)
+  0.00     12.52     0.00                             main (main.c:154 @ f88)
+  0.00     12.52     0.00                             main (main.c:172 @ f90)
+  0.00     12.52     0.00                             main (main.c:174 @ f9c)
+  0.00     12.52     0.00                             main (main.c:121 @ fa0)
+  0.00     12.52     0.00                             main (main.c:122 @ fb0)
+  0.00     12.52     0.00                             main (main.c:125 @ fd0)
+  0.00     12.52     0.00                             main (main.c:155 @ fd8)
+  0.00     12.52     0.00                             main (main.c:158 @ 1000)
+  0.00     12.52     0.00                             main (main.c:159 @ 1004)
+  0.00     12.52     0.00                             main (main.c:160 @ 1008)
+  0.00     12.52     0.00                             main (main.c:157 @ 100c)
+  0.00     12.52     0.00                             main (main.c:158 @ 1010)
+  0.00     12.52     0.00                             main (main.c:159 @ 1014)
+  0.00     12.52     0.00                             main (main.c:158 @ 1018)
+  0.00     12.52     0.00                             main (main.c:159 @ 101c)
+  0.00     12.52     0.00                             main (main.c:160 @ 1020)
+  0.00     12.52     0.00                             main (main.c:162 @ 1040)
+  0.00     12.52     0.00                             main (main.c:163 @ 1044)
+  0.00     12.52     0.00                             main (main.c:161 @ 1048)
+  0.00     12.52     0.00                             main (main.c:162 @ 104c)
+  0.00     12.52     0.00                             main (main.c:163 @ 1050)
+  0.00     12.52     0.00                             main (main.c:162 @ 1054)
+  0.00     12.52     0.00                             main (main.c:160 @ 1058)
+  0.00     12.52     0.00                             main (main.c:160 @ 1060)
+  0.00     12.52     0.00                             main (main.c:165 @ 1074)
+  0.00     12.52     0.00                             main (main.c:160 @ 107c)
+  0.00     12.52     0.00                             main (main.c:165 @ 1084)
+  0.00     12.52     0.00                             main (main.c:167 @ 108c)
+  0.00     12.52     0.00                             main (main.c:179 @ 10b0)
+  0.00     12.52     0.00                             main (main.c:150 @ 10d4)
+  0.00     12.52     0.00                             main (main.c:179 @ 1100)
+  0.00     12.52     0.00                             main (main.c:179 @ 1108)
+  0.00     12.52     0.00                             main (main.c:179 @ 1110)
+  0.00     12.52     0.00                             main (main.c:182 @ 1134)
+  0.00     12.52     0.00                             main (main.c:184 @ 115c)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ cac)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ cd8)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ d88)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ ef8)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f00)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f08)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f20)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f30)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f38)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f44)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f4c)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ f60)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 1090)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 10b4)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 1104)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 110c)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 1114)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 1534)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 15b8)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 16b0)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 16cc)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 172c)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 19f8)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 1abc)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 1b58)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 24e8)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 24f0)
+  0.00     12.52     0.00                             printf (stdio2.h:112 @ 2500)
+  0.00     12.52     0.00                             register_tm_clones
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 1d74)
+  0.00     12.52     0.00                             uniformrand (physical.c:133 @ 1d78)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 1d80)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 1d88)
+  0.00     12.52     0.00                             uniformrand (physical.c:133 @ 1d8c)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 1d90)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 1d94)
+  0.00     12.52     0.00                             uniformrand (physical.c:136 @ 1da4)
+  0.00     12.52     0.00                             uniformrand (physical.c:133 @ 1db8)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 1dbc)
+  0.00     12.52     0.00                             uniformrand (physical.c:136 @ 1ddc)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 1de8)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 1dec)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 1df4)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 1df8)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 1e08)
+  0.00     12.52     0.00                             uniformrand (physical.c:136 @ 1e14)
+  0.00     12.52     0.00                             uniformrand (physical.c:138 @ 1e20)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 1e24)
+  0.00     12.52     0.00                             uniformrand (physical.c:126 @ 2250)
+  0.00     12.52     0.00                             uniformrand (physical.c:133 @ 226c)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 2270)
+  0.00     12.52     0.00                             uniformrand (physical.c:133 @ 2274)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 227c)
+  0.00     12.52     0.00                             uniformrand (physical.c:133 @ 2284)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 2288)
+  0.00     12.52     0.00                             uniformrand (physical.c:136 @ 2294)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 2298)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 229c)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 22a0)
+  0.00     12.52     0.00                             uniformrand (physical.c:135 @ 22a8)
+  0.00     12.52     0.00                             uniformrand (physical.c:136 @ 22c4)
+  0.00     12.52     0.00                             uniformrand (physical.c:138 @ 22d0)
+  0.00     12.52     0.00                             uniformrand (physical.c:137 @ 22d8)
+  0.00     12.52     0.00                             uniformrand (physical.c:141 @ 22dc)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.08% of 12.52 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[26]     1.4    0.17    0.00                 _init [26]
+-----------------------------------------------
+                0.00    0.00       1/30001       main (main.c:109 @ d74) [473]
+                0.00    0.00   30000/30001       main (main.c:130 @ ea0) [485]
+[82]     0.0    0.00    0.00   30001         GetTemperature (physical.c:64 @ 2060) [82]
+-----------------------------------------------
+                0.00    0.00   30000/30000       main (main.c:139 @ ee4) [490]
+[83]     0.0    0.00    0.00   30000         GetEnergies (physical.c:97 @ 2140) [83]
+-----------------------------------------------
+                0.00    0.00   30000/30000       main (main.c:130 @ ea0) [485]
+[84]     0.0    0.00    0.00   30000         GetForces (forces.c:18 @ 2890) [84]
+-----------------------------------------------
+                0.00    0.00   30000/30000       main (main.c:125 @ e40) [483]
+[85]     0.0    0.00    0.00   30000         Solve1 (solve.c:13 @ 2570) [85]
+-----------------------------------------------
+                0.00    0.00   30000/30000       main (main.c:135 @ ed0) [487]
+[86]     0.0    0.00    0.00   30000         Solve2 (solve.c:61 @ 2770) [86]
+-----------------------------------------------
+                0.00    0.00    6000/6000        main (main.c:125 @ fd0) [511]
+[87]     0.0    0.00    0.00    6000         UpdateNeighbourlist (neighbourlist.c:27 @ 2340) [87]
+-----------------------------------------------
+                0.00    0.00       1/781         main (main.c:182 @ 1134) [539]
+                0.00    0.00      30/781         main (main.c:150 @ 10d4) [535]
+                0.00    0.00     250/781         SetTemperature (physical.c:31 @ 1f4c) [272]
+                0.00    0.00     250/781         gaussianrand (physical.c:35 @ 1f7c) [447]
+                0.00    0.00     250/781         SetTemperature (physical.c:35 @ 1fd0) [287]
+[88]     0.0    0.00    0.00     781         WriteAtoms (inout.c:197 @ 1c10) [88]
+-----------------------------------------------
+                0.00    0.00       1/1           main (main.c:106 @ d50) [472]
+[89]     0.0    0.00    0.00       1         ReadAtoms (inout.c:152 @ 1a14) [89]
+-----------------------------------------------
+                0.00    0.00       1/1           main (main.c:103 @ d40) [471]
+[90]     0.0    0.00    0.00       1         ReadParams (inout.c:30 @ 1340) [90]
+-----------------------------------------------
+                0.00    0.00       1/1           main (main.c:106 @ d50) [472]
+[91]     0.0    0.00    0.00       1         SetTemperature (physical.c:12 @ 1ea4) [91]
+-----------------------------------------------
+                                                 <spontaneous>
+[412]    0.0    0.00    0.00                 atexit [412]
+-----------------------------------------------
+                                                 <spontaneous>
+[413]    0.0    0.00    0.00                 call_weak_fn [413]
+-----------------------------------------------
+                                                 <spontaneous>
+[414]    0.0    0.00    0.00                 deregister_tm_clones [414]
+-----------------------------------------------
+                                                 <spontaneous>
+[425]    0.0    0.00    0.00                 frame_dummy [425]
+-----------------------------------------------
+                                                 <spontaneous>
+[455]    0.0    0.00    0.00                 gaussianrand (physical.c:155 @ 22f0) [455]
+-----------------------------------------------
+                                                 <spontaneous>
+[460]    0.0    0.00    0.00                 main (main.c:22 @ c40) [460]
+-----------------------------------------------
+                                                 <spontaneous>
+[569]    0.0    0.00    0.00                 register_tm_clones [569]
+-----------------------------------------------
+                                                 <spontaneous>
+[589]    0.0    0.00    0.00                 uniformrand (physical.c:126 @ 2250) [589]
+-----------------------------------------------
+                                                 <spontaneous>
+[605]    0.0    0.00    0.00                 __do_global_dtors_aux [605]
+-----------------------------------------------
+                                                 <spontaneous>
+[606]    0.0    0.00    0.00                 __gmon_start__ [606]
+-----------------------------------------------
+                                                 <spontaneous>
+[607]    0.0    0.00    0.00                 __stack_chk_fail_local [607]
+-----------------------------------------------
+                                                 <spontaneous>
+[608]    0.0    0.00    0.00                 _dl_relocate_static_pie [608]
+-----------------------------------------------
+                                                 <spontaneous>
+[609]    0.0    0.00    0.00                 _fini [609]
+-----------------------------------------------
+                                                 <spontaneous>
+[610]    0.0    0.00    0.00                 _start [610]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [83] GetEnergies (physical.c:97 @ 2140) [236] ReadParams (inout.c:81 @ 158c) [411] WriteAtoms (inout.c:207 @ 1d34)
+  [92] GetEnergies (physical.c:101 @ 2188) [237] ReadParams (inout.c:120 @ 15b0) [605] __do_global_dtors_aux
+  [93] GetEnergies (physical.c:102 @ 218c) [238] ReadParams (inout.c:132 @ 1634) [606] __gmon_start__
+  [94] GetEnergies (physical.c:101 @ 2194) [239] ReadParams (inout.c:137 @ 1640) [607] __stack_chk_fail_local
+  [95] GetEnergies (physical.c:102 @ 2198) [240] ReadParams (inout.c:144 @ 1650) [608] _dl_relocate_static_pie
+  [96] GetEnergies (physical.c:103 @ 21c4) [241] ReadParams (inout.c:83 @ 168c) [609] _fini
+  [97] GetEnergies (physical.c:104 @ 21d8) [242] ReadParams (inout.c:142 @ 16c8) [26] _init
+  [98] GetEnergies (physical.c:103 @ 21dc) [243] ReadParams (inout.c:137 @ 16e0) [610] _start
+  [99] GetEnergies (physical.c:104 @ 21e0) [244] ReadParams (inout.c:84 @ 16f4) [412] atexit
+ [100] GetEnergies (physical.c:105 @ 21f8) [245] ReadParams (inout.c:85 @ 1708) [413] call_weak_fn
+ [101] GetEnergies (physical.c:106 @ 2204) [246] ReadParams (inout.c:73 @ 174c) [414] deregister_tm_clones
+ [102] GetEnergies (physical.c:103 @ 2208) [247] ReadParams (inout.c:84 @ 1754) [415] etext
+  [53] GetEnergies (physical.c:106 @ 220c) [248] ReadParams (inout.c:87 @ 1764) [416] fgets (stdio2.h:266 @ 14d4)
+ [103] GetEnergies (physical.c:103 @ 2218) [249] ReadParams (inout.c:88 @ 1778) [417] fgets (stdio2.h:266 @ 1a70)
+ [104] GetEnergies (physical.c:108 @ 2220) [250] ReadParams (inout.c:87 @ 1798) [418] fgets (stdio2.h:266 @ 1aa8)
+ [105] GetEnergies (physical.c:110 @ 2224) [251] ReadParams (inout.c:89 @ 17a4) [419] fgets (stdio2.h:266 @ 1b24)
+ [106] GetEnergies (physical.c:108 @ 2228) [252] ReadParams (inout.c:91 @ 17c4) [420] fprintf (stdio2.h:105 @ 1c6c)
+ [107] GetEnergies (physical.c:110 @ 222c) [253] ReadParams (inout.c:92 @ 17f4) [421] fprintf (stdio2.h:105 @ 1cb8)
+ [108] GetEnergies (physical.c:108 @ 2238) [254] ReadParams (inout.c:93 @ 1824) [422] fprintf (stdio2.h:105 @ 1cc0)
+ [109] GetEnergies (physical.c:110 @ 223c) [255] ReadParams (inout.c:95 @ 1854) [423] fprintf (stdio2.h:105 @ 1cd8)
+ [110] GetEnergies (physical.c:103 @ 2248) [256] ReadParams (inout.c:144 @ 1884) [424] fprintf (stdio2.h:105 @ 1ce0)
+  [84] GetForces (forces.c:18 @ 2890) [257] ReadParams (inout.c:38 @ 1888) [425] frame_dummy
+ [111] GetForces (forces.c:23 @ 28f0) [258] ReadParams (inout.c:97 @ 189c) [426] gaussianrand (physical.c:145 @ 1d50)
+ [112] GetForces (forces.c:26 @ 28f8) [259] ReadParams (inout.c:98 @ 18c0) [427] gaussianrand (physical.c:163 @ 1da8)
+ [113] GetForces (forces.c:23 @ 2904) [260] ReadParams (inout.c:100 @ 18e4) [428] gaussianrand (physical.c:166 @ 1db0)
+ [114] GetForces (forces.c:24 @ 2910) [261] ReadParams (inout.c:102 @ 1914) [429] gaussianrand (physical.c:163 @ 1e04)
+ [115] GetForces (forces.c:25 @ 2918) [262] ReadParams (inout.c:103 @ 1938) [430] gaussianrand (physical.c:164 @ 1e2c)
+ [116] GetForces (forces.c:28 @ 291c) [263] ReadParams (inout.c:105 @ 195c) [431] gaussianrand (physical.c:165 @ 1e30)
+ [117] GetForces (forces.c:30 @ 2948) [264] ReadParams (inout.c:106 @ 1980) [432] gaussianrand (physical.c:166 @ 1e38)
+ [118] GetForces (forces.c:28 @ 294c) [265] ReadParams (inout.c:107 @ 19a4) [433] gaussianrand (physical.c:167 @ 1e48)
+ [119] GetForces (forces.c:32 @ 2950) [266] ReadParams (inout.c:109 @ 19c8) [434] gaussianrand (physical.c:168 @ 1e74)
+ [120] GetForces (forces.c:28 @ 2954) [267] ReadParams (inout.c:113 @ 1a0c) [435] gaussianrand (physical.c:177 @ 1e80)
+  [50] GetForces (forces.c:33 @ 2958) [91] SetTemperature (physical.c:12 @ 1ea4) [436] gaussianrand (physical.c:169 @ 1e84)
+  [65] GetForces (forces.c:28 @ 295c) [268] SetTemperature (physical.c:29 @ 1ed8) [437] gaussianrand (physical.c:177 @ 1e88)
+ [121] GetForces (forces.c:36 @ 2964) [269] SetTemperature (physical.c:32 @ 1f20) [438] gaussianrand (physical.c:168 @ 1e90)
+ [122] GetForces (forces.c:38 @ 297c) [270] SetTemperature (physical.c:31 @ 1f28) [439] gaussianrand (physical.c:177 @ 1e94)
+ [123] GetForces (forces.c:36 @ 2980) [271] SetTemperature (physical.c:32 @ 1f34) [440] gaussianrand (physical.c:169 @ 1e98)
+ [124] GetForces (forces.c:40 @ 2988) [272] SetTemperature (physical.c:31 @ 1f4c) [441] gaussianrand (physical.c:177 @ 1e9c)
+ [125] GetForces (forces.c:44 @ 29a0) [273] SetTemperature (physical.c:34 @ 1f5c) [442] gaussianrand (physical.c:161 @ 1f44)
+ [126] GetForces (forces.c:50 @ 29bc) [274] SetTemperature (physical.c:34 @ 1f64) [443] gaussianrand (physical.c:31 @ 1f58)
+  [58] GetForces (forces.c:62 @ 29c8) [275] SetTemperature (physical.c:35 @ 1f6c) [444] gaussianrand (physical.c:161 @ 1f60)
+ [127] GetForces (forces.c:63 @ 29d4) [276] SetTemperature (physical.c:35 @ 1f74) [445] gaussianrand (physical.c:161 @ 1f68)
+  [15] GetForces (forces.c:68 @ 29dc) [277] SetTemperature (physical.c:39 @ 1f84) [446] gaussianrand (physical.c:173 @ 1f70)
+ [128] GetForces (forces.c:70 @ 29e8) [278] SetTemperature (physical.c:36 @ 1f88) [447] gaussianrand (physical.c:35 @ 1f7c)
+   [3] GetForces (forces.c:44 @ 29f0) [279] SetTemperature (physical.c:32 @ 1f8c) [448] gaussianrand (physical.c:161 @ 1fac)
+  [59] GetForces (forces.c:47 @ 29fc) [280] SetTemperature (physical.c:39 @ 1f90) [449] gaussianrand (physical.c:173 @ 1fbc)
+   [7] GetForces (forces.c:50 @ 2a00) [281] SetTemperature (physical.c:40 @ 1f94) [450] gaussianrand (physical.c:34 @ 1fc8)
+ [129] GetForces (forces.c:51 @ 2a14) [282] SetTemperature (physical.c:36 @ 1f98) [451] gaussianrand (physical.c:161 @ 1fd4)
+  [22] GetForces (forces.c:56 @ 2a1c) [283] SetTemperature (physical.c:38 @ 1f9c) [452] gaussianrand (physical.c:161 @ 1fdc)
+  [27] GetForces (forces.c:57 @ 2a28) [284] SetTemperature (physical.c:32 @ 1fa4) [453] gaussianrand (physical.c:173 @ 1fe0)
+   [8] GetForces (forces.c:59 @ 2a38) [285] SetTemperature (physical.c:34 @ 1fb8) [454] gaussianrand (physical.c:174 @ 1fe4)
+  [19] GetForces (forces.c:62 @ 2a44) [286] SetTemperature (physical.c:34 @ 1fc0) [455] gaussianrand (physical.c:155 @ 22f0)
+  [66] GetForces (forces.c:63 @ 2a50) [287] SetTemperature (physical.c:35 @ 1fd0) [456] gaussianrand (physical.c:161 @ 230c)
+ [130] GetForces (forces.c:65 @ 2a60) [288] SetTemperature (physical.c:35 @ 1fd8) [457] gaussianrand (physical.c:177 @ 2320)
+  [31] GetForces (forces.c:60 @ 2a70) [289] SetTemperature (physical.c:44 @ 1fec) [458] gaussianrand (physical.c:173 @ 2330)
+  [24] GetForces (forces.c:51 @ 2a7c) [290] SetTemperature (physical.c:45 @ 2000) [459] gaussianrand (physical.c:177 @ 2334)
+  [11] GetForces (forces.c:53 @ 2a84) [291] SetTemperature (physical.c:46 @ 2008) [460] main (main.c:22 @ c40)
+  [54] GetForces (forces.c:54 @ 2a94) [292] SetTemperature (physical.c:49 @ 200c) [461] main (main.c:103 @ c94)
+ [131] GetForces (forces.c:66 @ 2aa0) [293] SetTemperature (physical.c:51 @ 2010) [462] main (main.c:22 @ c98)
+   [2] GetForces (forces.c:75 @ 2aac) [294] SetTemperature (physical.c:52 @ 2014) [463] main (main.c:103 @ ca0)
+ [132] GetForces (forces.c:79 @ 2ae4) [295] SetTemperature (physical.c:50 @ 2018) [464] main (main.c:22 @ ca4)
+ [133] GetForces (forces.c:85 @ 2ae8) [296] SetTemperature (physical.c:51 @ 201c) [465] main (main.c:98 @ cb4)
+ [134] GetForces (forces.c:44 @ 2af0) [297] SetTemperature (physical.c:52 @ 2020) [466] main (main.c:22 @ cb8)
+   [5] GetForces (forces.c:79 @ 2af4) [298] SetTemperature (physical.c:51 @ 2024) [467] main (main.c:103 @ cc4)
+ [135] GetForces (forces.c:83 @ 2b08) [299] SetTemperature (physical.c:49 @ 2028) [468] main (main.c:106 @ ccc)
+ [136] GetForces (forces.c:80 @ 2b0c) [300] SetTemperature (physical.c:52 @ 202c) [469] main (main.c:109 @ cd4)
+ [137] GetForces (forces.c:90 @ 2b10) [301] SetTemperature (physical.c:49 @ 2030) [470] main (main.c:98 @ cdc)
+  [67] GetForces (forces.c:84 @ 2b14) [302] SetTemperature (physical.c:55 @ 2044) [471] main (main.c:103 @ d40)
+ [138] GetForces (forces.c:83 @ 2b18) [85] Solve1 (solve.c:13 @ 2570) [472] main (main.c:106 @ d50)
+ [139] GetForces (forces.c:90 @ 2b1c) [303] Solve1 (solve.c:19 @ 25b4) [473] main (main.c:109 @ d74)
+ [140] GetForces (forces.c:83 @ 2b24) [304] Solve1 (solve.c:21 @ 25c8) [474] main (main.c:113 @ d9c)
+ [141] GetForces (forces.c:90 @ 2b2c) [305] Solve1 (solve.c:22 @ 25cc) [475] main (main.c:114 @ dc0)
+  [55] GetForces (forces.c:98 @ 2b30) [306] Solve1 (solve.c:19 @ 25d0) [476] main (main.c:113 @ dc4)
+ [142] GetForces (forces.c:107 @ 2b38) [307] Solve1 (solve.c:23 @ 25d8) [477] main (main.c:114 @ dc8)
+ [143] GetForces (forces.c:90 @ 2b3c) [308] Solve1 (solve.c:25 @ 25dc) [478] main (main.c:113 @ dcc)
+  [51] GetForces (forces.c:84 @ 2b40) [309] Solve1 (solve.c:39 @ 25f0) [479] main (main.c:142 @ dd4)
+ [144] GetForces (forces.c:90 @ 2b48) [310] Solve1 (solve.c:42 @ 25f4) [480] main (main.c:118 @ e08)
+  [68] GetForces (forces.c:98 @ 2b4c) [311] Solve1 (solve.c:45 @ 25f8) [481] main (main.c:142 @ e0c)
+ [145] GetForces (forces.c:96 @ 2b50) [312] Solve1 (solve.c:42 @ 2610) [482] main (main.c:119 @ e38)
+  [29] GetForces (forces.c:93 @ 2b54) [313] Solve1 (solve.c:45 @ 2618) [483] main (main.c:125 @ e40)
+  [60] GetForces (forces.c:103 @ 2b58) [314] Solve1 (solve.c:25 @ 2620) [484] main (main.c:127 @ e68)
+  [43] GetForces (forces.c:107 @ 2b5c) [315] Solve1 (solve.c:30 @ 2634) [485] main (main.c:130 @ ea0)
+  [69] GetForces (forces.c:98 @ 2b60) [316] Solve1 (solve.c:29 @ 2638) [486] main (main.c:132 @ eb4)
+  [38] GetForces (forces.c:93 @ 2b64) [317] Solve1 (solve.c:31 @ 2644) [487] main (main.c:135 @ ed0)
+  [70] GetForces (forces.c:90 @ 2b68) [318] Solve1 (solve.c:29 @ 2648) [488] main (main.c:139 @ ed4)
+ [146] GetForces (forces.c:93 @ 2b6c) [74] Solve1 (solve.c:30 @ 2650) [489] main (main.c:135 @ ee0)
+  [32] GetForces (forces.c:84 @ 2b70) [75] Solve1 (solve.c:31 @ 2664) [490] main (main.c:139 @ ee4)
+  [46] GetForces (forces.c:93 @ 2b74) [319] Solve1 (solve.c:34 @ 2678) [491] main (main.c:142 @ efc)
+  [34] GetForces (forces.c:96 @ 2b78) [320] Solve1 (solve.c:33 @ 267c) [492] main (main.c:142 @ f04)
+  [44] GetForces (forces.c:85 @ 2b80) [321] Solve1 (solve.c:35 @ 2684) [493] main (main.c:142 @ f0c)
+  [71] GetForces (forces.c:93 @ 2b84) [322] Solve1 (solve.c:33 @ 2688) [494] main (main.c:142 @ f24)
+  [72] GetForces (forces.c:85 @ 2b88) [76] Solve1 (solve.c:34 @ 268c) [495] main (main.c:144 @ f28)
+  [25] GetForces (forces.c:96 @ 2b8c) [323] Solve1 (solve.c:35 @ 2698) [496] main (main.c:142 @ f2c)
+  [61] GetForces (forces.c:98 @ 2b94) [77] Solve1 (solve.c:39 @ 26a4) [497] main (main.c:142 @ f34)
+ [147] GetForces (forces.c:96 @ 2b98) [324] Solve1 (solve.c:40 @ 26b8) [498] main (main.c:144 @ f3c)
+  [47] GetForces (forces.c:98 @ 2b9c) [78] Solve1 (solve.c:42 @ 26c0) [499] main (main.c:142 @ f40)
+  [62] GetForces (forces.c:85 @ 2ba0) [325] Solve1 (solve.c:43 @ 26d4) [500] main (main.c:142 @ f48)
+  [20] GetForces (forces.c:93 @ 2ba4) [326] Solve1 (solve.c:45 @ 26dc) [501] main (main.c:142 @ f54)
+  [63] GetForces (forces.c:98 @ 2bb4) [327] Solve1 (solve.c:46 @ 26f4) [502] main (main.c:147 @ f68)
+  [64] GetForces (forces.c:93 @ 2bb8) [328] Solve1 (solve.c:25 @ 26fc) [503] main (main.c:148 @ f74)
+  [35] GetForces (forces.c:102 @ 2bc0) [329] Solve1 (solve.c:50 @ 2710) [504] main (main.c:154 @ f80)
+ [148] GetForces (forces.c:98 @ 2bc4) [330] Solve1 (solve.c:40 @ 2724) [505] main (main.c:160 @ f84)
+  [23] GetForces (forces.c:102 @ 2bcc) [331] Solve1 (solve.c:46 @ 2730) [506] main (main.c:154 @ f88)
+  [48] GetForces (forces.c:103 @ 2bd4) [332] Solve1 (solve.c:43 @ 273c) [507] main (main.c:172 @ f90)
+  [30] GetForces (forces.c:104 @ 2be0) [333] Solve1 (solve.c:42 @ 2748) [508] main (main.c:174 @ f9c)
+  [16] GetForces (forces.c:105 @ 2bec) [334] Solve1 (solve.c:45 @ 2754) [509] main (main.c:121 @ fa0)
+  [42] GetForces (forces.c:106 @ 2bf8) [335] Solve1 (solve.c:39 @ 2760) [510] main (main.c:122 @ fb0)
+   [1] GetForces (forces.c:107 @ 2c04) [86] Solve2 (solve.c:61 @ 2770) [511] main (main.c:125 @ fd0)
+  [28] GetForces (forces.c:44 @ 2c10) [336] Solve2 (solve.c:70 @ 27b0) [512] main (main.c:155 @ fd8)
+  [40] GetForces (forces.c:113 @ 2c18) [337] Solve2 (solve.c:73 @ 27b8) [513] main (main.c:158 @ 1000)
+ [149] GetForces (forces.c:38 @ 2c1c) [338] Solve2 (solve.c:76 @ 27bc) [514] main (main.c:159 @ 1004)
+ [150] GetForces (forces.c:113 @ 2c28) [339] Solve2 (solve.c:80 @ 27d0) [515] main (main.c:160 @ 1008)
+  [73] GetForces (forces.c:38 @ 2c34) [340] Solve2 (solve.c:81 @ 27e8) [516] main (main.c:157 @ 100c)
+ [151] GetForces (forces.c:116 @ 2c48) [341] Solve2 (solve.c:76 @ 27ec) [517] main (main.c:158 @ 1010)
+ [152] GetForces (forces.c:64 @ 2c6c) [342] Solve2 (solve.c:81 @ 27f0) [518] main (main.c:159 @ 1014)
+  [56] GetForces (forces.c:52 @ 2c78) [343] Solve2 (solve.c:82 @ 27f4) [519] main (main.c:158 @ 1018)
+  [36] GetForces (forces.c:58 @ 2c84) [344] Solve2 (solve.c:80 @ 27f8) [520] main (main.c:159 @ 101c)
+ [153] GetForces (forces.c:36 @ 2c90) [345] Solve2 (solve.c:82 @ 27fc) [521] main (main.c:160 @ 1020)
+ [154] GetForces (forces.c:116 @ 2c94) [346] Solve2 (solve.c:81 @ 2800) [522] main (main.c:162 @ 1040)
+  [82] GetTemperature (physical.c:64 @ 2060) [347] Solve2 (solve.c:82 @ 2804) [523] main (main.c:163 @ 1044)
+ [155] GetTemperature (physical.c:76 @ 2090) [348] Solve2 (solve.c:84 @ 2808) [524] main (main.c:161 @ 1048)
+ [156] GetTemperature (physical.c:75 @ 20a4) [349] Solve2 (solve.c:85 @ 280c) [525] main (main.c:162 @ 104c)
+ [157] GetTemperature (physical.c:78 @ 20b0) [350] Solve2 (solve.c:86 @ 2810) [526] main (main.c:163 @ 1050)
+ [158] GetTemperature (physical.c:76 @ 20b4) [79] Solve2 (solve.c:85 @ 2814) [527] main (main.c:162 @ 1054)
+  [45] GetTemperature (physical.c:78 @ 20b8) [351] Solve2 (solve.c:76 @ 2818) [528] main (main.c:160 @ 1058)
+ [159] GetTemperature (physical.c:76 @ 20c8) [352] Solve2 (solve.c:86 @ 281c) [81] main (main.c:163 @ 105c)
+ [160] GetTemperature (physical.c:82 @ 20d0) [353] Solve2 (solve.c:76 @ 2820) [529] main (main.c:160 @ 1060)
+ [161] GetTemperature (physical.c:84 @ 20d8) [354] Solve2 (solve.c:90 @ 2828) [530] main (main.c:165 @ 1074)
+ [162] GetTemperature (physical.c:82 @ 20e0) [355] Solve2 (solve.c:70 @ 2840) [531] main (main.c:160 @ 107c)
+ [163] GetTemperature (physical.c:86 @ 20ec) [356] Solve2 (solve.c:71 @ 284c) [532] main (main.c:165 @ 1084)
+ [164] GetTemperature (physical.c:82 @ 20f0) [87] UpdateNeighbourlist (neighbourlist.c:27 @ 2340) [533] main (main.c:167 @ 108c)
+ [165] GetTemperature (physical.c:84 @ 20f8) [357] UpdateNeighbourlist (neighbourlist.c:36 @ 2384) [534] main (main.c:179 @ 10b0)
+ [166] GetTemperature (physical.c:82 @ 2100) [358] UpdateNeighbourlist (neighbourlist.c:33 @ 238c) [535] main (main.c:150 @ 10d4)
+ [167] GetTemperature (physical.c:84 @ 2104) [359] UpdateNeighbourlist (neighbourlist.c:34 @ 2398) [536] main (main.c:179 @ 1100)
+ [168] GetTemperature (physical.c:86 @ 2108) [360] UpdateNeighbourlist (neighbourlist.c:35 @ 23a0) [537] main (main.c:179 @ 1108)
+ [169] GetTemperature (physical.c:82 @ 210c) [361] UpdateNeighbourlist (neighbourlist.c:40 @ 23a4) [538] main (main.c:179 @ 1110)
+ [170] GetTemperature (physical.c:84 @ 2110) [362] UpdateNeighbourlist (neighbourlist.c:56 @ 23b4) [539] main (main.c:182 @ 1134)
+ [171] GetTemperature (physical.c:82 @ 2114) [363] UpdateNeighbourlist (neighbourlist.c:52 @ 23b8) [540] main (main.c:184 @ 115c)
+ [172] GetTemperature (physical.c:84 @ 211c) [364] UpdateNeighbourlist (neighbourlist.c:48 @ 23bc) [541] printf (stdio2.h:112 @ cac)
+ [173] GetTemperature (physical.c:86 @ 2124) [365] UpdateNeighbourlist (neighbourlist.c:39 @ 23c0) [542] printf (stdio2.h:112 @ cd8)
+ [174] GetTemperature (physical.c:75 @ 2130) [366] UpdateNeighbourlist (neighbourlist.c:63 @ 23c4) [543] printf (stdio2.h:112 @ d88)
+  [89] ReadAtoms (inout.c:152 @ 1a14) [367] UpdateNeighbourlist (neighbourlist.c:40 @ 23c8) [544] printf (stdio2.h:112 @ ef8)
+ [175] ReadAtoms (inout.c:157 @ 1a44) [368] UpdateNeighbourlist (neighbourlist.c:38 @ 23d0) [545] printf (stdio2.h:112 @ f00)
+ [176] ReadAtoms (inout.c:152 @ 1a50) [369] UpdateNeighbourlist (neighbourlist.c:63 @ 23d4) [546] printf (stdio2.h:112 @ f08)
+ [177] ReadAtoms (inout.c:157 @ 1a54) [370] UpdateNeighbourlist (neighbourlist.c:27 @ 23d8) [547] printf (stdio2.h:112 @ f20)
+ [178] ReadAtoms (inout.c:152 @ 1a58) [371] UpdateNeighbourlist (neighbourlist.c:41 @ 23dc) [548] printf (stdio2.h:112 @ f30)
+ [179] ReadAtoms (inout.c:157 @ 1a64) [372] UpdateNeighbourlist (neighbourlist.c:43 @ 23e0) [549] printf (stdio2.h:112 @ f38)
+ [180] ReadAtoms (inout.c:159 @ 1a6c) [41] UpdateNeighbourlist (neighbourlist.c:54 @ 23e8) [550] printf (stdio2.h:112 @ f44)
+ [181] ReadAtoms (inout.c:161 @ 1a84) [373] UpdateNeighbourlist (neighbourlist.c:55 @ 23f4) [551] printf (stdio2.h:112 @ f4c)
+ [182] ReadAtoms (inout.c:163 @ 1a98) [9] UpdateNeighbourlist (neighbourlist.c:58 @ 23fc) [552] printf (stdio2.h:112 @ f60)
+ [183] ReadAtoms (inout.c:168 @ 1ae4) [80] UpdateNeighbourlist (neighbourlist.c:60 @ 2408) [553] printf (stdio2.h:112 @ 1090)
+ [184] ReadAtoms (inout.c:171 @ 1b04) [12] UpdateNeighbourlist (neighbourlist.c:43 @ 2410) [554] printf (stdio2.h:112 @ 10b4)
+ [185] ReadAtoms (inout.c:168 @ 1b0c) [17] UpdateNeighbourlist (neighbourlist.c:44 @ 2420) [555] printf (stdio2.h:112 @ 1104)
+ [186] ReadAtoms (inout.c:171 @ 1b34) [18] UpdateNeighbourlist (neighbourlist.c:46 @ 2428) [556] printf (stdio2.h:112 @ 110c)
+ [187] ReadAtoms (inout.c:174 @ 1b50) [57] UpdateNeighbourlist (neighbourlist.c:47 @ 2434) [557] printf (stdio2.h:112 @ 1114)
+ [188] ReadAtoms (inout.c:177 @ 1b8c) [14] UpdateNeighbourlist (neighbourlist.c:50 @ 243c) [558] printf (stdio2.h:112 @ 1534)
+ [189] ReadAtoms (inout.c:178 @ 1b98) [39] UpdateNeighbourlist (neighbourlist.c:51 @ 2448) [559] printf (stdio2.h:112 @ 15b8)
+ [190] ReadAtoms (inout.c:163 @ 1ba0) [4] UpdateNeighbourlist (neighbourlist.c:52 @ 2458) [560] printf (stdio2.h:112 @ 16b0)
+ [191] ReadAtoms (inout.c:184 @ 1bbc) [21] UpdateNeighbourlist (neighbourlist.c:54 @ 2460) [561] printf (stdio2.h:112 @ 16cc)
+ [192] ReadAtoms (inout.c:159 @ 1bec) [374] UpdateNeighbourlist (neighbourlist.c:55 @ 246c) [562] printf (stdio2.h:112 @ 172c)
+ [193] ReadAtoms (inout.c:184 @ 1c08) [375] UpdateNeighbourlist (neighbourlist.c:56 @ 2480) [563] printf (stdio2.h:112 @ 19f8)
+  [90] ReadParams (inout.c:30 @ 1340) [37] UpdateNeighbourlist (neighbourlist.c:52 @ 248c) [564] printf (stdio2.h:112 @ 1abc)
+ [194] ReadParams (inout.c:36 @ 13dc) [6] UpdateNeighbourlist (neighbourlist.c:61 @ 2494) [565] printf (stdio2.h:112 @ 1b58)
+ [195] ReadParams (inout.c:30 @ 13e8) [376] UpdateNeighbourlist (neighbourlist.c:62 @ 2498) [566] printf (stdio2.h:112 @ 24e8)
+ [196] ReadParams (inout.c:36 @ 13ec) [377] UpdateNeighbourlist (neighbourlist.c:63 @ 249c) [567] printf (stdio2.h:112 @ 24f0)
+ [197] ReadParams (inout.c:30 @ 13f0) [52] UpdateNeighbourlist (neighbourlist.c:67 @ 24a8) [568] printf (stdio2.h:112 @ 2500)
+ [198] ReadParams (inout.c:36 @ 13fc) [378] UpdateNeighbourlist (neighbourlist.c:43 @ 24ac) [569] register_tm_clones
+ [199] ReadParams (inout.c:38 @ 1404) [379] UpdateNeighbourlist (neighbourlist.c:75 @ 24bc) [570] uniformrand (physical.c:137 @ 1d74)
+ [200] ReadParams (inout.c:41 @ 1408) [380] UpdateNeighbourlist (neighbourlist.c:40 @ 24c0) [571] uniformrand (physical.c:133 @ 1d78)
+ [201] ReadParams (inout.c:44 @ 1414) [381] UpdateNeighbourlist (neighbourlist.c:73 @ 24c4) [572] uniformrand (physical.c:135 @ 1d80)
+ [202] ReadParams (inout.c:41 @ 1418) [382] UpdateNeighbourlist (neighbourlist.c:40 @ 24c8) [573] uniformrand (physical.c:137 @ 1d88)
+ [203] ReadParams (inout.c:45 @ 141c) [383] UpdateNeighbourlist (neighbourlist.c:75 @ 24cc) [574] uniformrand (physical.c:133 @ 1d8c)
+ [204] ReadParams (inout.c:46 @ 1420) [384] UpdateNeighbourlist (neighbourlist.c:40 @ 24d0) [575] uniformrand (physical.c:137 @ 1d90)
+ [205] ReadParams (inout.c:65 @ 1424) [385] UpdateNeighbourlist (neighbourlist.c:80 @ 24d8) [576] uniformrand (physical.c:135 @ 1d94)
+ [206] ReadParams (inout.c:41 @ 1430) [386] UpdateNeighbourlist (neighbourlist.c:79 @ 24dc) [577] uniformrand (physical.c:136 @ 1da4)
+ [207] ReadParams (inout.c:46 @ 1434) [387] UpdateNeighbourlist (neighbourlist.c:82 @ 24e0) [578] uniformrand (physical.c:133 @ 1db8)
+ [208] ReadParams (inout.c:42 @ 1438) [388] UpdateNeighbourlist (neighbourlist.c:82 @ 24ec) [579] uniformrand (physical.c:135 @ 1dbc)
+ [209] ReadParams (inout.c:64 @ 143c) [389] UpdateNeighbourlist (neighbourlist.c:82 @ 24fc) [580] uniformrand (physical.c:136 @ 1ddc)
+ [210] ReadParams (inout.c:46 @ 1440) [390] UpdateNeighbourlist (neighbourlist.c:56 @ 2514) [581] uniformrand (physical.c:137 @ 1de8)
+ [211] ReadParams (inout.c:49 @ 1444) [13] UpdateNeighbourlist (neighbourlist.c:47 @ 251c) [582] uniformrand (physical.c:135 @ 1dec)
+ [212] ReadParams (inout.c:42 @ 1448) [10] UpdateNeighbourlist (neighbourlist.c:48 @ 2524) [583] uniformrand (physical.c:137 @ 1df4)
+ [213] ReadParams (inout.c:49 @ 144c) [49] UpdateNeighbourlist (neighbourlist.c:47 @ 2538) [584] uniformrand (physical.c:135 @ 1df8)
+ [214] ReadParams (inout.c:51 @ 1460) [391] UpdateNeighbourlist (neighbourlist.c:55 @ 2540) [585] uniformrand (physical.c:135 @ 1e08)
+ [215] ReadParams (inout.c:44 @ 1468) [33] UpdateNeighbourlist (neighbourlist.c:51 @ 2548) [586] uniformrand (physical.c:136 @ 1e14)
+ [216] ReadParams (inout.c:45 @ 1470) [392] UpdateNeighbourlist (neighbourlist.c:64 @ 2550) [587] uniformrand (physical.c:138 @ 1e20)
+ [217] ReadParams (inout.c:53 @ 1478) [393] UpdateNeighbourlist (neighbourlist.c:65 @ 255c) [588] uniformrand (physical.c:137 @ 1e24)
+ [218] ReadParams (inout.c:46 @ 147c) [88] WriteAtoms (inout.c:197 @ 1c10) [589] uniformrand (physical.c:126 @ 2250)
+ [219] ReadParams (inout.c:53 @ 1480) [394] WriteAtoms (inout.c:205 @ 1c34) [590] uniformrand (physical.c:133 @ 226c)
+ [220] ReadParams (inout.c:46 @ 1484) [395] WriteAtoms (inout.c:197 @ 1c38) [591] uniformrand (physical.c:135 @ 2270)
+ [221] ReadParams (inout.c:49 @ 1490) [396] WriteAtoms (inout.c:206 @ 1c54) [592] uniformrand (physical.c:133 @ 2274)
+ [222] ReadParams (inout.c:51 @ 14a8) [397] WriteAtoms (inout.c:197 @ 1c58) [593] uniformrand (physical.c:135 @ 227c)
+ [223] ReadParams (inout.c:50 @ 14ac) [398] WriteAtoms (inout.c:205 @ 1c60) [594] uniformrand (physical.c:133 @ 2284)
+ [224] ReadParams (inout.c:51 @ 14b4) [399] WriteAtoms (inout.c:211 @ 1c68) [595] uniformrand (physical.c:135 @ 2288)
+ [225] ReadParams (inout.c:53 @ 14c8) [400] WriteAtoms (inout.c:220 @ 1ca4) [596] uniformrand (physical.c:136 @ 2294)
+ [226] ReadParams (inout.c:65 @ 14d0) [401] WriteAtoms (inout.c:220 @ 1cbc) [597] uniformrand (physical.c:137 @ 2298)
+ [227] ReadParams (inout.c:62 @ 14e4) [402] WriteAtoms (inout.c:220 @ 1cd4) [598] uniformrand (physical.c:135 @ 229c)
+ [228] ReadParams (inout.c:65 @ 14e8) [403] WriteAtoms (inout.c:220 @ 1cdc) [599] uniformrand (physical.c:137 @ 22a0)
+ [229] ReadParams (inout.c:64 @ 14fc) [404] WriteAtoms (inout.c:220 @ 1ce8) [600] uniformrand (physical.c:135 @ 22a8)
+ [230] ReadParams (inout.c:65 @ 1500) [405] WriteAtoms (inout.c:225 @ 1cf0) [601] uniformrand (physical.c:136 @ 22c4)
+ [231] ReadParams (inout.c:68 @ 1504) [406] WriteAtoms (inout.c:227 @ 1cf4) [602] uniformrand (physical.c:138 @ 22d0)
+ [232] ReadParams (inout.c:70 @ 1510) [407] WriteAtoms (inout.c:225 @ 1d0c) [603] uniformrand (physical.c:137 @ 22d8)
+ [233] ReadParams (inout.c:77 @ 1518) [408] WriteAtoms (inout.c:206 @ 1d10) [604] uniformrand (physical.c:141 @ 22dc)
+ [234] ReadParams (inout.c:78 @ 154c) [409] WriteAtoms (inout.c:207 @ 1d28)
+ [235] ReadParams (inout.c:79 @ 156c) [410] WriteAtoms (inout.c:208 @ 1d2c)
