@@ -22,6 +22,7 @@ class Config:
         self.env_http_basic_auth: EnvProperty
         self.env_remote_grader: EnvProperty
         self.env_version: EnvProperty
+        self.env_remote_max_timeout: EnvProperty
 
     def test_command(self, test: str) -> List[str]:
         raise NotImplementedError
@@ -83,3 +84,8 @@ class Config:
                                        'version',
                                        path=False,
                                        home=False)
+        self.env_remote_max_timeout = EnvProperty(sources,
+                                                  'remote_max_timeout',
+                                                  'remote_max_timeout',
+                                                  path=False,
+                                                  home=False)

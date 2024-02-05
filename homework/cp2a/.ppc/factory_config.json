@@ -1,1 +1,1 @@
-{"version": "2023.09.04T09.11.40.000000000", "api_url": "https://ppc-exercises.cs.aalto.fi/api/", "remote_grader": "cp.cp2a-remote"}
+{"version": "2024.01.15T13.48.41.000000000", "api_url": "https://ppc-exercises.cs.aalto.fi/api/", "remote_grader": "cp.cp2a-remote", "remote_max_timeout": "30"}

@@ -155,7 +155,7 @@ class GccCompiler(Compiler):
 
         super().__init__(program=program,
                          common_flags=[
-                             '-std=gnu++11',
+                             '-std=c++2a',
                              '-Wall',
                              '-Wextra',
                              '-Wvla',
@@ -237,7 +237,7 @@ class ClangCompiler(Compiler):
         self.version, self.apple = ClangCompiler.__get_version(program)
 
         flags = [
-            '-std=gnu++11',
+            '-std=c++2a',
             '-Wall',
             '-Wextra',
             '-Wvla',

@@ -46,7 +46,7 @@
 #ifdef __clang__
 typedef long double pfloat;
 #else
-typedef _Float128 pfloat;
+typedef __float128 pfloat;
 #endif
 
 namespace ppc {

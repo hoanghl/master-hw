@@ -1,7 +1,7 @@
 // #include "cp.hpp"
 
 #include <cmath>
-#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,8 +15,7 @@ This is the function you need to implement. Quick reference:
 */
 void correlate(int ny, int nx, const float *data, float *result)
 {
-
-    double *norm = new double[ny * nx];
+    vector<double> norm(ny * nx, 0.);
 
     // 1. row-wise 0-mean normalization
     for (int i = 0; i < ny; ++i)
@@ -43,24 +42,29 @@ void correlate(int ny, int nx, const float *data, float *result)
             norm[i * nx + j] = norm[i * nx + j] / sq_sum;
     }
 
-    int nCon = 8;
-    int nxPadded = ceil(nx / nCon) * nCon;
+    const int nCon = 4;
+    int nxPadded = nx;
+    if (nx % nCon != 0)
+        nxPadded = (nx / nCon + 1) * nCon;
 
     // 3. Move to new array
-    double *normPadded = new double[ny * nxPadded];
+    vector<double> normPadded(ny * nxPadded, 0.);
     for (int i = 0; i < ny; ++i)
         for (int j = 0; j < nx; ++j)
-            normPadded[nxPadded * i + j] = data[nx * i + j];
+            normPadded[nxPadded * i + j] = norm[nx * i + j];
 
     // 3. upper-triangular matmul
+
     for (int i = 0; i < ny; ++i)
         for (int j = i; j < ny; ++j)
         {
-            double *corArr = new double[nCon];
+            double corArr[nCon];
             for (int l = 0; l < nCon; ++l)
+                corArr[l] = 0;
+            for (int k = 0; k < nxPadded / nCon; ++k)
             {
-                for (int k = 0; k < nxPadded / nCon; ++k)
-                    corArr[l] += pow(normPadded[i * nxPadded + k * nCon + l], 2);
+                for (int l = 0; l < nCon; ++l)
+                    corArr[l] += normPadded[i * nxPadded + k * nCon + l] * normPadded[j * nxPadded + k * nCon + l];
             }
 
             double cor = 0;

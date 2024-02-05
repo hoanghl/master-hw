@@ -13,6 +13,9 @@ class RemoteAPI(API):
         url = f"{self.url}/v1/remote-run/{remote_grader}"
         return self.make_json_request(url, args)
 
+    def test_connection(self):
+        return self.make_json_request(f"{self.url}/v1/me")
+
 
 def collect_args(args: Namespace, tests: List[str],
                  config: Config) -> Dict[str, Any]:
@@ -100,29 +103,64 @@ def exec_remote(config: Config, raw_args: List[str]):
     http_basic_auth = config.http_basic_auth.get_optional()
     api = RemoteAPI(url, token, http_basic_auth)
 
+    # Test if the token is valid
     try:
-        results = api.submit_run(remote_grader, args)
+        result = api.test_connection()
     except APIError as e:
-        print('Error while trying to submit for remote execution:\n',
-              file=sys.stderr)
-        if e.reason == 'AUTH_ERROR' or e.reason == 'AUTH_FAILED':
-            sys.exit(config.env_api_token.explain('is invalid'))
+        print("Error while testing connection:\n", file=sys.stderr)
+        if e.reason == "AUTH_ERROR" or e.reason == "AUTH_FAILED":
+            sys.exit(config.env_api_token.explain("is invalid"))
         else:
             print(e.message, file=sys.stderr)
             if e.unexpected:
                 print(
-                    '\nThis is most likely a bug in the grading system. Please report this message along with the command you ran to the course staff.',
+                    "\nThis is most likely a bug in the grading system. Please report this message along with the command you ran to the course staff.",
                     file=sys.stderr,
                 )
             sys.exit(1)
 
+    # Sum up timeout of all tests. Show a warning if the total timeout is too large.
+    local_sum_timeout = 0
+    for name, test in args['commands']:
+        for file, data in test:
+            first_line = open(file, 'r').readline().split(' ')
+            if first_line[0] == "timeout":
+                local_sum_timeout += float(first_line[1])
+
+    remote_max_timeout_str = config.env_remote_max_timeout.get_optional()
+    if remote_max_timeout_str is not None:
+        remote_max_timeout = float(remote_max_timeout_str)
+        if local_sum_timeout > remote_max_timeout:
+            print(
+                "You have submitted a large job for remote execution. You may encounter a time out."
+            )
+            print(
+                f"The total timeout of all tests you have submitted is {local_sum_timeout:.1f}s, while the remote execution will time out after {remote_max_timeout:.1f}s."
+            )
+            print()
+
+    try:
+        results = api.submit_run(remote_grader, args)
+    except APIError as e:
+        print("Error while trying to submit for remote execution:\n",
+              file=sys.stderr)
+        print(e.message, file=sys.stderr)
+        if e.unexpected:
+            print(
+                "\nThis is most likely a bug in the grading system. Please report this message along with the command you ran to the course staff.",
+                file=sys.stderr,
+            )
+        sys.exit(1)
+
     if not results:
         print(
-            'No results were received from the server. This could be caused by a bug in the grading system, or your command may have been stopped by an admin.',
-            file=sys.stderr)
+            "No results were received from the server. This could be caused by a bug in the grading system, or your command may have been stopped by an admin.",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     exit_code = 0
+
     for result in results:
         verdict = result['verdict']
         out = result['output']
