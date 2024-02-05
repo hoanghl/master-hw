@@ -4,13 +4,14 @@
 # Boilerplate code for Exercise 2
 # Last Updated: January 15, 2024
 ################################################################################
-from collections import defaultdict, deque, Counter
+from collections import Counter, defaultdict, deque
 from itertools import combinations
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
+
 
 def load_signed_network(path):
     """Reads from file at path and return graph
@@ -36,7 +37,13 @@ def load_signed_network(path):
     # use edge_attr to choose columns for edge weights
     df = pd.read_csv(path)
 
-    G = nx.from_pandas_edgelist(df, source='Source', target='Target', edge_attr='Rating', create_using=nx.DiGraph)
+    G = nx.from_pandas_edgelist(
+        df,
+        source="Source",
+        target="Target",
+        edge_attr="Rating",
+        create_using=nx.DiGraph,
+    )
     assert nx.is_directed(G)
     return G
 
@@ -62,14 +69,16 @@ def get_asymm_edges_diffs(G):
     # Note: process an asymmetric edge (u,v) ONLY ONCE and store one entry
     # Note: both (u,v) and (v,u) need to be present in graph to qualify as asymmetric
     # Hint: keep absolute differences in a list and then use `collections.Counter` to get dict of counts
-    weight_attr = 'Rating'
+    weight_attr = "Rating"
 
     edges_asym = set()
     list_abs_diff = []
-    for (u, v) in G.edges:
-        if (v, u) in G.edges and \
-            G.edges[(u, v)][weight_attr] != G.edges[(v, u)][weight_attr] and \
-            (v, u) not in edges_asym:
+    for u, v in G.edges:
+        if (
+            (v, u) in G.edges
+            and G.edges[(u, v)][weight_attr] != G.edges[(v, u)][weight_attr]
+            and (v, u) not in edges_asym
+        ):
             edges_asym.add((u, v))
             diff = abs(G.edges[(u, v)][weight_attr] - G.edges[(v, u)][weight_attr])
             list_abs_diff.append(diff)
@@ -132,7 +141,15 @@ def convert_undirected(G, asymmetric_edges):
     for edge in G.edges:
         if edge in asymmetric_edges or (edge[1], edge[0]) in asymmetric_edges:
             continue
-        G_und.add_edge(*edge)
+        weight = G.edges[edge]["Rating"]
+        if weight > 0:
+            weight = 1
+        elif weight == 0:
+            weight = 0
+        else:
+            weight = -1
+
+        G_und.add_edge(*edge, weight=weight)
     assert not nx.is_directed(G_und)
     return G_und
 
@@ -355,7 +372,9 @@ if __name__ == "__main__":
     bitcoin_directed = load_signed_network(bitcoin_file)
     asymmetric_edges, absolute_diffs = get_asymm_edges_diffs(bitcoin_directed)
 
-    print(f"There are {len(asymmetric_edges)} pairs of nodes that have asymmetric edges")
+    print(
+        f"There are {len(asymmetric_edges)} pairs of nodes that have asymmetric edges"
+    )
     plot_absolute_diffs(absolute_diffs)
 
     # convert directed network to undirected
