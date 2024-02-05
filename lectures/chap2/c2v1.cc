@@ -2,20 +2,21 @@
 #include <chrono>
 
 #include "chap2.hpp"
+#include <vector>
 
 using namespace std;
 using namespace std::chrono;
 
 void step(float *r, const float *d, int n)
 {
-    float *t = new float[n * n];
-#pragma omp parallel for
+
+    vector<float> t(n * n);
+    // #pragma omp parallel for
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j)
-            t[n * i + j] = d[n * j + i];
+            t[n * j + i] = d[n * i + j];
 
-    auto t1 = high_resolution_clock::now();
-#pragma omp parallel for
+    // #pragma omp parallel for
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j)
         {
@@ -23,29 +24,31 @@ void step(float *r, const float *d, int n)
             for (int k = 0; k < n; ++k)
             {
                 float x = d[n * i + k];
-                float y = d[n * k + j];
+                float y = t[n * j + k];
                 float z = x + y;
                 v = std::min(v, z);
             }
 
             r[n * i + j] = v;
         }
-    auto t2 = high_resolution_clock::now();
-
-    duration<double, std::milli> ms_double = t2 - t1;
-    cout << "Running time: " << ms_double.count() << endl;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     chap2_result *result = readFile(STD_FILENAME);
+
     cout << "Finish reading data!" << endl;
 
     float *r = new float[result->n * result->n];
 
     cout << "Start stepping!" << endl;
 
+    auto t1 = high_resolution_clock::now();
     step(r, result->d, result->n);
+    auto t2 = high_resolution_clock::now();
+
+    duration<double, std::milli> ms_double = t2 - t1;
+    cout << "Running time: " << ms_double.count() << endl;
 
     return 0;
 }

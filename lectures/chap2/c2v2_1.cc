@@ -15,25 +15,20 @@ void step(float *r, const float *d, int n)
     const uint32_t nCon = 4;
     int n_padded = ceil(n * 1.0 / nCon) * nCon;
 
-    // cout << "n = " << n << " - "
-    //      << "n_padded = " << n_padded << endl;
-
     // 2. Move to padded array and do transpose
     vector<float> d_padded(n * n_padded), d_t(n * n_padded);
 
+#pragma omp parallel for
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j)
         {
-            // if (n_padded * i + j > n * n_padded)
-            // {
-            //     cout << "Exceed: " << n_padded * i + j << endl;
-            //     exit(1);
-            // }
+
             d_t[n_padded * i + j] = d[n * j + i];
             d_padded[n_padded * i + j] = d[n * i + j];
         }
 
-    // 3. Calculate
+// 3. Calculate
+#pragma omp parallel for
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < n; ++j)
@@ -43,7 +38,7 @@ void step(float *r, const float *d, int n)
                 v_arr[v] = inf;
 
             for (int l = 0; l < nCon; ++l)
-                for (int k = 0; k < ceil(n * 1.0 / nCon); ++k)
+                for (int k = 0; k < ceil(n * 0.1 / nCon); ++k)
                 {
                     float x = d[n_padded * i + nCon * k + l];
                     float y = d_t[n_padded * j + nCon * k + l];

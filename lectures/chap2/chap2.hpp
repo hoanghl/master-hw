@@ -6,7 +6,7 @@ using namespace std;
 #ifndef CHAP2_HPP
 #define CHAP2_HPP
 
-const string STD_FILENAME = "test1.txt";
+const string STD_FILENAME = "data.txt";
 
 struct chap2_result
 {
