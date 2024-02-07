@@ -1,16 +1,16 @@
 import os
-import re
 import subprocess
 from typing import Literal
 
-re_pat = r"\:\s((\d|\.)*)"
+import pandas as pd
+from tqdm import trange
 
 CC = "clang++"
 LOWER = """
 }
     clock_t end = clock();
     double elapsed = double(end - start) / CLOCKS_PER_SEC;
-    cout << "CPU time (second): " << setprecision(12) << elapsed << endl;
+    cout << setprecision(12) << elapsed;
 
     return 0;
 }
@@ -50,7 +50,7 @@ def get_filename(n: int, filetype: Literal["code", "exe"]):
 if __name__ == "__main__":
     results = []
 
-    for i in range(1):
+    for i in trange(6):
         n = 2**i
 
         # Create code
@@ -75,13 +75,12 @@ if __name__ == "__main__":
             result = subprocess.run([f"./{filename_exe}"], stdout=subprocess.PIPE)
 
             # Extract result
-            time = float(re.findall(re_pat, result.stdout.decode("utf-8"))[0][0])
+            time = float(result.stdout.decode("utf-8"))
 
             results.append({"n": n, "flag": flag_opt, "time": time})
 
-            os.remove(filename_code)
             os.remove(filename_exe)
 
-        break
+        os.remove(filename_code)
 
-    print(results)
+    pd.DataFrame.from_records(results).to_csv("ex4_p3_times.csv", index=False)

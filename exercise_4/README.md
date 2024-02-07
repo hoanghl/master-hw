@@ -13,3 +13,9 @@ Please replace variable `CC` in `Makefile` to `g++`.
 Example:
 
 `make OPT_FLAG=O3 p1`
+
+## 3. For problem 3
+
+First, run the code with command:
+`    python ex4_p3/ex4_p3_gencode.py`
+It will generate **csv** file containing the running time. Then use file `visualize.ipynb` to plot the figure.

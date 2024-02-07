@@ -4,13 +4,16 @@
 // Cheers,
 // Xin
 
+#include <fstream>
 #include <iostream>
 #include <stdio.h>
+#include <string>
 #include <time.h>
 
-int main()
+using namespace std;
+
+double vec(int n2)
 {
-  int n2 = 2560;
   int n3 = 20000000;
   int *d = new int[n2];
   int *e = new int[n2];
@@ -37,9 +40,33 @@ int main()
     }
   }
   v4 = clock();
-  printf("de(repeat): \t\t\t %.6f s\n", (double)(v4 - v3) / CLOCKS_PER_SEC);
   delete[] d;
   delete[] e;
   delete[] f;
+
+  return (double)(v4 - v3) / CLOCKS_PER_SEC;
+}
+
+int main()
+{
+  int n2 = 32;
+  const int N = 20;
+
+  double results[N];
+
+  for (int i = 0; i < N; ++i)
+  {
+    results[i] = vec(n2);
+  }
+
+  fstream file("output.txt", ios::out);
+  if (file.is_open())
+    file << n2 << ",";
+  {
+    for (int i = 0; i < N; ++i)
+      file << results[i] << ",";
+    file.close();
+  }
+
   return 0;
 }
