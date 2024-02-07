@@ -1,6 +1,6 @@
+#include <iomanip>
 #include <iostream>
 #include <random>
-#include <iomanip>
 #include <time.h>
 
 #include "ex4.hpp"
@@ -24,8 +24,6 @@ void probB_Optimized(int n, float **a, float **b, float *c)
 
 int main(int argc, char const *argv[])
 {
-    cout << "* Problem A: " << endl;
-
     int n = 3000;
     float **a = new float *[n], **b = new float *[n], *c = new float[n];
 
