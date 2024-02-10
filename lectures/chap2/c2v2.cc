@@ -1,8 +1,8 @@
-#include <iostream>
-#include <chrono>
-#include <vector>
-#include <cmath>
 #include "chap2.hpp"
+#include <chrono>
+#include <cmath>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace std::chrono;
@@ -42,8 +42,8 @@ void step(float *r, const float *d, int n)
             for (int v = 0; v < nCon; ++v)
                 v_arr[v] = inf;
 
-            for (int l = 0; l < nCon; ++l)
-                for (int k = 0; k < ceil(n * 1.0 / nCon); ++k)
+            for (int k = 0; k < ceil(n * 1.0 / nCon); ++k)
+                for (int l = 0; l < nCon; ++l)
                 {
                     float x = d[n_padded * i + nCon * k + l];
                     float y = d_t[n_padded * j + nCon * k + l];
