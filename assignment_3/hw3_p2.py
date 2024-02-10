@@ -5,7 +5,17 @@
 # Last Updated: Jan 15, 2024
 ################################################################################
 
-# %%
+from pathlib import Path
+from collections import defaultdict
+import random
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import scipy
+import seaborn as sns
+
+
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -18,6 +28,8 @@ import copy
 import pandas as pd
 import seaborn as sns
 
+plt.style.use('seaborn-v0_8')
+plt.rcParams.update({'font.size': 8})
 
 class SIR_custom(CompartmentedModel):
     """The Susceptible-Infected-Removed model.
@@ -106,7 +118,7 @@ class SIR_custom(CompartmentedModel):
         self.changeCompartment(n, self.REMOVED)
 
 
-def getGraph(file):
+def getGraph(file: Path):
     """Load the graph from a file
 
     Args:
@@ -117,7 +129,9 @@ def getGraph(file):
     """
     ###############################################################################
     # TODO: your code here
+    # FIXME: HoangLe [Feb-06]: Done
     ###############################################################################
+    G = nx.read_edgelist(file)
     return G
 
 
@@ -174,10 +188,18 @@ def calculate_average_spread(
     """
     ###############################################################################
     # TODO: your code here
+    # FIXME: HoangLe [Feb-10]: Done
     # hint: use the SIRsimulation to run multiple simulations
     ###############################################################################
-    return
+    new_seed = seed_set + [candidate]
+    spreads = []
+    for _ in range(sigma):
+        result = SIRsimulation(G, new_seed, p, r)
+        spreads.append(result['I'] + result['R'])
 
+    spread = int(sum(spreads)*1.0 / len(spreads))
+
+    return spread
 
 def greedy(
     p: float,
@@ -209,17 +231,117 @@ def greedy(
     seeds = []
     ###############################################################################
     # TODO: your code here
+    # FIXME: HoangLe [Feb-10]: Done
     # Implement the Greedy algorithm. Use the calculate_spread function
     # keep seeds and record average spread at each iteration
     ###############################################################################
+    for _ in range(k):
+        # Find node maximizing the expected spread
+        max_spread = -10
+        optimal_node = -10
+        for c in candidate_set:
+            spread = calculate_average_spread(c, seeds, G, p, r, sigma)
+            if spread > max_spread:
+                max_spread = spread
+                optimal_node = c
+
+        # Update seed set
+        seeds.append(optimal_node)
+        spreads.append(max_spread)
+
+        # Discard optimal node from candidate seed
+        candidate_set.remove(optimal_node)
 
     return seeds, spreads
 
+def experiment(
+    G: nx.Graph, 
+    list_p: List[float],
+    r: float,
+    k: int, 
+    num_init_cand: int = 7,
+    num_cand_set: int = 3,
+    sigma: int = 5,
+    verbose: bool = False
+) -> dict[float, list]:
+    """Run experiment
 
-# %%
+    Args:
+        G (nx.Graph): Graph to do experiment with SIR
+        list_p (List[float]): List of infection probabilities
+        r (float): Recovery probability
+        k (int): Number of seeding nodes
+        num_init_cand (int, optional): Number of candidates picked randomly from G. Defaults to 7.
+        num_cand_set (int, optional): Number of candidate sets to do experiment. Defaults to 3.
+        sigma (int, optional): Num. simulations to approximate expected spread. Defaults to 5.
+        verbose (bool, optional): Flag for debugging purpose. Defaults to False.
+    
+    Returns:
+        dict[float, list]: results
+    """
+
+    # Generate experiment configurations
+    configurations = []
+    for p in list_p:
+        for _ in range(num_cand_set):
+            candidates = random.sample(list(G.nodes), num_init_cand)
+            configurations.append({
+                'p' : p,
+                'candidates': candidates
+            })
+
+    # Do experiments with 6 different configurations
+    results = defaultdict(list)
+    for conf in configurations:
+        p, candidates = conf['p'], conf['candidates'] 
+        _, spreads = greedy(p, G, candidates, k, r, verbose, sigma)
+
+        results[p].append(spreads)
+
+    return results
+
+def visualize(results: dict):
+    """Plot line charts
+
+    Args:
+        results (dict): results from experiments
+    """
+
+    # Convert to dataframe
+    records = []
+
+    for p, list_spreads in results.items():
+        for nth_set, spreads in enumerate(list_spreads):
+            for k, spread in enumerate(spreads):
+                records.append({
+                    'p': p,
+                    'nth_set': nth_set,
+                    'k': k+1,
+                    'spread': spread
+                })
+
+    df = pd.DataFrame.from_records(records)
+
+    # Plot
+    fig = plt.figure(figsize=(10, 5))
+
+    for idx, p in enumerate(df['p'].unique()):
+        ax = fig.add_subplot(1, 2, idx + 1)
+        df_p = df[df['p'] == p]
+        sns.lineplot(df_p, x='k', y='spread', hue='nth_set', style="nth_set", markers=True, ax=ax)
+        ax.set_title(f"p = {p}")
+
+    fig.tight_layout()
+    plt.savefig("as3_p2.png", dpi=200)
+
 if __name__ == "__main__":
-    # %%
-    G = getGraph("../h3_graph_data.edgelist")
-    results = SIRsimulation(G, infected_seeds=[0, 1, 2], p=0.1, r=1)
-    print(results)
-# %%
+    path = Path("h3_graph_data.edgelist")
+    G = getGraph(path)
+
+    # Do experiments
+    list_p = [0.1, 0.5]
+    results = experiment(G, list_p, r=1, k=5, num_init_cand=7, num_cand_set=3, sigma=5)
+    
+    # Visualize
+    visualize(results)
+
