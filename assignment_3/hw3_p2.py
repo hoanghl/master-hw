@@ -5,31 +5,22 @@
 # Last Updated: Jan 15, 2024
 ################################################################################
 
-from pathlib import Path
-from collections import defaultdict
 import random
+from collections import defaultdict
+from pathlib import Path
+from typing import Any, Dict, Final, List
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import scipy
-import seaborn as sns
-
-
-import numpy as np
 import networkx as nx
-import matplotlib.pyplot as plt
-import sys
-from typing import Dict, Any, Final, List
+import pandas as pd
+import seaborn as sns
 
 #! NOTE: INSTALL epydemic using `pip install epydemic`
-from epydemic import CompartmentedModel, SynchronousDynamics, StochasticDynamics
-import copy
-import pandas as pd
-import seaborn as sns
+from epydemic import CompartmentedModel, StochasticDynamics
 
-plt.style.use('seaborn-v0_8')
-plt.rcParams.update({'font.size': 8})
+plt.style.use("seaborn-v0_8")
+plt.rcParams.update({"font.size": 8})
+
 
 class SIR_custom(CompartmentedModel):
     """The Susceptible-Infected-Removed model.
@@ -195,11 +186,12 @@ def calculate_average_spread(
     spreads = []
     for _ in range(sigma):
         result = SIRsimulation(G, new_seed, p, r)
-        spreads.append(result['I'] + result['R'])
+        spreads.append(result["I"] + result["R"])
 
-    spread = int(sum(spreads)*1.0 / len(spreads))
+    spread = int(sum(spreads) * 1.0 / len(spreads))
 
     return spread
+
 
 def greedy(
     p: float,
@@ -254,15 +246,16 @@ def greedy(
 
     return seeds, spreads
 
+
 def experiment(
-    G: nx.Graph, 
+    G: nx.Graph,
     list_p: List[float],
     r: float,
-    k: int, 
+    k: int,
     num_init_cand: int = 7,
     num_cand_set: int = 3,
     sigma: int = 5,
-    verbose: bool = False
+    verbose: bool = False,
 ) -> dict[float, list]:
     """Run experiment
 
@@ -275,7 +268,7 @@ def experiment(
         num_cand_set (int, optional): Number of candidate sets to do experiment. Defaults to 3.
         sigma (int, optional): Num. simulations to approximate expected spread. Defaults to 5.
         verbose (bool, optional): Flag for debugging purpose. Defaults to False.
-    
+
     Returns:
         dict[float, list]: results
     """
@@ -285,20 +278,18 @@ def experiment(
     for p in list_p:
         for _ in range(num_cand_set):
             candidates = random.sample(list(G.nodes), num_init_cand)
-            configurations.append({
-                'p' : p,
-                'candidates': candidates
-            })
+            configurations.append({"p": p, "candidates": candidates})
 
     # Do experiments with 6 different configurations
     results = defaultdict(list)
     for conf in configurations:
-        p, candidates = conf['p'], conf['candidates'] 
+        p, candidates = conf["p"], conf["candidates"]
         _, spreads = greedy(p, G, candidates, k, r, verbose, sigma)
 
         results[p].append(spreads)
 
     return results
+
 
 def visualize(results: dict):
     """Plot line charts
@@ -313,26 +304,26 @@ def visualize(results: dict):
     for p, list_spreads in results.items():
         for nth_set, spreads in enumerate(list_spreads):
             for k, spread in enumerate(spreads):
-                records.append({
-                    'p': p,
-                    'nth_set': nth_set,
-                    'k': k+1,
-                    'spread': spread
-                })
+                records.append(
+                    {"p": p, "nth_set": nth_set, "k": k + 1, "spread": spread}
+                )
 
     df = pd.DataFrame.from_records(records)
 
     # Plot
     fig = plt.figure(figsize=(10, 5))
 
-    for idx, p in enumerate(df['p'].unique()):
+    for idx, p in enumerate(df["p"].unique()):
         ax = fig.add_subplot(1, 2, idx + 1)
-        df_p = df[df['p'] == p]
-        sns.lineplot(df_p, x='k', y='spread', hue='nth_set', style="nth_set", markers=True, ax=ax)
+        df_p = df[df["p"] == p]
+        sns.lineplot(
+            df_p, x="k", y="spread", hue="nth_set", style="nth_set", markers=True, ax=ax
+        )
         ax.set_title(f"p = {p}")
 
     fig.tight_layout()
     plt.savefig("as3_p2.png", dpi=200)
+
 
 if __name__ == "__main__":
     path = Path("h3_graph_data.edgelist")
@@ -341,7 +332,6 @@ if __name__ == "__main__":
     # Do experiments
     list_p = [0.1, 0.5]
     results = experiment(G, list_p, r=1, k=5, num_init_cand=7, num_cand_set=3, sigma=5)
-    
+
     # Visualize
     visualize(results)
-
