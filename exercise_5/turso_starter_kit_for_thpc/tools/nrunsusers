@@ -1,0 +1,14 @@
+#! /bin/bash
+
+if [ $# -eq 0 ]; then
+    cluster="kale ukko vorna"
+else
+    cluster=$1
+fi
+
+for c in $cluster; do
+    echo -e "\ncluster: " $c
+    squeue -M $c -a -o "%8u %12T %.10C" | \
+	gawk 'BEGIN {printf "user           runs  slots  cores/run\n-------------------------------------\n"} $2=="RUNNING" {j0++; c0+=$NF; j[$1]++;c[$1]+=$NF} END {for (u in j) printf "%-12s %6d %6d  %6.2f\n",u,j[u],c[u],c[u]/j[u]|"sort"; printf "%-12s %6d %6d  %6.2f\n","TOTAL",j0,c0,c0/(j0>0?j0:1)}'
+done
+

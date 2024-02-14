@@ -1,0 +1,22 @@
+#!/bin/bash
+
+squeue > sq.txt
+awk '{print $2}' sq.txt | sort | uniq | grep -v USER | less > users.txt
+
+tot=$(squeue | wc -l)
+tot=$((tot-1))
+
+while read u; do  
+  use=$(squeue -u $u | wc -l)
+  use=$((use-1))
+  percent=$(bc <<<"scale=4;100.0*$use/$tot")
+  echo -e "$use \t $percent " " \t $u" >> stats.txt
+done < users.txt
+
+echo "--- Kale Leaderboard, tot:" $tot "---"
+echo -e "jobs \t percent % \t user" 
+cat stats.txt | sort -nr
+
+rm sq.txt
+rm users.txt
+rm stats.txt

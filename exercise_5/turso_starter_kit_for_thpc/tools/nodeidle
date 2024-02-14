@@ -1,0 +1,13 @@
+#! /bin/bash
+
+if [ $# -eq 0 ]; then
+    cluster="kale ukko vorna"
+else
+    cluster=$1
+fi
+
+for c in $cluster; do
+    echo -e "\ncluster: " $c
+    sinfo -M $c -o "%16P %5a %.12l %.5D %8t %8s %6c %14C %N" | gawk 'NR==1 || $5~/idle/' | grep -v ^CLUSTER:
+done
+

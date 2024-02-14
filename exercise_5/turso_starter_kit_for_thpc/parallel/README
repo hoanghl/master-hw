@@ -1,0 +1,28 @@
+
+
+---------------------------------------------------------------------
+
+   This is a simple example to demonstrate parallel MPI runs on
+   turso cluster.
+
+       A.Kuronen, antti.kuronen@helsinki.fi, 6.2.2022, 12.2.2024
+
+---------------------------------------------------------------------
+
+
+Compile and link:
+	module load gompi
+	mpicc -o mpiexample mpiexample.c  or  mpif90 -o mpiexample mpiexample.f90
+
+
+Send the batch job for execution:
+	sbatch submit_parallel
+
+
+Check out the progress of your job:
+	squeue  or  squeue -u <username>
+
+
+Ouput goes to files 'out_<job#>' and 'mpiexample.out'.  Check folder
+'reference_output' for output of an example of a successful run.
+

@@ -1,0 +1,13 @@
+#! /bin/bash
+
+if [ $# -eq 0 ]; then
+    cluster="kale ukko vorna"
+else
+    cluster=$1
+fi
+
+for c in $cluster; do
+    #echo -e "\ncluster: " $c
+    squeue -M $c -o "%10i %14P %20j %8u %12T %12M %9l %.6D %.R  %.10C" -u ${USER}
+done
+

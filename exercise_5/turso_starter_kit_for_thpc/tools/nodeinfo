@@ -1,0 +1,34 @@
+#! /bin/bash
+
+# scontrol -o show node output fields
+# scontrol -o show node | gawk -F ' |=' '{for (i=1;i<=NF;i+=2) printf "%s|",$i; printf "\n"}' 
+
+#    1        3           5             7         9        11
+# NodeName | Arch | CoresPerSocket | CPUAlloc | CPUErr | CPUTot |
+#
+#    13       15        17     19           21          23
+# CPULoad | Features | Gres | NodeAddr | NodeHostName | OS |
+#
+#    25          27        29      31          33            35
+# RealMemory | Sockets | Boards | State | ThreadsPerCore | TmpDisk |
+#
+#   37       39            41               43             45
+# Weight | BootTime | SlurmdStartTime | CurrentWatts | LowestJoules |
+#
+#       47
+# ConsumedJoules |
+
+if [ $# -eq 0 ]; then
+    cluster="kale ukko vorna"
+else
+    cluster=$1
+fi
+
+gscript="/home/${USER}/tools/nodeinfo.awk"
+
+for c in $cluster; do
+    echo -e "\ncluster: " $c
+    scontrol -M $c -o show node | gawk -f $gscript
+done
+
+

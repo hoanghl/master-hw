@@ -1,0 +1,7 @@
+
+Simple examples of serial and parallel batch jobs on turso cluster.
+
+Folder tools contains some simple (not robust) tools to inquire job,
+partition and node status. 
+
+	A.Kuronen, 2020, 2024

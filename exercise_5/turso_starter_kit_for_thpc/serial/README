@@ -1,0 +1,30 @@
+
+
+---------------------------------------------------------------------
+
+   This is a simple example to demonstrate serial runs on
+   turso cluster.
+
+       A.Kuronen, antti.kuronen@helsinki.fi, 6.2.2022, 12.2.2024
+
+---------------------------------------------------------------------
+
+
+Compile and link:
+	module load GCC
+	gcc -o serialexample serialexample.c  or  gfortran -o serialexample serialexample.f90
+
+
+Send the batch job for execution:
+	sbatch submit_serial
+
+
+Check out the progress of your job:
+	squeue  or  squeue -u <username>
+
+
+Ouput goes to files 'out_<job#>' and 'serialexample.out'.  Check
+folder 'reference_output' for output of an example of a successful
+run.
+
+

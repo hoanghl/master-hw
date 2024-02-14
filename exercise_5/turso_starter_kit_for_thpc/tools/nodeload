@@ -1,0 +1,13 @@
+#! /bin/bash
+
+if [ $# -eq 0 ]; then
+    cluster="kale ukko vorna"
+else
+    cluster=$1
+fi
+
+for c in $cluster; do
+    echo -e "\ncluster: " $c
+    scontrol -M $c show node | gawk 'BEGIN {FS="[= ]+"} $1=="NodeName" {n=$2} /CPULoad/ {printf "%-8s %6.2f\n",n,$NF}'
+done
+
