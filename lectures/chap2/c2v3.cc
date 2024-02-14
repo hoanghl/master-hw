@@ -54,7 +54,7 @@ void step(float *r, const float *d, int n)
             vT[nPacks * i + j / nPerPack][j % nPerPack] = d[n * j + i];
         }
 
-        // Start calculating
+// Start calculating
 #pragma omp parallel for
     for (int i1 = 0; i1 < n; ++i1)
         for (int i2 = 0; i2 < n; ++i2)
@@ -62,13 +62,57 @@ void step(float *r, const float *d, int n)
             float8_t vMin = f8_inf;
             for (int j = 0; j < nPacks; ++j)
             {
-                float8_t x = v[nPacks * i1 + i2];
-                float8_t y = vT[nPacks * i1 + i2];
+                float8_t x = v[nPacks * i1 + j];
+                float8_t y = vT[nPacks * i2 + j];
                 vMin = minVector(vMin, x + y);
             }
 
             r[n * i1 + i2] = minInternal(vMin);
         }
+}
+
+void step_reference(float *r, const float *d_, int n)
+{
+    // elements per vector
+    constexpr int nb = 8;
+    // vectors per input row
+    int na = (n + nb - 1) / nb;
+
+    // input data, padded, converted to vectors
+    std::vector<float8_t> vd(n * na);
+    // input data, transposed, padded, converted to vectors
+    std::vector<float8_t> vt(n * na);
+
+#pragma omp parallel for
+    for (int j = 0; j < n; ++j)
+    {
+        for (int ka = 0; ka < na; ++ka)
+        {
+            for (int kb = 0; kb < nb; ++kb)
+            {
+                int i = ka * nb + kb;
+                vd[na * j + ka][kb] = i < n ? d_[n * j + i] : infty;
+                vt[na * j + ka][kb] = i < n ? d_[n * i + j] : infty;
+            }
+        }
+    }
+
+#pragma omp parallel for
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            float8_t vv = f8_inf;
+            for (int ka = 0; ka < na; ++ka)
+            {
+                float8_t x = vd[na * i + ka];
+                float8_t y = vt[na * j + ka];
+                float8_t z = x + y;
+                vv = minVector(vv, z);
+            }
+            r[n * i + j] = minInternal(vv);
+        }
+    }
 }
 
 int main()

@@ -1,5 +1,5 @@
-#include <iostream>
 #include <chrono>
+#include <iostream>
 
 #include "chap2.hpp"
 #include <vector>
@@ -16,7 +16,7 @@ void step(float *r, const float *d, int n)
         for (int j = 0; j < n; ++j)
             t[n * j + i] = d[n * i + j];
 
-    // #pragma omp parallel for
+#pragma omp parallel for
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j)
         {
