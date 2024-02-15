@@ -309,6 +309,7 @@ def visualize(results: dict):
                 )
 
     df = pd.DataFrame.from_records(records)
+    df.to_csv("asg3_p2_results.csv", index=False)
 
     # Plot
     fig = plt.figure(figsize=(10, 5))
