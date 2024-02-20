@@ -1,6 +1,9 @@
 FLAGS=-O3 -march=native -std=c++2a -fopenmp 
 
-COMPILER=clang++
+COMPILER=g++
+
+c2v5: c2v5.cc chap2.o
+	${COMPILER} ${FLAGS} -o c2v5 c2v5.cc chap2.o
 
 c2v4: c2v4.cc chap2.o
 	${COMPILER} ${FLAGS} -o c2v4 c2v4.cc chap2.o
@@ -27,4 +30,4 @@ chap2.o: chap2.cc
 	${COMPILER} ${FLAGS} -c chap2.cc
 
 clean:
-	rm -rf chap2.o c2v0.o c2v0 c2v0_1 c2v1_1 write c2v1 c2v2 c2v2_1 c2v3 c2v4
+	rm -rf chap2.o c2v0.o c2v0 c2v0_1 c2v1_1 write c2v1 c2v2 c2v2_1 c2v3 c2v4 c2v5
