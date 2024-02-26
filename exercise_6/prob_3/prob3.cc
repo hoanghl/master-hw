@@ -50,7 +50,10 @@ int main(int argc, char *argv[])
     const int LEN_MSG = 2;
 
     // 1. Send
-    dest_id = id + 1;
+    if (id < ntasks - 1)
+        dest_id = id + 1;
+    else
+        dest_id = 0;
 
     int msgSend[] = {id, (id + 1) * 10};
     msgSend[0] = id;
@@ -59,18 +62,12 @@ int main(int argc, char *argv[])
     log_send(id, msgSend);
 
     // 2. Wait
-    if (id > 0)
-    {
-        log_wait(id);
-    }
+    log_wait(id);
 
     // 3. Receive
-    if (id > 0)
-    {
-        int msgRecv[LEN_MSG];
-        rc = MPI_Recv(&msgRecv, LEN_MSG, MPI_INT, MPI_ANY_SOURCE, tag, MPI_COMM_WORLD, &status);
-        log_recv(id, status, msgRecv);
-    }
+    int msgRecv[LEN_MSG];
+    rc = MPI_Recv(&msgRecv, LEN_MSG, MPI_INT, MPI_ANY_SOURCE, tag, MPI_COMM_WORLD, &status);
+    log_recv(id, status, msgRecv);
 
     log_terminate(id);
 
