@@ -1,22 +1,22 @@
 #include <cmath>
 #include <vector>
-
+#include <x86intrin.h>
 using namespace std;
 
 constexpr int N_PER_PACK = 4;
 
 typedef double double4 __attribute__((vector_size(N_PER_PACK * sizeof(double))));
 
-const double4 vZeros = {0., 0., 0., 0.};
+const double4 vZeros = {
+    0.,
+    0.,
+    0.,
+    0.,
+};
 
-static inline double sumInternal(double4 x)
-{
-    double sum = 0;
-    for (int i = 0; i < N_PER_PACK; ++i)
-        sum += x[i];
-
-    return sum;
-}
+// static inline double4 swap4(double4 x) { return _mm256_permute2f128_ps(x, x, 0b00000001); }
+static inline double4 swap2(double4 x) { return _mm256_permute4x64_pd(x, 0b01001110); }
+static inline double4 swap1(double4 x) { return _mm256_permute4x64_pd(x, 0b10110001); }
 
 /*
 This is the function you need to implement. Quick reference:
@@ -62,16 +62,15 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     // 3. upper-triangular matmul
     // 3.1. Expand vector 'norm'
-    constexpr int bs = 8;
-    int nPacks = (nx + N_PER_PACK - 1) / N_PER_PACK;
-    int nyPadded = (ny + bs - 1) / bs * bs;
+    constexpr int bs = 4;
+    int nPacks = (ny + N_PER_PACK - 1) / N_PER_PACK;
 
     // 3.2. Move 'norm' to new padded
-    vector<double4> vnorm(nyPadded * nPacks, vZeros);
+    vector<double4> vnorm(nPacks * nx, vZeros);
 #pragma omp parallel for
     for (int i = 0; i < ny; ++i)
         for (int j = 0; j < nx; ++j)
-            vnorm[nPacks * i + j / N_PER_PACK][j % N_PER_PACK] = norm[nx * i + j];
+            vnorm[nx * (i / N_PER_PACK) + j][i % N_PER_PACK] = norm[nx * i + j];
 
 // 3.3. Start calculating
 #pragma omp parallel for
@@ -79,114 +78,50 @@ void correlate(int ny, int nx, const float *data, float *result)
         result[ny * i + i] = 1.0;
 
 #pragma omp parallel for
-    for (int i1 = 0; i1 < nyPadded; i1 += bs)
-        for (int i2 = i1; i2 < nyPadded; i2 += bs)
+    for (int i1 = 0; i1 < nPacks; ++i1)
+        for (int i2 = i1; i2 < nPacks; ++i2)
         {
-            double4 vtmp[bs][bs];
-
-            // Initialize
-            for (int i = 0; i < bs; ++i)
-                for (int j = 0; j < bs; ++j)
-                    vtmp[i][j] = vZeros;
+            double4 v0 = vZeros;
+            double4 v1 = vZeros;
+            double4 v2 = vZeros;
+            double4 v3 = vZeros;
+            // double4 v4 = vZeros;
+            // double4 v5 = vZeros;
+            // double4 v6 = vZeros;
+            // double4 v7 = vZeros;
 
             // Looping
-            for (int k = 0; k < nPacks; ++k)
+            for (int k = 0; k < nx; ++k)
             {
-                double4 v1_1 = vnorm[nPacks * (i1 + 0) + k];
-                double4 v1_2 = vnorm[nPacks * (i1 + 1) + k];
-                double4 v1_3 = vnorm[nPacks * (i1 + 2) + k];
-                double4 v1_4 = vnorm[nPacks * (i1 + 3) + k];
-                double4 v1_5 = vnorm[nPacks * (i1 + 4) + k];
-                double4 v1_6 = vnorm[nPacks * (i1 + 5) + k];
-                double4 v1_7 = vnorm[nPacks * (i1 + 6) + k];
-                double4 v1_8 = vnorm[nPacks * (i1 + 7) + k];
+                double4 a0 = vnorm[nx * i1 + k], b0 = vnorm[nx * i2 + k];
+                double4 a2 = swap2(a0);
+                // double4 a4 = swap4(a0);
+                // double4 a6 = swap2(a4);
+                double4 b1 = swap1(b0);
 
-                double4 v2_1 = vnorm[nPacks * (i2 + 0) + k];
-                double4 v2_2 = vnorm[nPacks * (i2 + 1) + k];
-                double4 v2_3 = vnorm[nPacks * (i2 + 2) + k];
-                double4 v2_4 = vnorm[nPacks * (i2 + 3) + k];
-                double4 v2_5 = vnorm[nPacks * (i2 + 4) + k];
-                double4 v2_6 = vnorm[nPacks * (i2 + 5) + k];
-                double4 v2_7 = vnorm[nPacks * (i2 + 6) + k];
-                double4 v2_8 = vnorm[nPacks * (i2 + 7) + k];
-
-                vtmp[0][0] = v1_1 * v2_1 + vtmp[0][0];
-                vtmp[0][1] = v1_1 * v2_2 + vtmp[0][1];
-                vtmp[0][2] = v1_1 * v2_3 + vtmp[0][2];
-                vtmp[0][3] = v1_1 * v2_4 + vtmp[0][3];
-                vtmp[0][4] = v1_1 * v2_5 + vtmp[0][4];
-                vtmp[0][5] = v1_1 * v2_6 + vtmp[0][5];
-                vtmp[0][6] = v1_1 * v2_7 + vtmp[0][6];
-                vtmp[0][7] = v1_1 * v2_8 + vtmp[0][7];
-
-                vtmp[1][0] = v1_2 * v2_1 + vtmp[1][0];
-                vtmp[1][1] = v1_2 * v2_2 + vtmp[1][1];
-                vtmp[1][2] = v1_2 * v2_3 + vtmp[1][2];
-                vtmp[1][3] = v1_2 * v2_4 + vtmp[1][3];
-                vtmp[1][4] = v1_2 * v2_5 + vtmp[1][4];
-                vtmp[1][5] = v1_2 * v2_6 + vtmp[1][5];
-                vtmp[1][6] = v1_2 * v2_7 + vtmp[1][6];
-                vtmp[1][7] = v1_2 * v2_8 + vtmp[1][7];
-
-                vtmp[2][0] = v1_3 * v2_1 + vtmp[2][0];
-                vtmp[2][1] = v1_3 * v2_2 + vtmp[2][1];
-                vtmp[2][2] = v1_3 * v2_3 + vtmp[2][2];
-                vtmp[2][3] = v1_3 * v2_4 + vtmp[2][3];
-                vtmp[2][4] = v1_3 * v2_5 + vtmp[2][4];
-                vtmp[2][5] = v1_3 * v2_6 + vtmp[2][5];
-                vtmp[2][6] = v1_3 * v2_7 + vtmp[2][6];
-                vtmp[2][7] = v1_3 * v2_8 + vtmp[2][7];
-
-                vtmp[3][0] = v1_4 * v2_1 + vtmp[3][0];
-                vtmp[3][1] = v1_4 * v2_2 + vtmp[3][1];
-                vtmp[3][2] = v1_4 * v2_3 + vtmp[3][2];
-                vtmp[3][3] = v1_4 * v2_4 + vtmp[3][3];
-                vtmp[3][4] = v1_4 * v2_5 + vtmp[3][4];
-                vtmp[3][5] = v1_4 * v2_6 + vtmp[3][5];
-                vtmp[3][6] = v1_4 * v2_7 + vtmp[3][6];
-                vtmp[3][7] = v1_4 * v2_8 + vtmp[3][7];
-
-                vtmp[4][0] = v1_5 * v2_1 + vtmp[4][0];
-                vtmp[4][1] = v1_5 * v2_2 + vtmp[4][1];
-                vtmp[4][2] = v1_5 * v2_3 + vtmp[4][2];
-                vtmp[4][3] = v1_5 * v2_4 + vtmp[4][3];
-                vtmp[4][4] = v1_5 * v2_5 + vtmp[4][4];
-                vtmp[4][5] = v1_5 * v2_6 + vtmp[4][5];
-                vtmp[4][6] = v1_5 * v2_7 + vtmp[4][6];
-                vtmp[4][7] = v1_5 * v2_8 + vtmp[4][7];
-
-                vtmp[5][0] = v1_6 * v2_1 + vtmp[5][0];
-                vtmp[5][1] = v1_6 * v2_2 + vtmp[5][1];
-                vtmp[5][2] = v1_6 * v2_3 + vtmp[5][2];
-                vtmp[5][3] = v1_6 * v2_4 + vtmp[5][3];
-                vtmp[5][4] = v1_6 * v2_5 + vtmp[5][4];
-                vtmp[5][5] = v1_6 * v2_6 + vtmp[5][5];
-                vtmp[5][6] = v1_6 * v2_7 + vtmp[5][6];
-                vtmp[5][7] = v1_6 * v2_8 + vtmp[5][7];
-
-                vtmp[6][0] = v1_7 * v2_1 + vtmp[6][0];
-                vtmp[6][1] = v1_7 * v2_2 + vtmp[6][1];
-                vtmp[6][2] = v1_7 * v2_3 + vtmp[6][2];
-                vtmp[6][3] = v1_7 * v2_4 + vtmp[6][3];
-                vtmp[6][4] = v1_7 * v2_5 + vtmp[6][4];
-                vtmp[6][5] = v1_7 * v2_6 + vtmp[6][5];
-                vtmp[6][6] = v1_7 * v2_7 + vtmp[6][6];
-                vtmp[6][7] = v1_7 * v2_8 + vtmp[6][7];
-
-                vtmp[7][0] = v1_8 * v2_1 + vtmp[7][0];
-                vtmp[7][1] = v1_8 * v2_2 + vtmp[7][1];
-                vtmp[7][2] = v1_8 * v2_3 + vtmp[7][2];
-                vtmp[7][3] = v1_8 * v2_4 + vtmp[7][3];
-                vtmp[7][4] = v1_8 * v2_5 + vtmp[7][4];
-                vtmp[7][5] = v1_8 * v2_6 + vtmp[7][5];
-                vtmp[7][6] = v1_8 * v2_7 + vtmp[7][6];
-                vtmp[7][7] = v1_8 * v2_8 + vtmp[7][7];
+                v0 += a0 * b0;
+                v1 += a0 * b1;
+                v2 += a2 * b0;
+                v3 += a2 * b1;
+                // v4 += a4 + b0;
+                // v5 += a4 + b1;
+                // v6 += a6 + b0;
+                // v7 += a6 + b1;
             }
 
+            double4 v[] = {v0, v1, v2, v3};
+            for (int j = 1; j < bs; j += 2)
+                v[j] = swap1(v[j]);
+
             // Assign back to 'result'
-            for (int i = 0; i < bs; ++i)
-                for (int j = 0; j < bs; ++j)
-                    if (i1 + i < ny && i2 + j < ny && i1 + i < i2 + j)
-                        result[ny * (i1 + i) + i2 + j] = (float)sumInternal(vtmp[i][j]);
+            for (int i_bs = 0; i_bs < bs; ++i_bs)
+                for (int j_bs = 0; j_bs < bs; ++j_bs)
+                {
+                    int i = i1 * N_PER_PACK + i_bs;
+                    int j = i2 * N_PER_PACK + j_bs;
+
+                    if (i < ny && j < ny && i < j)
+                        result[ny * i + j] = (float)v[i_bs ^ j_bs][j_bs];
+                }
         }
 }
