@@ -3,20 +3,24 @@
 #include <x86intrin.h>
 using namespace std;
 
-constexpr int N_PER_PACK = 4;
+constexpr int N_PER_PACK = 8;
 
-typedef double double4 __attribute__((vector_size(N_PER_PACK * sizeof(double))));
+typedef double double8 __attribute__((vector_size(N_PER_PACK * sizeof(double))));
 
-const double4 vZeros = {
+const double8 vZeros = {
+    0.,
+    0.,
+    0.,
+    0.,
     0.,
     0.,
     0.,
     0.,
 };
 
-// static inline double4 swap4(double4 x) { return _mm256_permute2f128_ps(x, x, 0b00000001); }
-static inline double4 swap2(double4 x) { return _mm256_permute4x64_pd(x, 0b01001110); }
-static inline double4 swap1(double4 x) { return _mm256_permute4x64_pd(x, 0b10110001); }
+static inline double8 swap2(double8 x) { return _mm512_permutex_pd(x, 0b01001110); }
+static inline double8 swap1(double8 x) { return _mm512_permutex_pd(x, 0b10110001); }
+static inline double8 swap4(double8 x) { return _mm512_shuffle_f64x2(x, x, 0b01001110); }
 
 /*
 This is the function you need to implement. Quick reference:
@@ -62,11 +66,11 @@ void correlate(int ny, int nx, const float *data, float *result)
 
     // 3. upper-triangular matmul
     // 3.1. Expand vector 'norm'
-    constexpr int bs = 4;
+    constexpr int bs = 8;
     int nPacks = (ny + N_PER_PACK - 1) / N_PER_PACK;
 
     // 3.2. Move 'norm' to new padded
-    vector<double4> vnorm(nPacks * nx, vZeros);
+    vector<double8> vnorm(nPacks * nx, vZeros);
 #pragma omp parallel for
     for (int i = 0; i < ny; ++i)
         for (int j = 0; j < nx; ++j)
@@ -81,35 +85,35 @@ void correlate(int ny, int nx, const float *data, float *result)
     for (int i1 = 0; i1 < nPacks; ++i1)
         for (int i2 = i1; i2 < nPacks; ++i2)
         {
-            double4 v0 = vZeros;
-            double4 v1 = vZeros;
-            double4 v2 = vZeros;
-            double4 v3 = vZeros;
-            // double4 v4 = vZeros;
-            // double4 v5 = vZeros;
-            // double4 v6 = vZeros;
-            // double4 v7 = vZeros;
+            double8 v0 = vZeros;
+            double8 v1 = vZeros;
+            double8 v2 = vZeros;
+            double8 v3 = vZeros;
+            double8 v4 = vZeros;
+            double8 v5 = vZeros;
+            double8 v6 = vZeros;
+            double8 v7 = vZeros;
 
             // Looping
             for (int k = 0; k < nx; ++k)
             {
-                double4 a0 = vnorm[nx * i1 + k], b0 = vnorm[nx * i2 + k];
-                double4 a2 = swap2(a0);
-                // double4 a4 = swap4(a0);
-                // double4 a6 = swap2(a4);
-                double4 b1 = swap1(b0);
+                double8 a0 = vnorm[nx * i1 + k], b0 = vnorm[nx * i2 + k];
+                double8 a2 = swap2(a0);
+                double8 a4 = swap4(a0);
+                double8 a6 = swap2(a4);
+                double8 b1 = swap1(b0);
 
                 v0 += a0 * b0;
                 v1 += a0 * b1;
                 v2 += a2 * b0;
                 v3 += a2 * b1;
-                // v4 += a4 + b0;
-                // v5 += a4 + b1;
-                // v6 += a6 + b0;
-                // v7 += a6 + b1;
+                v4 += a4 * b0;
+                v5 += a4 * b1;
+                v6 += a6 * b0;
+                v7 += a6 * b1;
             }
 
-            double4 v[] = {v0, v1, v2, v3};
+            double8 v[] = {v0, v1, v2, v3, v4, v5, v6, v7};
             for (int j = 1; j < bs; j += 2)
                 v[j] = swap1(v[j]);
 
