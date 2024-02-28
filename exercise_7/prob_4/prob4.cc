@@ -151,15 +151,16 @@ int main(int argc, char *argv[])
         MPI_Send(&sum, 1, MPI_INT, sendTo, id, MPI_COMM_WORLD);
         cout << "At " << id << " send to " << sendTo << " value: " << sum << endl;
 
-        MPI_Barrier(MPI_COMM_WORLD);
+        // MPI_Barrier(MPI_COMM_WORLD);
     }
 
     // 5. Print result at process 0
     if (id == 0)
     {
-        // cout << "= At process " << id << " -> sum = " << sum << endl;
-        MPI_Barrier(MPI_COMM_WORLD);
+        cout << "= At process " << id << " -> sum = " << sum << endl;
+        // MPI_Barrier(MPI_COMM_WORLD);
     }
 
+    MPI_Finalize();
     return 0;
 }
