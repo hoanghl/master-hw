@@ -106,7 +106,7 @@ void step(float *r, const float *d_, int n)
                     int i_r = i1 * nPerPack + i;
                     int j_r = i2 * nPerPack + j;
                     if (i_r < n && j_r < n)
-                        r[n * i_r + j_r] = vs[i ^ j][j];
+                        r[n * i_r + j_r] = vs[i ^ j][i];
                 }
         }
 }
@@ -194,7 +194,7 @@ int main(int argc, char const *argv[])
 
     cout << "2. Step" << endl;
     auto t1 = high_resolution_clock::now();
-    step(r, result->d, result->n);
+    step_reference(r, result->d, result->n);
     auto t2 = high_resolution_clock::now();
 
     duration<double, std::milli> ms_double = t2 - t1;
