@@ -142,8 +142,12 @@ int main(int argc, char *argv[])
     int procLeft = 0, procRight = 0;
     MPI_Cart_shift(comm, direction, disp, &procLeft, &procRight);
 
-    vector<double> epSum = vector<double>(maxt);
-    vector<double> ekSum = vector<double>(maxt);
+    MPI_Request requestSent;
+    vector<MPI_Request> vReqRecvKinetic(nProcs);
+    vector<MPI_Request> vReqRecvPotential(nProcs);
+    vector<MPI_Request> vReqSend(2);
+    vector<double> ekProcs(nProcs);
+    vector<double> epProcs(nProcs);
 
     auto t0 = std::chrono::system_clock::now();
     // Start simulation
@@ -198,101 +202,45 @@ int main(int argc, char *argv[])
         }
 
         // Send all accumulated ep and ek to rank 0
-        epSum[step] = accumulate(ep.begin(), ep.end(), 0.0);
-        ekSum[step] = accumulate(ek.begin(), ek.end(), 0.0);
+        double epSum = accumulate(ep.begin(), ep.end(), 0.0);
+        double ekSum = accumulate(ek.begin(), ek.end(), 0.0);
+
+        if (rank != 0)
+        {
+            MPI_Isend(&epSum, 1, MPI_DOUBLE, 0, getTag(rank, potential), MPI_COMM_WORLD, &vReqSend[0]);
+            MPI_Isend(&ekSum, 1, MPI_DOUBLE, 0, getTag(rank, kinetic), MPI_COMM_WORLD, &vReqSend[1]);
+            MPI_Wait(&vReqSend[0], MPI_STATUS_IGNORE);
+            MPI_Wait(&vReqSend[1], MPI_STATUS_IGNORE);
+        }
+        else
+        {
+            ekProcs[0] = ekSum;
+            epProcs[0] = epSum;
+
+            for (int i = 1; i < nProcs; ++i)
+            {
+                MPI_Irecv(&ekProcs[i], 1, MPI_DOUBLE, i, getTag(i, kinetic), MPI_COMM_WORLD, &vReqRecvKinetic[i]);
+                MPI_Irecv(&epProcs[i], 1, MPI_DOUBLE, i, getTag(i, potential), MPI_COMM_WORLD, &vReqRecvPotential[i]);
+            }
+
+            for (int i = 1; i < nProcs; ++i)
+            {
+                MPI_Wait(&vReqRecvKinetic[i], MPI_STATUS_IGNORE);
+                MPI_Wait(&vReqRecvPotential[i], MPI_STATUS_IGNORE);
+            }
+
+            double eksumFinal = accumulate(ekProcs.begin(), ekProcs.end(), 0.0);
+            double epsumFinal = accumulate(epProcs.begin(), epProcs.end(), 0.0);
+
+            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * step, epsumFinal + eksumFinal, epsumFinal, eksumFinal);
+        }
     }
-
-    // Receive results
-    if (rank != 0)
-    {
-        MPI_Request request;
-        // MPI_Isend(&epSum, maxt, MPI_DOUBLE, 0, getTag(rank, potential), comm, &request);
-        // MPI_Isend(&ekSum, maxt, MPI_DOUBLE, 0, getTag(rank, kinetic), comm, &request);
-        cout << "before rank: " << rank << endl;
-        // MPI_Send(&epSum, maxt, MPI_DOUBLE, 0, getTag(rank, potential), comm);
-        MPI_Isend(&ekSum, maxt, MPI_DOUBLE, 0, 0, comm, &request);
-        cout << "end rank: " << rank << endl;
-
-        MPI_Wait(&request, MPI_STATUS_IGNORE);
-    }
-    // else
-    // {
-    //     cout << "here rank 0" << endl;
-    // vector<double> epsumFinal = vector<double>(nProcs - 1);
-    // vector<double> eksumFinal = vector<double>(nProcs - 1);
-
-    // for (int proc = 1; proc < nProcs; ++proc)
-    // {
-    //     MPI_Recv(&epsumFinal[proc - 1], 1, MPI_DOUBLE, proc, TAG_RESULT_EP, comm, &status);
-    //     MPI_Recv(&eksumFinal[proc - 1], 1, MPI_DOUBLE, proc, TAG_RESULT_EK, comm, &status);
-    // }
-
-    // double epsum = accumulate(epsumFinal.begin(), epsumFinal.end(), 0.0);
-    // double eksum = accumulate(eksumFinal.begin(), eksumFinal.end(), 0.0);
-    // }
 
     if (rank == 0)
     {
-        // vector<vector<double>> epSumProcs;
-        // vector<vector<double>> ekSumProcs;
-
-        // epSumProcs.push_back(epSum);
-        // ekSumProcs.push_back(ekSum);
-
-        // double **epSumProcs = new double *[nProcs];
-
-        // for (int i = 1; i < nProcs; ++i)
-        // {
-        //     epSumProcs.push_back(vector<double>(maxt));
-        //     ekSumProcs.push_back(vector<double>(maxt));
-        // epSumProcs[i] = new double[maxt];
-        // }
-
-        vector<double> ekv1 = vector<double>(maxt);
-        vector<double> ekv2 = vector<double>(maxt);
-        vector<double> ekv3 = vector<double>(maxt);
-        MPI_Request request1;
-        MPI_Request request2;
-        MPI_Request request3;
-
-        MPI_Irecv(&ekv1, maxt, MPI_DOUBLE, 1, 0, MPI_COMM_WORLD, &request1);
-        MPI_Irecv(&ekv2, maxt, MPI_DOUBLE, 2, 0, MPI_COMM_WORLD, &request2);
-        MPI_Irecv(&ekv3, maxt, MPI_DOUBLE, 3, 0, MPI_COMM_WORLD, &request3);
-
-        MPI_Wait(&request1, MPI_STATUS_IGNORE);
-        cout << "rec rank: " << 1 << endl;
-        MPI_Wait(&request2, MPI_STATUS_IGNORE);
-        cout << "rec rank: " << 2 << endl;
-        MPI_Wait(&request3, MPI_STATUS_IGNORE);
-        cout << "rec rank: " << 3 << endl;
-
-        // MPI_Recv(&ekv1, maxt, MPI_DOUBLE, 1, getTag(1, kinetic), MPI_COMM_WORLD, &status1);
-
-        // Receive from other processes
-
-        for (int i = 1; i < nProcs; ++i)
-        {
-            // MPI_Recv(&ekv, maxt, MPI_DOUBLE, i, getTag(i, potential), comm, &status);
-            // epSumProcs.push_back(ekv);
-
-            // MPI_Recv(&ekSumProcs[i], maxt, MPI_DOUBLE, i, getTag(i, kinetic), comm, &status);
-        }
-
-        // // Calculate total energy for each step
-        // for (int step = 0; step < maxt; ++step)
-        // {
-        //     for (int i = 1; i < nProcs; ++i)
-        //     {
-        //         double epsum = epSumProcs[i][step];
-        //         double eksum = ekSumProcs[i][step];
-
-        //         printf("%20.10g %20.10g %20.10g %20.10g\n", dt * step, epsum + eksum, epsum, eksum);
-        //     }
-        // }
-
-        // auto t1 = std::chrono::system_clock::now();
-        // auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
-        // cout << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
+        auto t1 = std::chrono::system_clock::now();
+        auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
+        cout << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
     }
 
     MPI_Finalize();
