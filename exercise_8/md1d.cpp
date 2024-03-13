@@ -34,6 +34,7 @@ void accel(int nat, int i, double *u, double *a, double box, vector<double> &x)
     int j, k;
     double dxl, dxr;
 
+    // NOTE: HoangLe [Mar-12]: This is the part where a particle interacts with the neighbors
     j = i - 1;
     if (j < 0)
         j = nat - 1;
@@ -135,8 +136,8 @@ int main(int argc, char **argv)
         v[i] = vsc * (rn - 0.5); // Scale the velocities to vsc*[-½,½]
     }
 
-    if (coout > 0)
-        fcoord.open(coord_file);
+    // if (coout > 0)
+    //     fcoord.open(coord_file);
 
     // Remove center of mass velocity
     // NOTE: Commented out in order to make the exercise easier
@@ -144,23 +145,21 @@ int main(int argc, char **argv)
     // vsum/=nat;
     // for (i=0;i<nat;i++) v[i]-=vsum;
 
-    n = 0;
-
     // If the user wants calculate initial energy and print initial coords
-    if (coout > 0)
-    {
-        for (i = 0; i < nat; i++)
-            accel(nat, i, &ep[i], &a[i], box, x);
-        printcoords(nat, n, x, ep, box);
-    }
+    // if (coout > 0)
+    // {
+    //     for (i = 0; i < nat; i++)
+    //         accel(nat, i, &ep[i], &a[i], box, x);
+    //     printcoords(nat, n, x, ep, box);
+    // }
 
     // Simulation proper
 
+    n = 0;
     auto t0 = std::chrono::system_clock::now();
 
     for (n = 0; n < maxt; n++)
     {
-
         for (i = 0; i < nat; i++)
             v0[i] = v[i];
 
@@ -185,6 +184,7 @@ int main(int argc, char **argv)
 
         // Calculate and print total potential end kinetic energies
         // and their sum (= total energy that should be conserved).
+        // NOTE: HoangLe [Mar-12]: All processes must accummulate themselve and send the final results to host process to accummulate one more
         epsum = accumulate(ep.begin(), ep.end(), 0.0);
         eksum = accumulate(ek.begin(), ek.end(), 0.0);
         if (eout > 0)
@@ -198,6 +198,7 @@ int main(int argc, char **argv)
     auto t1 = std::chrono::system_clock::now();
     auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
     cerr << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
+    // cout << wct.count() / 1000.0 << endl;
 
     if (coout > 0)
         fcoord.close();

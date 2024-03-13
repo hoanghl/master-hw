@@ -1,7 +1,9 @@
 CC=clang++
-# mpic++
+CC_MPI=mpic++
 
-all:
-	${CC} -o md1d md1d.cpp
+all: clean
+	${CC} -o bin/md1d md1d.cpp
+	${CC_MPI} md1d_parallel.cc -o bin/md1d_parallel
+
 clean:
-	rm -rf *.dSYM md1d
+	rm -rf *.dSYM bin/*

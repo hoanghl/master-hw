@@ -153,15 +153,10 @@ int main(int argc, char *argv[])
     // Start simulation
     for (int step = 0; step < maxt; ++step)
     {
-
-        // cout << "rank = " << rank << ": start step: " << step << endl;
-
         // Each process calculates the following:
         // Get initial velocity
         for (int i = 0; i < nAtomsEach; i++)
             v0[i] = v[i];
-
-        // cout << "rank = " << rank << ": procLeft: " << procLeft << " -- procRight = " << procRight << endl;
 
         // Populate the leftmost particle's coordinate to the left process and receive back the coordinate
         double xLeftMost = 0;
@@ -171,13 +166,9 @@ int main(int argc, char *argv[])
                      &xRightMost, 1, MPI_DOUBLE, procRight, TAG_POPULATE, comm,
                      &status);
 
-        // cout << "rank = " << rank << ": finish leftmost" << endl;
-
         MPI_Sendrecv(&x[x.size() - 1], 1, MPI_DOUBLE, procRight, TAG_POPULATE,
                      &xLeftMost, 1, MPI_DOUBLE, procLeft, TAG_POPULATE, comm,
                      &status);
-
-        // cout << "rank = " << rank << ": finish rightmost" << endl;
 
         // Calculate new acceleration and ep for each particle
         for (int i = 0; i < nAtomsEach; ++i)
@@ -202,38 +193,47 @@ int main(int argc, char *argv[])
         }
 
         // Send all accumulated ep and ek to rank 0
-        double epSum = accumulate(ep.begin(), ep.end(), 0.0);
-        double ekSum = accumulate(ek.begin(), ek.end(), 0.0);
+        double epSumLocal = accumulate(ep.begin(), ep.end(), 0.0);
+        double ekSumLocal = accumulate(ek.begin(), ek.end(), 0.0);
 
-        if (rank != 0)
+        double epFinal, ekFinal;
+        MPI_Reduce(&epSumLocal, &epFinal, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+        MPI_Reduce(&ekSumLocal, &ekFinal, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+        // MPI_Reduce(&rank, &ekSum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
+        if (rank == 0)
         {
-            MPI_Isend(&epSum, 1, MPI_DOUBLE, 0, getTag(rank, potential), MPI_COMM_WORLD, &vReqSend[0]);
-            MPI_Isend(&ekSum, 1, MPI_DOUBLE, 0, getTag(rank, kinetic), MPI_COMM_WORLD, &vReqSend[1]);
-            MPI_Wait(&vReqSend[0], MPI_STATUS_IGNORE);
-            MPI_Wait(&vReqSend[1], MPI_STATUS_IGNORE);
+            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * step, epFinal + ekFinal, epFinal, ekFinal);
         }
-        else
-        {
-            ekProcs[0] = ekSum;
-            epProcs[0] = epSum;
+        // if (rank != 0)
+        // {
+        //     MPI_Isend(&epSum, 1, MPI_DOUBLE, 0, getTag(rank, potential), MPI_COMM_WORLD, &vReqSend[0]);
+        //     MPI_Isend(&ekSum, 1, MPI_DOUBLE, 0, getTag(rank, kinetic), MPI_COMM_WORLD, &vReqSend[1]);
+        //     MPI_Wait(&vReqSend[0], MPI_STATUS_IGNORE);
+        //     MPI_Wait(&vReqSend[1], MPI_STATUS_IGNORE);
+        // }
+        // else
+        // {
+        //     ekProcs[0] = ekSum;
+        //     epProcs[0] = epSum;
 
-            for (int i = 1; i < nProcs; ++i)
-            {
-                MPI_Irecv(&ekProcs[i], 1, MPI_DOUBLE, i, getTag(i, kinetic), MPI_COMM_WORLD, &vReqRecvKinetic[i]);
-                MPI_Irecv(&epProcs[i], 1, MPI_DOUBLE, i, getTag(i, potential), MPI_COMM_WORLD, &vReqRecvPotential[i]);
-            }
+        //     for (int i = 1; i < nProcs; ++i)
+        //     {
+        //         MPI_Irecv(&ekProcs[i], 1, MPI_DOUBLE, i, getTag(i, kinetic), MPI_COMM_WORLD, &vReqRecvKinetic[i]);
+        //         MPI_Irecv(&epProcs[i], 1, MPI_DOUBLE, i, getTag(i, potential), MPI_COMM_WORLD, &vReqRecvPotential[i]);
+        //     }
 
-            for (int i = 1; i < nProcs; ++i)
-            {
-                MPI_Wait(&vReqRecvKinetic[i], MPI_STATUS_IGNORE);
-                MPI_Wait(&vReqRecvPotential[i], MPI_STATUS_IGNORE);
-            }
+        //     for (int i = 1; i < nProcs; ++i)
+        //     {
+        //         MPI_Wait(&vReqRecvKinetic[i], MPI_STATUS_IGNORE);
+        //         MPI_Wait(&vReqRecvPotential[i], MPI_STATUS_IGNORE);
+        //     }
 
-            double eksumFinal = accumulate(ekProcs.begin(), ekProcs.end(), 0.0);
-            double epsumFinal = accumulate(epProcs.begin(), epProcs.end(), 0.0);
+        //     double eksumFinal = accumulate(ekProcs.begin(), ekProcs.end(), 0.0);
+        //     double epsumFinal = accumulate(epProcs.begin(), epProcs.end(), 0.0);
 
-            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * step, epsumFinal + eksumFinal, epsumFinal, eksumFinal);
-        }
+        //     printf("%20.10g %20.10g %20.10g %20.10g\n", dt * step, epsumFinal + eksumFinal, epsumFinal, eksumFinal);
+        // }
     }
 
     if (rank == 0)
@@ -241,6 +241,7 @@ int main(int argc, char *argv[])
         auto t1 = std::chrono::system_clock::now();
         auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
         cout << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
+        // cout << wct.count() / 1000.0 << endl;
     }
 
     MPI_Finalize();
