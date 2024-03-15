@@ -187,3 +187,5 @@ Temporary Items
 .apdisk
 
 experiments/
+**/experiment*.ipynb
+.tmc*.json

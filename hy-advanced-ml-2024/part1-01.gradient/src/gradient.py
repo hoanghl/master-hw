@@ -49,7 +49,7 @@ class Gradient:
         grad : an array of size k
                 the current gradient, the size must match to grads_squared
         """
-        self.round = self.round - self.step_size() * grad
+        self.round += 1
         self.grads_squared += np.square(grad)
 
     def gradient(self, X, y, w):
