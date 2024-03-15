@@ -188,4 +188,4 @@ Temporary Items
 
 experiments/
 **/experiment*.ipynb
-.tmc*.json
+**/.tmc*.json
