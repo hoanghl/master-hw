@@ -78,8 +78,11 @@ int main(int argc, char **argv)
         cerr << "Num. atoms is not divisible by num. threads.";
         exit(1);
     }
-    nPerThread = nat / nThreads;
+
     omp_set_num_threads(nThreads);
+
+    vector<double> ep = vector<double>(nat);
+    vector<double> ek = vector<double>(nat);
 
     // Initialize atoms positions and give them random velocities
     box = nat;
@@ -91,6 +94,9 @@ int main(int argc, char **argv)
         v[i] = vsc * (rn - 0.5); // Scale the velocities to vsc*[-½,½]
     }
 
+    double ekReduced;
+    double epReduced;
+
     // Simulation proper
     n = 0;
     auto t0 = std::chrono::system_clock::now();
@@ -100,10 +106,10 @@ int main(int argc, char **argv)
         for (int i = 0; i < nat; i++)
             v0[i] = v[i];
 
-        double ek = 0;
-        double ep = 0;
+        ekReduced = 0;
+        epReduced = 0;
 
-#pragma omp parallel for reduction(+ : ep) reduction(+ : ek)
+#pragma omp parallel for reduction(+ : epReduced, ekReduced)
         for (int i = 0; i < nat; i++)
         {
             // New potential energy and acceleration
@@ -130,7 +136,8 @@ int main(int argc, char **argv)
             dxl -= d;
             dxr -= d;
 
-            ep = (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
+            // ep[i] = (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
+            epReduced += (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
             a[i] = -(2.0 * k1 * (dxl - dxr) + 3.0 * k2 * (dxl * dxl - dxr * dxr));
 
             double vave;
@@ -145,14 +152,13 @@ int main(int argc, char **argv)
             // Calculate kinetic energy (note: mass=1)
             vave = (v0[i] + v[i]) / 2.0;
 
-            ek = 1.0 / 2.0 * vave * vave;
+            // ek[i] = 1.0 / 2.0 * vave * vave;
+            ekReduced += 1.0 / 2.0 * vave * vave;
         }
 
         xTmp = x;
         x = xnew;
         xnew = xTmp;
-
-        // ekThreads = accumulate(ek.begin(), ek.end(), 0.0);
 
         // Calculate and print total potential end kinetic energies
         // and their sum (= total energy that should be conserved).
@@ -160,8 +166,10 @@ int main(int argc, char **argv)
         {
             // epsum = accumulate(ep.begin(), ep.end(), 0.0);
             // eksum = accumulate(ek.begin(), ek.end(), 0.0);
-            eksum = ek;
-            epsum = ep;
+
+            epsum = epReduced;
+            eksum = ekReduced;
+
             printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epsum + eksum, epsum, eksum);
         }
     }
