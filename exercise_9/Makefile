@@ -1,11 +1,11 @@
-
-
 CC=clang++
-# CC_MPI=mpic++
+FLAGS = -fopenmp 
+#  -O3
+parallel: clean parallel.cc
+	${CC} parallel.cc -o bin/parallel ${FLAGS}
 
-all: clean
-	${CC} -o bin/md1d md1d.cpp
-	
+original: md1d.cpp
+	${CC} md1d.cpp -o bin/md1d
 
 clean:
 	rm -rf *.dSYM bin/*
