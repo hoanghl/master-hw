@@ -187,3 +187,4 @@ Temporary Items
 .apdisk
 *.dSYM
 .vscode
+**/bin
