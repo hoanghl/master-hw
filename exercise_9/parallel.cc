@@ -28,10 +28,10 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-    vector<double> x;  // atom positions
-    vector<double> v;  //      velocities
-    vector<double> v0; //      previous veloocities (leap frog needs them)
-    vector<double> a;  //      accelerations
+    vector<double> x, xnew, xTmp; // atom positions
+    vector<double> v;             //      velocities
+    vector<double> v0;            //      previous veloocities (leap frog needs them)
+    vector<double> a;             //      accelerations
 
     double epsum, eksum; // system energies
     double dt;           // time step
@@ -41,6 +41,8 @@ int main(int argc, char **argv)
     int maxt;            // number of time steps simulated
     int eout;            // energy output interval
     int coout;           // coordinate output interval (lot of data, beware!)
+    int nThreads;
+    int nPerThread;
 
     int n;
     double vsum, rn;
@@ -49,11 +51,11 @@ int main(int argc, char **argv)
     if (argc < 5 || argc > 7)
     {
         cerr << "usage: " << argv[0] << " nat dt maxt vsc [eout [coout]]\n";
-        cerr << "    nat   = number of atoms\n";
-        cerr << "    dt    = time step\n";
-        cerr << "    maxt  = number of time steps in simulation\n";
-        cerr << "    vsc   = mean velocity of atoms in the beginning ('temperature')\n";
-        cerr << "    eout  = interval for printing energies to stdout\n";
+        cerr << "    nat        = number of atoms\n";
+        cerr << "    dt         = time step\n";
+        cerr << "    maxt       = number of time steps in simulation\n";
+        cerr << "    vsc        = mean velocity of atoms in the beginning ('temperature')\n";
+        cerr << "    nthread    = num. threads\n";
         return (128);
     }
 
@@ -63,16 +65,21 @@ int main(int argc, char **argv)
     dt = atof(*++argv);
     maxt = atoi(*++argv);
     vsc = atof(*++argv);
-
-    if (argc > 5)
-        eout = atoi(*++argv);
-    if (argc > 6)
-        coout = atoi(*++argv);
+    nThreads = atoi(*++argv);
 
     x = vector<double>(nat);
+    xnew = vector<double>(nat);
     v = vector<double>(nat);
     v0 = vector<double>(nat);
     a = vector<double>(nat);
+
+    if (nat % nThreads != 0)
+    {
+        cerr << "Num. atoms is not divisible by num. threads.";
+        exit(1);
+    }
+    nPerThread = nat / nThreads;
+    omp_set_num_threads(nThreads);
 
     // Initialize atoms positions and give them random velocities
     box = nat;
@@ -84,31 +91,19 @@ int main(int argc, char **argv)
         v[i] = vsc * (rn - 0.5); // Scale the velocities to vsc*[-½,½]
     }
 
-    n = 0;
-
     // Simulation proper
-
-    int nThreads = 4;
-    if (nat % nThreads != 0)
-    {
-        cerr << "Num. atoms is not divisible by num. threads.";
-        exit(1);
-    }
-    int nPerThread = nat / nThreads;
-
-    omp_set_num_threads(nThreads);
-
-    vector<double> ep = vector<double>(nat);
-    vector<double> ek = vector<double>(nat);
-
+    n = 0;
     auto t0 = std::chrono::system_clock::now();
 
     for (n = 0; n < maxt; n++)
     {
         for (int i = 0; i < nat; i++)
             v0[i] = v[i];
-        //  shared (a)  reduction(+ : ep)
-        // #pragma omp parallel for
+
+        double ek = 0;
+        double ep = 0;
+
+#pragma omp parallel for reduction(+ : ep) reduction(+ : ek)
         for (int i = 0; i < nat; i++)
         {
             // New potential energy and acceleration
@@ -135,38 +130,38 @@ int main(int argc, char **argv)
             dxl -= d;
             dxr -= d;
 
-            ep[i] = (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
+            ep = (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
             a[i] = -(2.0 * k1 * (dxl - dxr) + 3.0 * k2 * (dxl * dxl - dxr * dxr));
+
+            double vave;
+            // Leap frog integration algorithm: update position and velocity
+            v[i] = v[i] + dt * a[i];
+            xnew[i] = x[i] + dt * v[i];
+            // Check periodic boundary conditions
+            if (xnew[i] < 0.0)
+                xnew[i] = xnew[i] + box;
+            if (xnew[i] >= box)
+                xnew[i] = xnew[i] - box;
+            // Calculate kinetic energy (note: mass=1)
+            vave = (v0[i] + v[i]) / 2.0;
+
+            ek = 1.0 / 2.0 * vave * vave;
         }
 
-        // double ek = 0;
+        xTmp = x;
+        x = xnew;
+        xnew = xTmp;
 
-#pragma omp parallel for
-        for (int iThread = 0; iThread < nThreads; ++iThread)
-            for (int i = iThread * nPerThread; i < (iThread + 1) * nPerThread; ++i)
-            {
-                double vave;
-                // Leap frog integration algorithm: update position and velocity
-                v[i] = v[i] + dt * a[i];
-                x[i] = x[i] + dt * v[i];
-                // Check periodic boundary conditions
-                if (x[i] < 0.0)
-                    x[i] = x[i] + box;
-                if (x[i] >= box)
-                    x[i] = x[i] - box;
-                // Calculate kinetic energy (note: mass=1)
-                vave = (v0[i] + v[i]) / 2.0;
-                ek[i] = 1.0 / 2.0 * vave * vave;
-                // ek = 1.0 / 2.0 * vave * vave;
-            }
+        // ekThreads = accumulate(ek.begin(), ek.end(), 0.0);
 
         // Calculate and print total potential end kinetic energies
         // and their sum (= total energy that should be conserved).
         if (n % eout == 0)
         {
-            epsum = accumulate(ep.begin(), ep.end(), 0.0);
-            eksum = accumulate(ek.begin(), ek.end(), 0.0);
-            // eksum = ek;
+            // epsum = accumulate(ep.begin(), ep.end(), 0.0);
+            // eksum = accumulate(ek.begin(), ek.end(), 0.0);
+            eksum = ek;
+            epsum = ep;
             printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epsum + eksum, epsum, eksum);
         }
     }
