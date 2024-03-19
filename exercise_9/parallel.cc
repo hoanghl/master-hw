@@ -81,9 +81,6 @@ int main(int argc, char **argv)
 
     omp_set_num_threads(nThreads);
 
-    vector<double> ep = vector<double>(nat);
-    vector<double> ek = vector<double>(nat);
-
     // Initialize atoms positions and give them random velocities
     box = nat;
     srand(time(NULL));
@@ -115,6 +112,7 @@ int main(int argc, char **argv)
             // New potential energy and acceleration
             int j, k;
             double dxl, dxr;
+            double vave;
 
             j = i - 1;
             if (j < 0)
@@ -136,11 +134,9 @@ int main(int argc, char **argv)
             dxl -= d;
             dxr -= d;
 
-            // ep[i] = (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
             epReduced += (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
             a[i] = -(2.0 * k1 * (dxl - dxr) + 3.0 * k2 * (dxl * dxl - dxr * dxr));
 
-            double vave;
             // Leap frog integration algorithm: update position and velocity
             v[i] = v[i] + dt * a[i];
             xnew[i] = x[i] + dt * v[i];
@@ -151,8 +147,6 @@ int main(int argc, char **argv)
                 xnew[i] = xnew[i] - box;
             // Calculate kinetic energy (note: mass=1)
             vave = (v0[i] + v[i]) / 2.0;
-
-            // ek[i] = 1.0 / 2.0 * vave * vave;
             ekReduced += 1.0 / 2.0 * vave * vave;
         }
 
@@ -163,15 +157,7 @@ int main(int argc, char **argv)
         // Calculate and print total potential end kinetic energies
         // and their sum (= total energy that should be conserved).
         if (n % eout == 0)
-        {
-            // epsum = accumulate(ep.begin(), ep.end(), 0.0);
-            // eksum = accumulate(ek.begin(), ek.end(), 0.0);
-
-            epsum = epReduced;
-            eksum = ekReduced;
-
-            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epsum + eksum, epsum, eksum);
-        }
+            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epReduced + ekReduced, epReduced, ekReduced);
     }
 
     auto t1 = std::chrono::system_clock::now();
