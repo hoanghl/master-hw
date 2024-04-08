@@ -1,4 +1,4 @@
-CC=clang++
+CC=g++
 FLAGS = -fopenmp 
 #  -O3
 parallel: clean parallel.cc
