@@ -98,9 +98,13 @@ def fit(X, y, featurecnt):
 
     # Select best feature
     # Change the code to use sampling
-    ind = feasible[np.argmax(g[feasible])]
+    # ind = feasible[np.argmax(g[feasible])]
 
     # place your code here
+    if featurecnt > len(feasible):
+        featurecnt = len(feasible)
+    feasible = np.random.choice(feasible, featurecnt, replace=False)
+    ind = feasible[np.argmax(g[feasible])]
     
     split = X[:,ind] == 1
     return (ind,
@@ -197,6 +201,21 @@ def rf(Xtrain, ltrain, treecnt, samplecnt, featurecnt, Xtest, ltest):
     misclass = np.zeros(treecnt)
 
     # place your code here
+    indices = list(range(cnt))
+    forest = []
+    for _ in range(treecnt):
+        ind_sample = np.random.choice(indices, samplecnt, replace=True)
+        X_sample, y_sample = Xtrain[ind_sample], ltrain[ind_sample]
+
+        tree = fit(X_sample, y_sample, featurecnt)
+        forest.append(tree)
+    
+    for i, tree in enumerate(forest):
+        ytest_pred_tree = predict(tree, Xtest)
+        p += ytest_pred_tree
+
+        miss = np.sum((np.sign(p) != ltest).astype(np.int32)) / len(ltest)
+        misclass[i] = miss
     
     return p, misclass
 
@@ -214,6 +233,9 @@ def main(argv):
     Xtest = D[:,1:] 
 
     treecnt = int(argv[3])
+
+    # FIXME: HoangLe [Apr-12]: Remove the following after testing
+    tree = fit(Xtest, ltest, 2)
 
     cnt, k = Xtrain.shape
 
