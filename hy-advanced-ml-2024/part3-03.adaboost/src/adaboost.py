@@ -112,7 +112,30 @@ def adaboost(X, y, itercnt):
     output = np.zeros(cnt)
 
     # place your code here
+    classifier = LDA()
 
+    weights = np.ones((cnt, )) / cnt
+    ensemble_pred = 0
+    for i in range(itercnt):
+        classifier.fit(X, y, weights)
+        y_pred = classifier.predict(X)
+
+        epsilon_m = 1.0 / np.sum(weights) * np.sum(weights * (y != y_pred).astype(np.int32))
+        err_individual[i] = epsilon_m
+
+        beta_m = 1.0 / 2 * np.log((1 - epsilon_m) / epsilon_m)
+
+        weights = weights * np.exp(-beta_m * y * y_pred)
+
+        ensemble_pred += beta_m * y_pred
+        err_ensemble[i] = (np.sign(ensemble_pred) != y).astype(np.int32).sum() * 1.0 / len(y)
+
+        exponential = 0
+        for j in range(cnt):
+            exponential += np.exp(-y[j] * ensemble_pred[j])
+        err_exponential[i] = 1.0 / cnt * exponential
+
+        output += beta_m * y_pred
     
     return output, err_individual, err_ensemble, err_exponential
 
