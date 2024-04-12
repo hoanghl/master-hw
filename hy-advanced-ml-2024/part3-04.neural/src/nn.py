@@ -53,7 +53,7 @@ class Neuron:
         """
 
         # place your code here
-        return 0
+        return 1.0 / (1 + np.exp(-x))
 
 
     def der(self, x):
@@ -72,7 +72,7 @@ class Neuron:
         """
 
         # place your code here
-        return 0
+        return self.act(x) * (1 - self.act(x))
 
 
     def compute_output(self):
@@ -84,6 +84,11 @@ class Neuron:
 
         # compute self.input and self.output
         # place your code here
+        self.input = 0
+        for edge in self.inedges:
+            self.input += edge.inn.output * edge.w 
+        self.input += self.bias
+        self.output = self.act(self.input)
 
 
     def compute_delta(self):
@@ -93,6 +98,10 @@ class Neuron:
 
         # compute self.delta
         # place your code here
+        self.delta = 0
+        for edge in self.outedges:
+            self.delta += edge.w * edge.outn.delta
+        self.delta *= self.der(self.input)
 
 
 class NN:
@@ -165,6 +174,8 @@ class NN:
 
         # compute the output for the remaining neurons
         # place your code here
+        for i in range(cnt, len(self.neurons)):
+            self.neurons[i].compute_output()
 
 
     def backward(self, y):
@@ -185,6 +196,8 @@ class NN:
             n.delta = -n.delta
 
         # place your code here
+        for i in range(len(self.neurons) - 2, -1, -1):
+            self.neurons[i].compute_delta()
             
 
     def gradients(self, X, y):
@@ -228,6 +241,13 @@ class NN:
 
             # Update the gradients 
             # place your code here
+            for j in range(ncnt - 1, -1, -1):
+                bgrad[j] += self.neurons[j].delta
+            for j in range(ecnt - 1, -1, -1):
+                wgrad[j] += self.edges[j].outn.delta * self.edges[j].inn.output
+
+        bgrad /= cnt
+        wgrad /= cnt
 
         return wgrad, bgrad, error
 
