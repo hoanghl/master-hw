@@ -252,22 +252,25 @@ contains
     integer :: in,j
     real(rk) :: dx,dy,r,u2,u3,fx2,fy2,fx3,fy3
 
-    u=0
-    u2=0
-    u3=0
-    a%x=0
-    a%y=0
+    u = 0
+    u2 = 0
+    u3 = 0
+    a%x = 0
+    a%y = 0
     
     neighloop: do j=1,NNEIGH
-       in=neigh(i,j)
-       dx=x(in)%x-x(i)%x
+       in = neigh(i,j)
+       dx = x(in)%x - x(i)%x
        if (dx<-box/2.0) dx=dx+box
        if (dx>=box/2.0) dx=dx-box
-       dy=x(in)%y-x(i)%y
-       if (dy<-box/2.0) dy=dy+box
-       if (dy>=box/2.0) dy=dy-box
-       r=sqrt(dx**2+dy**2)
-       u2=u2+1.0/2.0*k2*(r-d)**2
+
+       dy = x(in)%y - x(i)%y
+       if (dy<-box/2.0) dy = dy + box
+       if (dy>=box/2.0) dy = dy - box
+
+       r = sqrt(dx**2+dy**2)
+
+       u2 = u2 + 1.0/2.0 * k2 * (r-d)**2
        u3=u3+1.0/3.0*k3*(r-d)**3
        fx2=k2*(r-d)*dx/r
        fx3=k3*(r-d)**2*dx/r
