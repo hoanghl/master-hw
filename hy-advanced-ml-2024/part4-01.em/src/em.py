@@ -18,7 +18,12 @@ def logsumrows(X):
     """
 
     # place your code here
-    return None
+    m = X.shape[1]
+
+    M = -np.max(X, axis=-1)
+    M_ = np.repeat(M[:, None], m, -1)
+    out = np.log(np.sum(np.exp(X + M_), axis=-1)) - M
+    return out
 
 
 def computeparameters(R, X):
@@ -45,13 +50,26 @@ def computeparameters(R, X):
     """
 
     k = R.shape[1]
-    dim = X.shape[1]
+    cnt, dim = X.shape
 
     prior = np.zeros(k)
     mu = np.zeros((k, dim))
     C = np.zeros((k, dim, dim))
 
     # place your code here
+    for j in range(k):
+        mu_comp = 0
+        for n in range(cnt):
+            mu_comp += R[n, j] * X[n]
+        mu[j] = 1.0 / np.sum(R[:, j]) * mu_comp
+
+        s_comp = 0
+        for n in range(cnt):
+            s_comp += R[n, j] * (X[n][:, None] - mu[j][:, None]) @ (X[n][:, None] - mu[j][:, None]).T
+        C[j] = s_comp / np.sum(R[:, j])
+
+        prior[j] = 1.0 / cnt * np.sum(R[:, j])
+    
 
     return prior, mu, C
 
@@ -80,14 +98,32 @@ def computeparametersdiagonal(R, X):
         matrix of the ith component 
     """
 
+    def get_Ai(i, n):
+        A = np.zeros((n, n))
+        A[i, i] = 1
+        return A
+
     k = R.shape[1]
-    dim = X.shape[1]
+    cnt, dim = X.shape
 
     prior = np.zeros(k)
     mu = np.zeros((k, dim))
     C = np.zeros((k, dim, dim))
 
     # place your code here
+    for j in range(k):
+        mu_comp = 0
+        for n in range(cnt):
+            mu_comp += R[n, j] * X[n]
+        mu[j] = 1.0 / np.sum(R[:, j]) * mu_comp
+
+        s_comp = 0
+        for n in range(cnt):
+            s_comp += R[n, j] * (X[n][:, None] - mu[j][:, None]) @ (X[n][:, None] - mu[j][:, None]).T
+        C[j] = np.diag(np.diag(s_comp / np.sum(R[:, j])))
+
+        prior[j] = 1.0 / cnt * np.sum(R[:, j])
+
     return prior, mu, C
 
 
@@ -123,6 +159,18 @@ def computeparameterssame(R, X):
     C = np.zeros((k, dim, dim))
 
     # place your code here
+    for j in range(k):
+        mu_comp = 0
+        for n in range(cnt):
+            mu_comp += R[n, j] * X[n]
+        mu[j] = 1.0 / np.sum(R[:, j]) * mu_comp
+
+        prior[j] = 1.0 / cnt * np.sum(R[:, j])
+
+    for j in range(k):
+        for n in range(cnt):
+            C += R[n, j] * (X[n][:, None] - mu[j][:, None]) @ (X[n][:, None] - mu[j][:, None]).T
+    C *= 1.0 / np.sum(R)
     return prior, mu, C
 
 
@@ -158,6 +206,21 @@ def computeparametersspherical(R, X):
     C = np.zeros((k, dim, dim))
 
     # place your code here
+    for j in range(k):
+        mu_comp = 0
+        for n in range(cnt):
+            mu_comp += R[n, j] * X[n]
+        mu[j] = 1.0 / np.sum(R[:, j]) * mu_comp
+
+        prior[j] = 1.0 / cnt * np.sum(R[:, j])
+
+    sigma = 0
+    for j in range(k):
+        for n in range(cnt):
+            sigma += R[n, j] * (X[n][:, None] - mu[j][:, None]).T @ (X[n][:, None] - mu[j][:, None])
+    sigma /= (dim * np.sum(R))
+    C = sigma * np.identity(dim)
+    C = C[None, :].repeat(k, axis=0)
     return prior, mu, C
 
 
@@ -185,10 +248,21 @@ def computeresponsibilities(X, prior, mu, C):
     """
 
     k = prior.shape[0]
-    cnt = X.shape[0]
+    cnt, m = X.shape
     R = np.zeros((cnt, k))
 
     # place your code here
+    L = np.zeros((cnt, k))
+
+    for i in range(cnt):
+        for j in range(k):
+            L[i, j] = -m/2.0 * np.log(2 * np.pi) \
+                - 1.0/2 * np.log(np.linalg.det(C[j])) \
+                - 1.0/2 * (X[i] - mu[j]).T @ np.linalg.inv(C[j]) @ (X[i] - mu[j]) \
+                + np.log(prior[j])
+            
+    R = L - logsumrows(L)[:, None]
+    R = np.exp(R)
 
     return R
 
@@ -224,8 +298,15 @@ def em(X, R, itercnt, stats):
         C[i, :, :] is the covariance matrix of the ith component
 
     """
+    n, k = R.shape
+    m = X.shape[1]
 
     # place your code here
+    for _ in range(itercnt):
+        prior, mu, C = stats(R, X)
+
+        R = computeresponsibilities(X, prior, mu, C)
+
     return R, prior, mu, C
 
 
