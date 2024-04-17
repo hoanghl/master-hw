@@ -1,6 +1,8 @@
 import sys
 import numpy as np
 
+def error(X: np.ndarray, W: np.ndarray, H: np.ndarray):
+    return np.linalg.norm(X - W @ H)**2
 
 def nmf(X, W, H, itercnt):
     """ 
@@ -31,6 +33,33 @@ def nmf(X, W, H, itercnt):
     err = np.zeros(itercnt + 1)
 
     # place your code here
+    k, m = H.shape
+    n = W.shape[0]
+
+    eta = np.zeros((k, m))
+    lambd = np.zeros((n, k))
+
+    err[0] = error(X, W, H)
+    for it in range(itercnt):
+        # Calculate eta
+        tmp = W.T @ W @ H
+
+        for i in range(k):
+            for j in range(m):
+                eta[i, j] = H[i, j] / tmp[i, j]
+
+        H = eta * (W.T @ X)
+
+        # Calculate lambda
+        tmp = W @ H @ H.T
+
+        for i in range(n):
+            for j in range(k):
+                lambd[i, j] = W[i, j] / tmp[i, j]
+
+        W = lambd * (X @ H.T)
+
+        err[it + 1] = error(X, W, H)
 
     return W, H, err
 
