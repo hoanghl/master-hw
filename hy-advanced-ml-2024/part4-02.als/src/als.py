@@ -25,6 +25,7 @@ def error(X, W, H, reg):
 
     err = 0
     # place your code here
+    err = np.linalg.norm((X - W @ H)[~np.isnan(X)])**2 + reg * np.linalg.norm(W) ** 2 + reg * np.linalg.norm(H) ** 2
     return err
 
 
@@ -52,6 +53,15 @@ def solve(X, W, reg):
     H = np.zeros((k, m))
 
     # place your code here
+    mask = ~np.isnan(X)
+
+    for i in range(m):
+        Wi = W[mask[:, i]]
+        xi = X[:, i][mask[:, i]]
+
+        k = Wi.shape[1]
+
+        H[:, i] = np.linalg.inv(Wi.T @ Wi + reg * np.identity(k)) @ Wi.T @ xi
 
     return H
 
@@ -85,6 +95,12 @@ def als(X, W, reg, itercnt):
     err = np.zeros(itercnt)
 
     # place your code here
+    for i in range(itercnt):
+        H = solve(X, W, reg)
+
+        W = solve(X.T, H.T, reg).T
+
+        err[i] = error(X, W, H, reg)
 
     return W, H, err
 
