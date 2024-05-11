@@ -1,12 +1,3 @@
-//
-// 1D molecular dynamics simulation code for course
-// MATR326 Tools for high performance computing
-// Antti Kuronen, University of Helsinki
-//
-// Try e.g.
-// ./a.out 10000 0.001 100000 1 100 0
-//
-
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -19,8 +10,9 @@
 #define k1 1.0
 #define k2 1.0
 #define k3 0.4
-#// TODO: HoangLe [Apr-14]: Determine k2, k3 again
 #define xsc 2.35
+
+const int TAG_POPULATE = 100;
 
 typedef struct
 {
@@ -83,42 +75,6 @@ void getNeighList(vector<vector<int>> &neigh, int nat, int nuc)
 
 void accel(int nat, int i, double *u, Coordinate *a, double box, vector<Coordinate> *x, vector<vector<int>> *neighbors)
 {
-    // Calculate the potential energy u
-    // and acceleration a of atom i.
-    // int j, k;
-    // double dxl, dxr;
-
-    // NOTE: HoangLe [Mar-12]: This is the part where a particle interacts with the neighbors
-    // TODO: HoangLe [Apr-08]: Add for loop that calculates the interaction with 4 neighbors
-
-    // j = i - 1;
-    // if (j < 0)
-    //     j = nat - 1;
-    // k = i + 1;
-    // if (k >= nat)
-    //     k = 0;
-
-    // for (int nei = 0; nei < 4; ++nei)
-    // {
-    //     int in = neighbors[i][nei];
-    // }
-
-    // dxl = x[i] - x[j];
-    // dxr = x[k] - x[i];
-    // if (dxl < -box / 2.0)
-    //     dxl += box;
-    // if (dxl >= box / 2.0)
-    //     dxl -= box;
-    // if (dxr < -box / 2.0)
-    //     dxr += box;
-    // if (dxr >= box / 2.0)
-    //     dxr -= box;
-    // dxl -= d;
-    // dxr -= d;
-
-    // // TODO: HoangLe [Apr-08]: Modify this step of calculating U, note that the coefficient is now different
-    // *u = (k1 * (dxl * dxl + dxr * dxr) + k2 * (dxl * dxl * dxl + dxr * dxr * dxr)) / 2.0;
-    // *a = -(2.0 * k1 * (dxl - dxr) + 3.0 * k2 * (dxl * dxl - dxr * dxr));
 
     double u2 = 0, u3 = 0;
     a->x = 0;
@@ -154,18 +110,6 @@ void accel(int nat, int i, double *u, Coordinate *a, double box, vector<Coordina
 
     // Remember the factor 1 / 2 due to 'double counting
     *u = (u2 + u3) / 2.0;
-}
-
-// --------------------------------------------------------------------------------------
-
-void printcoords(int nat, int n, vector<Coordinate> x, vector<double> ep, double box)
-{
-    int i;
-    // TODO: HoangLe [Apr-14]: Fix this function to use with new 'x'
-    fcoord << nat << endl;
-    fcoord << "Frame number " << n << " " << n << " fs boxsize " << xsc * box << " " << xsc * box << endl;
-    for (i = 0; i < nat; i++)
-        fcoord << "Fe " << xsc * (x[i].x - box / 2) << " " << 0 << " " << 0 << " " << ep[i] << endl;
 }
 
 // --------------------------------------------------------------------------------------
@@ -267,18 +211,15 @@ int main(int argc, char **argv)
     // Simulation proper
     auto t0 = std::chrono::system_clock::now();
 
+    double v0_x, v0_y;
     for (int n = 0; n < maxt; n++)
     {
-        // for (i = 0; i < nat; i++)
-        //     v0[i] = v[i];
-        v0 = v;
-
-        for (i = 0; i < nat; i++)
-            // New potential energy and acceleration
-            accel(nat, i, &ep[i], &a[i], box, &x, &neighbors);
-
         for (i = 0; i < nat; i++)
         {
+            accel(nat, i, &ep[i], &a[i], box, &x, &neighbors);
+            v0_x = v[i].x;
+            v0_y = v[i].y;
+
             // Leap frog integration algorithm: update position and velocity
             v[i].x = v[i].x + dt * a[i].x;
             v[i].y = v[i].y + dt * a[i].y;
@@ -295,32 +236,24 @@ int main(int argc, char **argv)
             if (x[i].y >= box)
                 x[i].y -= box;
 
-            // Calculate kinetic energy (note: mass=1)
-            // vave = (v0[i] + v[i]) / 2.0;
-            // ek[i] = 1.0 / 2.0 * vave * vave;
-
-            vx = (v0[i].x + v[i].x) / 2.0;
-            vy = (v0[i].y + v[i].y) / 2.0;
+            vx = (v0_x + v[i].x) / 2.0;
+            vy = (v0_y + v[i].y) / 2.0;
             ek[i] = 1.0 / 2.0 * (pow(vx, 2) + pow(vy, 2));
         }
 
         // Calculate and print total potential end kinetic energies
         // and their sum (= total energy that should be conserved).
-        // NOTE: HoangLe [Mar-12]: All processes must accummulate themselve and send the final results to host process to accummulate one more
+
         epsum = accumulate(ep.begin(), ep.end(), 0.0);
         eksum = accumulate(ek.begin(), ek.end(), 0.0);
         if (eout > 0)
             if (n % eout == 0)
                 printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epsum + eksum, epsum, eksum);
-        if (coout > 0)
-            if (n % coout == 0)
-                printcoords(nat, n, x, ep, box);
     }
 
     auto t1 = std::chrono::system_clock::now();
     auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
     cerr << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
-    // cout << wct.count() / 1000.0 << endl;
 
     if (coout > 0)
         fcoord.close();

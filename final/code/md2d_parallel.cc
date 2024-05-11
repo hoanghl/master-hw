@@ -1,3 +1,4 @@
+#include <iostream>
 #include <map>
 #include <vector>
 
@@ -68,8 +69,8 @@ class Process
 public:
     // ----- Attributes -----
     int proc_id;
-    int num_iters, num_procs, nuc;
-    int interval;
+    int maxt, num_procs, nuc;
+    int eout;
     double box, dt, vsc;
 
     double ep_total, ek_total;
@@ -85,13 +86,13 @@ public:
     // ----- Methods -----
     Process(
         int proc_id,
-        int num_iters,
+        int maxt,
         int num_procs,
         int nuc,
         double box,
         double dt,
         double vsc,
-        int interval = 100) : proc_id(proc_id), num_iters(num_iters), num_procs(num_procs), nuc(nuc), box(box), dt(dt), vsc(vsc), interval(interval)
+        int eout = 100) : proc_id(proc_id), maxt(maxt), num_procs(num_procs), nuc(nuc), box(box), dt(dt), vsc(vsc), eout(eout)
     {
         // Some checkings
         if (proc_id < 0 || proc_id >= num_procs)
@@ -183,7 +184,6 @@ public:
 
     ~Process()
     {
-        MPI_Finalize();
     }
 
     double getRand()
@@ -374,9 +374,7 @@ public:
 
     void loop()
     {
-        printf("Start looping with num_iters = %d...\n", this->num_iters);
-
-        for (int n = 0; n < this->num_iters; ++n)
+        for (int n = 0; n < this->maxt; ++n)
         {
             // if (this->proc_id == PROC_LEADER)
             //     printf("n = %d\n", n);
@@ -451,7 +449,7 @@ public:
     {
         if (this->proc_id == PROC_LEADER)
         {
-            if (n % this->interval == 0)
+            if (n % this->eout == 0)
                 printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epFinal + ekFinal, epFinal, ekFinal);
         }
     }
@@ -489,26 +487,53 @@ public:
 
 int main(int argc, char *argv[])
 {
-    // TODO: HoangLe [May-11]: Write code to receive arguments
+    double dt;  // time step
+    double vsc; // mean initial velocity
+    double box; // system size
+    int nuc;    // number of unit cells
+    int nat;    // number of atoms
+    int maxt;   // number of time steps simulated
+    int eout;   // energy output eout
 
-    int num_procs = 3, proc_id = 0;
+    int num_procs, proc_id;
 
-    int nuc = 100, num_iters = 100000;
-    double box = nuc, dt = 0.001, vsc = 0.5;
+    if (argc < 5 || argc > 6)
+    {
+        cerr << "usage: " << argv[0] << " nuc dt maxt vsc [eout [coout]]\n";
+        cerr << "    nuc   = number of unit cells\n";
+        cerr << "    dt    = time step\n";
+        cerr << "    maxt  = number of time steps in simulation\n";
+        cerr << "    vsc   = mean velocity of atoms in the beginning ('temperature')\n";
+        cerr << "    eout  = eout for printing energies to stdout\n";
+        return (128);
+    }
+
+    nuc = atoi(*++argv);
+    dt = atof(*++argv);
+    maxt = atoi(*++argv);
+    vsc = atof(*++argv);
+    eout = atof(*++argv);
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
     MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
 
-    // int dim[] = {num_procs}, periods[] = {1}, reorder = false;
-    // MPI_Cart_create(MPI_COMM_WORLD, 1, dim, periods, reorder, &comm);
-    printf("proc_id = %d , num_procs = %d\n", proc_id, num_procs);
+    box = nuc;
 
-    Process process(proc_id, num_iters, num_procs, nuc, box, dt, vsc);
+    Process process(proc_id, maxt, num_procs, nuc, box, dt, vsc, eout);
+    // process.check();
+
+    auto t0 = std::chrono::system_clock::now();
 
     process.loop();
 
-    // process.check();
+    auto t1 = std::chrono::system_clock::now();
+    auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
+    if (proc_id == PROC_LEADER)
+        cerr << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
+
+    // printf("proc = %d\n", proc_id);
+    MPI_Finalize();
 
     return 0;
 }
