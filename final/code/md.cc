@@ -1,7 +1,7 @@
 #include <map>
 #include <vector>
 
-// #include <mpi.h>
+#include <mpi.h>
 
 using namespace std;
 
@@ -10,7 +10,10 @@ const double k2 = 1.0;
 const double k3 = 0.4;
 const double d = 1.0;
 
-const int PROC_MAIN = 0;
+const int TAG_X = 10;
+const int TAG_Y = 20;
+
+const int PROC_LEADER = 0;
 
 enum DIRECTION
 {
@@ -126,17 +129,52 @@ public:
     int proc_id;
     map<int, Particle *> particlesSend, particlesRecv;
 
+    vector<double> buffSendX, buffSendY, buffRecvX, buffRecvY;
+
     // ----- Methods -----
 
     void signup_recv(int particleID, Particle *particle)
     {
         if (this->particlesRecv.find(particleID) == this->particlesRecv.end())
+        {
             this->particlesRecv[particleID] = particle;
+
+            buffRecvX.push_back(0.0);
+            buffRecvY.push_back(0.0);
+        }
     }
     void signup_send(int particleID, Particle *particle)
     {
         if (this->particlesSend.find(particleID) == this->particlesSend.end())
+        {
             this->particlesSend[particleID] = particle;
+
+            buffSendX.push_back(0.0);
+            buffSendY.push_back(0.0);
+        }
+    }
+
+    void harvest()
+    {
+        int i = 0;
+        for (auto &[_, p] : this->particlesSend)
+        {
+            this->buffSendX[i] = p->x;
+            this->buffSendY[i] = p->y;
+
+            ++i;
+        }
+    }
+    void redistribute()
+    {
+        int i = 0;
+        for (auto &[_, p] : this->particlesRecv)
+        {
+            this->buffRecvX[i] = p->x;
+            this->buffRecvY[i] = p->y;
+
+            ++i;
+        }
     }
 };
 
@@ -182,7 +220,7 @@ public:
         this->num_each = nat / this->num_procs;
 
         int partStart = proc_id * num_each;
-        int partEnd = (proc_id + 1) * this->num_each;
+        int partEnd = (proc_id + 1) * this->num_each - 1;
         if (proc_id == num_procs - 1)
             partEnd = nat - 1;
 
@@ -224,18 +262,17 @@ public:
             {
 
                 // 2.1. Determine the neighbor particle and corresponding in each direction
+
                 int iNeighbor = 0, jNeighbor = 0;
                 this->getNeighbor(p->i, p->j, direction, iNeighbor, jNeighbor);
                 int idNeighbor = ij2parID(iNeighbor, jNeighbor);
 
                 // Get neighbor particle (create new one if not existed)
+
                 Particle *pNeighbor = nullptr;
                 if (this->dict_id2par.find(idNeighbor) == this->dict_id2par.end())
                 {
-                    // FIXME: HoangLe [May-10]: Uncomment the following after testing
-
-                    // pNeighbor = new Particle(iNeighbor, jNeighbor);
-                    pNeighbor = new Particle();
+                    pNeighbor = new Particle(iNeighbor, jNeighbor);
 
                     this->particlesNeighbor.push_back(pNeighbor);
                     this->dict_id2par[idNeighbor] = pNeighbor;
@@ -330,6 +367,10 @@ public:
         }
 
         int proc = idParticle / this->num_each;
+        if (proc >= this->num_procs)
+        {
+            proc = this->num_procs - 1;
+        }
 
         return proc;
     }
@@ -337,9 +378,15 @@ public:
     void
     loop()
     {
+        printf("Start looping with num_iters = %d...\n", this->num_iters);
+
         for (int n = 0; n < this->num_iters; ++n)
         {
+            if (this->proc_id == PROC_LEADER)
+                printf("n = %d\n", n);
+
             this->ek_total = this->ep_total = 0;
+            double epFinal = 0, ekFinal = 0;
 
             for (Particle *p : this->particles)
             {
@@ -356,44 +403,62 @@ public:
                 this->ek_total += p->ek;
                 this->ep_total += p->ep;
 
-                // Send energy to the process 0
-                if (this->proc_id != PROC_MAIN)
-                {
-                    send_energies();
-                }
-                else
-                {
-                    receive_energies();
-                }
+                // Process 0 () accumulates the total_ep, total_ek sent from followers'
+                reduce_energies(epFinal, ekFinal);
             }
 
             // Print energies
-            if (this->proc_id == PROC_MAIN)
-            {
-                print_energies(n);
-            }
+            print_energies(n, epFinal, ekFinal);
         }
     }
 
     void exchange_neighbors()
     {
+        // Create thins
+        int num_reqs = 4 * this->procsNeighbor.size();
+        MPI_Request *requests = new MPI_Request[num_reqs];
+
+        // Start iterating procNeighbor and exchanging
+        int i = 0;
+        for (auto &[_, p] : this->procsNeighbor)
+        {
+            // p.harvest();
+
+            // Use MPI API
+            MPI_Isend(&p.buffSendX, p.buffSendX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i]);
+            MPI_Isend(&p.buffSendY, p.buffSendY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 1]);
+
+            MPI_Irecv(&p.buffRecvX, p.buffRecvX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i + 2]);
+            MPI_Irecv(&p.buffRecvY, p.buffRecvY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 3]);
+
+            i += 4;
+        }
+
+        MPI_Waitall(num_reqs, requests, MPI_STATUSES_IGNORE);
+
+        // After exchanging, each neighbor redistributes the received coordinates
+        // for (auto &[_, p] : this->procsNeighbor)
+        // {
+        //     p.redistribute();
+        // }
+
+        // Remove pointers
+        delete[] requests;
     }
 
-    void send_energies()
+    void reduce_energies(double &epFinal, double &ekFinal)
     {
-        //
+        // MPI_Reduce(&this->ep_total, &epFinal, 1, MPI_DOUBLE, MPI_SUM, PROC_LEADER, MPI_COMM_WORLD);
+        // MPI_Reduce(&this->ek_total, &ekFinal, 1, MPI_DOUBLE, MPI_SUM, PROC_LEADER, MPI_COMM_WORLD);
     }
 
-    void receive_energies()
+    void print_energies(int n, double epFinal, double ekFinal)
     {
-    }
-
-    void print_energies(int n)
-    {
-        // NOTE: HoangLe [May-09]: Run by process 0 only
-
-        if (n % this->interval == 0)
-            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, this->ep_total + this->ek_total, this->ep_total, this->ek_total);
+        if (this->proc_id == PROC_LEADER)
+        {
+            if (n % this->interval == 0)
+                printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epFinal + ekFinal, epFinal, ekFinal);
+        }
     }
 
     void check()
@@ -441,20 +506,26 @@ public:
     }
 };
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
+    // TODO: HoangLe [May-11]: Write code to receive arguments
 
-    int nuc = 100, num_procs = 1, proc_id = 0, num_iters = 100000;
+    int num_procs, proc_id;
+
+    int nuc = 100, num_iters = 100000;
     double box = nuc, dt = 0.001, vsc = 0.5;
 
-    // MPI_Init(nullptr, nullptr);
-    // MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
-    // MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
+    MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+    MPI_Comm comm;
+    MPI_Status status;
 
-    // int dim[] = {num_procs}, periods[] = {1}, reorder = false;
-    // MPI_Cart_create(MPI_COMM_WORLD, 1, dim, periods, reorder, &comm);
-
+    int dim[] = {num_procs}, periods[] = {1}, reorder = false;
+    MPI_Cart_create(MPI_COMM_WORLD, 1, dim, periods, reorder, &comm);
     Process process(proc_id, num_iters, num_procs, nuc, box, dt, vsc);
+
+    printf("proc_id = %d , num_procs = %d\n", proc_id, num_procs);
 
     process.loop();
 
