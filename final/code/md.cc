@@ -1,7 +1,7 @@
 #include <map>
 #include <vector>
 
-#include <mpi.h>
+// #include <mpi.h>
 
 using namespace std;
 
@@ -23,103 +23,6 @@ enum DIRECTION
     BOTTOM
 };
 
-//- Particle ---------------------------------------------------------------------------------
-
-class Particle
-{
-public:
-    double x, y;
-    double v_x, v_y, v_x_prev, v_y_prev, a_x, a_y, ep, ek;
-    int i, j;
-
-    double box, dt, vsc;
-
-    vector<Particle *> neighbors = vector<Particle *>(N_DIRECTIONS);
-
-    Particle(double i = 0, double j = 0, double box = 0, double dt = 1, double vsc = 1) : i(i), j(j), box(box), dt(dt), vsc(vsc)
-    {
-        this->x = i * 1.0;
-        this->y = j * 1.0;
-
-        this->v_x = vsc * (getRand() - 0.5);
-        this->v_y = vsc * (getRand() - 0.5);
-    }
-
-    void update_xy()
-    {
-        this->x += dt * this->v_x;
-        this->y += dt * this->v_y;
-
-        if (this->x < 0.0)
-            this->x += box;
-        else if (this->x >= box)
-            this->x -= box;
-        if (this->y < 0.0)
-            this->y += box;
-        else if (this->y >= box)
-            this->y -= box;
-    }
-    void update_v()
-    {
-        this->v_x_prev = this->v_x;
-        this->v_y_prev = this->v_y;
-
-        this->v_x += this->dt * this->a_x;
-        this->v_y += this->dt * this->a_y;
-    }
-    void update_a()
-    {
-        this->a_x = this->a_y = 0;
-
-        double dx, dy, r, fx2, fy2, fx3, fy3;
-        double u2 = 0, u3 = 0;
-
-        Particle *neighbor;
-        for (int i = LEFT; i <= BOTTOM; ++i)
-        {
-            neighbor = neighbors[i];
-
-            dx = neighbor->x - this->x;
-            if (dx < -box / 2.0)
-                dx += box;
-            if (dx >= box / 2.0)
-                dx -= box;
-
-            dy = neighbor->y - this->y;
-            if (dy < -box / 2.0)
-                dy += box;
-            if (dy >= box / 2.0)
-                dy -= box;
-
-            r = sqrt(dx * dx + dy * dy);
-
-            u2 = u2 + 1.0 / 2.0 * k2 * pow(r - d, 2);
-            u3 = u3 + 1.0 / 3.0 * k3 * pow(r - d, 3);
-            fx2 = k2 * (r - d) * dx / r;
-            fx3 = k3 * pow(r - d, 2) * dx / r;
-            fy2 = k2 * (r - d) * dy / r;
-            fy3 = k3 * pow(r - d, 2) * dy / r;
-
-            this->a_x += fx2 + fx3;
-            this->a_y += fy2 + fy3;
-        }
-
-        this->ep = (u2 + u3) / 2.0;
-    }
-
-    void calc_ek()
-    {
-        double vx = (this->v_x_prev + this->v_x) / 2.0;
-        double vy = (this->v_y_prev + this->v_y) / 2.0;
-        this->ek = 1.0 / 2.0 * (pow(vx, 2) + pow(vy, 2));
-    }
-
-    double getRand()
-    {
-        return (double)rand() / RAND_MAX;
-    }
-};
-
 //- Neighbor ---------------------------------------------------------------------------------
 
 class Neighbor
@@ -127,53 +30,32 @@ class Neighbor
 public:
     // ----- Attributes -----
     int proc_id;
-    map<int, Particle *> particlesSend, particlesRecv;
-
-    vector<double> buffSendX, buffSendY, buffRecvX, buffRecvY;
+    int minParIDSend = -1, maxParIDSend = -1, minParIDRecv = -1, maxParIDRecv = -1;
 
     // ----- Methods -----
 
-    void signup_recv(int particleID, Particle *particle)
+    void signup_recv(int parID)
     {
-        if (this->particlesRecv.find(particleID) == this->particlesRecv.end())
+        if (this->minParIDRecv == -1)
+            this->minParIDRecv = this->maxParIDRecv = parID;
+        else
         {
-            this->particlesRecv[particleID] = particle;
-
-            buffRecvX.push_back(0.0);
-            buffRecvY.push_back(0.0);
+            if (parID < this->minParIDRecv)
+                this->minParIDRecv = parID;
+            else if (parID > this->maxParIDRecv)
+                this->maxParIDRecv = parID;
         }
     }
-    void signup_send(int particleID, Particle *particle)
+    void signup_send(int parID)
     {
-        if (this->particlesSend.find(particleID) == this->particlesSend.end())
+        if (this->minParIDSend == -1)
+            this->minParIDSend = this->maxParIDSend = parID;
+        else
         {
-            this->particlesSend[particleID] = particle;
-
-            buffSendX.push_back(0.0);
-            buffSendY.push_back(0.0);
-        }
-    }
-
-    void harvest()
-    {
-        int i = 0;
-        for (auto &[_, p] : this->particlesSend)
-        {
-            this->buffSendX[i] = p->x;
-            this->buffSendY[i] = p->y;
-
-            ++i;
-        }
-    }
-    void redistribute()
-    {
-        int i = 0;
-        for (auto &[_, p] : this->particlesRecv)
-        {
-            this->buffRecvX[i] = p->x;
-            this->buffRecvY[i] = p->y;
-
-            ++i;
+            if (parID < this->minParIDSend)
+                this->minParIDSend = parID;
+            else if (parID > this->maxParIDSend)
+                this->maxParIDSend = parID;
         }
     }
 };
@@ -182,16 +64,19 @@ public:
 
 class Process
 {
+
 public:
     // ----- Attributes -----
     int proc_id;
-    int num_iters, num_procs, nuc, num_each;
+    int num_iters, num_procs, nuc;
     int interval;
     double box, dt, vsc;
 
     double ep_total, ek_total;
-    vector<Particle *> particles, particlesNeighbor;
-    unordered_map<int, Particle *> dict_id2par;
+    int num_each, partStart, partEnd;
+
+    vector<double> x, y, v_x, v_y, a_x, a_y, ep, ek;
+
     unordered_map<int, Neighbor> procsNeighbor;
 
     // MPI_Comm comm;
@@ -215,145 +100,166 @@ public:
             exit(1);
         }
 
-        // Determine which particle is handled by current proc
+        // 1. Determine which particle is handled by current proc
         int nat = this->nuc * this->nuc;
         this->num_each = nat / this->num_procs;
 
-        int partStart = proc_id * num_each;
-        int partEnd = (proc_id + 1) * this->num_each - 1;
+        this->partStart = proc_id * num_each;
+        this->partEnd = (proc_id + 1) * this->num_each - 1;
         if (proc_id == num_procs - 1)
-            partEnd = nat - 1;
+            this->partEnd = nat - 1;
 
-        // 1. Initialize particle
+        // 2. Initialize particle: coordinate, velocity
+        this->x = vector<double>(nat, 0.0);
+        this->y = vector<double>(nat, 0.0);
+        this->v_x = vector<double>(nat, 0.0);
+        this->v_y = vector<double>(nat, 0.0);
+        this->a_x = vector<double>(nat, 0.0);
+        this->a_y = vector<double>(nat, 0.0);
+        this->ep = vector<double>(nat, 0.0);
+        this->ek = vector<double>(nat, 0.0);
 
-        // 1.1. Create new particles
-        for (int p = partStart; p <= partEnd; ++p)
+        // 2.1. Init coordinate, velocity
+        for (int parID = this->partStart; parID <= this->partEnd; ++parID)
         {
-            // 1.1. Declare particle
-            int i = p / this->nuc;
-            int j = p % this->nuc;
+            int i, j;
+            this->parID2ij(parID, i, j);
 
-            Particle *particle = new Particle(i, j, box, dt, vsc);
+            this->x[parID] = i * 1.0;
+            this->y[parID] = j * 1.0;
 
-            // 1.2. Push particle to vector and dictionary
-            this->particles.push_back(particle);
-            this->dict_id2par[this->ij2parID(particle)] = particle;
+            this->v_x[parID] = this->vsc * (getRand() - 0.5);
+            this->v_y[parID] = this->vsc * (getRand() - 0.5);
         }
 
-        // 1.2. Update particles' velocity
+        // 2.2. Update particles' coordinate
         double sum_vx = 0, sum_vy = 0;
-        for (Particle *p : this->particles)
+        for (int parID = this->partStart; parID <= this->partEnd; ++parID)
         {
-            sum_vx += p->v_x;
-            sum_vy += p->v_y;
+            sum_vx += this->v_x[parID];
+            sum_vy += this->v_y[parID];
         }
         sum_vx /= nat;
         sum_vy /= nat;
-        for (Particle *p : this->particles)
+        for (int parID = this->partStart; parID <= this->partEnd; ++parID)
         {
-            p->x -= sum_vx;
-            p->y -= sum_vy;
+            this->x[parID] -= sum_vx;
+            this->x[parID] -= sum_vy;
         }
 
         // 2. Define neighbor (neigbor particles, processes) in 4 directions
-        for (Particle *p : this->particles)
+        for (int parID = this->partStart; parID <= this->partEnd; ++parID)
         {
+            int i, j;
+            parID2ij(parID, i, j);
+
             for (int direction = DIRECTION::LEFT; direction <= DIRECTION::BOTTOM; ++direction)
             {
 
-                // 2.1. Determine the neighbor particle and corresponding in each direction
+                // 2.1. Determine the neighbor particle and corresponding process in each direction
 
-                int iNeighbor = 0, jNeighbor = 0;
-                this->getNeighbor(p->i, p->j, direction, iNeighbor, jNeighbor);
-                int idNeighbor = ij2parID(iNeighbor, jNeighbor);
-
-                // Get neighbor particle (create new one if not existed)
-
-                Particle *pNeighbor = nullptr;
-                if (this->dict_id2par.find(idNeighbor) == this->dict_id2par.end())
-                {
-                    pNeighbor = new Particle(iNeighbor, jNeighbor);
-
-                    this->particlesNeighbor.push_back(pNeighbor);
-                    this->dict_id2par[idNeighbor] = pNeighbor;
-                }
-                else
-                {
-                    pNeighbor = this->dict_id2par[idNeighbor];
-                }
-
-                int idProcNeighbor = ij2proc(iNeighbor, jNeighbor);
+                int parIDNb;
+                this->getNeighbor(parID, direction, parIDNb);
+                int procIDNb = parID2proc(parIDNb);
 
                 // If the process handling the neighbor particle is not the current process
-                if (idProcNeighbor != this->proc_id)
+                if (procIDNb != this->proc_id)
                 {
                     // Get neigbor process (create new one if not existed)
                     Neighbor *procNeighbor = nullptr;
-                    if (this->procsNeighbor.find(idProcNeighbor) == this->procsNeighbor.end())
+                    if (this->procsNeighbor.find(procIDNb) == this->procsNeighbor.end())
                     {
-                        this->procsNeighbor[idProcNeighbor] = {.proc_id = idProcNeighbor};
+                        this->procsNeighbor[procIDNb] = {.proc_id = procIDNb};
                     }
-                    procNeighbor = &this->procsNeighbor[idProcNeighbor];
+                    procNeighbor = &this->procsNeighbor[procIDNb];
 
                     // Sign up pNeighbor and p to procNeighbor
-                    procNeighbor->signup_recv(idNeighbor, pNeighbor);
-                    procNeighbor->signup_send(ij2parID(p), p);
+                    procNeighbor->signup_recv(parIDNb);
+                    procNeighbor->signup_send(parID);
                 }
-
-                // 2.2. Assign neighbor to each particle
-                p->neighbors[direction] = pNeighbor;
             }
         }
 
         // 3. Initialize MPI
     }
 
-    ~Process()
+    double getRand()
     {
-        for (int i = 0; i < this->particlesNeighbor.size(); ++i)
-        {
-            delete this->particlesNeighbor[i];
-            delete this->particles[i];
-        }
+        return (double)rand() / RAND_MAX;
     }
 
     int ij2parID(int i, int j)
     {
         return i * this->nuc + j;
     }
-    int ij2parID(Particle *p)
+
+    void parID2ij(int parID, int &i, int &j)
     {
-        return p->i * this->nuc + p->j;
+        i = parID / this->nuc;
+        j = parID % this->nuc;
     }
 
-    void getNeighbor(int i, int j, int direction, int &iNeighbor, int &jNeighbor)
+    void getNeighbor(int i, int j, int direction, int &iNb, int &jNb)
     {
-        iNeighbor = i;
-        jNeighbor = j;
+        iNb = i;
+        jNb = j;
 
         switch (direction)
         {
         case DIRECTION::UP:
-            iNeighbor--;
-            if (iNeighbor < 0)
-                iNeighbor = this->nuc - 1;
+            iNb--;
+            if (iNb < 0)
+                iNb = this->nuc - 1;
             break;
         case DIRECTION::BOTTOM:
-            iNeighbor++;
-            if (iNeighbor >= nuc)
-                iNeighbor = 0;
+            iNb++;
+            if (iNb >= nuc)
+                iNb = 0;
             break;
         case DIRECTION::LEFT:
-            jNeighbor--;
-            if (jNeighbor < 0)
-                jNeighbor = nuc - 1;
+            jNb--;
+            if (jNb < 0)
+                jNb = nuc - 1;
             break;
         case DIRECTION::RIGHT:
-            jNeighbor++;
-            if (jNeighbor >= nuc)
-                jNeighbor = 0;
+            jNb++;
+            if (jNb >= nuc)
+                jNb = 0;
             break;
         }
+    }
+
+    void getNeighbor(int parID, int direction, int &parIDNb)
+    {
+        int i, j;
+        parID2ij(parID, i, j);
+        int iNb = i, jNb = j;
+
+        switch (direction)
+        {
+        case DIRECTION::UP:
+            iNb--;
+            if (iNb < 0)
+                iNb = this->nuc - 1;
+            break;
+        case DIRECTION::BOTTOM:
+            iNb++;
+            if (iNb >= nuc)
+                iNb = 0;
+            break;
+        case DIRECTION::LEFT:
+            jNb--;
+            if (jNb < 0)
+                jNb = nuc - 1;
+            break;
+        case DIRECTION::RIGHT:
+            jNb++;
+            if (jNb >= nuc)
+                jNb = 0;
+            break;
+        }
+
+        parIDNb = ij2parID(iNb, jNb);
     }
 
     int ij2proc(int i, int j)
@@ -375,40 +281,134 @@ public:
         return proc;
     }
 
-    void
-    loop()
+    int parID2proc(int parID)
     {
-        printf("Start looping with num_iters = %d...\n", this->num_iters);
+        int nat = this->nuc * this->nuc;
+
+        if (parID < 0 || parID >= nat)
+        {
+            // TODO: HoangLe [Apr-28]: Yield error
+            return -1;
+        }
+
+        int proc = parID / this->num_each;
+        if (proc >= this->num_procs)
+        {
+            proc = this->num_procs - 1;
+        }
+
+        return proc;
+    }
+
+    // --- Particle update ---------
+    void update_a(int parID)
+    {
+        double dx, dy, r, fx2, fy2, fx3, fy3;
+        double u2 = 0, u3 = 0;
+
+        int i, j;
+        this->parID2ij(parID, i, j);
+        for (int direction = LEFT; direction <= BOTTOM; ++direction)
+        {
+            int parIDNb;
+            this->getNeighbor(parID, direction, parIDNb);
+
+            dx = this->x[parIDNb] - this->x[parID];
+            if (dx < -box / 2.0)
+                dx += box;
+            if (dx >= box / 2.0)
+                dx -= box;
+
+            dy = this->y[parIDNb] - this->y[parID];
+            if (dy < -box / 2.0)
+                dy += box;
+            if (dy >= box / 2.0)
+                dy -= box;
+
+            r = sqrt(dx * dx + dy * dy);
+
+            u2 = u2 + 1.0 / 2.0 * k2 * pow(r - d, 2);
+            u3 = u3 + 1.0 / 3.0 * k3 * pow(r - d, 3);
+            fx2 = k2 * (r - d) * dx / r;
+            fx3 = k3 * pow(r - d, 2) * dx / r;
+            fy2 = k2 * (r - d) * dy / r;
+            fy3 = k3 * pow(r - d, 2) * dy / r;
+
+            this->a_x[parID] += fx2 + fx3;
+            this->a_y[parID] += fy2 + fy3;
+        }
+
+        this->ep[parID] = (u2 + u3) / 2.0;
+    }
+
+    void update_v(int parID)
+    {
+        this->v_x[parID] += this->dt * this->a_x[parID];
+        this->v_y[parID] += this->dt * this->a_y[parID];
+    }
+
+    void update_xy(int parID)
+    {
+        this->x[parID] += this->dt * this->v_x[parID];
+        this->y[parID] += this->dt * this->v_y[parID];
+
+        if (this->x[parID] < 0.0)
+            this->x[parID] += box;
+        else if (this->x[parID] >= box)
+            this->x[parID] -= box;
+        if (this->y[parID] < 0.0)
+            this->y[parID] += box;
+        else if (this->y[parID] >= box)
+            this->y[parID] -= box;
+    }
+
+    void calc_ek(int parID, double v_x_prev, double v_y_prev)
+    {
+        double vx = (v_x_prev + this->v_x[parID]) / 2.0;
+        double vy = (v_y_prev + this->v_y[parID]) / 2.0;
+        this->ek[parID] = 1.0 / 2.0 * (pow(vx, 2) + pow(vy, 2));
+    }
+
+    void loop()
+    {
+        // printf("Start looping with num_iters = %d...\n", this->num_iters);
 
         for (int n = 0; n < this->num_iters; ++n)
         {
-            if (this->proc_id == PROC_LEADER)
-                printf("n = %d\n", n);
+            // if (this->proc_id == PROC_LEADER)
+            //     printf("n = %d\n", n);
 
             this->ek_total = this->ep_total = 0;
             double epFinal = 0, ekFinal = 0;
 
-            for (Particle *p : this->particles)
+            fill(this->a_x.begin(), this->a_x.end(), 0);
+            fill(this->a_y.begin(), this->a_y.end(), 0);
+
+            for (int parID = this->partStart; parID <= this->partEnd; ++parID)
             {
                 // Exchange the coordinate to the neighbors
                 this->exchange_neighbors();
 
                 // Calulcate acceleration, velocity, coordinate and energies
-                p->update_a();
-                p->update_v();
-                p->update_xy();
-                p->calc_ek();
+                double v_x_prev = this->v_x[parID], v_y_prev = this->v_y[parID];
+
+                update_a(parID);
+                update_v(parID);
+                update_xy(parID);
+                calc_ek(parID, v_x_prev, v_y_prev);
 
                 // Accumulate total energy
-                this->ek_total += p->ek;
-                this->ep_total += p->ep;
+                this->ek_total += this->ek[parID];
+                this->ep_total += this->ep[parID];
 
                 // Process 0 () accumulates the total_ep, total_ek sent from followers'
                 reduce_energies(epFinal, ekFinal);
             }
 
-            // Print energies
-            print_energies(n, epFinal, ekFinal);
+// Print energies
+#// FIXME: HoangLe [May-11]: Uncomment the following in multi-proc \
+    // print_energies(n, epFinal, ekFinal);
+            print_energies(n, this->ep_total, this->ek_total);
         }
     }
 
@@ -416,7 +416,7 @@ public:
     {
         // Create thins
         int num_reqs = 4 * this->procsNeighbor.size();
-        MPI_Request *requests = new MPI_Request[num_reqs];
+        // MPI_Request *requests = new MPI_Request[num_reqs];
 
         // Start iterating procNeighbor and exchanging
         int i = 0;
@@ -425,25 +425,25 @@ public:
             // p.harvest();
 
             // Use MPI API
-            MPI_Isend(&p.buffSendX, p.buffSendX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i]);
-            MPI_Isend(&p.buffSendY, p.buffSendY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 1]);
+            // MPI_Isend(&p.buffSendX, p.buffSendX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i]);
+            // MPI_Isend(&p.buffSendY, p.buffSendY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 1]);
 
-            MPI_Irecv(&p.buffRecvX, p.buffRecvX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i + 2]);
-            MPI_Irecv(&p.buffRecvY, p.buffRecvY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 3]);
+            // MPI_Irecv(&p.buffRecvX, p.buffRecvX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i + 2]);
+            // MPI_Irecv(&p.buffRecvY, p.buffRecvY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 3]);
 
             i += 4;
         }
 
-        MPI_Waitall(num_reqs, requests, MPI_STATUSES_IGNORE);
+        // MPI_Waitall(num_reqs, requests, MPI_STATUSES_IGNORE);
 
         // After exchanging, each neighbor redistributes the received coordinates
-        // for (auto &[_, p] : this->procsNeighbor)
-        // {
-        //     p.redistribute();
-        // }
+        for (auto &[_, p] : this->procsNeighbor)
+        {
+            // p.redistribute();
+        }
 
         // Remove pointers
-        delete[] requests;
+        // delete[] requests;
     }
 
     void reduce_energies(double &epFinal, double &ekFinal)
@@ -463,45 +463,31 @@ public:
 
     void check()
     {
+        int i, j, iNb, jNb;
+
         // Check handling particles
         printf("== handling:\n");
-        for (Particle *p : this->particles)
+        for (int parID = this->partStart; parID <= this->partEnd; ++parID)
         {
-            printf("particle %2d: \n", ij2parID(p->i, p->j));
-            printf("   - i = %2d - j = %2d - x = %.2f - y = %.2f\n", p->i, p->j, p->x, p->y);
+            parID2ij(parID, i, j);
+
+            printf("particle %2d: \n", parID);
+            printf("   - i = %2d - j = %2d - x = %.2f - y = %.2f\n", i, j, this->x[parID], this->y[parID]);
             for (int d = LEFT; d <= BOTTOM; ++d)
             {
-                printf("   - %d: i = %2d - j = %2d\n", d, p->neighbors[d]->i, p->neighbors[d]->j);
+                this->getNeighbor(i, j, d, iNb, jNb);
+                printf("   - %d: i = %2d - j = %2d\n", d, iNb, jNb);
             }
-        }
-
-        // Check neighbor particles
-        printf("== Neighbor particles:\n");
-        for (Particle *p : this->particlesNeighbor)
-        {
-            printf("particle %2d: \n", ij2parID(p->i, p->j));
-            printf("   - i = %2d - j = %2d - x = %.2f - y = %.2f\n", p->i, p->j, p->x, p->y);
         }
 
         // Check neighbor processes
         printf("== Neighbor processes:\n");
         for (auto &[k, v] : this->procsNeighbor)
         {
-            printf("neigh_proc %d\n: ", k);
+            printf("neigh_proc %d:\n", k);
 
-            printf("--- Receive:\n");
-            for (auto &[pID, p] : v.particlesRecv)
-            {
-                printf("particle %2d: \n", pID);
-                printf("   - i = %2d - j = %2d - x = %.2f - y = %.2f\n", p->i, p->j, p->x, p->y);
-            }
-
-            printf("--- Send:\n");
-            for (auto &[pID, p] : v.particlesSend)
-            {
-                printf("particle %2d: \n", pID);
-                printf("   - i = %2d - j = %2d - x = %.2f - y = %.2f\n", p->i, p->j, p->x, p->y);
-            }
+            printf("--- Receive: min: %d - max: %d\n", v.minParIDRecv, v.maxParIDRecv);
+            printf("--- Send:    min: %d - max: %d\n", v.minParIDSend, v.maxParIDSend);
         }
     }
 };
@@ -510,22 +496,22 @@ int main(int argc, char *argv[])
 {
     // TODO: HoangLe [May-11]: Write code to receive arguments
 
-    int num_procs, proc_id;
+    int num_procs = 1, proc_id = 0;
 
     int nuc = 100, num_iters = 100000;
     double box = nuc, dt = 0.001, vsc = 0.5;
 
-    MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
-    MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
-    MPI_Comm comm;
-    MPI_Status status;
+    // MPI_Init(&argc, &argv);
+    // MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
+    // MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+    // MPI_Comm comm;
+    // MPI_Status status;
 
-    int dim[] = {num_procs}, periods[] = {1}, reorder = false;
-    MPI_Cart_create(MPI_COMM_WORLD, 1, dim, periods, reorder, &comm);
-    Process process(proc_id, num_iters, num_procs, nuc, box, dt, vsc);
-
+    // int dim[] = {num_procs}, periods[] = {1}, reorder = false;
+    // MPI_Cart_create(MPI_COMM_WORLD, 1, dim, periods, reorder, &comm);
     printf("proc_id = %d , num_procs = %d\n", proc_id, num_procs);
+
+    Process process(proc_id, num_iters, num_procs, nuc, box, dt, vsc);
 
     process.loop();
 
