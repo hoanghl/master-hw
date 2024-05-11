@@ -1,7 +1,7 @@
 #include <map>
 #include <vector>
 
-// #include <mpi.h>
+#include <mpi.h>
 
 using namespace std;
 
@@ -79,8 +79,8 @@ public:
 
     unordered_map<int, Neighbor> procsNeighbor;
 
-    // MPI_Comm comm;
-    // MPI_Status status;
+    MPI_Comm comm;
+    MPI_Status status;
 
     // ----- Methods -----
     Process(
@@ -179,8 +179,11 @@ public:
                 }
             }
         }
+    }
 
-        // 3. Initialize MPI
+    ~Process()
+    {
+        MPI_Finalize();
     }
 
     double getRand()
@@ -371,7 +374,7 @@ public:
 
     void loop()
     {
-        // printf("Start looping with num_iters = %d...\n", this->num_iters);
+        printf("Start looping with num_iters = %d...\n", this->num_iters);
 
         for (int n = 0; n < this->num_iters; ++n)
         {
@@ -384,10 +387,11 @@ public:
             fill(this->a_x.begin(), this->a_x.end(), 0);
             fill(this->a_y.begin(), this->a_y.end(), 0);
 
+            // Exchange the coordinate to the neighbors
+            this->exchange_neighbors();
+
             for (int parID = this->partStart; parID <= this->partEnd; ++parID)
             {
-                // Exchange the coordinate to the neighbors
-                this->exchange_neighbors();
 
                 // Calulcate acceleration, velocity, coordinate and energies
                 double v_x_prev = this->v_x[parID], v_y_prev = this->v_y[parID];
@@ -400,56 +404,47 @@ public:
                 // Accumulate total energy
                 this->ek_total += this->ek[parID];
                 this->ep_total += this->ep[parID];
-
-                // Process 0 () accumulates the total_ep, total_ek sent from followers'
-                reduce_energies(epFinal, ekFinal);
             }
 
-// Print energies
-#// FIXME: HoangLe [May-11]: Uncomment the following in multi-proc \
-    // print_energies(n, epFinal, ekFinal);
-            print_energies(n, this->ep_total, this->ek_total);
+            // Process 0 () accumulates the total_ep, total_ek sent from followers'
+            reduce_energies(epFinal, ekFinal);
+
+            // Print energies
+            print_energies(n, epFinal, ekFinal);
         }
     }
 
     void exchange_neighbors()
     {
+
         // Create thins
-        int num_reqs = 4 * this->procsNeighbor.size();
-        // MPI_Request *requests = new MPI_Request[num_reqs];
+        int N = 4;
+        int num_reqs = N * this->procsNeighbor.size();
+        MPI_Request *requests = new MPI_Request[num_reqs];
 
         // Start iterating procNeighbor and exchanging
         int i = 0;
         for (auto &[_, p] : this->procsNeighbor)
         {
-            // p.harvest();
-
             // Use MPI API
-            // MPI_Isend(&p.buffSendX, p.buffSendX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i]);
-            // MPI_Isend(&p.buffSendY, p.buffSendY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 1]);
+            MPI_Isend(&this->x[p.minParIDSend], p.maxParIDSend - p.minParIDSend + 1, MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i + 0]);
+            MPI_Irecv(&this->x[p.minParIDRecv], p.maxParIDRecv - p.minParIDRecv + 1, MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i + 1]);
 
-            // MPI_Irecv(&p.buffRecvX, p.buffRecvX.size(), MPI_DOUBLE, p.proc_id, TAG_X, MPI_COMM_WORLD, &requests[i + 2]);
-            // MPI_Irecv(&p.buffRecvY, p.buffRecvY.size(), MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 3]);
+            MPI_Isend(&this->y[p.minParIDSend], p.maxParIDSend - p.minParIDSend + 1, MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 2]);
+            MPI_Irecv(&this->y[p.minParIDRecv], p.maxParIDRecv - p.minParIDRecv + 1, MPI_DOUBLE, p.proc_id, TAG_Y, MPI_COMM_WORLD, &requests[i + 3]);
 
-            i += 4;
+            i += N;
         }
-
-        // MPI_Waitall(num_reqs, requests, MPI_STATUSES_IGNORE);
-
-        // After exchanging, each neighbor redistributes the received coordinates
-        for (auto &[_, p] : this->procsNeighbor)
-        {
-            // p.redistribute();
-        }
+        MPI_Waitall(num_reqs, requests, MPI_STATUSES_IGNORE);
 
         // Remove pointers
-        // delete[] requests;
+        delete[] requests;
     }
 
     void reduce_energies(double &epFinal, double &ekFinal)
     {
-        // MPI_Reduce(&this->ep_total, &epFinal, 1, MPI_DOUBLE, MPI_SUM, PROC_LEADER, MPI_COMM_WORLD);
-        // MPI_Reduce(&this->ek_total, &ekFinal, 1, MPI_DOUBLE, MPI_SUM, PROC_LEADER, MPI_COMM_WORLD);
+        MPI_Reduce(&this->ep_total, &epFinal, 1, MPI_DOUBLE, MPI_SUM, PROC_LEADER, MPI_COMM_WORLD);
+        MPI_Reduce(&this->ek_total, &ekFinal, 1, MPI_DOUBLE, MPI_SUM, PROC_LEADER, MPI_COMM_WORLD);
     }
 
     void print_energies(int n, double epFinal, double ekFinal)
@@ -496,16 +491,14 @@ int main(int argc, char *argv[])
 {
     // TODO: HoangLe [May-11]: Write code to receive arguments
 
-    int num_procs = 1, proc_id = 0;
+    int num_procs = 3, proc_id = 0;
 
     int nuc = 100, num_iters = 100000;
     double box = nuc, dt = 0.001, vsc = 0.5;
 
-    // MPI_Init(&argc, &argv);
-    // MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
-    // MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
-    // MPI_Comm comm;
-    // MPI_Status status;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &proc_id);
+    MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
 
     // int dim[] = {num_procs}, periods[] = {1}, reorder = false;
     // MPI_Cart_create(MPI_COMM_WORLD, 1, dim, periods, reorder, &comm);
