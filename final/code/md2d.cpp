@@ -34,63 +34,65 @@ double getRand()
     return (double)rand() / RAND_MAX;
 }
 
-void getNeighList(vector<vector<int>> &neigh, int nat, int nuc)
+void getNeighbor(int parID, int direction, int nuc, int &parIDNb)
 {
-    int row, col;
-    int left_row, left_col;
-    int right_row, right_col;
-    int top_row, top_col;
-    int bottom_row, bottom_col;
+    int i = parID / nuc, j = parID % nuc;
+    int iNb = i, jNb = j;
 
-    for (int i = 0; i < nat; ++i)
+    switch (direction)
     {
-        row = i / nuc;
-        col = i % nuc;
-
-        left_row = right_row = row;
-        top_col = bottom_col = col;
-
-        right_col = col + 1;
-        if (right_col >= nuc)
-            right_col = 0;
-        left_col = col - 1;
-        if (left_col < 0)
-            left_col = nuc - 1;
-        top_row = row - 1;
-        if (top_row < 0)
-            top_row = nuc - 1;
-        bottom_row = row + 1;
-        if (bottom_row >= nuc)
-            bottom_row = 0;
-
-        vector<int> v1 = {
-            left_col + (left_row)*nuc,
-            top_col + (top_row)*nuc,
-            right_col + (right_row)*nuc,
-            bottom_col + (bottom_row)*nuc,
-        };
-        neigh.push_back(v1);
+    case 1:
+        iNb--;
+        if (iNb < 0)
+            iNb = nuc - 1;
+        break;
+    case 3:
+        iNb++;
+        if (iNb >= nuc)
+            iNb = 0;
+        break;
+    case 0:
+        jNb--;
+        if (jNb < 0)
+            jNb = nuc - 1;
+        break;
+    case 2:
+        jNb++;
+        if (jNb >= nuc)
+            jNb = 0;
+        break;
     }
+
+    parIDNb = iNb * nuc + jNb;
 }
 
-void accel(int nat, int i, double *u, Coordinate *a, double box, vector<Coordinate> *x, vector<vector<int>> *neighbors)
+void accel(
+    int nuc,
+    int i,
+    vector<double> &u,
+    vector<double> &a_x,
+    vector<double> &a_y,
+    double box,
+    vector<double> &x,
+    vector<double> &y)
 {
 
     double u2 = 0, u3 = 0;
-    a->x = 0;
-    a->y = 0;
+    a_x[i] = a_y[i] = 0;
+
     double dx, dy, r, fx2, fy2, fx3, fy3;
 
     for (int j = 0; j < 4; ++j)
     {
-        int in = (*neighbors)[i][j];
-        dx = (*x)[in].x - (*x)[i].x;
+        int in;
+        getNeighbor(i, j, nuc, in);
+        dx = x[in] - x[i];
         if (dx < -box / 2.0)
             dx += box;
         if (dx >= box / 2.0)
             dx -= box;
 
-        dy = (*x)[in].y - (*x)[i].y;
+        dy = y[in] - y[i];
         if (dy < -box / 2.0)
             dy += box;
         if (dy >= box / 2.0)
@@ -104,12 +106,12 @@ void accel(int nat, int i, double *u, Coordinate *a, double box, vector<Coordina
         fx3 = k3 * pow(r - d, 2) * dx / r;
         fy2 = k2 * (r - d) * dy / r;
         fy3 = k3 * pow(r - d, 2) * dy / r;
-        a->x += fx2 + fx3;
-        a->y += fy2 + fy3;
+        a_x[i] += fx2 + fx3;
+        a_y[i] += fy2 + fy3;
     }
 
     // Remember the factor 1 / 2 due to 'double counting
-    *u = (u2 + u3) / 2.0;
+    u[i] = (u2 + u3) / 2.0;
 }
 
 // --------------------------------------------------------------------------------------
@@ -117,12 +119,14 @@ void accel(int nat, int i, double *u, Coordinate *a, double box, vector<Coordina
 int main(int argc, char **argv)
 {
 
-    vector<Coordinate> x;  //      atom positions
-    vector<Coordinate> v;  //      velocities
-    vector<Coordinate> a;  //      accelerations
-    vector<Coordinate> v0; //      previous veloocities (leap frog needs them)
-    vector<double> ep;     //      potential energies
-    vector<double> ek;     //      kinetic energies
+    vector<double> x;   //      atom positions
+    vector<double> y;   //      atom positions
+    vector<double> v_x; //      velocities
+    vector<double> v_y; //      velocities
+    vector<double> a_x; //      accelerations
+    vector<double> a_y; //      accelerations
+    vector<double> ep;  //      potential energies
+    vector<double> ek;  //      kinetic energies
 
     double epsum, eksum; // system energies
     double dt;           // time step
@@ -163,10 +167,12 @@ int main(int argc, char **argv)
         coout = atoi(*++argv);
 
     nat = nuc * nuc;
-    x = vector<Coordinate>(nat);
-    v = vector<Coordinate>(nat);
-    a = vector<Coordinate>(nat);
-    v0 = vector<Coordinate>(nat);
+    x = vector<double>(nat);
+    y = vector<double>(nat);
+    v_x = vector<double>(nat);
+    v_y = vector<double>(nat);
+    a_x = vector<double>(nat);
+    a_y = vector<double>(nat);
 
     ep = vector<double>(nat);
     ek = vector<double>(nat);
@@ -176,37 +182,28 @@ int main(int argc, char **argv)
     srand(time(NULL));
     for (i = 0; i < nat; i++)
     {
-        x[i] = {
-            .x = (i / nuc) * 1.0,
-            .y = (i % nuc) * 1.0,
-        };
-        v[0] = {.x = 0, .y = 0};
+        x[i] = (i / nuc) * 1.0;
+        y[i] = (i % nuc) * 1.0;
 
         // Scale the velocities to vsc*[-½,½]
-        v[i] = {
-            .x = vsc * (getRand() - 0.5),
-            .y = vsc * (getRand() - 0.5),
-        };
+        v_x[i] = vsc * (getRand() - 0.5);
+        v_y[i] = vsc * (getRand() - 0.5);
     }
 
     // Remove center of mass velocity
     double sum_vx = 0, sum_vy = 0;
     for (int i = 0; i < nat; ++i)
     {
-        sum_vx += v[i].x;
-        sum_vy += v[i].y;
+        sum_vx += v_x[i];
+        sum_vy += v_y[i];
     }
     sum_vx /= nat;
     sum_vy /= nat;
     for (int i = 0; i < nat; ++i)
     {
-        v[i].x -= sum_vx;
-        v[i].y -= sum_vy;
+        v_x[i] -= sum_vx;
+        v_y[i] -= sum_vy;
     }
-
-    // Find neighbors for each atam
-    vector<vector<int>> neighbors;
-    getNeighList(neighbors, nat, nuc);
 
     // Simulation proper
     auto t0 = std::chrono::system_clock::now();
@@ -216,28 +213,28 @@ int main(int argc, char **argv)
     {
         for (i = 0; i < nat; i++)
         {
-            accel(nat, i, &ep[i], &a[i], box, &x, &neighbors);
-            v0_x = v[i].x;
-            v0_y = v[i].y;
+            accel(nuc, i, ep, a_x, a_y, box, x, y);
+            v0_x = v_x[i];
+            v0_y = v_y[i];
 
             // Leap frog integration algorithm: update position and velocity
-            v[i].x = v[i].x + dt * a[i].x;
-            v[i].y = v[i].y + dt * a[i].y;
-            x[i].x = x[i].x + dt * v[i].x;
-            x[i].y = x[i].y + dt * v[i].y;
+            v_x[i] += dt * a_x[i];
+            v_y[i] += dt * a_y[i];
+            x[i] += dt * v_x[i];
+            y[i] += dt * v_y[i];
 
             // Check periodic boundary conditions
-            if (x[i].x < 0.0)
-                x[i].x += box;
-            if (x[i].y < 0.0)
-                x[i].y += box;
-            if (x[i].x >= box)
-                x[i].x -= box;
-            if (x[i].y >= box)
-                x[i].y -= box;
+            if (x[i] < 0.0)
+                x[i] += box;
+            else if (x[i] >= box)
+                x[i] -= box;
+            if (y[i] < 0.0)
+                y[i] += box;
+            else if (y[i] >= box)
+                y[i] -= box;
 
-            vx = (v0_x + v[i].x) / 2.0;
-            vy = (v0_y + v[i].y) / 2.0;
+            vx = (v0_x + v_x[i]) / 2.0;
+            vy = (v0_y + v_y[i]) / 2.0;
             ek[i] = 1.0 / 2.0 * (pow(vx, 2) + pow(vy, 2));
         }
 
@@ -246,14 +243,18 @@ int main(int argc, char **argv)
 
         epsum = accumulate(ep.begin(), ep.end(), 0.0);
         eksum = accumulate(ek.begin(), ek.end(), 0.0);
-        if (eout > 0)
-            if (n % eout == 0)
-                printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epsum + eksum, epsum, eksum);
+
+        if (eout > 0 && n % eout == 0)
+            printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epsum + eksum, epsum, eksum);
     }
 
     auto t1 = std::chrono::system_clock::now();
     auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
-    cerr << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
+    double wtime = wct.count() / 1000.0;
+    if (eout > 0)
+        printf("Wall clock time: %.4f seconds\n", wtime);
+    else
+        printf("%f\n", wtime);
 
     if (coout > 0)
         fcoord.close();

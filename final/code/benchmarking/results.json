@@ -1,0 +1,122 @@
+{
+  "serial-100-1": {
+    "nuc": 100,
+    "num_procs": 1,
+    "time": 84.833,
+    "mode": "serial"
+  },
+  "parallel-100-2": {
+    "nuc": 100,
+    "num_procs": 2,
+    "time": 44.188,
+    "mode": "parallel"
+  },
+  "parallel-100-4": {
+    "nuc": 100,
+    "num_procs": 4,
+    "time": 24.166,
+    "mode": "parallel"
+  },
+  "parallel-100-5": {
+    "nuc": 100,
+    "num_procs": 5,
+    "time": 34.428,
+    "mode": "parallel"
+  },
+  "parallel-100-6": {
+    "nuc": 100,
+    "num_procs": 6,
+    "time": 47.317,
+    "mode": "parallel"
+  },
+  "serial-120-1": {
+    "nuc": 120,
+    "num_procs": 1,
+    "time": 124.921,
+    "mode": "serial"
+  },
+  "parallel-120-2": {
+    "nuc": 120,
+    "num_procs": 2,
+    "time": 64.967,
+    "mode": "parallel"
+  },
+  "parallel-120-4": {
+    "nuc": 120,
+    "num_procs": 4,
+    "time": 39.83,
+    "mode": "parallel"
+  },
+  "parallel-120-5": {
+    "nuc": 120,
+    "num_procs": 5,
+    "time": 55.088,
+    "mode": "parallel"
+  },
+  "parallel-120-6": {
+    "nuc": 120,
+    "num_procs": 6,
+    "time": 67.116,
+    "mode": "parallel"
+  },
+  "serial-150-1": {
+    "nuc": 150,
+    "num_procs": 1,
+    "time": 193.107,
+    "mode": "serial"
+  },
+  "parallel-150-2": {
+    "nuc": 150,
+    "num_procs": 2,
+    "time": 105.773,
+    "mode": "parallel"
+  },
+  "parallel-150-4": {
+    "nuc": 150,
+    "num_procs": 4,
+    "time": 74.477,
+    "mode": "parallel"
+  },
+  "parallel-150-5": {
+    "nuc": 150,
+    "num_procs": 5,
+    "time": 84.146,
+    "mode": "parallel"
+  },
+  "parallel-150-6": {
+    "nuc": 150,
+    "num_procs": 6,
+    "time": 101.06,
+    "mode": "parallel"
+  },
+  "serial-250-1": {
+    "nuc": 250,
+    "num_procs": 1,
+    "time": 539.526,
+    "mode": "serial"
+  },
+  "parallel-250-2": {
+    "nuc": 250,
+    "num_procs": 2,
+    "time": 279.834,
+    "mode": "parallel"
+  },
+  "parallel-250-4": {
+    "nuc": 250,
+    "num_procs": 4,
+    "time": 150.321,
+    "mode": "parallel"
+  },
+  "parallel-250-5": {
+    "nuc": 250,
+    "num_procs": 5,
+    "time": 201.583,
+    "mode": "parallel"
+  },
+  "parallel-250-6": {
+    "nuc": 250,
+    "num_procs": 6,
+    "time": 240.851,
+    "mode": "parallel"
+  }
+}

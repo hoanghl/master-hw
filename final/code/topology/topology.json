@@ -1,0 +1,66 @@
+[
+  {
+    "nuc": 5,
+    "num_procs": 6,
+    "metrics": {
+      "mean_diff_par": {
+        "method_3": 1.6666666666666667,
+        "method_2": -1,
+        "method_1": 1.93333333333
+      },
+      "mean_com": {
+        "method_3": 2,
+        "method_2": -1,
+        "method_1": 3
+      }
+    }
+  },
+  {
+    "nuc": 5,
+    "num_procs": 4,
+    "metrics": {
+      "mean_diff_par": {
+        "method_3": 1.5,
+        "method_2": 2.5,
+        "method_1": 4.5
+      },
+      "mean_com": {
+        "method_3": 2.5,
+        "method_2": 2,
+        "method_1": 2
+      }
+    }
+  },
+  {
+    "nuc": 8,
+    "num_procs": 4,
+    "metrics": {
+      "mean_diff_par": {
+        "method_3": 0,
+        "method_2": 0,
+        "method_1": 8
+      },
+      "mean_com": {
+        "method_3": 2,
+        "method_2": 2,
+        "method_1": 2
+      }
+    }
+  },
+  {
+    "nuc": 8,
+    "num_procs": 7,
+    "metrics": {
+      "mean_diff_par": {
+        "method_3": 1.7142857142,
+        "method_2": 2.285714285,
+        "method_1": 3.4285714285
+      },
+      "mean_com": {
+        "method_3": 2.2857142857,
+        "method_2": 2,
+        "method_1": 4.28571428571
+      }
+    }
+  }
+]

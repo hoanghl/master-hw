@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <math.h>
 #include <vector>
 
 #include <mpi.h>
@@ -144,8 +145,8 @@ public:
         sum_vy /= nat;
         for (int parID = this->partStart; parID <= this->partEnd; ++parID)
         {
-            this->x[parID] -= sum_vx;
-            this->x[parID] -= sum_vy;
+            this->v_x[parID] -= sum_vx;
+            this->v_y[parID] -= sum_vy;
         }
 
         // 2. Define neighbor (neigbor particles, processes) in 4 directions
@@ -182,10 +183,6 @@ public:
         }
     }
 
-    ~Process()
-    {
-    }
-
     double getRand()
     {
         return (double)rand() / RAND_MAX;
@@ -216,17 +213,17 @@ public:
             break;
         case DIRECTION::BOTTOM:
             iNb++;
-            if (iNb >= nuc)
+            if (iNb >= this->nuc)
                 iNb = 0;
             break;
         case DIRECTION::LEFT:
             jNb--;
             if (jNb < 0)
-                jNb = nuc - 1;
+                jNb = this->nuc - 1;
             break;
         case DIRECTION::RIGHT:
             jNb++;
-            if (jNb >= nuc)
+            if (jNb >= this->nuc)
                 jNb = 0;
             break;
         }
@@ -449,7 +446,7 @@ public:
     {
         if (this->proc_id == PROC_LEADER)
         {
-            if (n % this->eout == 0)
+            if (this->eout > 0 && n % this->eout == 0)
                 printf("%20.10g %20.10g %20.10g %20.10g\n", dt * n, epFinal + ekFinal, epFinal, ekFinal);
         }
     }
@@ -530,9 +527,14 @@ int main(int argc, char *argv[])
     auto t1 = std::chrono::system_clock::now();
     auto wct = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
     if (proc_id == PROC_LEADER)
-        cerr << "Wall clock time: " << wct.count() / 1000.0 << " seconds\n";
+    {
+        double wtime = wct.count() / 1000.0;
+        if (eout > 0)
+            printf("Wall clock time: %.4f seconds\n", wtime);
+        else
+            printf("%f\n", wtime);
+    }
 
-    // printf("proc = %d\n", proc_id);
     MPI_Finalize();
 
     return 0;
