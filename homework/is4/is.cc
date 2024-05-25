@@ -2,31 +2,13 @@
 #include <tuple>
 #include <vector>
 
+#include <math.h>
+
 using namespace std;
 
 typedef tuple<int, int, int, int> TLBR;
 constexpr int N_COLOR_CHAN = 3;
 const double inf = numeric_limits<double>::infinity();
-
-float genColor()
-{
-    return (rand() % 256) * 1.0;
-}
-float *genRandArr(int nx, int ny)
-{
-    float *out = new float[nx * ny * N_COLOR_CHAN];
-
-    for (int y = 0; y < ny; ++y)
-        for (int x = 0; x < nx; ++x)
-            for (int c = 0; c < N_COLOR_CHAN; ++c)
-            {
-                out[c + 3 * x + 3 * nx * y] = genColor();
-            }
-
-    return out;
-}
-
-// == namespace: Utils =================================================
 
 void xy2each(int xy, int nx, int &x, int &y)
 {
@@ -42,34 +24,18 @@ int getNumCells(int x, int y, bool excludeLast = true)
     return nRows * nCols;
 }
 
-int getNumCells(int left, int top, int right, int bottom)
+int getNumCells(int left, int top, int right, int bot)
 {
-    int nRowsInside = bottom - top;
-    int nColsInside = right - left;
+    int nRowsInside = bot - top + 1;
+    int nColsInside = right - left + 1;
 
     return nRowsInside * nColsInside;
     ;
 }
 
-int getNumCellsOutside(int left, int top, int right, int bottom, int nx, int ny)
+int getNumCellsOutside(int left, int top, int right, int bot, int nx, int ny)
 {
-    return getNumCells(nx, ny) - getNumCells(left, top, right, bottom);
-}
-
-bool isInside(int x, int y, int tl, int br, int nx)
-{
-    int left, top, right, bottom;
-    xy2each(tl, nx, left, top);
-    xy2each(br, nx, right, bottom);
-    ++right;
-    ++bottom;
-
-    return (x >= left && x < right && y >= top && y < bottom);
-}
-
-bool isInside(int x, int y, int left, int top, int right, int bottom)
-{
-    return (x >= left && x < right && y >= top && y < bottom);
+    return getNumCells(0, 0, nx - 1, ny - 1) - getNumCells(left, top, right, bot);
 }
 
 struct Result
@@ -91,137 +57,173 @@ This is the function you need to implement. Quick reference:
 */
 Result segment(int ny, int nx, const float *data)
 {
+    // NOTE: HoangLe [May-24]: In my code, bottom-right is in included mode whereas the requirement of the output is excluded mode
+
     Result result{0, 0, 0, 0, {0, 0, 0}, {0, 0, 0}};
 
     // 1. Pre-compute
 
     // 1.1. Define pre-computed vectors
-    vector<double> avgColor = vector<double>(N_COLOR_CHAN * nx * ny, 0.);
-    avgColor[0] = data[0];
-    avgColor[1] = data[1];
-    avgColor[2] = data[2];
+    vector<double> cumSum = vector<double>(N_COLOR_CHAN * (nx + 1) * (ny + 1), 0.);
+    vector<double> cumSumSq = vector<double>(N_COLOR_CHAN * (nx + 1) * (ny + 1), 0.);
+    cumSum[0] = data[0];
+    cumSum[1] = data[1];
+    cumSum[2] = data[2];
+    cumSumSq[0] = pow(data[0], 2);
+    cumSumSq[1] = pow(data[1], 2);
+    cumSumSq[2] = pow(data[2], 2);
 
-    // 1.1. Pre-compute 3 color channels
+    // 1.2. Pre-compute
+
     // NOTE: HoangLe [May-21]: Can use multithread, z-order here
-    for (int xy = 1; xy < ny * nx; ++xy) // Start at 2 because position [0, 0] is pre-assigned above
+
+    // #pragma omp parallel for schedule(static, 1)
+    for (int br = 1; br < ny * nx; ++br) // Start at 2 because position [0, 0] is pre-assigned above
     {
-        int x, y;
-        xy2each(xy, nx, x, y);
+        int right, bot;
+        xy2each(br, nx, right, bot);
+        int top = bot - 1, left = right - 1;
 
         for (int c = 0; c < N_COLOR_CHAN; ++c)
         {
-            double X = avgColor[c + 3 * x + 3 * nx * max(y - 1, 0)];
-            double Y = avgColor[c + 3 * max(x - 1, 0) + 3 * nx * y];
-            double Z = avgColor[c + 3 * max(x - 1, 0) + 3 * nx * max(y - 1, 0)];
-            double current = data[c + 3 * x + 3 * nx * y];
-            int Xn = getNumCells(x, y - 1, false);
-            int Yn = getNumCells(x - 1, y, false);
-            int Zn = getNumCells(x - 1, y - 1, false);
-            int n = getNumCells(x, y, false);
+            int locX = top < 0 || left < 0 ? -1 : c + 3 * (left + nx * top);
+            int locXY = top < 0 ? -1 : c + 3 * (right + nx * top);
+            int locXZ = left < 0 ? -1 : c + 3 * (left + nx * bot);
+            int locCurrent = c + 3 * (right + nx * bot);
 
-            avgColor[c + 3 * x + 3 * nx * y] = 1.0 / n * (X * Xn + Y * Yn - Z * Zn + current);
+            double X = locX == -1 ? 0 : cumSum[locX];
+            double XY = locXY == -1 ? 0 : cumSum[locXY];
+            double XZ = locXZ == -1 ? 0 : cumSum[locXZ];
+            double Xsq = locX == -1 ? 0 : cumSumSq[locX];
+            double XYsq = locXY == -1 ? 0 : cumSumSq[locXY];
+            double XZsq = locXZ == -1 ? 0 : cumSumSq[locXZ];
+
+            double current = data[locCurrent];
+            double currentSq = pow(data[locCurrent], 2);
+
+            cumSum[locCurrent] = XY + XZ - X + current;
+            cumSumSq[locCurrent] = XYsq + XZsq - Xsq + currentSq;
         }
     }
 
-    // 1.2. Pre-compute error
-    // 1.2.1. Calculate possible pairs of topleft-bottomright
-    vector<TLBR> pairs_tlbr = vector<TLBR>(ny * nx * ny * nx);
-    int nPairsValid = 0;
-    // NOTE: HoangLe [May-21]: Can use multithread
-    for (int br = nx + 1; br <= (ny + 1) * (nx + 1); ++br)
-    {
-        int right, bottom;
-        xy2each(br, nx + 1, right, bottom);
+    // 2. Start
 
-        for (int top = 0; top < bottom; ++top)
-            for (int left = 0; left < right; ++left)
-            {
-                pairs_tlbr[nPairsValid] = make_tuple(top, left, bottom, right);
-                ++nPairsValid;
-            }
-    }
-
-    // 1.2.2. Pre-compute error with given valid tl-br pairs
-    vector<double> errors = vector<double>(nPairsValid, 0);
-    vector<double> inner = vector<double>(N_COLOR_CHAN * nPairsValid, 0);
-    vector<double> outer = vector<double>(N_COLOR_CHAN * nPairsValid, 0);
+    vector<Result> bestEachSize = vector<Result>(ny * nx);
+    vector<double> costEachSize = vector<double>(ny * nx, inf);
 
 // NOTE: HoangLe [May-21]: Can use multithread here
 #pragma omp parallel for schedule(static, 1)
-    for (int tlbr = 0; tlbr < nPairsValid; ++tlbr)
+    for (int size = 1; size < ny * nx; ++size)
     {
-        int left, top, right, bottom;
-        top = get<0>(pairs_tlbr[tlbr]);
-        left = get<1>(pairs_tlbr[tlbr]);
-        bottom = get<2>(pairs_tlbr[tlbr]);
-        right = get<3>(pairs_tlbr[tlbr]);
+        Result best{0, 0, 0, 0, {0, 0, 0}, {0, 0, 0}};
+        double bestCost = inf;
 
-        // Determine outer[c] and inner[c]
-        for (int c = 0; c < N_COLOR_CHAN; ++c)
+        for (int tl = 0; tl < ny * nx; ++tl)
         {
-            for (int y = 0; y < ny; ++y)
-                for (int x = 0; x < nx; ++x)
+            int top = 0, left = 0;
+            xy2each(tl, nx, left, top);
+
+            for (int br = 0; br < ny * nx; ++br)
+            {
+                int right, bot;
+                xy2each(br, nx, right, bot);
+
+                if (getNumCells(left, top, right, bot) != size || right < left || bot < top)
                 {
-                    if (isInside(x, y, left, top, right, bottom))
-                    {
-                        inner[tlbr * N_COLOR_CHAN + c] += data[c + 3 * x + 3 * nx * y];
-                    }
-                    else
-                    {
-                        outer[tlbr * N_COLOR_CHAN + c] += data[c + 3 * x + 3 * nx * y];
-                    }
+                    continue;
                 }
 
-            inner[tlbr * N_COLOR_CHAN + c] /= getNumCells(left, top, right, bottom);
-            outer[tlbr * N_COLOR_CHAN + c] /= getNumCellsOutside(left, top, right, bottom, nx, ny);
-        }
+                vector<double> inner = vector<double>(3, 0.);
+                vector<double> outer = vector<double>(3, 0.);
+                double cost = 0;
 
-        // Determine the error
-        for (int y = 0; y < ny; ++y)
-            for (int x = 0; x < nx; ++x)
+                int nInside = getNumCells(left, top, right, bot);
+                int nOutside = getNumCellsOutside(left, top, right, bot, nx, ny);
+
                 for (int c = 0; c < N_COLOR_CHAN; ++c)
                 {
-                    if (isInside(x, y, left, top, right, bottom))
-                    {
-                        errors[tlbr] += pow(inner[tlbr * N_COLOR_CHAN + c] - data[c + 3 * x + 3 * nx * y], 2);
-                    }
-                    else
-                    {
-                        errors[tlbr] += pow(outer[tlbr * N_COLOR_CHAN + c] - data[c + 3 * x + 3 * nx * y], 2);
-                    }
+                    // Calculate components for include-exclude principle
+                    int locX = left == 0 || top == 0 ? -1 : c + 3 * ((left - 1) + nx * (top - 1));
+                    int locXY = top == 0 ? -1 : c + 3 * (right + nx * (top - 1));
+                    int locXZ = left == 0 ? -1 : c + 3 * ((left - 1) + nx * bot);
+                    int locXYZW = c + 3 * (right + nx * bot);
+                    int locWhole = c + 3 * (nx * ny - 1);
+
+                    double X = locX == -1 ? 0 : cumSum[locX];
+                    double XY = locXY == -1 ? 0 : cumSum[locXY];
+                    double XZ = locXZ == -1 ? 0 : cumSum[locXZ];
+                    double XYZW = cumSum[locXYZW];
+                    double whole = cumSum[locWhole];
+
+                    double Xsq = locX == -1 ? 0 : cumSumSq[locX];
+                    double XYsq = locXY == -1 ? 0 : cumSumSq[locXY];
+                    double XZsq = locXZ == -1 ? 0 : cumSumSq[locXZ];
+                    double XYZWsq = cumSumSq[locXYZW];
+                    double wholesq = cumSumSq[locWhole];
+
+                    double sumInside = XYZW - XY - XZ + X;
+                    double sumOutside = whole - sumInside;
+                    double sumInsideSq = XYZWsq - XYsq - XZsq + Xsq;
+                    double sumOutsideSq = wholesq - sumInsideSq;
+
+                    // Calculate inner and outer
+                    inner[c] = 1.0 / nInside * sumInside;
+                    outer[c] = 1.0 / nOutside * sumOutside;
+
+                    // Calculate cost
+                    cost += nInside * pow(inner[c], 2) - 2 * inner[c] * sumInside + sumInsideSq;
+                    cost += nOutside * pow(outer[c], 2) - 2 * outer[c] * sumOutside + sumOutsideSq;
                 }
+
+                if (cost < bestCost)
+                {
+                    bestCost = cost;
+
+                    best.x0 = left;
+                    best.y0 = top;
+                    best.x1 = right;
+                    best.y1 = bot;
+                    best.inner[0] = inner[0];
+                    best.inner[1] = inner[1];
+                    best.inner[2] = inner[2];
+                    best.outer[0] = outer[0];
+                    best.outer[1] = outer[1];
+                    best.outer[2] = outer[2];
+                }
+            }
+        }
+
+        bestEachSize[size] = best;
+        costEachSize[size] = bestCost;
     }
 
-    // 2. Choose best tl, br
+    // 3. Choose best tl, br
+
     // NOTE: HoangLe [May-21]: Can use multithread here
-    double bestError = inf;
-    for (int tlbr = 0; tlbr < nPairsValid; ++tlbr)
+    double bestCost = inf;
+    double bestIdx = 0;
+    for (int i = 1; i < ny * nx; ++i)
     {
-        int left, top, right, bottom;
-        top = get<0>(pairs_tlbr[tlbr]);
-        left = get<1>(pairs_tlbr[tlbr]);
-        bottom = get<2>(pairs_tlbr[tlbr]);
-        right = get<3>(pairs_tlbr[tlbr]);
-
-        if (bestError > errors[tlbr])
+        if (costEachSize[i] < bestCost)
         {
-            bestError = errors[tlbr];
-
-            result.x0 = left;
-            result.y0 = top;
-            result.x1 = right;
-            result.y1 = bottom;
-            result.outer[0] = static_cast<float>(outer[N_COLOR_CHAN * tlbr + 0]);
-            result.outer[1] = static_cast<float>(outer[N_COLOR_CHAN * tlbr + 1]);
-            result.outer[2] = static_cast<float>(outer[N_COLOR_CHAN * tlbr + 2]);
-            result.inner[0] = static_cast<float>(inner[N_COLOR_CHAN * tlbr + 0]);
-            result.inner[1] = static_cast<float>(inner[N_COLOR_CHAN * tlbr + 1]);
-            result.inner[2] = static_cast<float>(inner[N_COLOR_CHAN * tlbr + 2]);
+            bestCost = costEachSize[i];
+            bestIdx = i;
         }
     }
 
+    result.x0 = bestEachSize[bestIdx].x0;
+    result.y0 = bestEachSize[bestIdx].y0;
+    result.x1 = bestEachSize[bestIdx].x1 + 1;
+    result.y1 = bestEachSize[bestIdx].y1 + 1;
+    result.inner[0] = static_cast<float>(bestEachSize[bestIdx].inner[0]);
+    result.inner[1] = static_cast<float>(bestEachSize[bestIdx].inner[1]);
+    result.inner[2] = static_cast<float>(bestEachSize[bestIdx].inner[2]);
+    result.outer[0] = static_cast<float>(bestEachSize[bestIdx].outer[0]);
+    result.outer[1] = static_cast<float>(bestEachSize[bestIdx].outer[1]);
+    result.outer[2] = static_cast<float>(bestEachSize[bestIdx].outer[2]);
+
     // Testing
-    // Testing::printColor<vector<double>>(avgColor, nx, ny);
+    // Testing::printColor<vector<double>>(cumSum, nx, ny);
 
     return result;
 }
