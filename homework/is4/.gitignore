@@ -1,4 +1,6 @@
 is
 is-demo
 out.png
-experiments
+experiments/bin
+experiments/data
+experiments/notebooks
