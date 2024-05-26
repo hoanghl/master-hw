@@ -7,6 +7,7 @@
 using namespace std;
 
 typedef tuple<int, int, int, int> TLBR;
+typedef tuple<double, double, double> COLOR;
 
 constexpr int N_COLOR_CHAN = 3;
 constexpr double inf = numeric_limits<double>::infinity();

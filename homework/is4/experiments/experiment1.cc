@@ -12,15 +12,21 @@ using namespace std::chrono;
 
 Result segment(int ny, int nx, const float *data)
 {
-    // NOTE: HoangLe [May-24]: In my code, bottom-right is in included mode whereas the requirement of the output is excluded mode
+    // NOTE: HoangLe [May-24]: In my code, bottom-r is in included mode whereas the requirement of the output is excluded mode
+
+    const int NYX = ny * nx;
+    constexpr int N_VECS = 8;
+
+    int n = (NYX * NYX + N_VECS - 1) / N_VECS;
+    const int NYX2 = n * N_VECS;
 
     Result result{0, 0, 0, 0, {0, 0, 0}, {0, 0, 0}};
 
     // 1. Pre-compute
 
     // 1.1. Define pre-computed vectors
-    vector<double> cumSum = vector<double>(N_COLOR_CHAN * (nx + 1) * (ny + 1), 0.);
-    vector<double> cumSumSq = vector<double>(N_COLOR_CHAN * (nx + 1) * (ny + 1), 0.);
+    vector<double> cumSum = vector<double>(N_COLOR_CHAN * nx * ny, 0.);
+    vector<double> cumSumSq = vector<double>(N_COLOR_CHAN * nx * ny, 0.);
     cumSum[0] = data[0];
     cumSum[1] = data[1];
     cumSum[2] = data[2];
@@ -34,18 +40,18 @@ Result segment(int ny, int nx, const float *data)
     // NOTE: HoangLe [May-21]: Can use multithread, z-order here
 
     // #pragma omp parallel for schedule(static, 1)
-    for (int br = 1; br < ny * nx; ++br) // Start at 2 because position [0, 0] is pre-assigned above
+    for (int br = 1; br < NYX; ++br) // Start at 2 because position [0, 0] is pre-assigned above
     {
-        int right, bot;
-        Utils::xy2each(br, nx, right, bot);
-        int top = bot - 1, left = right - 1;
+        int r, b;
+        Utils::xy2each(br, nx, r, b);
+        int t = b - 1, l = r - 1;
 
         for (int c = 0; c < N_COLOR_CHAN; ++c)
         {
-            int locX = top < 0 || left < 0 ? -1 : c + 3 * (left + nx * top);
-            int locXY = top < 0 ? -1 : c + 3 * (right + nx * top);
-            int locXZ = left < 0 ? -1 : c + 3 * (left + nx * bot);
-            int locCurrent = c + 3 * (right + nx * bot);
+            int locX = t < 0 || l < 0 ? -1 : c + 3 * (l + nx * t);
+            int locXY = t < 0 ? -1 : c + 3 * (r + nx * t);
+            int locXZ = l < 0 ? -1 : c + 3 * (l + nx * b);
+            int locCurrent = c + 3 * (r + nx * b);
 
             double X = locX == -1 ? 0 : cumSum[locX];
             double XY = locXY == -1 ? 0 : cumSum[locXY];
@@ -66,139 +72,169 @@ Result segment(int ny, int nx, const float *data)
     duration<double, std::milli> ms_double = t2 - t1;
     printf("1. Running time: %8.4f\n", ms_double.count());
 
-    // 2. Start
+    // 2. Assign inner, outer, cost
 
     t1 = high_resolution_clock::now();
 
-    vector<Result> bestEachSize = vector<Result>(ny * nx);
-    vector<double> costEachSize = vector<double>(ny * nx, inf);
+    vector<COLOR> inner = vector<COLOR>(NYX2, make_tuple(inf, inf, inf));
+    vector<COLOR> outer = vector<COLOR>(NYX2, make_tuple(inf, inf, inf));
+    vector<double> costs = vector<double>(NYX2, inf);
 
-// NOTE: HoangLe [May-21]: Can use multithread here
-#pragma omp parallel for schedule(static, 1)
-    for (int size = 1; size < ny * nx; ++size)
+    // TODO: HoangLe [May-25]: Fill 3 above vectors with heavy optimizations
+
+#pragma omp parallel for schedule(dynamic, 1)
+    for (int tlbr = 0; tlbr < NYX2; ++tlbr)
     {
-        Result best{0, 0, 0, 0, {0, 0, 0}, {0, 0, 0}};
-        double bestCost = inf;
+        int tl, br, t, l, b, r;
+        tl = tlbr / NYX;
+        br = tlbr % NYX;
+        t = tl / nx;
+        l = tl % nx;
+        b = br / nx;
+        r = br % nx;
 
-        // printf("size = %d\n", size);
+        if (b < t || r < l || t >= ny || b >= ny || l >= nx || r >= nx)
+            continue;
 
-        for (int tl = 0; tl < ny * nx; ++tl)
+        int nInside = Utils::getNumCells(l, t, r, b);
+        int nOutside = Utils::getNumCellsOutside(l, t, r, b, nx, ny);
+
+        if (nOutside == 0)
+            continue;
+
+        vector<double> innerEach = vector<double>(N_COLOR_CHAN, 0.);
+        vector<double> outerEach = vector<double>(N_COLOR_CHAN, 0.);
+        costs[tlbr] = 0;
+
+        for (int c = 0; c < N_COLOR_CHAN; ++c)
         {
-            int top = 0, left = 0;
-            Utils::xy2each(tl, nx, left, top);
+            // Calculate components for include-exclude principle
 
-            for (int bot = top; bot < min(top + size + 1, ny); ++bot)
-            {
-                for (int right = left; right < min(left + size + 1, nx); ++right)
-                {
+            int locX = l == 0 || t == 0 ? -1 : c + 3 * ((l - 1) + nx * (t - 1));
+            int locXY = t == 0 ? -1 : c + 3 * (r + nx * (t - 1));
+            int locXZ = l == 0 ? -1 : c + 3 * ((l - 1) + nx * b);
+            int locXYZW = c + 3 * (r + nx * b);
+            int locWhole = c + 3 * (nx * ny - 1);
 
-                    if (Utils::getNumCells(left, top, right, bot) != size)
-                    {
-                        continue;
-                    }
+            double X = locX == -1 ? 0 : cumSum[locX];
+            double XY = locXY == -1 ? 0 : cumSum[locXY];
+            double XZ = locXZ == -1 ? 0 : cumSum[locXZ];
+            double XYZW = cumSum[locXYZW];
+            double whole = cumSum[locWhole];
 
-                    vector<double> inner = vector<double>(3, 0.);
-                    vector<double> outer = vector<double>(3, 0.);
-                    double cost = 0;
+            double Xsq = locX == -1 ? 0 : cumSumSq[locX];
+            double XYsq = locXY == -1 ? 0 : cumSumSq[locXY];
+            double XZsq = locXZ == -1 ? 0 : cumSumSq[locXZ];
+            double XYZWsq = cumSumSq[locXYZW];
+            double wholesq = cumSumSq[locWhole];
 
-                    int nInside = Utils::getNumCells(left, top, right, bot);
-                    int nOutside = Utils::getNumCellsOutside(left, top, right, bot, nx, ny);
+            double sumInside = XYZW - XY - XZ + X;
+            double sumOutside = whole - sumInside;
+            double sumInsideSq = XYZWsq - XYsq - XZsq + Xsq;
+            double sumOutsideSq = wholesq - sumInsideSq;
 
-                    for (int c = 0; c < N_COLOR_CHAN; ++c)
-                    {
-                        // Calculate components for include-exclude principle
+            // Calculate inner and outer
+            innerEach[c] = 1.0 / nInside * sumInside;
+            outerEach[c] = 1.0 / nOutside * sumOutside;
 
-                        int locX = left == 0 || top == 0 ? -1 : c + 3 * ((left - 1) + nx * (top - 1));
-                        int locXY = top == 0 ? -1 : c + 3 * (right + nx * (top - 1));
-                        int locXZ = left == 0 ? -1 : c + 3 * ((left - 1) + nx * bot);
-                        int locXYZW = c + 3 * (right + nx * bot);
-                        int locWhole = c + 3 * (nx * ny - 1);
-
-                        double X = locX == -1 ? 0 : cumSum[locX];
-                        double XY = locXY == -1 ? 0 : cumSum[locXY];
-                        double XZ = locXZ == -1 ? 0 : cumSum[locXZ];
-                        double XYZW = cumSum[locXYZW];
-                        double whole = cumSum[locWhole];
-
-                        double Xsq = locX == -1 ? 0 : cumSumSq[locX];
-                        double XYsq = locXY == -1 ? 0 : cumSumSq[locXY];
-                        double XZsq = locXZ == -1 ? 0 : cumSumSq[locXZ];
-                        double XYZWsq = cumSumSq[locXYZW];
-                        double wholesq = cumSumSq[locWhole];
-
-                        double sumInside = XYZW - XY - XZ + X;
-                        double sumOutside = whole - sumInside;
-                        double sumInsideSq = XYZWsq - XYsq - XZsq + Xsq;
-                        double sumOutsideSq = wholesq - sumInsideSq;
-
-                        // Calculate inner and outer
-                        inner[c] = 1.0 / nInside * sumInside;
-                        outer[c] = 1.0 / nOutside * sumOutside;
-
-                        // Calculate cost
-                        cost += nInside * pow(inner[c], 2) - 2 * inner[c] * sumInside + sumInsideSq;
-                        cost += nOutside * pow(outer[c], 2) - 2 * outer[c] * sumOutside + sumOutsideSq;
-                    }
-
-                    // printf("(t, l, b, r) = (%d, %d, %d, %d): inner = [%.4f, %.4f, %.4f], outer = [%.4f, %.4f, %.4f] -> cost = %.4f\n", top, left, bot + 1, right + 1, inner[0], inner[1], inner[2], outer[0], outer[1], outer[2], cost);
-
-                    if (cost < bestCost)
-                    {
-                        bestCost = cost;
-
-                        best.x0 = left;
-                        best.y0 = top;
-                        best.x1 = right + 1;
-                        best.y1 = bot + 1;
-                        best.inner[0] = inner[0];
-                        best.inner[1] = inner[1];
-                        best.inner[2] = inner[2];
-                        best.outer[0] = outer[0];
-                        best.outer[1] = outer[1];
-                        best.outer[2] = outer[2];
-                    }
-                }
-            }
+            // Calculate cost
+            costs[tlbr] += nInside * pow(innerEach[c], 2) - 2 * innerEach[c] * sumInside + sumInsideSq;
+            costs[tlbr] += nOutside * pow(outerEach[c], 2) - 2 * outerEach[c] * sumOutside + sumOutsideSq;
         }
 
-        bestEachSize[size] = best;
-        costEachSize[size] = bestCost;
+        inner[tlbr] = make_tuple(innerEach[0], innerEach[1], innerEach[2]);
+        outer[tlbr] = make_tuple(outerEach[0], outerEach[1], outerEach[2]);
     }
 
     t2 = high_resolution_clock::now();
     ms_double = t2 - t1;
     printf("2. Running time: %8.4f\n", ms_double.count());
 
-    // 3. Choose best tl, br
+    for (int tlbr = 0; tlbr < NYX2; ++tlbr)
+    {
+        int tl, br, t, l, b, r;
+        tl = tlbr / NYX;
+        br = tlbr % NYX;
+        t = tl / nx;
+        l = tl % nx;
+        b = br / nx;
+        r = br % nx;
+
+        if (b < t || r < l || t >= ny || b >= ny || l >= nx || r >= nx)
+            continue;
+
+        double inner0 = get<0>(inner[tlbr]);
+        double inner1 = get<1>(inner[tlbr]);
+        double inner2 = get<2>(inner[tlbr]);
+        double outer0 = get<0>(outer[tlbr]);
+        double outer1 = get<1>(outer[tlbr]);
+        double outer2 = get<2>(outer[tlbr]);
+        printf("(t, l, b, r) = (%d, %d, %d, %d): inner = [%.4f, %.4f, %.4f], outer = [%.4f, %.4f, %.4f] -> cost = %.4f\n", t, l, b + 1, r + 1, inner0, inner1, inner2, outer0, outer1, outer2, costs[tlbr]);
+    }
+
+    // 3. Select best for each size
+
+    t1 = high_resolution_clock::now();
+
+    vector<int> bestIndices = vector<int>(N_VECS, 0);
+    vector<double> bestCosts = vector<double>(N_VECS, inf);
+    // TODO: HoangLe [May-25]: Padding this
+
+#pragma omp parallel for schedule(dynamic, 1)
+    for (int k = 0; k < N_VECS; ++k)
+    {
+        for (int tlbr = n * k; tlbr < n * (k + 1); ++tlbr)
+        {
+
+            // NOTE: HoangLe [May-25]: Can apply instruction-level optimization here
+
+            if (costs[tlbr] < bestCosts[k])
+            {
+                bestCosts[k] = costs[tlbr];
+                bestIndices[k] = tlbr;
+            }
+        }
+        // printf("(t, l, b, r) = (%d, %d, %d, %d): inner = [%.4f, %.4f, %.4f], outer = [%.4f, %.4f, %.4f] -> cost = %.4f\n", t, l, b + 1, r + 1, inner[0], inner[1], inner[2], outer[0], outer[1], outer[2], cost);
+    }
+
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    printf("3. Running time: %8.4f\n", ms_double.count());
+
+    // 4. Choose best from best
 
     t1 = high_resolution_clock::now();
 
     // NOTE: HoangLe [May-21]: Can use multithread here
     double bestCost = inf;
-    double bestIdx = 0;
-    for (int i = 1; i < ny * nx; ++i)
+    int bestIdx = 0;
+    for (int k = 0; k < N_VECS; ++k)
     {
-        if (costEachSize[i] < bestCost)
+        if (bestCosts[k] < bestCost)
         {
-            bestCost = costEachSize[i];
-            bestIdx = i;
+            bestCost = bestCosts[k];
+            bestIdx = bestIndices[k];
         }
     }
 
-    result.x0 = bestEachSize[bestIdx].x0;
-    result.y0 = bestEachSize[bestIdx].y0;
-    result.x1 = bestEachSize[bestIdx].x1;
-    result.y1 = bestEachSize[bestIdx].y1;
-    result.inner[0] = static_cast<float>(bestEachSize[bestIdx].inner[0]);
-    result.inner[1] = static_cast<float>(bestEachSize[bestIdx].inner[1]);
-    result.inner[2] = static_cast<float>(bestEachSize[bestIdx].inner[2]);
-    result.outer[0] = static_cast<float>(bestEachSize[bestIdx].outer[0]);
-    result.outer[1] = static_cast<float>(bestEachSize[bestIdx].outer[1]);
-    result.outer[2] = static_cast<float>(bestEachSize[bestIdx].outer[2]);
+    int tl, br;
+    tl = bestIdx / NYX;
+    br = bestIdx % NYX;
+    result.y0 = tl / nx;
+    result.x0 = tl % nx;
+    result.y1 = br / nx + 1;
+    result.x1 = br % nx + 1;
+
+    result.inner[0] = static_cast<float>(get<0>(inner[bestIdx]));
+    result.inner[1] = static_cast<float>(get<1>(inner[bestIdx]));
+    result.inner[2] = static_cast<float>(get<2>(inner[bestIdx]));
+    result.outer[0] = static_cast<float>(get<0>(outer[bestIdx]));
+    result.outer[1] = static_cast<float>(get<1>(outer[bestIdx]));
+    result.outer[2] = static_cast<float>(get<2>(outer[bestIdx]));
 
     t2 = high_resolution_clock::now();
     ms_double = t2 - t1;
-    printf("3. Running time: %8.4f\n", ms_double.count());
+    printf("4. Running time: %8.4f\n", ms_double.count());
 
     // Testing
     // Testing::printColor<vector<double>>(cumSum, nx, ny);
@@ -209,20 +245,20 @@ Result segment(int ny, int nx, const float *data)
 int main(int argc, char const *argv[])
 {
     // 1. Generate or read data from file
-    int ny = 100, nx = 100;
-    srand(0);
-    Input input = {.ny = ny, .nx = nx, .data = DataGen::genRandArr(nx, ny)};
+    // int ny = 100, nx = 100;
+    // srand(0);
+    // Input input = {.ny = ny, .nx = nx, .data = DataGen::genRandArr(nx, ny)};
 
     // printColor(data, nx, ny);
     // Testing::printColor<float>(data, nx, ny);
 
-    // string filename = FILE2;
-    // Input input = DataGen::readFile(filename);
-    // if (input.data == nullptr)
-    // {
-    //     cerr << "Cannot read data file: " << filename << endl;
-    //     return 1;
-    // }
+    string filename = FILE2;
+    Input input = DataGen::readFile(filename);
+    if (input.data == nullptr)
+    {
+        cerr << "Cannot read data file: " << filename << endl;
+        return 1;
+    }
 
     // DataGen::printInput(input);
 
