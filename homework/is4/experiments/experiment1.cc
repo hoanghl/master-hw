@@ -30,16 +30,12 @@ Result segment(int ny, int nx, const float *data)
     cumSum[0] = data[0];
     cumSum[1] = data[1];
     cumSum[2] = data[2];
-    cumSumSq[0] = pow(data[0], 2);
-    cumSumSq[1] = pow(data[1], 2);
-    cumSumSq[2] = pow(data[2], 2);
 
     // 1.2. Pre-compute
     auto t1 = high_resolution_clock::now();
 
     // NOTE: HoangLe [May-21]: Can use multithread, z-order here
 
-    // #pragma omp parallel for schedule(static, 1)
     for (int br = 1; br < NYX; ++br) // Start at 2 because position [0, 0] is pre-assigned above
     {
         int r, b;
@@ -56,15 +52,9 @@ Result segment(int ny, int nx, const float *data)
             double X = locX == -1 ? 0 : cumSum[locX];
             double XY = locXY == -1 ? 0 : cumSum[locXY];
             double XZ = locXZ == -1 ? 0 : cumSum[locXZ];
-            double Xsq = locX == -1 ? 0 : cumSumSq[locX];
-            double XYsq = locXY == -1 ? 0 : cumSumSq[locXY];
-            double XZsq = locXZ == -1 ? 0 : cumSumSq[locXZ];
-
             double current = data[locCurrent];
-            double currentSq = pow(data[locCurrent], 2);
 
             cumSum[locCurrent] = XY + XZ - X + current;
-            cumSumSq[locCurrent] = XYsq + XZsq - Xsq + currentSq;
         }
     }
 
@@ -82,7 +72,7 @@ Result segment(int ny, int nx, const float *data)
 
     // TODO: HoangLe [May-25]: Fill 3 above vectors with heavy optimizations
 
-#pragma omp parallel for schedule(dynamic, 1)
+#pragma omp parallel for schedule(dynamic, ny)
     for (int tlbr = 0; tlbr < NYX2; ++tlbr)
     {
         int tl, br, t, l, b, r;
@@ -102,8 +92,8 @@ Result segment(int ny, int nx, const float *data)
         if (nOutside == 0)
             continue;
 
-        vector<double> innerEach = vector<double>(N_COLOR_CHAN, 0.);
-        vector<double> outerEach = vector<double>(N_COLOR_CHAN, 0.);
+        double innerEach[N_COLOR_CHAN] = {};
+        double outerEach[N_COLOR_CHAN] = {};
         costs[tlbr] = 0;
 
         for (int c = 0; c < N_COLOR_CHAN; ++c)
@@ -130,16 +120,14 @@ Result segment(int ny, int nx, const float *data)
 
             double sumInside = XYZW - XY - XZ + X;
             double sumOutside = whole - sumInside;
-            double sumInsideSq = XYZWsq - XYsq - XZsq + Xsq;
-            double sumOutsideSq = wholesq - sumInsideSq;
 
             // Calculate inner and outer
             innerEach[c] = 1.0 / nInside * sumInside;
             outerEach[c] = 1.0 / nOutside * sumOutside;
 
             // Calculate cost
-            costs[tlbr] += nInside * pow(innerEach[c], 2) - 2 * innerEach[c] * sumInside + sumInsideSq;
-            costs[tlbr] += nOutside * pow(outerEach[c], 2) - 2 * outerEach[c] * sumOutside + sumOutsideSq;
+            costs[tlbr] += nInside * pow(innerEach[c], 2) - 2 * innerEach[c] * sumInside;
+            costs[tlbr] += nOutside * pow(outerEach[c], 2) - 2 * outerEach[c] * sumOutside;
         }
 
         inner[tlbr] = make_tuple(innerEach[0], innerEach[1], innerEach[2]);
@@ -150,27 +138,27 @@ Result segment(int ny, int nx, const float *data)
     ms_double = t2 - t1;
     printf("2. Running time: %8.4f\n", ms_double.count());
 
-    for (int tlbr = 0; tlbr < NYX2; ++tlbr)
-    {
-        int tl, br, t, l, b, r;
-        tl = tlbr / NYX;
-        br = tlbr % NYX;
-        t = tl / nx;
-        l = tl % nx;
-        b = br / nx;
-        r = br % nx;
+    // for (int tlbr = 0; tlbr < NYX2; ++tlbr)
+    // {
+    //     int tl, br, t, l, b, r;
+    //     tl = tlbr / NYX;
+    //     br = tlbr % NYX;
+    //     t = tl / nx;
+    //     l = tl % nx;
+    //     b = br / nx;
+    //     r = br % nx;
 
-        if (b < t || r < l || t >= ny || b >= ny || l >= nx || r >= nx)
-            continue;
+    //     if (b < t || r < l || t >= ny || b >= ny || l >= nx || r >= nx)
+    //         continue;
 
-        double inner0 = get<0>(inner[tlbr]);
-        double inner1 = get<1>(inner[tlbr]);
-        double inner2 = get<2>(inner[tlbr]);
-        double outer0 = get<0>(outer[tlbr]);
-        double outer1 = get<1>(outer[tlbr]);
-        double outer2 = get<2>(outer[tlbr]);
-        printf("(t, l, b, r) = (%d, %d, %d, %d): inner = [%.4f, %.4f, %.4f], outer = [%.4f, %.4f, %.4f] -> cost = %.4f\n", t, l, b + 1, r + 1, inner0, inner1, inner2, outer0, outer1, outer2, costs[tlbr]);
-    }
+    //     double inner0 = get<0>(inner[tlbr]);
+    //     double inner1 = get<1>(inner[tlbr]);
+    //     double inner2 = get<2>(inner[tlbr]);
+    //     double outer0 = get<0>(outer[tlbr]);
+    //     double outer1 = get<1>(outer[tlbr]);
+    //     double outer2 = get<2>(outer[tlbr]);
+    //     printf("(t, l, b, r) = (%d, %d, %d, %d): inner = [%.4f, %.4f, %.4f], outer = [%.4f, %.4f, %.4f] -> cost = %.4f\n", t, l, b + 1, r + 1, inner0, inner1, inner2, outer0, outer1, outer2, costs[tlbr]);
+    // }
 
     // 3. Select best for each size
 
@@ -187,7 +175,6 @@ Result segment(int ny, int nx, const float *data)
         {
 
             // NOTE: HoangLe [May-25]: Can apply instruction-level optimization here
-
             if (costs[tlbr] < bestCosts[k])
             {
                 bestCosts[k] = costs[tlbr];
@@ -205,7 +192,6 @@ Result segment(int ny, int nx, const float *data)
 
     t1 = high_resolution_clock::now();
 
-    // NOTE: HoangLe [May-21]: Can use multithread here
     double bestCost = inf;
     int bestIdx = 0;
     for (int k = 0; k < N_VECS; ++k)
@@ -245,20 +231,20 @@ Result segment(int ny, int nx, const float *data)
 int main(int argc, char const *argv[])
 {
     // 1. Generate or read data from file
-    // int ny = 100, nx = 100;
-    // srand(0);
-    // Input input = {.ny = ny, .nx = nx, .data = DataGen::genRandArr(nx, ny)};
+    int ny = 200, nx = 200;
+    srand(0);
+    Input input = {.ny = ny, .nx = nx, .data = DataGen::genRandArr(nx, ny)};
 
     // printColor(data, nx, ny);
     // Testing::printColor<float>(data, nx, ny);
 
-    string filename = FILE2;
-    Input input = DataGen::readFile(filename);
-    if (input.data == nullptr)
-    {
-        cerr << "Cannot read data file: " << filename << endl;
-        return 1;
-    }
+    // string filename = FILE2;
+    // Input input = DataGen::readFile(filename);
+    // if (input.data == nullptr)
+    // {
+    //     cerr << "Cannot read data file: " << filename << endl;
+    //     return 1;
+    // }
 
     // DataGen::printInput(input);
 

@@ -1,5 +1,5 @@
 CC = clang++
-FLAGS = -std=c++2a -fopenmp -O3
+FLAGS = -std=c++2a  -fopenmp -O3 
 #  -fopenmp -O3 
 BIN = bin
 
