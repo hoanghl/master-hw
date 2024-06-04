@@ -1,6 +1,6 @@
-CC = clang++
-FLAGS = -std=c++2a  -fopenmp -O3 
-#  -fopenmp -O3 
+CC = g++
+FLAGS =-march=native -std=c++2a -mavx -fopenmp -O3
+#-fopenmp -O3
 BIN = bin
 
 e1: experiment1.cc exp
