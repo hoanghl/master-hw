@@ -1,6 +1,8 @@
 #ifndef EXP_HPP
 #define EXP_HPP
 
+#include <limits>
+#include <math.h>
 #include <string>
 #include <tuple>
 
@@ -14,6 +16,7 @@ constexpr double inf = numeric_limits<double>::infinity();
 
 const string FILE1 = "data/001-small-simple.txt";
 const string FILE2 = "data/003-small-structured.txt";
+const string FILE3 = "data/029-small-mse-map.txt";
 
 struct Result
 {
