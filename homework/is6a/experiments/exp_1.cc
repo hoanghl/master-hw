@@ -1,32 +1,16 @@
-// #include <cstdlib>
-#include <limits>
-#include <math.h>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
 #include <tuple>
 #include <vector>
 
+#include "exp.hpp"
+
 using namespace std;
+using namespace std::chrono;
 
-typedef tuple<int, int, int, int> TLBR;
-
-const float inf = numeric_limits<float>::infinity();
-
-struct Result
-{
-    int y0;
-    int x0;
-    int y1;
-    int x1;
-    float outer[3];
-    float inner[3];
-};
-
-/*
-This is the function you need to implement. Quick reference:
-- x coordinates: 0 <= x < nx
-- y coordinates: 0 <= y < ny
-- color components: 0 <= c < 3
-- input: data[c + 3 * x + 3 * nx * y]
-*/
 Result segment(int ny, int nx, const float *data)
 {
     const int NYX = ny * nx;
@@ -44,11 +28,14 @@ Result segment(int ny, int nx, const float *data)
     vector<int> locationsXY = vector<int>(ny * nx);
     vector<int> locationsXZ = vector<int>(ny * nx);
 
+    auto t1 = high_resolution_clock::now();
+
     cumSum[0] = data[0];
 
     for (int br = 1; br < NYX; ++br)
     {
-        int r = br % nx, b = br / nx;
+        int r, b;
+        Utils::xy2each(br, nx, r, b);
         int t = b - 1, l = r - 1;
 
         // Determine regions' location
@@ -65,7 +52,17 @@ Result segment(int ny, int nx, const float *data)
         cumSum[locCurrent] = XY + XZ - X + current;
     }
 
-#pragma omp parallel for collapse(2)
+    // for (int i = 0; i < ny * nx; ++i)
+    // {
+    //     printf("%3d] = (%.6f, %.6f, %.6f)\n", i, cumSum[i]);
+    // }
+
+    for (int i = 0; i < ny * nx; ++i)
+    {
+        printf("cumSum[%3d] = %.6f\n", i, cumSum[i]);
+    }
+
+    // #pragma omp parallel for collapse(2)
     for (int y = 0; y < ny; ++y)
         for (int x = 0; x < nx; ++x)
         {
@@ -76,31 +73,41 @@ Result segment(int ny, int nx, const float *data)
             locationsXZ[idx] = x == 0 ? -1 : (x - 1) + nx * y;
         }
 
-    // 2. Assign inner, outer, cost
+    auto t2 = high_resolution_clock::now();
+    duration<double, std::milli> ms_double = t2 - t1;
+    printf("1. Running time: %8.4f\n", ms_double.count());
 
-    vector<float> costs = vector<float>(NYX_pad, inf);
+    // 2. Main loop
+
+    t1 = high_resolution_clock::now();
+
+    vector<double> costs = vector<double>(NYX_pad, inf);
     vector<TLBR> bestTLBR = vector<TLBR>(NYX_pad);
 
-#pragma omp parallel for collapse(2) schedule(dynamic, ny)
+    int locWhole = nx * ny - 1;
+    float whole = cumSum[locWhole];
+
+    // #pragma omp parallel for schedule(dynamic, ny) collapse(2)
     for (int height = 1; height <= ny; ++height)
         for (int width = 1; width <= nx; ++width)
         {
-            int locWhole = nx * ny - 1;
+
             int nInside = height * width;
             int nOutside = NYX - nInside;
 
-            float bestCostEach = inf;
-            int bestY0 = 0, bestX0 = 0, bestY1 = 0, bestX1 = 0;
+            double bestCostEach = inf;
+            int bestY0, bestX0, bestY1, bestX1;
+            double cost;
 
             if (nOutside > 0)
             {
                 for (int t = 0; t <= ny - height; ++t)
-                {
                     for (int l = 0; l <= nx - width; ++l)
                     {
-                        int b = t + height - 1;
-                        int r = l + width - 1;
+                        // Determine b, r
+                        int b = t + height - 1, r = l + width - 1;
 
+                        // Calculate components for include-exclude principle
                         int locX = locationsX[t * nx + l];
                         int locXY = locationsXY[t * nx + r];
                         int locXZ = locationsXZ[b * nx + l];
@@ -110,12 +117,16 @@ Result segment(int ny, int nx, const float *data)
                         float XY = locXY == -1 ? 0.0 : cumSum[locXY];
                         float XZ = locXZ == -1 ? 0.0 : cumSum[locXZ];
                         float XYZW = cumSum[locXYZW];
-                        float whole = cumSum[locWhole];
 
                         float sumInside = XYZW - XY - XZ + X;
                         float sumOutside = whole - sumInside;
 
                         float cost = -1.0 / nInside * powf(sumInside, 2) - 1.0 / nOutside * powf(sumOutside, 2);
+
+                        // cost = sum_v(
+                        //     _mm256_add_pd(
+                        //         _mm256_mul_pd(_mm256_mul_pd(v_nInside, sumInside), sumInside),
+                        //         _mm256_mul_pd(_mm256_mul_pd(v_nOutside, sumOutside), sumOutside)));
 
                         if (cost < bestCostEach)
                         {
@@ -127,34 +138,58 @@ Result segment(int ny, int nx, const float *data)
                             bestY1 = b;
                         }
                     }
-                }
             }
 
             int idx = (height - 1) * nx + (width - 1);
             costs[idx] = bestCostEach;
             bestTLBR[idx] = std::make_tuple(bestY0, bestX0, bestY1, bestX1);
+
+            printf("idx = %3d: costs[%2d] = %.4f, (t, l, b, r) = (%2d, %2d, %2d, %2d)\n", idx, idx, costs[idx], bestY0, bestX0, bestY1, bestX1);
         }
+
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    printf("2. Running time: %8.4f\n", ms_double.count());
+
+    for (int i = 0; i < NYX_pad; ++i)
+    {
+        int t = get<0>(bestTLBR[i]);
+        int l = get<1>(bestTLBR[i]);
+        int b = get<2>(bestTLBR[i]);
+        int r = get<3>(bestTLBR[i]);
+
+        printf("i = %3d: costs[%2d] = %.4f, (t, l, b, r) = (%2d, %2d, %2d, %2d)\n", i, i, costs[i], t, l, b, r);
+    }
 
     // 3. Select best for each size
 
-    vector<int> bestIndices = vector<int>(N_VECS, 0);
-    vector<float> bestCosts = vector<float>(N_VECS, inf);
+    t1 = high_resolution_clock::now();
 
-#pragma omp parallel for schedule(dynamic, 1)
+    vector<int> bestIndices = vector<int>(N_VECS, 0);
+    vector<double> bestCosts = vector<double>(N_VECS, inf);
+
+    // #pragma omp parallel for schedule(dynamic, 1)
     for (int k = 0; k < N_VECS; ++k)
     {
-        for (int tlbr = n * k; tlbr < n * (k + 1); ++tlbr)
+        for (int size = n * k; size < n * (k + 1); ++size)
         {
-            if (costs[tlbr] < bestCosts[k])
+            if (costs[size] < bestCosts[k])
             {
-                bestCosts[k] = costs[tlbr];
-                bestIndices[k] = tlbr;
+                bestCosts[k] = costs[size];
+                bestIndices[k] = size;
             }
         }
     }
 
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    printf("3. Running time: %8.4f\n", ms_double.count());
+
     // 4. Choose best from best
-    float bestCost = inf;
+
+    t1 = high_resolution_clock::now();
+
+    double bestCost = inf;
     int bestIdx = 0;
     for (int k = 0; k < N_VECS; ++k)
     {
@@ -165,23 +200,24 @@ Result segment(int ny, int nx, const float *data)
         }
     }
 
+    // Calculate inner and outer
+
     int bestT = get<0>(bestTLBR[bestIdx]);
     int bestL = get<1>(bestTLBR[bestIdx]);
     int bestB = get<2>(bestTLBR[bestIdx]);
     int bestR = get<3>(bestTLBR[bestIdx]);
 
-    int locX = bestL == 0 || bestT == 0 ? -1 : (bestL - 1) + nx * (bestT - 1);
-    int locXY = bestT == 0 ? -1 : bestR + nx * (bestT - 1);
-    int locXZ = bestL == 0 ? -1 : (bestL - 1) + nx * bestB;
+    int locX = locationsX[bestT * nx + bestL];
+    int locXY = locationsXY[bestT * nx + bestR];
+    int locXZ = locationsXZ[bestB * nx + bestL];
     int locXYZW = bestR + nx * bestB;
 
-    int locWhole = nx * ny - 1;
     float X = locX == -1 ? 0.0 : cumSum[locX];
     float XY = locXY == -1 ? 0.0 : cumSum[locXY];
     float XZ = locXZ == -1 ? 0.0 : cumSum[locXZ];
     float XYZW = cumSum[locXYZW];
     float sumInside = XYZW - XY - XZ + X;
-    float whole = cumSum[locWhole];
+
     float sumOutside = whole - sumInside;
 
     int nInside = (bestB - bestT + 1) * (bestR - bestL + 1);
@@ -202,5 +238,39 @@ Result segment(int ny, int nx, const float *data)
     result.outer[1] = outer;
     result.outer[2] = outer;
 
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    printf("4. Running time: %8.4f\n", ms_double.count());
+
     return result;
+}
+
+int main(int argc, char const *argv[])
+{
+    // 1. Generate or read data from file
+    // srand(0);
+    // int ny = 400, nx = 400;
+    // Input input = {.ny = ny, .nx = nx, .data = DataGen::genRandArr(nx, ny)};
+
+    string filename = FILE1;
+    Input input = DataGen::readFile(filename);
+    if (input.data == nullptr)
+    {
+        cerr << "Cannot read data file: " << filename << endl;
+        return 1;
+    }
+
+    // DataGen::printInput(input);
+
+    printf("\n===================\n\n");
+
+    Result result = segment(input.ny, input.nx, input.data);
+
+    printf("\n===================\n\n");
+
+    Testing::printResult(result);
+
+    delete[] input.data;
+
+    return 0;
 }

@@ -264,6 +264,8 @@ class ClangCompiler(Compiler):
             '-Wno-error=unused-parameter',
             '-Wno-error=unused-but-set-parameter',
             '-march=native',
+            '-L/opt/homebrew/opt/libomp/lib',
+            '-I/opt/homebrew/opt/libomp/include'
         ]
         if platform.system() == 'Darwin' and platform.machine() == 'arm64':
             flags = flags[:-1]

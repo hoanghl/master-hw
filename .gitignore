@@ -223,3 +223,5 @@ tests/
 *.dSYM
 tests1/
 .vscode/
+**/bin/
+**/notebooks/
