@@ -222,3 +222,4 @@ Temporary Items
 tests/
 *.dSYM
 tests1/
+.vscode/
