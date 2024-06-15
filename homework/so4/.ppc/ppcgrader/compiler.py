@@ -389,6 +389,7 @@ I should be able to find the right packages and compilers then!'''
             if sys.argv[1] != 'assembly':
                 self = self.add_flag('-lomp')
                 self = self.add_flag('-L', f'{brew_dir}/lib')
+                self = self.add_flag('-L', '/opt/homebrew/opt/libomp/lib')
 
         else:
             self = self.add_flag('-fopenmp')
