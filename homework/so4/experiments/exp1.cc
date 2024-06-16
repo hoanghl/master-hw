@@ -1,14 +1,48 @@
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <omp.h>
 #include <vector>
 
 using namespace std;
+using namespace std::chrono;
 
 typedef unsigned long long data_t;
+// typedef int data_t;
 constexpr int NUM_BASE = 20;
 
+void genRand(int n, data_t *&data)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        data[i] = rand() % 10000;
+    }
+}
+
+void test(int n, data_t *&data)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        printf("i = %3d: %3llu\n", i, data[i]);
+    }
+}
+
+void test(int n, vector<data_t> &data)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        printf("i = %3d: %3llu\n", i, data[i]);
+    }
+}
+
+void test(int l, int r, data_t *&data)
+{
+    for (int i = l; i < r; ++i)
+    {
+        printf("i = %3d: %3llu\n", i, data[i]);
+    }
+}
 void mergesort_merge(data_t *data, vector<data_t> &aux, int l, int m, int r)
 {
     int i1 = l, i2 = m;
@@ -52,18 +86,36 @@ void mergesort_sort(data_t *data, vector<data_t> &aux, int l, int r)
 
     int m = (r - l) / 2 + l;
 
+    // printf("0--\n");
+
     mergesort_sort(data, aux, l, m);
+
+    // printf("1--\n");
+    // test(l, m, data);
+    // printf("1-end--\n");
+
     mergesort_sort(data, aux, m, r);
+
+    // printf("2--\n");
+    // test(m, r, data);
+    // printf("2-end--\n");
+
     mergesort_merge(data, aux, l, m, r);
+
+    // printf("3--\n");
+    // test(l, r, data);
+    // printf("3-end--\n");
 }
 
-void psort(int N, data_t *data)
+void mergesort(int N, data_t *data)
 {
     if (N <= NUM_BASE)
     {
         sort(data, data + N);
         return;
     }
+
+    auto t1 = high_resolution_clock::now();
 
     vector<data_t> aux = vector<data_t>(N);
     int numEach = 0;
@@ -83,7 +135,16 @@ void psort(int N, data_t *data)
         }
     }
 
+    auto t2 = high_resolution_clock::now();
+    duration<double, std::milli> ms_double = t2 - t1;
+    printf("1. Running time: %8.4f\n", ms_double.count());
+
+    // printf("after each-seg-sort--\n");
+    // test(N, data);
+    // printf("after each-seg-sort-end--\n");
+
     // Merge all segments
+    t1 = high_resolution_clock::now();
 
     int lastNumEach = numEach;
     numEach = min(numEach * 2, N);
@@ -122,8 +183,7 @@ void psort(int N, data_t *data)
             }
         }
 
-        // Update back to data
-
+// Update back to data
 #pragma omp parallel for
         for (int i = 0; i < N; ++i)
             data[i] = aux[i];
@@ -133,4 +193,36 @@ void psort(int N, data_t *data)
         lastNumEach = numEach;
         numEach = min(numEach * 2, N);
     }
+
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    printf("2. Running time: %8.4f\n", ms_double.count());
+}
+
+int main(int argc, char const *argv[])
+{
+    constexpr int N = 100000000;
+
+    data_t *data = new data_t[N];
+
+    // Generate random vectors
+    genRand(N, data);
+
+    // test(N, data);
+
+    // sort(data, data + N);
+
+    // auto t1 = high_resolution_clock::now();
+    // merge(N, data);
+    mergesort(N, data);
+    // auto t2 = high_resolution_clock::now();
+    // duration<double, std::milli> ms_double = t2 - t1;
+    // printf("Running time: %8.4f\n", ms_double.count());
+
+    // printf("After -- \n");
+    // test(N, data);
+
+    delete[] data;
+
+    return 0;
 }
