@@ -120,6 +120,9 @@ void psort(int N, data_t *data)
                     ++i2;
                 }
             }
+
+            // int length = min(numEach, N - i);
+            // copy_n(aux.begin() + i, length, data + i);
         }
 
         // Update back to data

@@ -39,12 +39,12 @@ Result segment(int ny, int nx, const float *data)
 
     // 1. Pre-compute
 
-    vector<float> cumSum = vector<float>(nx * ny, 0.0);
+    vector<int> cumSum = vector<int>(nx * ny, 0);
     vector<int> locationsX = vector<int>(ny * nx);
     vector<int> locationsXY = vector<int>(ny * nx);
     vector<int> locationsXZ = vector<int>(ny * nx);
 
-    cumSum[0] = data[0];
+    cumSum[0] = static_cast<int>(data[0]);
 
     for (int br = 1; br < NYX; ++br)
     {
@@ -57,10 +57,10 @@ Result segment(int ny, int nx, const float *data)
         int locXZ = l < 0 ? -1 : l + nx * b;
         int locCurrent = r + nx * b;
 
-        float X = locX == -1 ? 0.0 : cumSum[locX];
-        float XY = locXY == -1 ? 0.0 : cumSum[locXY];
-        float XZ = locXZ == -1 ? 0.0 : cumSum[locXZ];
-        float current = data[3 * locCurrent];
+        int X = locX == -1 ? 0 : cumSum[locX];
+        int XY = locXY == -1 ? 0 : cumSum[locXY];
+        int XZ = locXZ == -1 ? 0 : cumSum[locXZ];
+        int current = static_cast<int>(data[3 * locCurrent]);
 
         cumSum[locCurrent] = XY + XZ - X + current;
     }
@@ -81,11 +81,13 @@ Result segment(int ny, int nx, const float *data)
     vector<float> costs = vector<float>(NYX_pad, inf);
     vector<TLBR> bestTLBR = vector<TLBR>(NYX_pad);
 
+    int locWhole = nx * ny - 1;
+    int whole = cumSum[locWhole];
+
 #pragma omp parallel for collapse(2) schedule(dynamic, ny)
     for (int height = 1; height <= ny; ++height)
         for (int width = 1; width <= nx; ++width)
         {
-            int locWhole = nx * ny - 1;
             int nInside = height * width;
             int nOutside = NYX - nInside;
 
@@ -106,14 +108,13 @@ Result segment(int ny, int nx, const float *data)
                         int locXZ = locationsXZ[b * nx + l];
                         int locXYZW = r + nx * b;
 
-                        float X = locX == -1 ? 0.0 : cumSum[locX];
-                        float XY = locXY == -1 ? 0.0 : cumSum[locXY];
-                        float XZ = locXZ == -1 ? 0.0 : cumSum[locXZ];
-                        float XYZW = cumSum[locXYZW];
-                        float whole = cumSum[locWhole];
+                        int X = locX == -1 ? 0 : cumSum[locX];
+                        int XY = locXY == -1 ? 0 : cumSum[locXY];
+                        int XZ = locXZ == -1 ? 0 : cumSum[locXZ];
+                        int XYZW = cumSum[locXYZW];
 
-                        float sumInside = XYZW - XY - XZ + X;
-                        float sumOutside = whole - sumInside;
+                        int sumInside = XYZW - XY - XZ + X;
+                        int sumOutside = whole - sumInside;
 
                         float cost = -1.0 / nInside * powf(sumInside, 2) - 1.0 / nOutside * powf(sumOutside, 2);
 
@@ -175,14 +176,12 @@ Result segment(int ny, int nx, const float *data)
     int locXZ = bestL == 0 ? -1 : (bestL - 1) + nx * bestB;
     int locXYZW = bestR + nx * bestB;
 
-    int locWhole = nx * ny - 1;
-    float X = locX == -1 ? 0.0 : cumSum[locX];
-    float XY = locXY == -1 ? 0.0 : cumSum[locXY];
-    float XZ = locXZ == -1 ? 0.0 : cumSum[locXZ];
-    float XYZW = cumSum[locXYZW];
-    float sumInside = XYZW - XY - XZ + X;
-    float whole = cumSum[locWhole];
-    float sumOutside = whole - sumInside;
+    int X = locX == -1 ? 0 : cumSum[locX];
+    int XY = locXY == -1 ? 0 : cumSum[locXY];
+    int XZ = locXZ == -1 ? 0 : cumSum[locXZ];
+    int XYZW = cumSum[locXYZW];
+    int sumInside = XYZW - XY - XZ + X;
+    int sumOutside = whole - sumInside;
 
     int nInside = (bestB - bestT + 1) * (bestR - bestL + 1);
     int nOutside = NYX - nInside;

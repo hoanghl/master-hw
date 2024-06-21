@@ -5,20 +5,14 @@
 #include <omp.h>
 #include <vector>
 
+#include "exp.hpp"
+
 using namespace std;
 using namespace std::chrono;
 
 typedef unsigned long long data_t;
 // typedef int data_t;
-constexpr int NUM_BASE = 20;
-
-void genRand(int n, data_t *&data)
-{
-    for (int i = 0; i < n; ++i)
-    {
-        data[i] = rand() % 10000;
-    }
-}
+constexpr int NUM_BASE = 50;
 
 void test(int n, data_t *&data)
 {
@@ -43,6 +37,7 @@ void test(int l, int r, data_t *&data)
         printf("i = %3d: %3llu\n", i, data[i]);
     }
 }
+
 void mergesort_merge(data_t *data, vector<data_t> &aux, int l, int m, int r)
 {
     int i1 = l, i2 = m;
@@ -86,27 +81,30 @@ void mergesort_sort(data_t *data, vector<data_t> &aux, int l, int r)
 
     int m = (r - l) / 2 + l;
 
-    // printf("0--\n");
-
     mergesort_sort(data, aux, l, m);
-
-    // printf("1--\n");
-    // test(l, m, data);
-    // printf("1-end--\n");
-
     mergesort_sort(data, aux, m, r);
-
-    // printf("2--\n");
-    // test(m, r, data);
-    // printf("2-end--\n");
-
     mergesort_merge(data, aux, l, m, r);
-
-    // printf("3--\n");
-    // test(l, r, data);
-    // printf("3-end--\n");
 }
 
+void mergesort_sort2(data_t *data, vector<data_t> &aux, int l, int r)
+{
+    if (r - l <= NUM_BASE)
+    {
+        sort(data + l, data + r);
+        return;
+    }
+
+    int m = (r - l) / 2 + l;
+
+#pragma omp task
+    mergesort_sort(data, aux, l, m);
+#pragma omp task
+    mergesort_sort(data, aux, m, r);
+
+    mergesort_merge(data, aux, l, m, r);
+}
+
+/////////////////////////////////////////////////////////////////////
 void mergesort(int N, data_t *data)
 {
     if (N <= NUM_BASE)
@@ -181,6 +179,9 @@ void mergesort(int N, data_t *data)
                     ++i2;
                 }
             }
+
+            // for (int j = i; j < min(N, i + numEach); ++j)
+            //     data[j] = aux[j];
         }
 
 // Update back to data
@@ -199,30 +200,147 @@ void mergesort(int N, data_t *data)
     printf("2. Running time: %8.4f\n", ms_double.count());
 }
 
-int main(int argc, char const *argv[])
+void mergesort2(int N, data_t *data)
 {
-    constexpr int N = 100000000;
+    if (N <= NUM_BASE)
+    {
+        sort(data, data + N);
+        return;
+    }
 
-    data_t *data = new data_t[N];
+    int numEach = NUM_BASE;
+    int lastNumEach = numEach;
 
-    // Generate random vectors
-    genRand(N, data);
-
-    // test(N, data);
-
-    // sort(data, data + N);
+    // Sort with base
 
     // auto t1 = high_resolution_clock::now();
-    // merge(N, data);
-    mergesort(N, data);
+
+#pragma omp parallel for
+    for (int i = 0; i < N; i += numEach)
+    {
+        int interval = min(numEach, N - i);
+        sort(data + i, data + i + interval);
+    }
+
+    // auto t2 = high_resolution_clock::now();
+    // duration<double, std::milli> ms_double = t2 - t1;
+    // printf("1. Running time: %8.4f\n", ms_double.count());
+
+    // Start merging
+
+    printf("1.\n");
+    test(N, data);
+    printf("1-End.\n");
+
+    // t1 = high_resolution_clock::now();
+
+    vector<data_t> aux = vector<data_t>(N);
+
+    lastNumEach = numEach;
+    numEach = min(numEach * 2, N);
+    while (numEach <= N)
+    {
+        // #pragma omp parallel for
+        for (int i = 0; i < N; i += numEach)
+        {
+            int i1 = i, i2 = i + lastNumEach;
+            int lim_i1 = min(N, i1 + lastNumEach), lim_i2 = min(N, i + lastNumEach * 2);
+
+            for (int j = i; j < min(N, i + numEach); ++j)
+            {
+                if (i2 >= lim_i2)
+                {
+                    aux[j] = data[i1];
+                    ++i1;
+                }
+                else if (i1 >= lim_i1)
+                {
+                    aux[j] = data[i2];
+                    ++i2;
+                }
+                else if (data[i1] < data[i2])
+                {
+                    aux[j] = data[i1];
+                    ++i1;
+                }
+                else
+                {
+                    aux[j] = data[i2];
+                    ++i2;
+                }
+            }
+
+            // for (int j = i; j < min(N, i + numEach); ++j)
+            //     data[j] = aux[j];
+            int length = min(numEach, N - i);
+            copy_n(aux.begin() + i, length, data + i);
+        }
+
+        printf("numEach=%d\n", numEach);
+        test(N, data);
+        printf("numEach=%d -End.\n", numEach);
+
+        // Update back to data
+
+        // #pragma omp parallel for
+        // for (int i = 0; i < N; ++i)
+        //     data[i] = aux[i];
+        // copy(data, data + N, aux.begin());
+
+        if (numEach == N)
+            break;
+        lastNumEach = numEach;
+        numEach = min(numEach * 2, N);
+    }
+
+    // t2 = high_resolution_clock::now();
+    // ms_double = t2 - t1;
+    // printf("2. Running time: %8.4f\n", ms_double.count());
+}
+
+void mergesort3(int N, data_t *data)
+{
+    if (N <= NUM_BASE)
+    {
+        sort(data, data + N);
+        return;
+    }
+
+    vector<data_t> aux = vector<data_t>(N);
+
+#pragma omp parallel
+    {
+#pragma omp single
+        mergesort_sort2(data, aux, 0, N);
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+
+    // Generate random vectors
+    // constexpr int N = 101;
+    // data_t *data = new data_t[N];
+    // DataGen::genRand(N, data);
+
+    Input *input = DataGen::readFile(FILE1);
+    int N = input->n;
+    data_t *data = input->data;
+
+    printf("=> Before\n");
+    test(N, data);
+
+    // auto t1 = high_resolution_clock::now();
+    mergesort2(N, data);
     // auto t2 = high_resolution_clock::now();
     // duration<double, std::milli> ms_double = t2 - t1;
     // printf("Running time: %8.4f\n", ms_double.count());
 
-    // printf("After -- \n");
-    // test(N, data);
+    printf("=> After\n");
+    test(N, data);
 
-    delete[] data;
+    delete[] input->data;
+    delete input;
 
     return 0;
 }
